@@ -1,0 +1,5 @@
+name : AlteryaCore
+version : 1.0
+author : Alterya
+main: fr.alterya.core.Main;
+commands:

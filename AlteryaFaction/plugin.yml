@@ -1,0 +1,5 @@
+name : AlteryaFaction
+version : 1.0
+author : Alterya
+main: fr.alterya.faction.Main;
+commands:
