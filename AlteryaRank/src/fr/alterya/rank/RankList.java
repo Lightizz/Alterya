@@ -2,14 +2,17 @@ package fr.alterya.rank;
 
 public enum RankList {
 
-	JOUEUR(0, 1, "§7", "", " > "),
-	DEVELOPPEUR(1, 10, "§5[DEVELOPPEUR]", "", " > "),
-	ARCHITECTE(2, 10, "§5[ARCHITECTE]", "", " > "),
-	GUIDE(3, 20, "§a§l[GUIDE]", "", " §b> "),
-	MODERATEUR(4, 40, "§e§l[MODERATEUR]", "",  " §b> "),
-	MODERATEUR_PLUS(5, 60, "§6§l[Modérateur+]", "", " §b> §6"),
-	RESPONSABLE(6, 80, "§4§l[Responsable]", "", " §b> §4"),
-	ADMINISTRATEUR(7, 100, "§4§l[Admin] ", "", " §4§l>> §4");
+	JOUEUR(0, 1, "", "", " > "),
+	SOUVENIR(1, 3, "§a[Souvenir]", "", " > "),
+	MEMOIRE(2, 5, "§1[Mémoire]", "", " > "),
+	SAGE(3, 10, "§d[Sage]", "", " > "),
+	DEVELOPPEUR(4, 15, "§5[Développeur]", "", " > "),
+	ARCHITECTE(5, 15, "§5[Architecte]", "", " > "),
+	GUIDE(6, 20, "§a§l[Guide]", "", " §b> "),
+	MODERATEUR(7, 40, "§e§l[Modérateur]", "",  " §b> "),
+	MODERATEUR_PLUS(8, 60, "§6§l[Modérateur+]", "", " §b> §6"),
+	RESPONSABLE(9, 80, "§4§l[Responsable]", "", " §b> §4"),
+	ADMINISTRATEUR(10, 100, "§4§l[Administrateur] ", "", " §4§l>> §4");
 	
 	//Fields
 	private final int power, id;

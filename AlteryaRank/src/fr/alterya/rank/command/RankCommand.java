@@ -34,13 +34,16 @@ public class RankCommand implements CommandExecutor, TabCompleter {
 			if(args.length == 1 && args[0] == "info" && player.isOp() == true) {
 				player.sendMessage("§4§l[Rank] §eVoici les rangs présents sur le serveur §r:");
 				player.sendMessage("-Joueur : ID = 0 ; Power = 0");
-				player.sendMessage("-§5Développeur §r: ID = 1 ; Power = 10");
-				player.sendMessage("-§5Architecte §r: ID = 2 ;  Power = 10");
-				player.sendMessage("-§aGuide §r: ID = 3 ; Power = 20");
-				player.sendMessage("-§eModérateur §r: ID = 4 ; Power = 40");
-				player.sendMessage("-§6Modérateur+ §r: ID = 5 ; Power = 60");
-				player.sendMessage("-§4Responsable §r: ID = 6 ; Power = 80");
-				player.sendMessage("-§4Administrateur §r: ID = 7 ; Power = 100");
+				player.sendMessage("-§aSouvenir : ID = 1 ; Power = 3");
+				player.sendMessage("-1Mémoire : ID = 2 ; Power = 5");
+				player.sendMessage("-§dSage : ID = 3 ; Power = 10");
+				player.sendMessage("-§5Développeur §r: ID = 4 ; Power = 15");
+				player.sendMessage("-§5Architecte §r: ID = 5 ;  Power = 15");
+				player.sendMessage("-§aGuide §r: ID = 6 ; Power = 20");
+				player.sendMessage("-§eModérateur §r: ID = 7 ; Power = 40");
+				player.sendMessage("-§6Modérateur+ §r: ID = 8 ; Power = 60");
+				player.sendMessage("-§4Responsable §r: ID = 9 ; Power = 80");
+				player.sendMessage("-§4Administrateur §r: ID = 10 ; Power = 100");
 			}
 			
 			if(args.length == 2) 
