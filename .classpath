@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="AlteryaCore/src"/>
+	<classpathentry kind="src" path="AlteryaFaction/src"/>
+	<classpathentry kind="src" path="AlteryaModeration/src"/>
+	<classpathentry kind="src" path="AlteryaTrade/src"/>
+	<classpathentry kind="lib" path="Plugins compiled (.jar)/AlteryaCore.jar"/>
+	<classpathentry kind="lib" path="Plugins compiled (.jar)/AlteryaFaction.jar"/>
+	<classpathentry kind="lib" path="Plugins compiled (.jar)/AlteryaModeration.jar"/>
+	<classpathentry kind="lib" path="Plugins compiled (.jar)/AlteryaTrade.jar"/>
+	<classpathentry kind="output" path="AlteryaCore/bin"/>
+</classpath>

@@ -1,0 +1,5 @@
+name : AlteryaPVP
+version : 1.0.0
+author : Alterya
+main: fr.alterya.pvp.Main
+commands:

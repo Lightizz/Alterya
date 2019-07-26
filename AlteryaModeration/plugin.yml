@@ -1,5 +1,5 @@
 name : AlteryaModeration
-version : 1.0
+version : 1.0.0
 author : Alterya
-main: fr.alterya.moderation.Main;
+main: fr.alterya.moderation.Main
 commands:
