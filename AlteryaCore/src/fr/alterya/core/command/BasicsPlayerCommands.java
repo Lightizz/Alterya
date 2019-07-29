@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import net.minecraft.server.v1_7_R4.EntityPlayer;
 
 public class BasicsPlayerCommands implements CommandExecutor{
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args){		
 			if(command.getName().equalsIgnoreCase("ping") && sender instanceof Player){
@@ -38,7 +39,7 @@ public class BasicsPlayerCommands implements CommandExecutor{
 	            
 	            return true;
 	        }
-		return false;
+	        return false;
 	}
 	
 	public double getPing(Player player) 
@@ -47,5 +48,10 @@ public class BasicsPlayerCommands implements CommandExecutor{
 		EntityPlayer pingE = pingC.getHandle();
 		
 		return pingE.ping;
+	}
+	
+	public int getMoney(Player player, int money) 
+	{
+		return money;
 	}
 }

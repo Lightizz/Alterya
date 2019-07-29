@@ -28,22 +28,22 @@ public class RankCommand implements CommandExecutor, TabCompleter {
 			Player player = (Player) sender;
 			
 			if(args.length == 0) {
-				player.sendMessage(Main.prefix + "La commande est /rank <id du rang> <joueur cibler>  (Cela sert à donner un rang  à un joueur) ou " + "/rank info (Cela permet d'obtenir toutes les informations sur les rangs)");
+				player.sendMessage(Main.prefix + "La commande est /rank <id du rang> <joueur cibler>  (Cela sert Ã  donner un rang  Ã  un joueur) ou " + "/rank info (Cela permet d'obtenir toutes les informations sur les rangs)");
 			}
 			
 			if(args.length == 1 && args[0] == "info" && player.isOp() == true) {
-				player.sendMessage("§4§l[Rank] §eVoici les rangs présents sur le serveur §r:");
-				player.sendMessage("-Joueur : ID = 0 ; Power = 0");
-				player.sendMessage("-§aSouvenir : ID = 1 ; Power = 3");
-				player.sendMessage("-1Mémoire : ID = 2 ; Power = 5");
-				player.sendMessage("-§dSage : ID = 3 ; Power = 10");
-				player.sendMessage("-§5Développeur §r: ID = 4 ; Power = 15");
-				player.sendMessage("-§5Architecte §r: ID = 5 ;  Power = 15");
-				player.sendMessage("-§aGuide §r: ID = 6 ; Power = 20");
-				player.sendMessage("-§eModérateur §r: ID = 7 ; Power = 40");
-				player.sendMessage("-§6Modérateur+ §r: ID = 8 ; Power = 60");
-				player.sendMessage("-§4Responsable §r: ID = 9 ; Power = 80");
-				player.sendMessage("-§4Administrateur §r: ID = 10 ; Power = 100");
+				player.sendMessage("Â§4Â§l[Rank] Â§eVoici les rangs prÃ©sents sur le serveur Â§r:");
+				player.sendMessage("-Joueur : ID = 0 ; Power = 1 ; Nombre de home : 2");
+				player.sendMessage("-Â§aSouvenir Â§r: ID = 1 ; Power = 3 ; Nombre de home : 4");
+				player.sendMessage("-Â§1MÃ©moire Â§r: ID = 2 ; Power = 5 ; Nombre de home : 6");
+				player.sendMessage("-Â§dSage Â§r: ID = 3 ; Power = 10 ; Nombre de home : 10");
+				player.sendMessage("-Â§5DÃ©veloppeur Â§r: ID = 4 ; Power = 15 ; Nombre de home : 4");
+				player.sendMessage("-Â§5Architecte Â§r: ID = 5 ;  Power = 15 ; Nombre de home : 4");
+				player.sendMessage("-Â§aGuide Â§r: ID = 6 ; Power = 20 ; Nombre de home : 6");
+				player.sendMessage("-Â§eModÃ©rateur Â§r: ID = 7 ; Power = 40 ; Nombre de home : 10");
+				player.sendMessage("-Â§6ModÃ©rateur+ Â§r: ID = 8 ; Power = 60 ; Nombre de home : 15");
+				player.sendMessage("-Â§4Responsable Â§r: ID = 9 ; Power = 80 ; Nombre de home : âˆž");
+				player.sendMessage("-Â§4Administrateur Â§r: ID = 10 ; Power = 100 ; Nombre de home : âˆž");
 			}
 			
 			if(args.length == 2) 
