@@ -1,41 +1,40 @@
 package fr.alterya.rank;
 
-import org.bukkit.entity.Player;
-
 /*
 Resp of the rank plugin: Lightiz
 */
 
 public enum RankList {
 	
-	JOUEUR(0, 1, "", "", " > "),
-	SOUVENIR(1, 3, "§a[Souvenir]", "", " > "),
-	MEMOIRE(2, 5, "§1[Mémoire]", "", " > "),
-	SAGE(3, 10, "§d[Sage]", "", " > "),
-	DEVELOPPEUR(4, 15, "§5[Développeur]", "", " > "),
-	ARCHITECTE(5, 15, "§5[Architecte]", "", " > "),
-	GUIDE(6, 20, "§a§l[Guide]", "", " §b> "),
-	MODERATEUR(7, 40, "§e§l[Modérateur]", "",  " §b> "),
-	MODERATEUR_PLUS(8, 60, "§6§l[Modérateur+]", "", " §b> §6"),
-	RESPONSABLE(9, 80, "§4§l[Responsable]", "", " §b> §4"),
-	ADMINISTRATEUR(10, 100, "§4§l[Administrateur] ", "", " §4§l>> §4");
+	JOUEUR(0, 1, "Joueur", "", " > "),
+	SOUVENIR(1, 3, "Souvenir", "§a[Souvenir] ", " > "),
+	MEMOIRE(2, 5, "Mémoire","§1[Mémoire] ", " > "),
+	SAGE(3, 10, "Sage", "§d[Sage] ", " > "),
+	DEVELOPPEUR(4, 15, "Développeur", "§5[Développeur] ", " > "),
+	ARCHITECTE(5, 15, "Achitecte","§5[Architecte] ", " > "),
+	GUIDE(6, 20, "Guide", "§a[Guide] ", " > "),
+	MODERATEUR(7, 40, "Modérateur","§e[Modérateur] ", " > "),
+	MODERATEUR_PLUS(8, 60, "Modérateur+", "§6[Modérateur+] ", " > §6"),
+	RESPONSABLE(9, 80, "Responsable", "§4§l[Responsable] ", " > §4"),
+	ADMINISTRATEUR(10, 100, "Administateur", "§4§l[Administrateur] ", " >> §4");
 	
 	//Fields
 	private final int power, id;
-	private final String prefix, suffix, chatSeparator;
-	
-	Player player;
+	private final String rankName, prefix, chatSeparator;
 	
 	//Constructor
-	private RankList(int id, int power, String prefix, String suffix, String chatSeparator) {
+	private RankList(int id, int power, String rankName, String prefix, String chatSeparator) {
 		this.id = id;
 		this.power = power;
+		this.rankName = rankName;
 		this.prefix = prefix;
-		this.suffix = suffix;
 		this.chatSeparator = chatSeparator;
 	}
 	
 	//Method Getter
+	public final String getRankName() {
+		return rankName;
+	}
 	public final int GetId() {
 		return id;
 	}
@@ -44,9 +43,6 @@ public enum RankList {
 	}
 	public final String getPrefix() {
 		return prefix;	
-	}
-	public final String getSuffix() {
-		return suffix;	
 	}
 	public final String getName() {
 		return this.toString();

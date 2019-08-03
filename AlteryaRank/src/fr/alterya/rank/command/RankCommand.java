@@ -32,11 +32,11 @@ public class RankCommand implements CommandExecutor, TabCompleter {
 			Player player = (Player) sender;
 			if(player.isOp() == true) {
 				if(args.length == 0) {
-					player.sendMessage(Main.prefix + "La commande est /rank <id du rang> <joueur cibler> (Cela sert à donner un rang à un joueur) ou " + "/rank info (Cela permet d'obtenir toutes les informations sur les rangs)");
+					player.sendMessage(Main.prefix + "La commande est /rank <id du rang> <joueur cibler> (Cela sert à donner un rang à un joueur) ou /rank info (Cela permet d'obtenir toutes les informations sur les rangs)");
 				}
 				
 				if(args.length == 1 && args[0] == "info") {
-					player.sendMessage("§4§l[Rank] §eVoici les rangs présents sur le serveur §r:");
+					player.sendMessage(Main.prefix + "§eVoici les rangs présents sur le serveur §r:");
 					player.sendMessage("-Joueur : ID = 0 ; Power = 1 ; Nombre de home : 2");
 					player.sendMessage("-§aSouvenir §r: ID = 1 ; Power = 3 ; Nombre de home : 4");
 					player.sendMessage("-§1Mémoire §r: ID = 2 ; Power = 5 ; Nombre de home : 6");
@@ -53,48 +53,73 @@ public class RankCommand implements CommandExecutor, TabCompleter {
 				if(args.length == 2) 
 				{		
 					Player target = Bukkit.getPlayer(args[1]);
-					target.getAddress();
 					if(player.isOp() == true) {
 						
 						String id = args[0];
 						int id0 = Integer.valueOf(id);
 						
 						if(id0 == 0) {
-							rank.addRank(RankList.JOUEUR, target);
+							rank.addRank(RankList.JOUEUR, target); 
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.JOUEUR.getRankName());
 							return true;
 						}else if(id0 == 1) {
 							rank.addRank(RankList.SOUVENIR, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName());
 							return true;
 						}else if(id0 == 2) {
 							rank.addRank(RankList.MEMOIRE, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MEMOIRE.getRankName());
 							return true;
 						}else if(id0 == 3) {
 							rank.addRank(RankList.SAGE, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SAGE.getRankName());
 							return true;
 						}else if(id0 == 4) {
 							rank.addRank(RankList.DEVELOPPEUR, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.DEVELOPPEUR.getRankName());
 							return true;
 						}else if(id0 == 5) {
 							rank.addRank(RankList.ARCHITECTE, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ARCHITECTE.getRankName());
 							return true;
 						}else if(id0 == 6) {
 							rank.addRank(RankList.GUIDE, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.GUIDE.getRankName());
 							return true;
 						}else if(id0 == 7) {
 							rank.addRank(RankList.MODERATEUR, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR.getRankName());
 							return true;
 						}else if(id0 == 8) {
 							rank.addRank(RankList.MODERATEUR_PLUS, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR_PLUS.getRankName());
 							return true;
 						}else if(id0 == 9) {
 							rank.addRank(RankList.RESPONSABLE, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.RESPONSABLE.getRankName());
 							return true;
 						}else if(id0 == 10) {
 							rank.addRank(RankList.ADMINISTRATEUR, target);
+							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ADMINISTRATEUR.getRankName());
 							return true;
 						}
 					}
 				}
+			}
+		}
+		if(command.getName().equalsIgnoreCase("unrank")) {
+			Player player = (Player) sender;
+			if(args.length != 1 && player.isOp() == true) {
+				player.sendMessage(Main.prefix + "La commande est : /unrank <joueur ciblé> !");
+			}else if(args.length == 1 && player.isOp() == true) {
+				Player target = player.getServer().getPlayer(args[0]);
+				rank.deletPlayer(target);
+				player.sendMessage(Main.prefix + target.getName() + " a été dérank !");
+				return true;
+			}
+			if(player.isOp() == false) {
+				player.sendMessage(Main.prefix + "Vous n'êtes pas OP, Administrateur ou Responsable : vous ne pouvez pas effectuer cette commande !");
+				return true;
 			}
 		}
 		return false;

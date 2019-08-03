@@ -23,13 +23,21 @@ public final class Rank {
 	private final Plugin plugin;
 	private final Map<String, RankList> playerRanks = Maps.newHashMap();
 	
+	Player player;
+	
 	private FileConfiguration config;
 	private File file;
 	
+	int rankCount = 0;
+	
 	public Rank(Plugin plugin) 
-	{
+	{	
 		this.plugin = plugin;
 		initConfig();
+		
+		if(rankCount == 0) {
+			this.addRank(RankList.JOUEUR, player);
+		}
 	}
 	
 	public final Plugin getPlugin() 
@@ -63,7 +71,6 @@ public final class Rank {
 			
 			Team team = scoreboard.registerNewTeam(rankList.getName());
 			team.setPrefix(rankList.getPrefix());
-			team.setSuffix(rankList.getSuffix());
 		}
 	}
 	
@@ -98,50 +105,70 @@ public final class Rank {
 	}
 	
 	public void addRank(RankList rankList, Player target) {
-		if(rankList == RankList.ADMINISTRATEUR) {
+		if(rankList == RankList.ADMINISTRATEUR && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.ADMINISTRATEUR);
-		}else if(rankList == RankList.RESPONSABLE) {
+			rankCount = 1;
+		}else if(rankList == RankList.RESPONSABLE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.RESPONSABLE);
-		}else if(rankList == RankList.ARCHITECTE) {
+			rankCount = 1;
+		}else if(rankList == RankList.ARCHITECTE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.ARCHITECTE);
-		}else if(rankList == RankList.DEVELOPPEUR) {
+			rankCount = 1;
+		}else if(rankList == RankList.DEVELOPPEUR && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.DEVELOPPEUR);
-		}else if(rankList == RankList.GUIDE) {
+			rankCount = 1;
+		}else if(rankList == RankList.GUIDE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.GUIDE);
-		}else if(rankList == RankList.MODERATEUR) {
+			rankCount = 1;
+		}else if(rankList == RankList.MODERATEUR && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.MODERATEUR);
-		}else if(rankList == RankList.MODERATEUR_PLUS) {
+			rankCount = 1;
+		}else if(rankList == RankList.MODERATEUR_PLUS && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.MODERATEUR_PLUS);
-		}else if(rankList == RankList.SOUVENIR) {
+			rankCount = 1;
+		}else if(rankList == RankList.SOUVENIR && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.SOUVENIR);
-		}else if(rankList == RankList.MEMOIRE) {
+			rankCount = 1;
+		}else if(rankList == RankList.MEMOIRE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.MEMOIRE);
-		}else if(rankList == RankList.SAGE) {
+			rankCount = 1;
+		}else if(rankList == RankList.SAGE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.SAGE);
+			rankCount = 1;
 		}
 	}
 	
 	public void removeRank(RankList rankList, Player target) {
-		if(rankList == RankList.ADMINISTRATEUR) {
+		if(rankList == RankList.ADMINISTRATEUR && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.ADMINISTRATEUR);
-		}else if(rankList == RankList.RESPONSABLE) {
+			rankCount = 0;
+		}else if(rankList == RankList.RESPONSABLE && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.RESPONSABLE);
-		}else if(rankList == RankList.ARCHITECTE) {
+			rankCount = 0;
+		}else if(rankList == RankList.ARCHITECTE && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.ARCHITECTE);
-		}else if(rankList == RankList.DEVELOPPEUR) {
+			rankCount = 0;
+		}else if(rankList == RankList.DEVELOPPEUR && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.DEVELOPPEUR);
-		}else if(rankList == RankList.GUIDE) {
+			rankCount = 0;
+		}else if(rankList == RankList.GUIDE && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.GUIDE);
-		}else if(rankList == RankList.MODERATEUR) {
+			rankCount = 0;
+		}else if(rankList == RankList.MODERATEUR && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.MODERATEUR);
-		}else if(rankList == RankList.MODERATEUR_PLUS) {
+			rankCount = 0;
+		}else if(rankList == RankList.MODERATEUR_PLUS && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.MODERATEUR_PLUS);
-		}else if(rankList == RankList.SOUVENIR) {
+			rankCount = 0;
+		}else if(rankList == RankList.SOUVENIR && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.SOUVENIR);
-		}else if(rankList == RankList.MEMOIRE) {
+			rankCount = 0;
+		}else if(rankList == RankList.MEMOIRE && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.MEMOIRE);
-		}else if(rankList == RankList.SAGE) {
+			rankCount = 0;
+		}else if(rankList == RankList.SAGE && rankCount != 0) {
 			playerRanks.remove(target.getUniqueId().toString(), RankList.SAGE);
+			rankCount = 0;
 		}
 	}
 	
