@@ -16,7 +16,6 @@ import fr.alterya.faction.struct.Rel;
 import fr.alterya.faction.util.*;
 import fr.alterya.faction.zcore.persist.Entity;
 
-
 public class Faction extends Entity implements EconomyParticipator
 {
 	private Map<String, Rel> relationWish;
@@ -24,17 +23,31 @@ public class Faction extends Entity implements EconomyParticipator
 	private transient Set<FPlayer> fplayers = new HashSet<FPlayer>();
 
 	private Set<String> invites; 
-	public void invite(FPlayer fplayer) { this.invites.add(fplayer.getId().toLowerCase()); }
-	public void deinvite(FPlayer fplayer) { this.invites.remove(fplayer.getId().toLowerCase()); }
-	public boolean isInvited(FPlayer fplayer) { return this.invites.contains(fplayer.getId().toLowerCase()); }
+	public void invite(FPlayer fplayer) {
+		this.invites.add(fplayer.getId().toLowerCase()); 
+	}
+	public void deinvite(FPlayer fplayer) {
+		this.invites.remove(fplayer.getId().toLowerCase()); 
+	}
+	public boolean isInvited(FPlayer fplayer) {
+		return this.invites.contains(fplayer.getId().toLowerCase()); 
+	}
 	
 	private boolean open;
-	public boolean getOpen() { return open; }
-	public void setOpen(boolean isOpen) { open = isOpen; }
+	public boolean getOpen() {
+		return open; 
+	}
+	public void setOpen(boolean isOpen) {
+		open = isOpen; 
+	}
 	
 	private String tag;
-	public String getTag() { return this.tag; }
-	public String getTag(String prefix) { return prefix+this.tag; }
+	public String getTag() {
+		return this.tag; 
+	}
+	public String getTag(String prefix) {
+		return prefix + this.tag; 
+		}
 	public String getTag(RelationParticipator observer)
 	{
 		if (observer == null)

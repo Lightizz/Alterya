@@ -1,5 +1,9 @@
 package fr.alterya.rank;
 
+/*
+Author and resp of the rank plugin: Lightiz
+*/
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;

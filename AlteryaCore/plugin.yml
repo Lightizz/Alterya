@@ -7,7 +7,7 @@ commands:
     description: A command for open your enderchest with out have the block on the map
     permission: ec.use
   craft:
-    description: A command for open a simple workbench
+    description: A command for open a workbench
     permission: craft.use
   ping:
     description: A command to send to the player his ping
@@ -15,3 +15,12 @@ commands:
   discord:
     description: A command for send the Discord invite link to the player
     permission: discord.use
+  money:
+    description: A command for send to the sender his money count
+    permission: money.use
+  pay:
+    description: A command for pay a player on the server
+    permission: pay.use
+  shop:
+    description: A command for open the shop menu
+    permission: shop.use

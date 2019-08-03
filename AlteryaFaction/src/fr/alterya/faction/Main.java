@@ -51,7 +51,7 @@ import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 
 public class Main extends MPlugin
 {
-	public static final String prefix = "§e§l[&4Faction&e&l]";
+	public static final String prefix = "§e§l[&4Faction&e&l] ";
 	
 	public static Main main;
 	
@@ -94,7 +94,7 @@ public class Main extends MPlugin
 		}
 		catch (ClassNotFoundException ex)
 		{
-			this.log(Level.SEVERE, "GSON lib not found. Your CraftBukkit build is too old (< 1.3.2) or otherwise not compatible.");
+			this.log(Level.SEVERE, "GSON lib introuvable. Votre CraftBukkit export est plus vienx que (< 1.3.2) u incompatible.");
 			this.suicide();
 			return;
 		}

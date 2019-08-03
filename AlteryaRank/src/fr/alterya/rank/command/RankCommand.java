@@ -13,6 +13,10 @@ import fr.alterya.rank.Main;
 import fr.alterya.rank.Rank;
 import fr.alterya.rank.RankList;
 
+/*
+Author and resp of the rank plugin: Lightiz
+*/
+
 public class RankCommand implements CommandExecutor, TabCompleter {
 	
 	private final Rank rank;
@@ -26,59 +30,69 @@ public class RankCommand implements CommandExecutor, TabCompleter {
 		if(command.getName().equalsIgnoreCase("rank")) {
 			
 			Player player = (Player) sender;
-			
-			if(args.length == 0) {
-				player.sendMessage(Main.prefix + "La commande est /rank <id du rang> <joueur cibler>  (Cela sert à donner un rang  à un joueur) ou " + "/rank info (Cela permet d'obtenir toutes les informations sur les rangs)");
-			}
-			
-			if(args.length == 1 && args[0] == "info" && player.isOp() == true) {
-				player.sendMessage("§4§l[Rank] §eVoici les rangs présents sur le serveur §r:");
-				player.sendMessage("-Joueur : ID = 0 ; Power = 1 ; Nombre de home : 2");
-				player.sendMessage("-§aSouvenir §r: ID = 1 ; Power = 3 ; Nombre de home : 4");
-				player.sendMessage("-§1Mémoire §r: ID = 2 ; Power = 5 ; Nombre de home : 6");
-				player.sendMessage("-§dSage §r: ID = 3 ; Power = 10 ; Nombre de home : 10");
-				player.sendMessage("-§5Développeur §r: ID = 4 ; Power = 15 ; Nombre de home : 4");
-				player.sendMessage("-§5Architecte §r: ID = 5 ;  Power = 15 ; Nombre de home : 4");
-				player.sendMessage("-§aGuide §r: ID = 6 ; Power = 20 ; Nombre de home : 6");
-				player.sendMessage("-§eModérateur §r: ID = 7 ; Power = 40 ; Nombre de home : 10");
-				player.sendMessage("-§6Modérateur+ §r: ID = 8 ; Power = 60 ; Nombre de home : 15");
-				player.sendMessage("-§4Responsable §r: ID = 9 ; Power = 80 ; Nombre de home : ∞");
-				player.sendMessage("-§4Administrateur §r: ID = 10 ; Power = 100 ; Nombre de home : ∞");
-			}
-			
-			if(args.length == 2) 
-			{		
-				Player target = Bukkit.getPlayer(args[1]);
-				target.getAddress();
-				if(player.isOp() == true) {
-					
-					String id = args[0];
-					int id0 = Integer.valueOf(id);
-					
-					if(id0 == 0) {
-						rank.addRank(RankList.JOUEUR, target);
-						return true;
-					}else if(id0 == 1) {
-						rank.addRank(RankList.DEVELOPPEUR, target);
-						return true;
-					}else if(id0 == 2) {
-						rank.addRank(RankList.ARCHITECTE, target);
-						return true;
-					}else if(id0 == 3) {
-						rank.addRank(RankList.GUIDE, target);
-						return true;
-					}else if(id0 == 4) {
-						rank.addRank(RankList.MODERATEUR, target);
-						return true;
-					}else if(id0 == 5) {
-						rank.addRank(RankList.MODERATEUR_PLUS, target);
-						return true;
-					}else if(id0 == 6) {
-						rank.addRank(RankList.RESPONSABLE, target);
-						return true;
-					}else if(id0 == 7) {
-						rank.addRank(RankList.ADMINISTRATEUR, target);
-						return true;
+			if(player.isOp() == true) {
+				if(args.length == 0) {
+					player.sendMessage(Main.prefix + "La commande est /rank <id du rang> <joueur cibler> (Cela sert à donner un rang à un joueur) ou " + "/rank info (Cela permet d'obtenir toutes les informations sur les rangs)");
+				}
+				
+				if(args.length == 1 && args[0] == "info") {
+					player.sendMessage("§4§l[Rank] §eVoici les rangs présents sur le serveur §r:");
+					player.sendMessage("-Joueur : ID = 0 ; Power = 1 ; Nombre de home : 2");
+					player.sendMessage("-§aSouvenir §r: ID = 1 ; Power = 3 ; Nombre de home : 4");
+					player.sendMessage("-§1Mémoire §r: ID = 2 ; Power = 5 ; Nombre de home : 6");
+					player.sendMessage("-§dSage §r: ID = 3 ; Power = 10 ; Nombre de home : 10");
+					player.sendMessage("-§5Développeur §r: ID = 4 ; Power = 15 ; Nombre de home : 4");
+					player.sendMessage("-§5Architecte §r: ID = 5 ;  Power = 15 ; Nombre de home : 4");
+					player.sendMessage("-§aGuide §r: ID = 6 ; Power = 20 ; Nombre de home : 6");
+					player.sendMessage("-§eModérateur §r: ID = 7 ; Power = 40 ; Nombre de home : 10");
+					player.sendMessage("-§6Modérateur+ §r: ID = 8 ; Power = 60 ; Nombre de home : 15");
+					player.sendMessage("-§4Responsable §r: ID = 9 ; Power = 80 ; Nombre de home : ∞");
+					player.sendMessage("-§4Administrateur §r: ID = 10 ; Power = 100 ; Nombre de home : ∞");
+				}
+				
+				if(args.length == 2) 
+				{		
+					Player target = Bukkit.getPlayer(args[1]);
+					target.getAddress();
+					if(player.isOp() == true) {
+						
+						String id = args[0];
+						int id0 = Integer.valueOf(id);
+						
+						if(id0 == 0) {
+							rank.addRank(RankList.JOUEUR, target);
+							return true;
+						}else if(id0 == 1) {
+							rank.addRank(RankList.SOUVENIR, target);
+							return true;
+						}else if(id0 == 2) {
+							rank.addRank(RankList.MEMOIRE, target);
+							return true;
+						}else if(id0 == 3) {
+							rank.addRank(RankList.SAGE, target);
+							return true;
+						}else if(id0 == 4) {
+							rank.addRank(RankList.DEVELOPPEUR, target);
+							return true;
+						}else if(id0 == 5) {
+							rank.addRank(RankList.ARCHITECTE, target);
+							return true;
+						}else if(id0 == 6) {
+							rank.addRank(RankList.GUIDE, target);
+							return true;
+						}else if(id0 == 7) {
+							rank.addRank(RankList.MODERATEUR, target);
+							return true;
+						}else if(id0 == 8) {
+							rank.addRank(RankList.MODERATEUR_PLUS, target);
+							return true;
+						}else if(id0 == 9) {
+							rank.addRank(RankList.RESPONSABLE, target);
+							return true;
+						}else if(id0 == 10) {
+							rank.addRank(RankList.ADMINISTRATEUR, target);
+							return true;
+						}
 					}
 				}
 			}

@@ -1,7 +1,13 @@
 package fr.alterya.rank;
 
-public enum RankList {
+import org.bukkit.entity.Player;
 
+/*
+Resp of the rank plugin: Lightiz
+*/
+
+public enum RankList {
+	
 	JOUEUR(0, 1, "", "", " > "),
 	SOUVENIR(1, 3, "§a[Souvenir]", "", " > "),
 	MEMOIRE(2, 5, "§1[Mémoire]", "", " > "),
@@ -18,6 +24,8 @@ public enum RankList {
 	private final int power, id;
 	private final String prefix, suffix, chatSeparator;
 	
+	Player player;
+	
 	//Constructor
 	private RankList(int id, int power, String prefix, String suffix, String chatSeparator) {
 		this.id = id;
@@ -31,10 +39,8 @@ public enum RankList {
 	public final int GetId() {
 		return id;
 	}
-	
 	public final int getPower() {
 		return power;
-		
 	}
 	public final String getPrefix() {
 		return prefix;	
@@ -42,11 +48,9 @@ public enum RankList {
 	public final String getSuffix() {
 		return suffix;	
 	}
-	
 	public final String getName() {
 		return this.toString();
 	}
-
 	public final String getChatSeparator() {
 		return chatSeparator;
 	}

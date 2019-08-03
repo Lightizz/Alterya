@@ -20,7 +20,7 @@ import fr.alterya.faction.struct.TerritoryAccess;
 import fr.alterya.faction.util.AsciiCompass;
 import fr.alterya.faction.zcore.util.DiscUtil;
 
-public class Board
+public class Board 
 {
 	private static transient File file = new File(Main.main.getDataFolder(), "board.json");
 	private static transient HashMap<FLocation, TerritoryAccess> flocationIds = new HashMap<FLocation, TerritoryAccess>();

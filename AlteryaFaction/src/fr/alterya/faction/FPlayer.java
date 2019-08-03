@@ -1,4 +1,4 @@
-package fr.alterya.faction;
+package fr.alterya.faction; 
 
 import java.util.HashSet;
 import java.util.Set;
@@ -415,13 +415,13 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		
 		if (!perm && this.getRole() == Rel.LEADER && myFaction.getFPlayers().size() > 1)
 		{
-			msg("<b>You must give the admin role to someone else first.");
+			msg(Main.prefix + "<b>Vous devez donner le rôle d'administateur de faction à quelqu'un d'autre !");
 			return;
 		}
 
 		if (!Conf.canLeaveWithNegativePower && this.getPower() < 0)
 		{
-			msg("<b>You cannot leave until your power is positive.");
+			msg(Main.prefix + "<b>Vous ne pouvez pas quitter tant que le power est en dessu de 0 !");
 			return;
 		}
 
@@ -443,11 +443,11 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		{
 			for (FPlayer fplayer : myFaction.getFPlayersWhereOnline(true))
 			{
-				fplayer.msg("%s<i> left %s<i>.", this.describeTo(fplayer, true), myFaction.describeTo(fplayer));
+				fplayer.msg("%s<i> a quitter %s<i>.", this.describeTo(fplayer, true), myFaction.describeTo(fplayer));
 			}
 
 			if (Conf.logFactionLeave)
-				Main.main.log(this.getName()+" left the faction: "+myFaction.getTag());
+				Main.main.log(this.getName()+" a quitter la faction : " + myFaction.getTag());
 		}
 		
 		this.resetFactionData();
@@ -457,12 +457,12 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		{
 			for (FPlayer fplayer : FPlayers.i.getOnline())
 			{
-				fplayer.msg("<i>%s<i> was disbanded.", myFaction.describeTo(fplayer, true));
+				fplayer.msg("<i>%s<i> a été séparé !", myFaction.describeTo(fplayer, true));
 			}
 
 			myFaction.detach();
 			if (Conf.logFactionDisband)
-				Main.main.log("The faction "+myFaction.getTag()+" ("+myFaction.getId()+") was disbanded due to the last player ("+this.getName()+") leaving.");
+				Main.main.log("La faction "+myFaction.getTag()+" ("+myFaction.getId()+") a été séparé car le dernier joueur ("+this.getName()+") a quitter !");
 		}
 	}
 
@@ -476,11 +476,11 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		
 		if (Conf.worldGuardChecking && Worldguard.checkForRegionsInChunk(location))
 		{
-			error = Main.main.txt.parse("<b>This land is protected");
+			error = Main.main.txt.parse("<b>Cette terre est protégée");
 		}
 		else if (Conf.worldsNoClaiming.contains(flocation.getWorldName()))
 		{
-			error = Main.main.txt.parse("<b>Sorry, this world has land claiming disabled.");
+			error = Main.main.txt.parse("<b>Désoler, le /claim est désactiver dans cette partie du monde !");
 		}
 		else if (this.hasAdminMode())
 		{
@@ -488,7 +488,7 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		}
 		else if (forFaction == currentFaction)
 		{
-			error = Main.main.txt.parse("%s<i> already own this land.", forFaction.describeTo(this, true));
+			error = Main.main.txt.parse("%s<i> posséde déjà cette terre !", forFaction.describeTo(this, true));
 		}
 		else if ( ! FPerm.TERRITORY.has(this, forFaction, true))
 		{
@@ -500,11 +500,11 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		}
 		else if (ownedLand >= forFaction.getPowerRounded())
 		{
-			error = Main.main.txt.parse("<b>You can't claim more land! You need more power!");
+			error = Main.main.txt.parse("<b>Vous ne pouvez pas plus claim de terres que ça ! Vous avez besoin de plus de power !");
 		}
 		else if (Conf.claimedLandsMax != 0 && ownedLand >= Conf.claimedLandsMax && ! forFaction.getFlag(FFlag.INFPOWER))
 		{
-			error = Main.main.txt.parse("<b>Limit reached. You can't claim more land!");
+			error = Main.main.txt.parse("<b>Limite attenteinte ! Vous ne pouvez pas plus claim de terres que ça !");
 		}
 		else if ( ! Conf.claimingFromOthersAllowed && currentFaction.isNormal())
 		{

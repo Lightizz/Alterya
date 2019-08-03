@@ -1,13 +1,18 @@
 package fr.alterya.rank;
 
+/*
+Author and resp of the rank plugin: Lightiz
+*/
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.alterya.rank.command.CmdKit;
 import fr.alterya.rank.command.RankCommand;
 
 public class Main extends JavaPlugin
 {
-	public static String prefix = "§e§l[&4Rank&e&l]";
+	public static String prefix = "§e§l[&4Rank&e&l] ";
 	
 	private Rank rank;
 	
@@ -26,6 +31,7 @@ public class Main extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(rank), this);
 		
 		getCommand("rank").setExecutor(new RankCommand(rank));
+		getCommand("kit").setExecutor(new CmdKit());
 	}
 	
 	@Override
