@@ -1,11 +1,14 @@
 package fr.alterya.rank.command;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import fr.alterya.rank.Main;
@@ -68,17 +71,93 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 	}
 	
 	public void giveSageKit(Player player) {
-		player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+		ItemStack kitBoots = new ItemStack(Material.IRON_BOOTS);
+		ItemMeta bootsMeta = kitBoots.getItemMeta();
+		bootsMeta.setDisplayName(ChatColor.RED + "Kit boots");
+		bootsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+		bootsMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		kitBoots.setItemMeta(bootsMeta);
+		
+		ItemStack kitChestplate = new ItemStack(Material.IRON_CHESTPLATE);
+		ItemMeta chestplateMeta = kitChestplate.getItemMeta();
+		bootsMeta.setDisplayName(ChatColor.RED + "Kit chestplate");
+		chestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+		bootsMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		kitChestplate.setItemMeta(chestplateMeta);
+		
+		ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
+		ItemMeta leggingsMeta = leggings.getItemMeta();
+		bootsMeta.setDisplayName(ChatColor.RED + "Kit leggings");
+		leggingsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+		bootsMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		leggings.setItemMeta(leggingsMeta);
+		
+		ItemStack helmet = new ItemStack(Material.IRON_HELMET);
+		ItemMeta helmetMeta = helmet.getItemMeta();
+		bootsMeta.setDisplayName(ChatColor.RED + "Kit helmet");
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+		bootsMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		helmet.setItemMeta(helmetMeta);
+		
+		ItemStack sword = new ItemStack(Material.IRON_SWORD);
+		ItemMeta swordMeta = sword.getItemMeta();
+		swordMeta.setDisplayName(ChatColor.RED + "Kit sword");
+		swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
+		swordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		sword.setItemMeta(swordMeta);
+		
+		ItemStack goldenApple = new ItemStack((Material.GOLDEN_APPLE), 5);
+		
+		player.getInventory().addItem(sword);
+		player.getInventory().addItem(helmet);
+		player.getInventory().addItem(kitChestplate);
+		player.getInventory().addItem(leggings);
+		player.getInventory().addItem(kitBoots);
+		player.getInventory().addItem(goldenApple);
 		player.updateInventory();
 	}
 	
 	public void giveMemoireKit(Player player) {
-		player.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE));
+		ItemStack kitBoots = new ItemStack(Material.IRON_BOOTS);
+		ItemMeta bootsMeta = kitBoots.getItemMeta();
+		bootsMeta.setDisplayName(ChatColor.RED + "Kit boots");
+		bootsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		kitBoots.setItemMeta(bootsMeta);
+		
+		ItemStack kitChestplate = new ItemStack(Material.IRON_CHESTPLATE);
+		ItemMeta chestplateMeta = kitChestplate.getItemMeta();
+		bootsMeta.setDisplayName(ChatColor.RED + "Kit chestplate");
+		chestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		kitChestplate.setItemMeta(chestplateMeta);
+		
+		ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
+		ItemMeta leggingsMeta = leggings.getItemMeta();
+		bootsMeta.setDisplayName(ChatColor.RED + "Kit leggings");
+		leggingsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		leggings.setItemMeta(leggingsMeta);
+		
+		ItemStack helmet = new ItemStack(Material.IRON_HELMET);
+		ItemMeta helmetMeta = helmet.getItemMeta();
+		bootsMeta.setDisplayName(ChatColor.RED + "Kit helmet");
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		helmet.setItemMeta(helmetMeta);
+		
+		ItemStack goldenApple = new ItemStack((Material.GOLDEN_APPLE), 5);
+		
+		player.getInventory().addItem(helmet);
+		player.getInventory().addItem(leggings);
+		player.getInventory().addItem(kitChestplate);
+		player.getInventory().addItem(kitBoots);
+		player.getInventory().addItem(goldenApple);
 		player.updateInventory();
 	}
 
 	public void giveSouvenirKit(Player player) {
-		player.getInventory().addItem(new ItemStack(Material.IRON_CHESTPLATE));
+		player.getInventory().addItem(new ItemStack(Material.STONE_SWORD));
+		player.getInventory().addItem(new ItemStack(Material.LEATHER_HELMET));
+		player.getInventory().addItem(new ItemStack(Material.LEATHER_CHESTPLATE));
+		player.getInventory().addItem(new ItemStack(Material.LEATHER_LEGGINGS));
+		player.getInventory().addItem(new ItemStack(Material.LEATHER_BOOTS));
 		player.updateInventory();
 	}
 

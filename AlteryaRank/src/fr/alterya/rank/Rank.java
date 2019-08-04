@@ -36,6 +36,7 @@ public final class Rank {
 		initConfig();
 		
 		if(rankCount == 0) {
+			this.deletPlayer(player);
 			this.addRank(RankList.JOUEUR, player);
 		}
 	}

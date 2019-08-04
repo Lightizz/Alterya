@@ -6,6 +6,24 @@ Resp of the rank plugin: Lightiz
 
 public enum RankList {
 	
+	/*
+	§4 = "dark_red"
+	§c = "red"
+	§6 = "gold"
+	§e = "yellow"
+	§2 = "dark_green"
+	§a = "green"
+	§b = "aqua"
+	§3 = "dark_aqua"
+	§1 = "dark_blue"
+	§9 = "blue"
+	§d = "light_purple"
+	§5 = "dark_purple"
+	§f = "white"
+	§7 = "gray"
+	§8 = "dark_gray"
+	§0 = "black"
+	*/
 	JOUEUR(0, 1, "Joueur", "", " > "),
 	SOUVENIR(1, 3, "Souvenir", "§a[Souvenir] ", " > "),
 	MEMOIRE(2, 5, "Mémoire","§1[Mémoire] ", " > "),
