@@ -75,8 +75,15 @@ public class Shop implements Listener {
 	public float seedsPrise = 2.5f;
 	public float seedsSellCount = 1f;
 	
+	public float cocoaPrise = 4.5f;
+	
+	public float melonPrise = 3.5f;
+	
+	public float pumpkinPrise = 3.5f;
+	
+	public float cactusPrise = 3f;
+	
 	public float sugarCanePrise = 10f;
-	public float sugarCaneSellCount = 5.5f;
 	
 	//Set items in main page of the shop
 	public void setItemsInShopMain() {
@@ -432,9 +439,33 @@ public class Shop implements Listener {
 		
 		ItemStack sugarCan = new ItemStack(Material.SUGAR_CANE);
 		ItemMeta sugarCanMeta = sugarCan.getItemMeta();
-		sugarCanMeta.setLore(Arrays.asList("§2Prix d'achat / u : " + sugarCanePrise + "$", "Prix de vente / u :" + sugarCaneSellCount + "$"));
+		sugarCanMeta.setLore(Arrays.asList("§2Prix d'achat / u : " + sugarCanePrise + "$", "La vente de canne à sucre est bloquée."));
 		sugarCanMeta.setDisplayName("Canne à sucre");
 		sugarCan.setItemMeta(sugarCanMeta);
+		
+		ItemStack cactus = new ItemStack(Material.CACTUS);
+		ItemMeta cactusMeta = cactus.getItemMeta();
+		cactusMeta.setLore(Arrays.asList("§2Prix d'achat / u : " + cactusPrise + "$", "La vente de cactus est bloquée."));
+		cactusMeta.setDisplayName("Cactus");
+		cactus.setItemMeta(cactusMeta);
+		
+		ItemStack cocoa = new ItemStack(Material.COCOA);
+		ItemMeta cocoaMeta = cocoa.getItemMeta();
+		cocoaMeta.setLore(Arrays.asList("§2Prix d'achat / u : " + cocoaPrise + "$", "La vente de cactus est bloquée."));
+		cocoaMeta.setDisplayName("Cacao");
+		cocoa.setItemMeta(cocoaMeta);
+		
+		ItemStack melon = new ItemStack(Material.MELON);
+		ItemMeta melonMeta = melon.getItemMeta();
+		melonMeta.setLore(Arrays.asList("§2Prix d'achat / u : " + melonPrise + "$", "La vente de cactus est bloquée."));
+		melonMeta.setDisplayName("Pastèque / Melon d'eau");
+		melon.setItemMeta(melonMeta);
+		
+		ItemStack pumpkin = new ItemStack(Material.PUMPKIN);
+		ItemMeta pumpkinMeta = pumpkin.getItemMeta();
+		pumpkinMeta.setLore(Arrays.asList("§2Prix d'achat / u : " + pumpkinPrise + "$", "La vente de cactus est bloquée."));
+		pumpkinMeta.setDisplayName("Citoruille");
+		pumpkin.setItemMeta(pumpkinMeta);
 		
 		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
 		ItemMeta doorMeta = backDoor.getItemMeta();
@@ -456,8 +487,8 @@ public class Shop implements Listener {
 		//2nd line
 		shopInvMain.setItem(9, seeds);
 		shopInvMain.setItem(10, sugarCan);
-		shopInvMain.setItem(11, new ItemStack(Material.THIN_GLASS));
-		shopInvMain.setItem(12, new ItemStack(Material.THIN_GLASS));
+		shopInvMain.setItem(11, cocoa);
+		shopInvMain.setItem(12, cactus);
 		shopInvMain.setItem(13, new ItemStack(Material.THIN_GLASS));
 		shopInvMain.setItem(14, new ItemStack(Material.THIN_GLASS));
 		shopInvMain.setItem(15, new ItemStack(Material.THIN_GLASS));
@@ -982,15 +1013,7 @@ public class Shop implements Listener {
 				Material objectToSell = event.getCurrentItem().getType();
 				
 				if(objectToSell.equals(Material.SUGAR_CANE)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
-					if(! player.getInventory().contains(currentStack)) {
-						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " canne(s) à sucre !");
-					}else if(player.getInventory().contains(currentStack)) {
-						playerMoney =+ sugarCaneSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
-						player.getInventory().remove(currentStack);
-						player.openInventory(shopInvMain);
-					}		
+					player.sendMessage("La canne à sucre n'est pas vendable.");		
 				}else if(objectToSell.equals(Material.SEEDS)) {
 					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
 					if(! player.getInventory().contains(currentStack)) {
@@ -1001,21 +1024,30 @@ public class Shop implements Listener {
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}
+				}else if(objectToSell.equals(Material.MELON)) {
+					player.sendMessage("La pastèque n'est pas vendable.");
+				}else if(objectToSell.equals(Material.COCOA)) {
+					player.sendMessage("La pastèque n'est pas vendable.");
+				}else if(objectToSell.equals(Material.PUMPKIN)) {
+					player.sendMessage("La pastèque n'est pas vendable.");
+				}else if(objectToSell.equals(Material.CACTUS)) {
+					player.sendMessage("La pastèque n'est pas vendable.");
+				}
 			}else if(event.getCurrentItem().getType().equals(Material.CHEST)) {
-				Material objectToBuy = event.getCurrentItem().getType();
+					Material objectToBuy = event.getCurrentItem().getType();
 
-				if(objectToBuy.equals(Material.SUGAR_CANE)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
-					if(sugarCanePrise > playerMoney) {
-						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + sugarCanePrise + "$ pour acheter cette quantité de canne à sucre !");
-					}else if(sugarCanePrise < money.getPlayerMoney(player.getUniqueId().toString())) {
-						playerMoney =- sugarCanePrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
-						player.getInventory().addItem(currentStack);
-						player.openInventory(shopInvMain);
+					if(objectToBuy.equals(Material.SUGAR_CANE)) {
+						double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						if(sugarCanePrise > playerMoney) {
+							player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + sugarCanePrise + "$ pour acheter cette quantité de canne à sucre !");
+						}else if(sugarCanePrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+							playerMoney =- sugarCanePrise;
+							playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+							player.getInventory().addItem(currentStack);
+							player.openInventory(shopInvMain);
 							
-						player.updateInventory();
-					}	
+							player.updateInventory();
+						}	
 				}else if(objectToBuy.equals(Material.SEEDS)) {
 					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
 					if(seedsPrise > playerMoney) {
@@ -1028,10 +1060,57 @@ public class Shop implements Listener {
 						
 						player.updateInventory();
 					}
+				}else if(objectToBuy.equals(Material.MELON)) {
+					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					if(melonPrise > playerMoney) {
+						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + melonPrise + "$ pour acheter cette quantité de graine de blé !");
+					}else if(melonPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+						playerMoney =- melonPrise;
+						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						player.getInventory().addItem(currentStack);
+						player.openInventory(shopInvMain);
+						
+						player.updateInventory();
+					}
+				}else if(objectToBuy.equals(Material.PUMPKIN)) {
+					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					if(pumpkinPrise > playerMoney) {
+						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + pumpkinPrise + "$ pour acheter cette quantité de graine de blé !");
+					}else if(pumpkinPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+						playerMoney =- pumpkinPrise;
+						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						player.getInventory().addItem(currentStack);
+						player.openInventory(shopInvMain);
+						
+						player.updateInventory();
+					}
+				}else if(objectToBuy.equals(Material.CACTUS)) {
+					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					if(cactusPrise > playerMoney) {
+						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + cactusPrise + "$ pour acheter cette quantité de graine de blé !");
+					}else if(cactusPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+						playerMoney =- cactusPrise;
+						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						player.getInventory().addItem(currentStack);
+						player.openInventory(shopInvMain);
+						
+						player.updateInventory();
+					}
+				}else if(objectToBuy.equals(Material.COCOA)) {
+					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					if(cocoaPrise > playerMoney) {
+						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + cocoaPrise + "$ pour acheter cette quantité de graine de blé !");
+					}else if(cocoaPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+						playerMoney =- cocoaPrise;
+						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						player.getInventory().addItem(currentStack);
+						player.openInventory(shopInvMain);
+						
+						player.updateInventory();
+					}
 				}
 			}	
 		}
-	}
 	
 	//The void event for the minerals shop inventory
 	//The void event for the utils shop inventory
