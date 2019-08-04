@@ -6,13 +6,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
 
-import fr.alterya.core.Main;
 import fr.alterya.rank.Rank;
-import fr.alterya.rank.RankList;
 import net.minecraft.server.v1_7_R4.EntityPlayer;
 
 public class BasicsPlayerCommands implements CommandExecutor, Listener {
@@ -47,6 +43,13 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	        //Mémoire = 3 lignes
 	        //Joueur = 1 lignes
 	        if(command.getName().equalsIgnoreCase("ec") && sender instanceof Player) {
+	        	Player player = (Player) sender;
+	        	player.openInventory(player.getEnderChest());
+	        }
+	    return false;
+	}
+
+	        /*if(command.getName().equalsIgnoreCase("ec") && sender instanceof Player) {
 	            Player player = (Player) sender;
 	            if(rank.getPlayerRank(player) == RankList.SOUVENIR) {
 	            	
@@ -109,7 +112,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 				event.setCancelled(false);
 			}
 		}
-	}
+	}*/
 	
 	public double getPing(Player player) 
 	{
