@@ -11,15 +11,18 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.core.money.Money;
+import fr.alterya.money.manager.AccountManager;
+import fr.alterya.money.manager.account.Account;
+import fr.alterya.money.manager.account.AccountData;
+import fr.alterya.money.manager.account.AccountException;
 
 /*
 Author and resp of the shop: Lightiz
 */
 
 public class Shop implements Listener {
-
-	Money money;
+	
+	AccountData accountData;
 	
 	public Shop (){
 		//Set all items in their inventory to prepare the shop
@@ -32,14 +35,14 @@ public class Shop implements Listener {
 	}
 
 	//Create all inventorys
-	public Inventory shopInvMain = Bukkit.createInventory(null, 5*9, "§dShop");
+	public static Inventory shopInvMain = Bukkit.createInventory(null, 5*9, "§dShop");
 	
-	public Inventory shopInvBlocks = Bukkit.createInventory(null, 5*9, "§eBlocks");
-	public Inventory shopInvUtils = Bukkit.createInventory(null, 5*9, "§eUtils");
-	public Inventory shopInvPlants = Bukkit.createInventory(null, 5*9, "§ePlants");
-	public Inventory shopInvMinerals = Bukkit.createInventory(null, 5*9, "§eMinerals");
+	public static Inventory shopInvBlocks = Bukkit.createInventory(null, 5*9, "§eBlocks");
+	public static Inventory shopInvUtils = Bukkit.createInventory(null, 5*9, "§eUtils");
+	public static Inventory shopInvPlants = Bukkit.createInventory(null, 5*9, "§ePlants");
+	public static Inventory shopInvMinerals = Bukkit.createInventory(null, 5*9, "§eMinerals");
 	
-	public Inventory shopInvSellBuy = Bukkit.createInventory(null, 5*9, "§eSell / Buy items");
+	public static Inventory shopInvSellBuy = Bukkit.createInventory(null, 5*9, "§eSell / Buy items");
 	
 	//Blocks prises
 	public float stonePrise = 0.1f;
@@ -583,6 +586,15 @@ public class Shop implements Listener {
 		Player player = (Player) event.getWhoClicked();
 		ItemStack currentStack = event.getCurrentItem();
 		event.setCancelled(true);
+		
+		Account account = null;
+		
+		try {
+			account = AccountManager.getAccount(player.getUniqueId().toString(), "default");
+		} catch(AccountException e) {
+			player.sendMessage(e.getMessage());
+		}
+		
 		if(event.getClickedInventory() == shopInvBlocks && event.getCursor().getType().isBlock() == true) {
 			
 			ItemStack stackChosen = event.getCurrentItem();
@@ -687,32 +699,32 @@ public class Shop implements Listener {
 				Material objectToSell = event.getCurrentItem().getType();
 			
 				if(objectToSell.equals(Material.DIRT)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " blocks de terre !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ dirtSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}		
 				}else if(objectToSell.equals(Material.STONE)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " blocks de pierre !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ stoneSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}
 				}else if(objectToSell.equals(Material.SAND)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " blocks de sable !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ sandSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}
@@ -721,36 +733,36 @@ public class Shop implements Listener {
 				Material objectToBuy = event.getCurrentItem().getType();
 
 				if(objectToBuy.equals(Material.DIRT)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(dirtPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + dirtPrise + "$ pour acheter cette quantité de terre !");
-					}else if(dirtPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(dirtPrise < account.getHoldings().getBalance()) {
 						playerMoney =- dirtPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}	
 				}else if(objectToBuy.equals(Material.STONE)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(stonePrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + stonePrise + "$ pour acheter cette quantité de pierre !");
-					}else if(stonePrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(stonePrise < account.getHoldings().getBalance()) {
 						playerMoney =- stonePrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}
 				}else if(objectToBuy.equals(Material.SAND)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(sandPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + sandPrise + "$ pour acheter cette quantité de sable !");
-					}else if(sandPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(sandPrise < account.getHoldings().getBalance()) {
 						playerMoney =- sandPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
@@ -766,6 +778,15 @@ public class Shop implements Listener {
 		Player player = (Player) event.getWhoClicked();
 		ItemStack currentStack = event.getCurrentItem();
 		event.setCancelled(true);
+		
+		Account account = null;
+		
+		try {
+			account = AccountManager.getAccount(player.getUniqueId().toString(), "default");
+		} catch(AccountException e) {
+			player.sendMessage(e.getMessage());
+		}
+		
 		if(event.getClickedInventory() == shopInvUtils && event.getCursor().getType().isBlock() == true) {
 			
 			ItemStack stackChosen = event.getCurrentItem();
@@ -870,12 +891,12 @@ public class Shop implements Listener {
 				Material objectToSell = event.getCurrentItem().getType();
 			
 				if(objectToSell.equals(Material.BONE)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " blocks de terre !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ dirtSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}		
@@ -883,12 +904,12 @@ public class Shop implements Listener {
 				Material objectToBuy = event.getCurrentItem().getType();
 
 				if(objectToBuy.equals(Material.BONE)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(bonesPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + dirtPrise + "$ pour acheter cette quantité de terre !");
-					}else if(dirtPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(dirtPrise < account.getHoldings().getBalance()) {
 						playerMoney =- bonesPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
@@ -899,8 +920,6 @@ public class Shop implements Listener {
 		}
 	}
 	
-	
-	
 	//The void event for the minerals shop inventory
 	
 	//The void event for the plants shop inventory
@@ -909,6 +928,15 @@ public class Shop implements Listener {
 		Player player = (Player) event.getWhoClicked();
 		ItemStack currentStack = event.getCurrentItem();
 		event.setCancelled(true);
+		
+		Account account = null;
+		
+		try {
+			account = AccountManager.getAccount(player.getUniqueId().toString(), "default");
+		} catch(AccountException e) {
+			player.sendMessage(e.getMessage());
+		}
+		
 		if(event.getClickedInventory() == shopInvPlants && event.getCursor().getType().isBlock() == true) {
 				
 			ItemStack stackChosen = event.getCurrentItem();
@@ -1015,12 +1043,12 @@ public class Shop implements Listener {
 				if(objectToSell.equals(Material.SUGAR_CANE)) {
 					player.sendMessage("La canne à sucre n'est pas vendable.");		
 				}else if(objectToSell.equals(Material.SEEDS)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " graines de blé !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ seedsSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}
@@ -1037,72 +1065,72 @@ public class Shop implements Listener {
 					Material objectToBuy = event.getCurrentItem().getType();
 
 					if(objectToBuy.equals(Material.SUGAR_CANE)) {
-						double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						double playerMoney = account.getHoldings().getBalance();
 						if(sugarCanePrise > playerMoney) {
 							player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + sugarCanePrise + "$ pour acheter cette quantité de canne à sucre !");
-						}else if(sugarCanePrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+						}else if(sugarCanePrise < account.getHoldings().getBalance()) {
 							playerMoney =- sugarCanePrise;
-							playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+							playerMoney = account.getHoldings().getBalance();
 							player.getInventory().addItem(currentStack);
 							player.openInventory(shopInvMain);
 							
 							player.updateInventory();
 						}	
 				}else if(objectToBuy.equals(Material.SEEDS)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(seedsPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + seedsPrise + "$ pour acheter cette quantité de graine de blé !");
-					}else if(seedsPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(seedsPrise < account.getHoldings().getBalance()) {
 						playerMoney =- seedsPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}
 				}else if(objectToBuy.equals(Material.MELON)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(melonPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + melonPrise + "$ pour acheter cette quantité de graine de blé !");
-					}else if(melonPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(melonPrise < account.getHoldings().getBalance()) {
 						playerMoney =- melonPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}
 				}else if(objectToBuy.equals(Material.PUMPKIN)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(pumpkinPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + pumpkinPrise + "$ pour acheter cette quantité de graine de blé !");
-					}else if(pumpkinPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(pumpkinPrise < account.getHoldings().getBalance()) {
 						playerMoney =- pumpkinPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}
 				}else if(objectToBuy.equals(Material.CACTUS)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(cactusPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + cactusPrise + "$ pour acheter cette quantité de graine de blé !");
-					}else if(cactusPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(cactusPrise < account.getHoldings().getBalance()) {
 						playerMoney =- cactusPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}
 				}else if(objectToBuy.equals(Material.COCOA)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(cocoaPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + cocoaPrise + "$ pour acheter cette quantité de graine de blé !");
-					}else if(cocoaPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(cocoaPrise < account.getHoldings().getBalance()) {
 						playerMoney =- cocoaPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
@@ -1119,6 +1147,15 @@ public class Shop implements Listener {
 		Player player = (Player) event.getWhoClicked();
 		ItemStack currentStack = event.getCurrentItem();
 		event.setCancelled(true);
+		
+		Account account = null;
+		
+		try {
+			account = AccountManager.getAccount(player.getUniqueId().toString(), "default");
+		} catch(AccountException e) {
+			player.sendMessage(e.getMessage());
+		}
+		
 		if(event.getClickedInventory() == shopInvMinerals && event.getCursor().getType().isBlock() == true) {
 			
 			ItemStack stackChosen = event.getCurrentItem();
@@ -1223,52 +1260,52 @@ public class Shop implements Listener {
 				Material objectToSell = event.getCurrentItem().getType();
 			
 				if(objectToSell.equals(Material.DIAMOND)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " diamant(s) !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ diamondSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}		
 				}else if(objectToSell.equals(Material.GOLD_INGOT)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " lingot(s) d'or !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ goldSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}
 				}else if(objectToSell.equals(Material.IRON_INGOT)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " lingot(s) de fer !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ ironSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}
 				}else if(objectToSell.equals(Material.COAL)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " charbon(s)!");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ coalSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}
 				}else if(objectToSell.equals(Material.EMERALD)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(! player.getInventory().contains(currentStack)) {
 						player.sendMessage("Vous devez avoir " + currentStack.getAmount() + " emeraude(s) !");
 					}else if(player.getInventory().contains(currentStack)) {
 						playerMoney =+ emeraldSellCount;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().remove(currentStack);
 						player.openInventory(shopInvMain);
 					}
@@ -1277,60 +1314,60 @@ public class Shop implements Listener {
 				Material objectToBuy = event.getCurrentItem().getType();
 
 				if(objectToBuy.equals(Material.DIAMOND)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(diamondPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + diamondPrise + "$ pour acheter cette quantité de diamant(s) !");
-					}else if(diamondPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(diamondPrise < account.getHoldings().getBalance()) {
 						playerMoney =- diamondPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}	
 				}else if(objectToBuy.equals(Material.GOLD_INGOT)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(goldPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + goldPrise + "$ pour acheter cette quantité de lingot(s) d'or !");
-					}else if(goldPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(goldPrise < account.getHoldings().getBalance()) {
 						playerMoney =- goldPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}
 				}else if(objectToBuy.equals(Material.EMERALD)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(emeraldPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + emeraldPrise + "$ pour acheter cette quantité d'émeraude(s) !");
-					}else if(emeraldPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(emeraldPrise < account.getHoldings().getBalance()) {
 						playerMoney =- emeraldPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}		
 				}else if(objectToBuy.equals(Material.IRON_INGOT)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(ironPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + ironPrise + "$ pour acheter cette quantité de ligot(s) de fer !");
-					}else if(ironPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(ironPrise < account.getHoldings().getBalance()) {
 						playerMoney =- ironPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						
 						player.updateInventory();
 					}		
 				}else if(objectToBuy.equals(Material.COAL)) {
-					double playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+					double playerMoney = account.getHoldings().getBalance();
 					if(coalPrise > playerMoney) {
 						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + coalPrise + "$ pour acheter cette quantité de charbon !");
-					}else if(coalPrise < money.getPlayerMoney(player.getUniqueId().toString())) {
+					}else if(coalPrise < account.getHoldings().getBalance()) {
 						playerMoney =- coalPrise;
-						playerMoney = money.getPlayerMoney(player.getUniqueId().toString());
+						playerMoney = account.getHoldings().getBalance();
 						player.getInventory().addItem(currentStack);
 						player.openInventory(shopInvMain);
 						

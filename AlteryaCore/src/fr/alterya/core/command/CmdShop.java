@@ -4,8 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageEvent;
 
 import fr.alterya.core.Shop;
 
@@ -13,8 +11,8 @@ import fr.alterya.core.Shop;
 Author and resp of the shop: Lightiz
 */
 
-public class CmdShop implements CommandExecutor, Listener  {
-
+public class CmdShop implements CommandExecutor {
+	
 	Shop shop;
 	
 	@Override
@@ -23,22 +21,17 @@ public class CmdShop implements CommandExecutor, Listener  {
 		Player player = (Player) sender;
 		
 		if(command.getName().equalsIgnoreCase("shop") && sender instanceof Player) {
-			player.openInventory(shop.shopInvMain);
+			
+			shop.setItemsInShopMain();
+			shop.setItemInShopBlocks();
+			shop.setItemInShopPlants();
+			shop.setItemInShopUtils();
+			shop.setItemInShopMinerals();
+			shop.setItemsInShopSellBuy();
+			
+			player.openInventory(Shop.shopInvMain);
 			return true;
 		}
 		return false;
-	}
-	
-	public void onDamage(EntityDamageEvent eventDamage) {
-		Player player = (Player) eventDamage.getEntity();
-		
-		if(player.getOpenInventory() == shop.shopInvBlocks 
-			||player.getOpenInventory() == shop.shopInvMain
-			||player.getOpenInventory() == shop.shopInvPlants
-			||player.getOpenInventory() == shop.shopInvUtils
-			||player.getOpenInventory() == shop.shopInvMinerals
-			||player.getOpenInventory() == shop.shopInvSellBuy) {
-			player.getOpenInventory().close();
-		}
 	}
 }

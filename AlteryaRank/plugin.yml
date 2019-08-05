@@ -6,3 +6,5 @@ commands:
   rank:
     description: A command for do everything with the ranks(the sender must be opped or already have the administrator rank / perms)
     permission: rank.use
+  unrank:
+    description: A command to reset a rank of a player on the server

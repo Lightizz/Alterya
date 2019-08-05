@@ -28,7 +28,7 @@ public final class Rank {
 	private FileConfiguration config;
 	private File file;
 	
-	int rankCount = 0;
+	public static int rankCount = 0;
 	
 	public Rank(Plugin plugin) 
 	{	
@@ -36,7 +36,6 @@ public final class Rank {
 		initConfig();
 		
 		if(rankCount == 0) {
-			this.deletPlayer(player);
 			this.addRank(RankList.JOUEUR, player);
 		}
 	}
@@ -65,7 +64,7 @@ public final class Rank {
 	
 	public void initScoreboard() {
 		
-		if(scoreboard != null) throw new UnsupportedOperationException("ScoreBoard déja initialise.");
+		if(scoreboard != null) throw new UnsupportedOperationException("ScoreBoard déja initialisé.");
 		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 		
 		for(RankList rankList : RankList.values()) {
@@ -89,8 +88,10 @@ public final class Rank {
 	}
 	
 	public void deletPlayer(Player player) {
-		if(playerRanks.containsKey(player.getUniqueId().toString())) return;
-		playerRanks.remove(player.getUniqueId() .toString());
+		if(playerRanks.containsKey(player.getUniqueId().toString())) {
+			playerRanks.remove(player.getUniqueId().toString());
+		}
+		playerRanks.remove(player.getUniqueId().toString());
 	}
 	
 	public RankList getPlayerRank (Player player) {

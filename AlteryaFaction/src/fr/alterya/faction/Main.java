@@ -48,7 +48,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 
-
 public class Main extends MPlugin
 {
 	public static final String prefix = "§e§l[&4Faction&e&l] ";

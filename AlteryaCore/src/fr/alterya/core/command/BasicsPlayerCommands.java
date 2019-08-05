@@ -1,14 +1,20 @@
 package fr.alterya.core.command;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
+import fr.alterya.core.Main;
 import fr.alterya.rank.Rank;
+import fr.alterya.rank.RankList;
 import net.minecraft.server.v1_7_R4.EntityPlayer;
 
 public class BasicsPlayerCommands implements CommandExecutor, Listener {
@@ -26,8 +32,14 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	        
 	        if(command.getName().equalsIgnoreCase("discord") && sender instanceof Player) {
 	            Player player = (Player) sender;
-	            player.sendMessage(ChatColor.GOLD + ">> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<" );
+	            player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<|" );
 	            
+	            return true;
+	        }
+	        
+	        if(command.getName().equalsIgnoreCase("tipeee")) {
+	            Player player = (Player) sender;
+	            player.sendMessage(ChatColor.GOLD + "|>> https://fr.tipeee.com/alterya-pvp <<|");
 	            return true;
 	        }
 	        
@@ -44,75 +56,55 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	        //Joueur = 1 lignes
 	        if(command.getName().equalsIgnoreCase("ec") && sender instanceof Player) {
 	        	Player player = (Player) sender;
-	        	player.openInventory(player.getEnderChest());
+	        	
+	        	ItemStack glass = new ItemStack(Material.GLASS);
+	        	
+	        	if(rank.getPlayerRank(player) == RankList.SOUVENIR) {
+	        		player.getEnderChest().setItem(0, glass);
+	        		player.getEnderChest().setItem(1, glass);
+	        		player.getEnderChest().setItem(2, glass);
+	        		player.getEnderChest().setItem(3, glass);
+	        		player.getEnderChest().setItem(4, glass);
+	        		player.getEnderChest().setItem(5, glass);
+	        		player.getEnderChest().setItem(6, glass);
+	        		player.getEnderChest().setItem(7, glass);
+	        		player.getEnderChest().setItem(8, glass);
+	        	}else if(rank.getPlayerRank(player) == RankList.JOUEUR || rank.getPlayerRank(player) == null) {
+	        		player.getEnderChest().setItem(0, glass);
+	        		player.getEnderChest().setItem(1, glass);
+	        		player.getEnderChest().setItem(2, glass);
+	        		player.getEnderChest().setItem(3, glass);
+	        		player.getEnderChest().setItem(4, glass);
+	        		player.getEnderChest().setItem(5, glass);
+	        		player.getEnderChest().setItem(6, glass);
+	        		player.getEnderChest().setItem(7, glass);
+	        		player.getEnderChest().setItem(8, glass);
+	        		
+	        		player.getEnderChest().setItem(9, glass);
+	        		player.getEnderChest().setItem(10, glass);
+	        		player.getEnderChest().setItem(11, glass);
+	        		player.getEnderChest().setItem(12, glass);
+	        		player.getEnderChest().setItem(13, glass);
+	        		player.getEnderChest().setItem(14, glass);
+	        		player.getEnderChest().setItem(15, glass);
+	        		player.getEnderChest().setItem(16, glass);
+	        		player.getEnderChest().setItem(17, glass);
+	        	}
+	    		player.openInventory(player.getEnderChest());
+	    		return true;
 	        }
 	    return false;
-	}
-
-	        /*if(command.getName().equalsIgnoreCase("ec") && sender instanceof Player) {
-	            Player player = (Player) sender;
-	            if(rank.getPlayerRank(player) == RankList.SOUVENIR) {
-	            	
-	            }else if(rank.getPlayerRank(player) == RankList.SAGE) {
-	            	
-	            }else if(rank.getPlayerRank(player) == RankList.MEMOIRE) {
-	            	
-	            }else if(rank.getPlayerRank(player) == RankList.JOUEUR) {
-	            	
-	            }
-	            player.openInventory(player.getEnderChest());
-	            return true;
-	        }
-	        return false;
 	}
 	
 	@EventHandler
 	public void onInterract(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked();
 		
-		if(player.getEnderChest().getContents().length == 3*9 && rank.getPlayerRank(player) == RankList.SOUVENIR && event.getClickedInventory() == player.getEnderChest()) {
-			if(event.getSlot() == 26 
-					||event.getSlot() == 27
-					||event.getSlot() == 25
-					||event.getSlot() == 24
-					||event.getSlot() == 23
-					||event.getSlot() == 22
-					||event.getSlot() == 21
-					||event.getSlot() == 20
-					||event.getSlot() == 19
-					||event.getSlot() == 18) {
-				event.setCancelled(true);
-				player.sendMessage(Main.prefix + ChatColor.RED + "Vous n'avez pas le grade suffisant pour avoir accès à cette bar de votre ender chest !");
-			}else {
-				event.setCancelled(false);
-			}
-		}else if(player.getEnderChest().getContents().length == 3*9 && rank.getPlayerRank(player) == RankList.JOUEUR && event.getClickedInventory() == player.getEnderChest()) {
-			if(event.getSlot() == 26 
-					||event.getSlot() == 27
-					||event.getSlot() == 25
-					||event.getSlot() == 24
-					||event.getSlot() == 23
-					||event.getSlot() == 22
-					||event.getSlot() == 21
-					||event.getSlot() == 20
-					||event.getSlot() == 19
-					||event.getSlot() == 18
-					||event.getSlot() == 17
-					||event.getSlot() == 16
-					||event.getSlot() == 15
-					||event.getSlot() == 14
-					||event.getSlot() == 13
-					||event.getSlot() == 12
-					||event.getSlot() == 11
-					||event.getSlot() == 10
-					||event.getSlot() == 9) {
-				event.setCancelled(true);
-				player.sendMessage(Main.prefix + ChatColor.RED + "Vous n'avez pas le grade suffisant pour avoir accès à cette bar de votre ender chest !");
-			}else {
-				event.setCancelled(false);
-			}
+		if(event.getCurrentItem() == new ItemStack(Material.GLASS)) {
+			event.setCancelled(true);
+			player.sendMessage(Main.prefix + "Vu n'avez pas la permission d'utiliser ses slots.");
 		}
-	}*/
+	}
 	
 	public double getPing(Player player) 
 	{
