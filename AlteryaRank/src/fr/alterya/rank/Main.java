@@ -14,7 +14,7 @@ public class Main extends JavaPlugin
 {
 	public static String prefix = "§e§l[&4Rank&e&l] ";
 	
-	private Rank rank;
+	Rank rank;
 	
 	@Override
 	public void onLoad() {
@@ -31,6 +31,7 @@ public class Main extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(rank), this);
 		
 		getCommand("rank").setExecutor(new RankCommand(rank));
+		getCommand("unrank").setExecutor(new RankCommand(rank));
 		getCommand("kit").setExecutor(new CmdKit());
 	}
 	

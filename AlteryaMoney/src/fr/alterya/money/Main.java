@@ -24,8 +24,11 @@ public class Main extends JavaPlugin {
 
 	private FileConfiguration cfg;
 
+	public static String prefix = "§e[&4Rank&e] §r";
+	
 	private Interest interest;
 	
+	@Override
 	public void onEnable() {
 		
 		this.getCommand("money").setExecutor(new CmdMoney(this));
@@ -55,6 +58,7 @@ public class Main extends JavaPlugin {
 
 	}
 	
+	@Override
 	public void onDisable() {
 		if(interest != null)
 			interest.saveState();

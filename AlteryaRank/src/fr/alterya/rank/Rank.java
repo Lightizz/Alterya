@@ -20,8 +20,8 @@ import net.minecraft.util.com.google.common.collect.Maps;
 
 public final class Rank { 
 	private Scoreboard scoreboard;
-	private final Plugin plugin;
-	private final Map<String, RankList> playerRanks = Maps.newHashMap();
+	Plugin plugin;
+	public Map<String, RankList> playerRanks = Maps.newHashMap();
 	
 	Player player;
 	

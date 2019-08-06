@@ -24,3 +24,6 @@ commands:
   shop:
     description: A command for open the shop menu
     permission: shop.use
+  tipeee: 
+    description: A command to show the tipeee to give money for the server
+    permission: tipeee.use

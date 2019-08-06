@@ -21,6 +21,7 @@ public class Main extends JavaPlugin
 		getCommand("craft").setExecutor(new BasicsPlayerCommands());
 		getCommand("discord").setExecutor(new BasicsPlayerCommands());
 		getCommand("ping").setExecutor(new BasicsPlayerCommands());
+		getCommand("tipeee").setExecutor(new BasicsPlayerCommands());
 		getCommand("shop").setExecutor(new CmdShop());
 	}
 	

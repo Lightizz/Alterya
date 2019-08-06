@@ -1,6 +1,6 @@
 name: AlteryaFaction
-version: 1.0.0
-main: fr.alterya.faction.zcore.MPlugin
+version: 1.0.1
+main: fr.alterya.faction.Main
 author: Alterya
 softdepend: [PermissionsEx, Permissions, Essentials, EssentialsChat, HeroChat, iChat, LocalAreaChat, LWC, nChat, ChatManager, CAPI, AuthMe, Vault, Spout, WorldEdit, WorldGuard, AuthDB, CaptureThePoints, CombatTag]
 commands:

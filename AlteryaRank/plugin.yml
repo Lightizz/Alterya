@@ -8,3 +8,7 @@ commands:
     permission: rank.use
   unrank:
     description: A command to reset a rank of a player on the server
+    permission: unrank.use
+  kit:
+    description: A command to give grade kit to a player
+    permission: kit.use
