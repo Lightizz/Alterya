@@ -1,14 +1,8 @@
 package fr.alterya.money;
 
-import java.io.File;
-
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
 public class Messages {
 
-	private static FileConfiguration messagesCfg;
+	/*private static FileConfiguration messagesCfg;
 
 	public Messages(Main bcon) {
 		
@@ -26,7 +20,7 @@ public class Messages {
 
 	public static String tl(String identifier, Object[]... replacers) {
 
-		String message = messagesCfg.getString(format(identifier));
+		//String message = messagesCfg.getString(format(identifier));
 		/*
 		for(Object[] array : replacers) {
 			
@@ -38,14 +32,14 @@ public class Messages {
 			
 		}
 		*/
-		return format(message);
+		//return format(message);
 
-	}
+//	}
 	
-	public static String format(String string) {
+	//public static String format(String string) {
 		
-		return ChatColor.translateAlternateColorCodes('&', string);
+		//return ChatColor.translateAlternateColorCodes('&', string);
 		
-	}
+	//}*/
 
 }

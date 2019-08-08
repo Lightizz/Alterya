@@ -1,5 +1,5 @@
 name: AlteryaCore
-version: 1.0.0
+version: 1.0.1
 author: Alterya
 main: fr.alterya.core.Main
 commands:
@@ -15,15 +15,50 @@ commands:
   discord:
     description: A command for send the Discord invite link to the player
     permission: discord.use
-  money:
-    description: A command for send to the sender his money count
-    permission: money.use
-  pay:
-    description: A command for pay a player on the server
-    permission: pay.use
   shop:
     description: A command for open the shop menu
     permission: shop.use
   tipeee: 
     description: A command to show the tipeee to give money for the server
     permission: tipeee.use
+  money:
+    usage: /money <player>
+    description: Check your own or a players balance
+    permission: alterya.user.money
+  topmoney:
+    usage: /topmoney
+    description: Display the top balances in the server
+    permission: alterya.user.topmoney
+  pay:
+    usage: /pay <player> <amount>
+    description: Give a player some money
+    permission: alterya.user.sendmoney
+  givemoney:
+    usage: /givemoney <player> <amount>
+    description: Give some money to a player (doesn't take from your own balance)
+    permission: alterya.admin.givemoney
+  setmoney:
+    usage: /setmoney <player> <amount>
+    description: Set a players balance
+    permission: alterya.admin.setmoney
+  takemoney:
+    usage: /takemoney <player> <amount>
+    description: take some money from a player
+    permission: alterya.admin.takemoney
+permissions:
+  alterya.user:
+    description: Gives access to all alterya user commands
+    children:
+      alterya.user.money: true
+      alterya.user.topmoney: true
+      alterya.user.sendmoney: true
+      alterya.user.help: true
+  alterya.admin:
+    description: Gives access to all alterya admin commands
+    children:
+      alterya.admin.givemoney: false
+      alterya.admin.setmoney: false
+      alterya.admin.takemoney: false
+      alterya.admin.purgemoney: false
+      alterya.sign.place: false
+      alterya.sign.break: false

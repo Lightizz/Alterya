@@ -57,39 +57,6 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	        if(command.getName().equalsIgnoreCase("ec") && sender instanceof Player) {
 	        	Player player = (Player) sender;
 	        	
-	        	ItemStack glass = new ItemStack(Material.GLASS);
-	        	
-	        	if(rank.getPlayerRank(player) == RankList.SOUVENIR) {
-	        		player.getEnderChest().setItem(0, glass);
-	        		player.getEnderChest().setItem(1, glass);
-	        		player.getEnderChest().setItem(2, glass);
-	        		player.getEnderChest().setItem(3, glass);
-	        		player.getEnderChest().setItem(4, glass);
-	        		player.getEnderChest().setItem(5, glass);
-	        		player.getEnderChest().setItem(6, glass);
-	        		player.getEnderChest().setItem(7, glass);
-	        		player.getEnderChest().setItem(8, glass);
-	        	}else if(rank.getPlayerRank(player) == RankList.JOUEUR || rank.getPlayerRank(player) == null) {
-	        		player.getEnderChest().setItem(0, glass);
-	        		player.getEnderChest().setItem(1, glass);
-	        		player.getEnderChest().setItem(2, glass);
-	        		player.getEnderChest().setItem(3, glass);
-	        		player.getEnderChest().setItem(4, glass);
-	        		player.getEnderChest().setItem(5, glass);
-	        		player.getEnderChest().setItem(6, glass);
-	        		player.getEnderChest().setItem(7, glass);
-	        		player.getEnderChest().setItem(8, glass);
-	        		
-	        		player.getEnderChest().setItem(9, glass);
-	        		player.getEnderChest().setItem(10, glass);
-	        		player.getEnderChest().setItem(11, glass);
-	        		player.getEnderChest().setItem(12, glass);
-	        		player.getEnderChest().setItem(13, glass);
-	        		player.getEnderChest().setItem(14, glass);
-	        		player.getEnderChest().setItem(15, glass);
-	        		player.getEnderChest().setItem(16, glass);
-	        		player.getEnderChest().setItem(17, glass);
-	        	}
 	    		player.openInventory(player.getEnderChest());
 	    		return true;
 	        }
@@ -100,10 +67,43 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	public void onInterract(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked();
 		
-		if(event.getCurrentItem() == new ItemStack(Material.GLASS)) {
-			event.setCancelled(true);
-			player.sendMessage(Main.prefix + "Vu n'avez pas la permission d'utiliser ses slots.");
+		if(event.getClickedInventory() == player.getEnderChest()) {
+			if(event.getCurrentItem() == new ItemStack(Material.AIR) || event.getCurrentItem() == null 
+					&& event.getSlot() == 0
+					&& event.getSlot() == 1
+					&& event.getSlot() == 2
+					&& event.getSlot() == 3
+					&& event.getSlot() == 4
+					&& event.getSlot() == 5
+					&& event.getSlot() == 6
+					&& event.getSlot() == 7
+					&& event.getSlot() == 8
+					&& event.getSlot() == 9
+					&& event.getSlot() == 10
+					&& event.getSlot() == 11
+					&& event.getSlot() == 12
+					&& event.getSlot() == 13
+					&& event.getSlot() == 14
+					&& event.getSlot() == 15
+					&& event.getSlot() == 16
+					&& event.getSlot() == 17 && rank.getPlayerRank(player) == RankList.JOUEUR) {
+				event.setCancelled(true);
+				player.sendMessage(Main.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
+			}else if(event.getCurrentItem() == new ItemStack(Material.AIR) || event.getCurrentItem() == null 
+					&& event.getSlot() == 0
+					&& event.getSlot() == 1
+					&& event.getSlot() == 2
+					&& event.getSlot() == 3
+					&& event.getSlot() == 4
+					&& event.getSlot() == 5
+					&& event.getSlot() == 6
+					&& event.getSlot() == 7
+					&& event.getSlot() == 8 && rank.getPlayerRank(player) == RankList.SOUVENIR) {
+				event.setCancelled(true);
+				player.sendMessage(Main.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
+			}
 		}
+		event.setCancelled(false);
 	}
 	
 	public double getPing(Player player) 
