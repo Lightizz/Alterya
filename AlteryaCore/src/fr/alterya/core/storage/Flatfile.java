@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import fr.alterya.money.Main;
+import fr.alterya.core.Main;
 
 public class Flatfile {
 

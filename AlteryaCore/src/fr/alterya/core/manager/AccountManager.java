@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 
+import fr.alterya.core.Main;
 import fr.alterya.core.event.AccountCreateEvent;
 import fr.alterya.core.event.AccountDeleteEvent;
-import fr.alterya.money.Main;
-import fr.alterya.money.manager.account.Account;
-import fr.alterya.money.manager.account.AccountData;
-import fr.alterya.money.manager.account.AccountException;
+import fr.alterya.core.manager.account.Account;
+import fr.alterya.core.manager.account.AccountData;
+import fr.alterya.core.manager.account.AccountException;
 
 public class AccountManager {
 
@@ -29,7 +29,7 @@ public class AccountManager {
 			
 		} else {
 			
-			throw new AccountException("&cCe compte n'éxiste pas.");
+			throw new AccountException("§cCe compte n'éxiste pas.");
 			
 		}
 		

@@ -46,7 +46,7 @@ public class Main extends JavaPlugin
 		getCommand("shop").setExecutor(new CmdShop());
 		getCommand("money").setExecutor(new CmdMoney());
 		getCommand("topmoney").setExecutor(new CmdTopmoney());
-		getCommand("sendmoney").setExecutor(new CmdSendmoney());
+		getCommand("pay").setExecutor(new CmdSendmoney());
 		getCommand("givemoney").setExecutor(new CmdGivemoney());
 		getCommand("setmoney").setExecutor(new CmdSetmoney());
 		getCommand("takemoney").setExecutor(new CmdTakemoney());
@@ -55,7 +55,7 @@ public class Main extends JavaPlugin
 		
 		initializeAccountData();
 		
-		getServer().getPluginManager().registerEvents(new fr.alterya.money.listeners.PlayerListener(), this);
+		getServer().getPluginManager().registerEvents(new fr.alterya.core.PlayerListener(), this);
 		
 		initializeInterest();
 	}
@@ -75,7 +75,7 @@ public class Main extends JavaPlugin
 	
 	private void initializeAccountData() {
 		
-		new AccountData();
+		new AccountData(this);
 		
 	}
 	

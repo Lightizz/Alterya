@@ -13,48 +13,41 @@ public class Sqlite implements Database {
 	
 	private String dbUrl;
 	
-	private Connection connection;
+	public Connection connection;
 	
 	public Sqlite(String dbName, String dbLocation) {
-		
 		this.dbUrl = "jdbc:sqlite:" + dbLocation + File.separator + dbName;
-		
 	}
 	
 	@Override
 	public void openDataConnection() {
-		
         try {
-        	
             Class.forName("org.sqlite.JDBC");
-            
             connection = DriverManager.getConnection(dbUrl);
-       
         } catch (ClassNotFoundException e) {
-        	
             Bukkit.getLogger().severe("ClassNotFoundException! " + e.getMessage());
-        
         } catch (SQLException e) {
-        	
             Bukkit.getLogger().severe("SQLException! " + e.getMessage());
-            
         }
-		
 	}
 
 	@Override
 	public void closeDataConnection() {
-		
-		try {
-			
-			connection.close();
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+		Connection connection_ = null;
+		try
+		{
+			connection_ = this.getDataStatement().getConnection();
 		}
-		
+		catch (SQLException e1)
+		{
+			e1.printStackTrace();
+		}
+		this.connection = connection_;
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -148,25 +141,18 @@ public class Sqlite implements Database {
 
 	@Override
 	public boolean hasTable(String tableName) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public Statement getDataStatement() {
-		
+		Connection connection_;
+		connection_ = this.connection;
 		try {
-			
-			return connection.createStatement();
-			
+			return connection_.createStatement();
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-			
 			return null;
-			
 		}
-		
 	}
-
 }

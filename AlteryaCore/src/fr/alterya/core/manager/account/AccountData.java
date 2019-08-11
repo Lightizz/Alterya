@@ -8,22 +8,27 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import fr.alterya.core.Main;
 import fr.alterya.core.Settings.Nodes;
-import fr.alterya.money.Main;
-import fr.alterya.money.storage.Database;
-import fr.alterya.money.storage.Sqlite;
+import fr.alterya.core.storage.Database;
+import fr.alterya.core.storage.Sqlite;
 
 public class AccountData {
 
-	private static Main plugin;
+	public static Main plugin;
 
+	Sqlite sqlite;
+	
 	private static Database db;
 
-	public AccountData() {
+	public AccountData(Main plugin_) {
+		
+		plugin = plugin_;
 		
 		if(Nodes.DATABASEMYSQL.getBoolean()) {
 			
 		} else {
+			
 			db = new Sqlite("accounts.db", plugin.getDataFolder().getAbsolutePath());
 		}
 		db.execute("CREATE TABLE IF NOT EXISTS `accounts` (  `id` INTEGER PRIMARY KEY,  `userid` VARCHAR(40) NOT NULL, `usergroup` VARCHAR(20) NOT NULL,  `balance` INT(11) NOT NULL);");
@@ -33,7 +38,7 @@ public class AccountData {
 
 		if(hasAccount(userId, group)) return false;
 		db.execute("INSERT INTO accounts (userid, usergroup, balance) VALUES('" + userId + "', '" + group + "', " + balance + ");");
-		Bukkit.getLogger().info("[BConomy] User account " + userId + " has been created for " + group);
+		Bukkit.getLogger().info("[Core] User account " + userId + " has been created for " + group);
 		return true;
 	}
 	

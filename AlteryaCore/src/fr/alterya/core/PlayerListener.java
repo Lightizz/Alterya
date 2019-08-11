@@ -4,8 +4,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
-import fr.alterya.money.manager.AccountManager;
-import fr.alterya.money.manager.account.AccountException;
+import fr.alterya.core.manager.AccountManager;
+import fr.alterya.core.manager.account.AccountException;
 
 public class PlayerListener implements Listener {
 	

@@ -6,11 +6,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import fr.alterya.money.Main;
-import fr.alterya.money.manager.AccountManager;
-import fr.alterya.money.manager.account.Account;
-import fr.alterya.money.manager.account.AccountException;
-import fr.alterya.money.manager.account.Holdings;
+import fr.alterya.core.Main;
+import fr.alterya.core.manager.AccountManager;
+import fr.alterya.core.manager.account.Account;
+import fr.alterya.core.manager.account.AccountException;
+import fr.alterya.core.manager.account.Holdings;
 
 public class CmdMoney implements CommandExecutor {
 

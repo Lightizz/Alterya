@@ -1,7 +1,6 @@
 package fr.alterya.core.manager.account;
 
-import fr.alterya.money.Main;
-import fr.alterya.money.manager.account.Holdings;
+import fr.alterya.core.Main;
 
 public class Account {
 	

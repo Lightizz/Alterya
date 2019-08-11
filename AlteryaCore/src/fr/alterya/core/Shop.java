@@ -11,10 +11,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.money.manager.AccountManager;
-import fr.alterya.money.manager.account.Account;
-import fr.alterya.money.manager.account.AccountData;
-import fr.alterya.money.manager.account.AccountException;
+import fr.alterya.core.manager.AccountManager;
+import fr.alterya.core.manager.account.Account;
+import fr.alterya.core.manager.account.AccountData;
+import fr.alterya.core.manager.account.AccountException;
 
 /*
 Author and resp of the shop: Lightiz

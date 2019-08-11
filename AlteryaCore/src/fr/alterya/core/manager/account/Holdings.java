@@ -2,9 +2,9 @@ package fr.alterya.core.manager.account;
 
 import org.bukkit.Bukkit;
 
+import fr.alterya.core.Main;
 import fr.alterya.core.Settings.Nodes;
 import fr.alterya.core.event.HoldingsChangeEvent;
-import fr.alterya.money.Main;
 
 public class Holdings {
 

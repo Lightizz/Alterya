@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import fr.alterya.money.Main;
+import fr.alterya.core.Main;
 
 public class Settings {
 

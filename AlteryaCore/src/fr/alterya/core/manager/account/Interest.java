@@ -5,10 +5,10 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import fr.alterya.core.Main;
 import fr.alterya.core.Settings.Nodes;
-import fr.alterya.money.Main;
-import fr.alterya.money.storage.Flatfile;
-import fr.alterya.money.utils.TimeUtil;
+import fr.alterya.core.storage.Flatfile;
+import fr.alterya.core.utils.TimeUtil;
 
 public class Interest extends BukkitRunnable {
 

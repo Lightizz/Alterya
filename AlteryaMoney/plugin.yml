@@ -1,7 +1,0 @@
-name: AlteryaMoney
-version: 1.0.1
-author: Alterya
-main: fr.alterya.money.Main
-softdepend: [Vault]
-commands:
-  
