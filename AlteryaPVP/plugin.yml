@@ -1,8 +1,0 @@
-name : AlteryaPVP
-version : 1.0.0
-author : Alterya
-main: fr.alterya.pvp.Main
-commands:
-  hunt:
-    description: A command for get infos to the player who's targeted
-    permission: hunt.use

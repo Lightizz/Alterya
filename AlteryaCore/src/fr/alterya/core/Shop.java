@@ -1,8 +1,11 @@
 package fr.alterya.core;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -10,11 +13,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.Dye;
 
-import fr.alterya.core.manager.AccountManager;
-import fr.alterya.core.manager.account.Account;
-import fr.alterya.core.manager.account.AccountData;
-import fr.alterya.core.manager.account.AccountException;
+import fr.alterya.core.shop.PrisesList;
+import fr.alterya.money.money.manager.AccountManager;
+import fr.alterya.money.money.manager.account.Account;
+import fr.alterya.money.money.manager.account.AccountException;
 
 /*
 Author and resp of the shop: Lightiz
@@ -22,9 +26,25 @@ Author and resp of the shop: Lightiz
 
 public class Shop implements Listener {
 	
-	AccountData accountData;
+	/*public static Dye red;
+	public static Dye gray;
+	public static Dye green;
+	public static Dye cyan;
+	public static Dye bleue;
+	public static Dye light_bleue;
+	public static Dye orange;
+	public static Dye yellow;*/
 	
-	public Shop (){
+	public final List<PrisesList> unsellableItems;
+	
+	public final List<PrisesList> pillageList;
+	public final List<PrisesList> oresList;
+	public final List<PrisesList> othersList;
+	public final List<PrisesList> alchemyList;
+	public final List<PrisesList> blocksList;
+	public final List<PrisesList> farmingList;
+	
+	Shop (){
 		//Set all items in their inventory to prepare the shop
 		setItemsInShopMain();
 		setItemInShopBlocks();
@@ -32,8 +52,147 @@ public class Shop implements Listener {
 		setItemInShopUtils();
 		setItemInShopMinerals();
 		setItemsInShopSellBuy();
+		
+		//setDyesColors();
 	}
-
+	
+	/*
+	public void setDyesColors() {
+		red.setColor(DyeColor.RED);
+		bleue.setColor(DyeColor.BLUE);
+		light_bleue.setColor(DyeColor.LIGHT_BLUE);
+		green.setColor(DyeColor.GREEN);
+		gray.setColor(DyeColor.GRAY);
+		yellow.setColor(DyeColor.YELLOW);
+		cyan.setColor(DyeColor.CYAN);
+		orange.setColor(DyeColor.ORANGE);
+	}
+	*/
+	
+	public void setUnsellableItems() {
+		//Minerais
+		unsellableItems.add(PrisesList.EMERALD);
+		
+		//Farming
+		unsellableItems.add(PrisesList.MELON_SEEDS);
+		unsellableItems.add(PrisesList.SEEDS);
+		unsellableItems.add(PrisesList.PUMPKIN_SEEDS);
+		unsellableItems.add(PrisesList.COCOA);
+		unsellableItems.add(PrisesList.CACTUS);
+		unsellableItems.add(PrisesList.VINE);
+		unsellableItems.add(PrisesList.SUGAR_CAN);
+		
+		//Loots
+		unsellableItems.add(PrisesList.EMPTY_BOTTLE);
+		unsellableItems.add(PrisesList.BREWING_STAND);
+		unsellableItems.add(PrisesList.GOLDEN_MELON);
+		unsellableItems.add(PrisesList.GOLDEN_CARROT);
+		unsellableItems.add(PrisesList.BROWN_MUSHROOM);
+		unsellableItems.add(PrisesList.RED_MUSHROOM);
+		unsellableItems.add(PrisesList.NETHER_WARTS);
+		unsellableItems.add(PrisesList.MILK_BUCKET);
+		
+		//Pillage
+		unsellableItems.add(PrisesList.SOUL_SAND);
+		unsellableItems.add(PrisesList.WITHER_SKULL);
+		unsellableItems.add(PrisesList.CREEPER_EGG);
+		unsellableItems.add(PrisesList.TNT);
+		
+		//Divers
+		unsellableItems.add(PrisesList.WOOL);
+		unsellableItems.add(PrisesList.INK_SACK);
+		//unsellableItems.add(PrisesList.GREEN_DYE);
+		//unsellableItems.add(PrisesList.LIGHT_GREEN_DYE);
+		//unsellableItems.add(PrisesList.LIGHT_BLEUE_DYE);
+		//unsellableItems.add(PrisesList.CYAN_DYE);
+		//unsellableItems.add(PrisesList.RED_DYE);
+		//unsellableItems.add(PrisesList.ORANGE_DYE);
+		//unsellableItems.add(PrisesList.YELLOW_DYE);
+		unsellableItems.add(PrisesList.COOKED_STEAK);
+		unsellableItems.add(PrisesList.COOKED_CHIKEN);
+		unsellableItems.add(PrisesList.COOKED_PORCKCHOP);
+	}
+	public void setPillageItems() {
+		pillageList.add(PrisesList.ENDER_PEARL);
+		pillageList.add(PrisesList.WITHER_SKULL);
+		pillageList.add(PrisesList.CREEPER_EGG);
+		pillageList.add(PrisesList.TNT);
+		pillageList.add(PrisesList.SOUL_SAND);
+	}
+	public void setOresItems() {
+		oresList.add(PrisesList.EMERALD);
+		oresList.add(PrisesList.DIAMOND);
+		oresList.add(PrisesList.GOLD);
+		oresList.add(PrisesList.IRON);
+		oresList.add(PrisesList.COAL);
+		oresList.add(PrisesList.REDSTONE);
+	}
+	public void setOthersItems() {
+		othersList.add(PrisesList.WOOL);
+		othersList.add(PrisesList.INK_SACK);
+		//othersList.add(PrisesList.GREEN_DYE);
+		//othersList.add(PrisesList.LIGHT_GREEN_DYE);
+		//othersList.add(PrisesList.LIGHT_BLEUE_DYE);
+		//othersList.add(PrisesList.CYAN_DYE);
+		//othersList.add(PrisesList.RED_DYE);
+		//othersList.add(PrisesList.ORANGE_DYE);
+		//othersList.add(PrisesList.YELLOW_DYE);
+		othersList.add(PrisesList.COOKED_STEAK);
+		othersList.add(PrisesList.COOKED_CHIKEN);
+		othersList.add(PrisesList.COOKED_PORCKCHOP);
+	}
+	public void setAlchemyItems() {
+		alchemyList.add(PrisesList.EMPTY_BOTTLE);
+		alchemyList.add(PrisesList.BREWING_STAND);
+		alchemyList.add(PrisesList.MAGMA_CREAM);
+		alchemyList.add(PrisesList.GOLDEN_MELON);
+		alchemyList.add(PrisesList.GOLDEN_CARROT);
+		alchemyList.add(PrisesList.GHAST_TEAR);
+		alchemyList.add(PrisesList.FERMENTED_SPIDER_EYE);
+		alchemyList.add(PrisesList.RED_MUSHROOM);
+		alchemyList.add(PrisesList.BROWN_MUSHROOM);
+		alchemyList.add(PrisesList.NETHER_WARTS);
+		alchemyList.add(PrisesList.GLOWSTONE);
+		alchemyList.add(PrisesList.MILK_BUCKET);
+	}
+	public void setBlocksItems() {
+		blocksList.add(PrisesList.COBBLESTONE);
+		blocksList.add(PrisesList.GRAVEL);
+		blocksList.add(PrisesList.ICE);
+		blocksList.add(PrisesList.PACKED_ICE);
+		blocksList.add(PrisesList.GRAVEL);
+		blocksList.add(PrisesList.GRASS);
+		blocksList.add(PrisesList.SAND);
+		blocksList.add(PrisesList.WOOD);
+		blocksList.add(PrisesList.OBSIDIAN);
+		blocksList.add(PrisesList.STONE);
+	}
+	public void setFarmingItems() {
+		//Plantes
+		farmingList.add(PrisesList.MELON_SEEDS);
+		farmingList.add(PrisesList.PUMPKIN_SEEDS);
+		farmingList.add(PrisesList.SEEDS);
+		farmingList.add(PrisesList.CARROT);
+		farmingList.add(PrisesList.POTATO);			 
+		farmingList.add(PrisesList.SUGAR_CAN);
+		farmingList.add(PrisesList.APPLE);
+		farmingList.add(PrisesList.CACTUS);
+		farmingList.add(PrisesList.COCOA);
+		farmingList.add(PrisesList.VINE);
+		
+		//Loots 
+		farmingList.add(PrisesList.STRING);
+		farmingList.add(PrisesList.BLAZE_ROD);
+		farmingList.add(PrisesList.BONE);
+		farmingList.add(PrisesList.ROTTEN_FLESH);
+		farmingList.add(PrisesList.GUNPOWDER);
+		farmingList.add(PrisesList.ARROW);
+		farmingList.add(PrisesList.LEATHER);
+		farmingList.add(PrisesList.EGG);
+		farmingList.add(PrisesList.FEATHER);
+		farmingList.add(PrisesList.SLIME_BALL);
+	}
+	
 	//Create all inventorys
 	public static Inventory shopInvMain = Bukkit.createInventory(null, 5*9, "§dShop");
 	
@@ -43,50 +202,6 @@ public class Shop implements Listener {
 	public static Inventory shopInvMinerals = Bukkit.createInventory(null, 5*9, "§eMinerals");
 	
 	public static Inventory shopInvSellBuy = Bukkit.createInventory(null, 5*9, "§eSell / Buy items");
-	
-	//Blocks prises
-	public float stonePrise = 0.1f;
-	public float stoneSellCount = 0f;
-	
-	public float dirtPrise = 0.1f;
-	public float dirtSellCount = 0f;
-	
-	public float sandPrise = 0.1f;
-	public float sandSellCount = 0f;
-	
-	//Utils prises
-	public float bonesPrise = 150f;
-	public float bonesSellCount = 75f;
-	
-	//Minerals prises
-	public float diamondPrise = 5000f;
-	public float diamondSellCount = 1500f;
-	
-	public float goldPrise = 2500f;
-	public float goldSellCount = 1000f;
-	
-	public float emeraldPrise = 3250f;
-	public float emeraldSellCount = 2250f;
-	
-	public float ironPrise = 850f;
-	public float ironSellCount = 400f;
-	
-	public float coalPrise = 50f;
-	public float coalSellCount = 5f;
-	
-	//Plants prises
-	public float seedsPrise = 2.5f;
-	public float seedsSellCount = 1f;
-	
-	public float cocoaPrise = 4.5f;
-	
-	public float melonPrise = 3.5f;
-	
-	public float pumpkinPrise = 3.5f;
-	
-	public float cactusPrise = 3f;
-	
-	public float sugarCanePrise = 10f;
 	
 	//Set items in main page of the shop
 	public void setItemsInShopMain() {
@@ -906,7 +1021,7 @@ public class Shop implements Listener {
 				if(objectToBuy.equals(Material.BONE)) {
 					double playerMoney = account.getHoldings().getBalance();
 					if(bonesPrise > playerMoney) {
-						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + dirtPrise + "$ pour acheter cette quantité de terre !");
+						player.sendMessage("Vous n'avez pas asser de money ! Vous devez avoir " + PrisesList.COAL.getBuyPrise() + "$ pour acheter cette quantité de terre !");
 					}else if(dirtPrise < account.getHoldings().getBalance()) {
 						playerMoney =- bonesPrise;
 						playerMoney = account.getHoldings().getBalance();
@@ -919,8 +1034,6 @@ public class Shop implements Listener {
 			}
 		}
 	}
-	
-	//The void event for the minerals shop inventory
 	
 	//The void event for the plants shop inventory
 	@SuppressWarnings("unused")
@@ -1141,7 +1254,6 @@ public class Shop implements Listener {
 		}
 	
 	//The void event for the minerals shop inventory
-	//The void event for the utils shop inventory
 	@SuppressWarnings("unused")
 	public void onInventoryInterractMinerals(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked();

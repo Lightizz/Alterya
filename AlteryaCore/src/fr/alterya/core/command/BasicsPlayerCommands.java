@@ -26,7 +26,6 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 			if(command.getName().equalsIgnoreCase("ping") && sender instanceof Player){
 	            Player player = (Player) sender;
 	            player.sendMessage(ChatColor.YELLOW + "Votre ping est : " + ChatColor.GOLD + getPing(player) + "ms");
-	                
 	            return true;
 	        }
 	        
@@ -112,10 +111,5 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 		EntityPlayer pingE = pingC.getHandle();
 		
 		return pingE.ping;
-	}
-	
-	public int getMoney(Player player, int money) 
-	{
-		return money;
 	}
 }
