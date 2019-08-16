@@ -2,7 +2,6 @@ name: AlteryaCore
 version: 1.0.1
 author: Alterya
 main: fr.alterya.core.Main
-softdepend: [Vault]
 commands:
   ec:
     description: A command for open your enderchest with out have the block on the map

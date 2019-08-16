@@ -1,9 +1,11 @@
 package fr.alterya.core;
 
-import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
+import fr.alterya.core.command.CmdShop;
+import fr.alterya.core.event.ShopInterractEvent;
+import fr.alterya.core.shop.Shop;
 import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin
@@ -22,6 +24,9 @@ public class Main extends JavaPlugin
 		getCommand("discord").setExecutor(new BasicsPlayerCommands());
 		getCommand("ping").setExecutor(new BasicsPlayerCommands());
 		getCommand("tipeee").setExecutor(new BasicsPlayerCommands());
+		getCommand("shop").setExecutor(new CmdShop());
+		
+		getServer().getPluginManager().registerEvents(new ShopInterractEvent(), this);
 	}
 	
 	@Override
