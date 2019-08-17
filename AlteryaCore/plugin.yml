@@ -4,20 +4,42 @@ author: Alterya
 main: fr.alterya.core.Main
 commands:
   ec:
+    usage: /ec
     description: A command for open your enderchest with out have the block on the map
     permission: ec.use
   craft:
+    usage: /craft
     description: A command for open a workbench
     permission: craft.use
   ping:
+    usage: /ping
     description: A command to send to the player his ping
     permission: ping.use
   discord:
+    usage: /discord
     description: A command for send the Discord invite link to the player
     permission: discord.use
   shop:
+    usage: /shop
     description: A command for open the shop menu
     permission: shop.use
   tipeee: 
+    usage: /tipeee
     description: A command to show the tipeee to give money for the server
     permission: tipeee.use
+  delhome:
+    usage: /delhome <nom du home>
+    description: A command for delete a home
+    permission: delhome.use
+  home:
+    usage: /home <nom du home>
+    description: A commmand to teleport your self to a home location
+    permission: home.use
+  sethome:
+    usage: /sethome <nom du home>
+    description: A command to set a home location to the sender's location
+    permission: sethome.use
+  homeinfo:
+    usage: /homeinfo
+    description: A command to get all infos on current home set on the sender 's account
+    permission: homeinfo.use

@@ -16,7 +16,7 @@ commands:
     permission: account.user.topmoney
   sendmoney:
     usage: /sendmoney <player> <amount>
-    description: Give a player some money
+    description: Pay a player some money
     aliases: [paymoney, pay]
     permission: account.user.sendmoney
   accountcommand:

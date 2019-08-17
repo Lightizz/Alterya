@@ -28,6 +28,10 @@ public class Main extends JavaPlugin
 		getCommand("ping").setExecutor(new BasicsPlayerCommands());
 		getCommand("tipeee").setExecutor(new BasicsPlayerCommands());
 		getCommand("shop").setExecutor(new CmdShop());
+		getCommand("home").setExecutor(new CmdHome());
+		getCommand("delhome").setExecutor(new CmdHome());
+		getCommand("sethome").setExecutor(new CmdHome());
+		getCommand("homeinfo").setExecutor(new CmdHome());
 		
 		getServer().getPluginManager().registerEvents(new ShopInterractEvent(this, accountPlugin), this);
 	}

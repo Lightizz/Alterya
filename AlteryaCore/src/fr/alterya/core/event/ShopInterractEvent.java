@@ -29,6 +29,14 @@ public class ShopInterractEvent implements Listener
 	
 	Shop shop;
 	
+	@EventHandler
+	public void onDoorInterract(InventoryClickEvent e) {
+		Player player = (Player) e.getWhoClicked();
+		if(e.getCursor().getType() == Material.WOODEN_DOOR) {
+			player.getOpenInventory().close();
+		}
+	}
+	
 	@SuppressWarnings("static-access")
 	@EventHandler
 	public void onShopInterractMain(InventoryClickEvent e) {

@@ -332,11 +332,16 @@ public class Shop implements Listener {
 		alchemyMeta.setLore(Arrays.asList("Ici, vous trouverez des items pour faire de l'achimie !", "Clickez pour plus d'informations !"));
 		alchemy.setItemMeta(alchemyMeta);
 		
+		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
+		doorMeta.setDisplayName("§4Fermer / Retour");
+		backDoor.setItemMeta(doorMeta);
+		
+		/*
 		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
 		ItemMeta doorMeta = backDoor.getItemMeta();
 		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
 		doorMeta.setDisplayName("§4Fermer / Retour");
-		backDoor.setItemMeta(doorMeta);
+		backDoor.setItemMeta(doorMeta);*/
 		
 		//3rd line
 		shopInvMain.setItem(19, blocks);
@@ -362,8 +367,8 @@ public class Shop implements Listener {
 			item.setItemMeta(itemMeta);
 		}
 		
-		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
-		ItemMeta doorMeta = backDoor.getItemMeta();
+		//ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
+		//ItemMeta doorMeta = backDoor.getItemMeta();
 		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
 		doorMeta.setDisplayName("§4Fermer / Retour");
 		backDoor.setItemMeta(doorMeta);
@@ -390,8 +395,8 @@ public class Shop implements Listener {
 			item.setItemMeta(itemMeta);
 		}
 		
-		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
-		ItemMeta doorMeta = backDoor.getItemMeta();
+		//ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
+		//ItemMeta doorMeta = backDoor.getItemMeta();
 		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
 		doorMeta.setDisplayName("§4Fermer / Retour");
 		backDoor.setItemMeta(doorMeta);
@@ -419,8 +424,8 @@ public class Shop implements Listener {
 			item.setItemMeta(itemMeta);
 		}
 		
-		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
-		ItemMeta doorMeta = backDoor.getItemMeta();
+		//ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
+		//ItemMeta doorMeta = backDoor.getItemMeta();
 		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
 		doorMeta.setDisplayName("§4Fermer / Retour");
 		backDoor.setItemMeta(doorMeta);
@@ -447,8 +452,8 @@ public class Shop implements Listener {
 			item.setItemMeta(itemMeta);
 		}
 		
-		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
-		ItemMeta doorMeta = backDoor.getItemMeta();
+		//ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
+		//ItemMeta doorMeta = backDoor.getItemMeta();
 		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
 		doorMeta.setDisplayName("§4Fermer / Retour");
 		backDoor.setItemMeta(doorMeta);
@@ -475,8 +480,8 @@ public class Shop implements Listener {
 			item.setItemMeta(itemMeta);
 		}
 		
-		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
-		ItemMeta doorMeta = backDoor.getItemMeta();
+		//ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
+		//ItemMeta doorMeta = backDoor.getItemMeta();
 		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
 		doorMeta.setDisplayName("§4Fermer / Retour");
 		backDoor.setItemMeta(doorMeta);
@@ -503,8 +508,8 @@ public class Shop implements Listener {
 			item.setItemMeta(itemMeta);
 		}
 		
-		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
-		ItemMeta doorMeta = backDoor.getItemMeta();
+		//ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
+		//ItemMeta doorMeta = backDoor.getItemMeta();
 		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
 		doorMeta.setDisplayName("§4Fermer / Retour");
 		backDoor.setItemMeta(doorMeta);
