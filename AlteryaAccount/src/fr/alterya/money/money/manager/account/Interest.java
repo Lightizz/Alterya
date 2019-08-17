@@ -5,14 +5,14 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.Settings.Nodes;
 import fr.alterya.money.money.storage.Flatfile;
 import fr.alterya.money.money.util.TimeUtil;
 
 public class Interest extends BukkitRunnable {
 
-	private Main plugin;
+	private MainAccount plugin;
 	
 	private Random rand;
 	
@@ -20,7 +20,7 @@ public class Interest extends BukkitRunnable {
 	
 	private Flatfile interestFile;
 	
-	public Interest(Main plugin) {
+	public Interest(MainAccount plugin) {
 		
 		this.plugin = plugin;
 		

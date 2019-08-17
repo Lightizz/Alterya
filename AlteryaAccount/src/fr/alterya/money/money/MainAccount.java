@@ -21,7 +21,7 @@ import fr.alterya.money.money.manager.account.Interest;
 import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
 
-public class Main extends JavaPlugin {
+public class MainAccount extends JavaPlugin {
 	
 	private FileConfiguration cfg;
 

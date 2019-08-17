@@ -6,14 +6,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.Messages;
 
 public class CmdMain extends AccountCommand implements CommandExecutor {
 
-	private Main plugin;
+	private MainAccount plugin;
 	
-	public CmdMain(Main plugin) {
+	public CmdMain(MainAccount plugin) {
 		
 		this.plugin = plugin;
 		

@@ -2,7 +2,7 @@ package fr.alterya.money.money.manager.account;
 
 import org.bukkit.Bukkit;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.Settings.Nodes;
 import fr.alterya.money.money.event.HoldingsChangeEvent;
 
@@ -12,9 +12,9 @@ public class Holdings {
 	
 	private String userId;
 	
-	private Main plugin;
+	private MainAccount plugin;
 	
-	public Holdings(String userId, String accountName, Main plugin) {
+	public Holdings(String userId, String accountName, MainAccount plugin) {
 		
 		this.userId = userId;
 		

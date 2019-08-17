@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.manager.AccountManager;
 import fr.alterya.money.money.manager.account.Account;
 import fr.alterya.money.money.manager.account.AccountException;
@@ -14,9 +14,9 @@ import fr.alterya.money.money.manager.account.Holdings;
 
 public class CmdMoney extends AccountCommand implements CommandExecutor {
 
-	private Main plugin;
+	private MainAccount plugin;
 	
-	public CmdMoney(Main plugin) {
+	public CmdMoney(MainAccount plugin) {
 		
 		this.plugin = plugin;
 		

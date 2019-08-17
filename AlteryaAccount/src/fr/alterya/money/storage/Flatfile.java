@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 
 public class Flatfile {
 
@@ -33,7 +33,7 @@ public class Flatfile {
 	/**
 	 * The instance of BConomy plugin
 	 */
-	private Main plugin;
+	private MainAccount plugin;
 	
 	/**
 	 * Create an instance of a flatfile database
@@ -43,7 +43,7 @@ public class Flatfile {
 	 * @param path The path on disk where we want the cfg to be located
 	 * @param resourceName The resource name from BConomy jar. Set to null if not needed
 	 */
-	public Flatfile(Main plugin, String cfgName, File path, String resourceName) {
+	public Flatfile(MainAccount plugin, String cfgName, File path, String resourceName) {
 
 		this.plugin = plugin;
 		

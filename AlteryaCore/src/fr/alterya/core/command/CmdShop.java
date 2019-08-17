@@ -19,7 +19,6 @@ public class CmdShop implements CommandExecutor
 			initShop();
 			Player player = (Player) sender;
 			Shop shop = this.initShop();
-			shop.placeItemsInShop();
 			player.openInventory(shop.shopInvMain);
 			
 			return true;

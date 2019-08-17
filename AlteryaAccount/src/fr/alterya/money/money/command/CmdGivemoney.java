@@ -6,16 +6,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.manager.AccountManager;
 import fr.alterya.money.money.manager.account.AccountException;
 import fr.alterya.money.money.manager.account.Holdings;
 
 public class CmdGivemoney extends AccountCommand implements CommandExecutor {
 
-	private Main plugin;
+	private MainAccount plugin;
 	
-	public CmdGivemoney(Main plugin) {
+	public CmdGivemoney(MainAccount plugin) {
 		
 		this.plugin = plugin;
 		

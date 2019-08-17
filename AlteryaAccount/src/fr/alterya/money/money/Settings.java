@@ -8,9 +8,9 @@ public class Settings {
 
 	private static FileConfiguration cfg;
 	
-	private static Main plugin;
+	private static MainAccount plugin;
 	
-	public Settings(Main plugin, FileConfiguration cfg) {
+	public Settings(MainAccount plugin, FileConfiguration cfg) {
 
 		this.plugin = plugin;
 		

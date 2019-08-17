@@ -6,11 +6,14 @@ import fr.alterya.core.command.BasicsPlayerCommands;
 import fr.alterya.core.command.CmdShop;
 import fr.alterya.core.event.ShopInterractEvent;
 import fr.alterya.core.shop.Shop;
+import fr.alterya.money.money.MainAccount;
 import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin
 {
 	public static String prefix = ChatColor.GOLD + "[Core] ";
+	
+	MainAccount accountPlugin;
 	
 	Shop shop;
 	
@@ -26,7 +29,7 @@ public class Main extends JavaPlugin
 		getCommand("tipeee").setExecutor(new BasicsPlayerCommands());
 		getCommand("shop").setExecutor(new CmdShop());
 		
-		getServer().getPluginManager().registerEvents(new ShopInterractEvent(), this);
+		getServer().getPluginManager().registerEvents(new ShopInterractEvent(this, accountPlugin), this);
 	}
 	
 	@Override

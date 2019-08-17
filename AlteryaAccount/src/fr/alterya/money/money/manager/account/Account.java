@@ -1,6 +1,6 @@
 package fr.alterya.money.money.manager.account;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 
 public class Account {
 	
@@ -8,9 +8,9 @@ public class Account {
 	
 	private String userId;
 	
-	private Main plugin;
+	private MainAccount plugin;
 	
-	public Account(String userId, String accountName, Main plugin) {
+	public Account(String userId, String accountName, MainAccount plugin) {
 		
 		this.accountName = accountName;
 		

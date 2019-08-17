@@ -100,16 +100,22 @@ public enum PrisesList
 		this.itemMaterial = itemMaterial;
 	}
 	
-	public final double getBuyPrise() {
+	public String getBuyPriseS() {
+		return Double.toString(buyPrise);
+	}
+	public String getSellPriseS() {
+		return Double.toString(sellPrise);
+	}
+	public double getBuyPrise() {
 		return buyPrise;
 	}
-	public final double getSellPrise() {
+	public double getSellPrise() {
 		return sellPrise;
 	}
-	public final int getID() {
+	public int getID() {
 		return id;
 	}
-	public final Material getMaterial() {
+	public Material getMaterial() {
 		return itemMaterial;
 	}
 }

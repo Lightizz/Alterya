@@ -4,15 +4,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.manager.AccountManager;
 import fr.alterya.money.money.manager.account.AccountException;
 
 public class PlayerListener implements Listener {
 
-	private Main plugin;
+	private MainAccount plugin;
 	
-	public PlayerListener(Main plugin) {
+	public PlayerListener(MainAccount plugin) {
 		
 		this.plugin = plugin;
 		

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -31,9 +32,14 @@ public class Shop implements Listener {
 	@SuppressWarnings({
 			"unchecked", "rawtypes"
 	})
+	public List<PrisesList> prisesList = new ArrayList();
+	
+	@SuppressWarnings({
+			"unchecked", "rawtypes"
+	})
 	public List<PrisesList> unsellableItems = new ArrayList();
 	@SuppressWarnings({
-		"unchecked", "rawtypes"
+			"unchecked", "rawtypes"
 	})
 	public List<PrisesList> pillageList = new ArrayList();
 	@SuppressWarnings({
@@ -66,6 +72,7 @@ public class Shop implements Listener {
 		this.setOthersItems();
 		this.setPillageItems();
 		this.setUnsellableItems();
+		this.setPrisesList();
 		
 		//Set all items in their inventory to prepare the shop
 		setItemsInShopMain();
@@ -92,6 +99,57 @@ public class Shop implements Listener {
 		orange.setColor(DyeColor.ORANGE);
 	}
 	*/
+	
+	public Inventory getShopPartOpened(Player player) {
+		if(player.getOpenInventory() != shopInvMain 
+				|| player.getOpenInventory() != shopInvBlocks
+				|| player.getOpenInventory() != shopInvSellBuy
+				|| player.getOpenInventory() != shopInvMinerals
+				|| player.getOpenInventory() != shopInvAlchemy
+				|| player.getOpenInventory() != shopInvPillage
+				|| player.getOpenInventory() != shopInvFarming
+				|| player.getOpenInventory() != shopInvUtils) {
+			return (Inventory) player.getOpenInventory();
+		}
+		
+		return null;
+	}
+	
+	public ItemStack sell = new ItemStack(Material.ARROW);
+	public ItemMeta sellMeta = sell.getItemMeta();
+	
+	public ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
+	public ItemMeta doorMeta = backDoor.getItemMeta();
+	
+	public ItemStack Buy = new ItemStack(Material.BEACON);
+	public ItemMeta buyMeta = Buy.getItemMeta();
+	
+	public void openInvSellBuy(Player player, ItemStack itemToSellBuy) {
+		setInvSellBuy(player);
+		shopInvSellBuy.setItem(13, itemToSellBuy);
+		player.openInventory(shopInvSellBuy);
+	}
+	
+	public void setInvSellBuy(Player player) {
+		if(shopInvSellBuy.getItem(13) != null) {
+			
+			doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
+			doorMeta.setDisplayName("§4Fermer / Retour");
+			backDoor.setItemMeta(doorMeta);
+			
+			buyMeta.setDisplayName("§1 Acheter");
+			Buy.setItemMeta(buyMeta);
+
+			sellMeta.setDisplayName("§1Vendre");
+			sell.setItemMeta(sellMeta);
+			
+			shopInvSellBuy.setItem(24, backDoor);
+			shopInvSellBuy.setItem(31, sell);
+			shopInvSellBuy.setItem(20, Buy);
+		}else {
+			player.sendMessage("Vous devez séléctionner un item pour accèder à cet invenaire ! Veuillez contacter un Administrateur ou un Développeur.");
+		}
+	}
 	
 	public void setUnsellableItems() {
 		//Minerais
@@ -215,6 +273,13 @@ public class Shop implements Listener {
 		farmingList.add(PrisesList.EGG);
 		farmingList.add(PrisesList.FEATHER);
 		farmingList.add(PrisesList.SLIME_BALL);
+	}
+	
+	public void setPrisesList() {
+		for(PrisesList pl : PrisesList.values()) {
+			this.pl_ = pl;
+			prisesList.add(pl);
+		}
 	}
 	
 	//Create all inventorys

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.event.AccountCreateEvent;
 import fr.alterya.money.money.event.AccountDeleteEvent;
 import fr.alterya.money.money.manager.account.Account;
@@ -13,9 +13,9 @@ import fr.alterya.money.money.manager.account.AccountException;
 
 public class AccountManager {
 
-	private static Main plugin;
+	private static MainAccount plugin;
 	
-	public AccountManager(Main plugin) {
+	public AccountManager(MainAccount plugin) {
 		
 		this.plugin = plugin;
 		

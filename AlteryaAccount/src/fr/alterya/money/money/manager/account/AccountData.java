@@ -8,14 +8,14 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import fr.alterya.money.money.Main;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.Settings.Nodes;
 import fr.alterya.money.money.storage.Database;
 import fr.alterya.money.money.storage.Sqlite;
 
 public class AccountData {
 
-	private static Main plugin;
+	private static MainAccount plugin;
 	
 	private static Database db;
 	
@@ -24,7 +24,7 @@ public class AccountData {
 	 * 
 	 * @param plugin BConomy plugin instance
 	 */
-	public AccountData(Main plugin) {
+	public AccountData(MainAccount plugin) {
 		
 		AccountData.plugin = plugin;
 		

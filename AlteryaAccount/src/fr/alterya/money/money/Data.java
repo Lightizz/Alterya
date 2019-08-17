@@ -12,9 +12,9 @@ public class Data {
 	
 	private static File persistanceFile;
 	
-	private Main plugin;
+	private MainAccount plugin;
 	
-	public Data(Main plugin) {
+	public Data(MainAccount plugin) {
 		
 		this.plugin = plugin;
 		
