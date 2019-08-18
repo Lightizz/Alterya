@@ -12,7 +12,7 @@ import fr.alterya.rank.command.RankCommand;
 
 public class Main extends JavaPlugin
 {
-	public static String prefix = "§e§l[&4Rank&e&l] ";
+	public static String prefix = "§e[Rank] ";
 	
 	Rank rank;
 	

@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+//import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
@@ -39,6 +40,7 @@ public final class Rank {
 			this.addRank(RankList.JOUEUR, player);
 		}
 	}
+	
 	
 	public final Plugin getPlugin() 
 	{
@@ -75,7 +77,7 @@ public final class Rank {
 	}
 	
 	public void loadPlayer(Player player) {
-		String uuid = player.getUniqueId() .toString();
+		String uuid = player.getUniqueId().toString();
 		if(playerRanks.containsKey(uuid)) return;
 		if(!config.contains(uuid)) {
 			config.set(uuid, 1);
@@ -87,23 +89,45 @@ public final class Rank {
 		scoreboard.getTeam(playerRanks.get(uuid).getName()).addEntry(player.getName());
 	}
 	
-	public void deletPlayer(Player player) {
+	public void deletPlayer(String uuid) {
 		if(playerRanks.containsKey(player.getUniqueId().toString())) {
 			playerRanks.remove(player.getUniqueId().toString());
 		}
 		playerRanks.remove(player.getUniqueId().toString());
 	}
 	
-	public RankList getPlayerRank (Player player) {
-		if(!playerRanks.containsKey(player.getUniqueId().toString())); loadPlayer(player);
-		return playerRanks.get(player.getUniqueId().toString());
+	public RankList getPlayerRank (String uuid) {
+		if(!config.contains(uuid)) {
+			loadPlayer(player);
+		}
+			return getRankById(config.getInt(uuid));
 	}
 	
 	public RankList getRankById(int id) {
-		for(RankList rankList : RankList.values()) {
-			if(rankList.GetId() == id) return rankList;
-		}
-		return RankList.JOUEUR;
+			if(id == 0) {
+				return RankList.JOUEUR;
+			}else if(id == 1) {
+				return RankList.SOUVENIR;
+			}else if(id == 2) {
+				return RankList.MEMOIRE;
+			}else if(id == 3) {
+				return RankList.SAGE;
+			}else if(id == 4) {
+				return RankList.DEVELOPPEUR;
+			}else if(id == 5) {
+				return RankList.ARCHITECTE;
+			}else if(id == 6) {
+				return RankList.GUIDE;
+			}else if(id == 7) {
+				return RankList.MODERATEUR;
+			}else if(id == 8) {
+				return RankList.MODERATEUR_PLUS;
+			}else if(id == 9) {
+				return RankList.RESPONSABLE;
+			}else if(id == 10) {
+				return RankList.ADMINISTRATEUR;
+			}
+			return null;
 	}
 	
 	public void addRank(RankList rankList, Player target) {

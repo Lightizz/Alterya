@@ -1,6 +1,7 @@
 package fr.alterya.money.money.manager.account;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 
 import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.Settings.Nodes;

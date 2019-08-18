@@ -22,7 +22,7 @@ public class AccountData {
 	/**
 	 * Create a new AccountData instance 
 	 * 
-	 * @param plugin BConomy plugin instance
+	 * @param plugin Account plugin instance
 	 */
 	public AccountData(MainAccount plugin) {
 		
@@ -56,7 +56,7 @@ public class AccountData {
 		
 		db.execute("INSERT INTO accounts (userid, usergroup, balance) VALUES('" + userId + "', '" + group + "', " + balance + ");");
 		
-		Bukkit.getLogger().info("[BConomy] User account " + userId + " has been created for " + group);
+		Bukkit.getLogger().info("[Acccount] User account " + userId + " has been created for " + group);
 		
 		return true;
 		

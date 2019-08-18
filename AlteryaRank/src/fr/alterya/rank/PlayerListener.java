@@ -23,13 +23,13 @@ public final class PlayerListener implements Listener {
 	
 	@EventHandler
 	private void playerQuit(PlayerQuitEvent pqe) {
-		rank.deletPlayer(pqe.getPlayer());
+		rank.deletPlayer(pqe.getPlayer().getUniqueId().toString());
 		
 	}
 	
 	@EventHandler
 	private void playerChat(AsyncPlayerChatEvent pce) {
-		RankList rankList = rank.getPlayerRank(pce.getPlayer());
+		RankList rankList = rank.getPlayerRank(pce.getPlayer().getUniqueId().toString());
 		pce.setFormat(rankList.getPrefix()+pce.getPlayer().getName()+rankList.getChatSeparator()+pce.getMessage());
 		
 	}

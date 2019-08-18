@@ -113,7 +113,7 @@ public class RankCommand implements CommandExecutor, TabCompleter {
 				player.sendMessage(Main.prefix + "La commande est : /unrank <joueur ciblé> !");
 			}else if(args.length == 1 && player.isOp() == true) {
 				Player target = player.getServer().getPlayer(args[0]);
-				rank.deletPlayer(target);
+				rank.deletPlayer(target.getUniqueId().toString());
 				player.sendMessage(Main.prefix + target.getName() + " a été dérank !");
 				return true;
 			}

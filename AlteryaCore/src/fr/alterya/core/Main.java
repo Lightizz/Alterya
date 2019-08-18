@@ -3,6 +3,7 @@ package fr.alterya.core;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
+import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdShop;
 import fr.alterya.core.event.ShopInterractEvent;
 import fr.alterya.core.shop.Shop;

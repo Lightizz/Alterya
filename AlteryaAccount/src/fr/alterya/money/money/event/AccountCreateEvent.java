@@ -11,11 +11,11 @@ public class AccountCreateEvent extends Event {
 
 	private String userId;
 	
-	private int balance;
+	private double balance;
 	
 	private boolean cancel;
 	
-	public AccountCreateEvent(String userId, String accountName, int balance) {
+	public AccountCreateEvent(String userId, String accountName, double balance) {
 		
 		this.userId = userId;
 		
@@ -61,13 +61,13 @@ public class AccountCreateEvent extends Event {
 		
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		
 		return balance;
 		
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		
 		this.balance = balance;
 		
