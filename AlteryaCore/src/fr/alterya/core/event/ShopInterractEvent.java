@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import fr.alterya.core.Main;
 import fr.alterya.core.shop.PrisesList;
 import fr.alterya.core.shop.Shop;
+import fr.alterya.money.money.MainAccount;
 import fr.alterya.money.money.manager.account.Account;
 import fr.alterya.money.money.manager.account.AccountException;
 import fr.alterya.money.money.manager.account.Holdings;
@@ -18,14 +19,6 @@ import fr.alterya.money.money.manager.account.Holdings;
 public class ShopInterractEvent implements Listener 
 {	
 	PrisesList prisesList;
-	
-	private fr.alterya.core.Main pluginCore;
-	private fr.alterya.money.money.MainAccount pluginAccount;
-	
-	public ShopInterractEvent (fr.alterya.core.Main mainCore, fr.alterya.money.money.MainAccount mainAccount){
-		this.pluginCore = mainCore;
-		this.pluginAccount = mainAccount;
-	}
 	
 	Shop shop;
 	
@@ -246,9 +239,7 @@ public class ShopInterractEvent implements Listener
 		}
 	}
 
-	@SuppressWarnings({
-			"deprecation", "static-access"
-	})
+	@SuppressWarnings("deprecation")
 	public void onSellBuyInterract(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
 		shop.setInvSellBuy(player);
@@ -269,7 +260,7 @@ public class ShopInterractEvent implements Listener
 					return;
 				}
 				
-				Holdings payerHoldings = new Account(player.getUniqueId().toString(), "default", pluginAccount).getHoldings();
+				Holdings payerHoldings = new Account(player.getUniqueId().toString(), "default", new MainAccount()).getHoldings();
 				try {
 					payerHoldings.subtract(amount);
 				} catch (AccountException e2) {
@@ -300,10 +291,10 @@ public class ShopInterractEvent implements Listener
 					e.setCancelled(true);
 					return;
 				}
-				Holdings payerHoldings = new Account(player.getUniqueId().toString(), "default", pluginAccount).getHoldings();
+				Holdings payerHoldings = new Account(player.getUniqueId().toString(), "default", new MainAccount()).getHoldings();
 				payerHoldings.add(amount);
 				String formattedBal = Holdings.format(amount);
-				player.sendMessage(pluginCore.prefix + "§aVous avez vendu x" + new ItemStack(prisesList.getMaterial()).getAmount() + " " + prisesList.getMaterial().toString() + " pour §e" + formattedBal + " $ §a!");
+				player.sendMessage(Main.prefix + "§aVous avez vendu x" + new ItemStack(prisesList.getMaterial()).getAmount() + " " + prisesList.getMaterial().toString() + " pour §e" + formattedBal + " $ §a!");
 				player.getInventory().addItem(new ItemStack(prisesList.getMaterial()));
 				e.setCancelled(true);
 				return;

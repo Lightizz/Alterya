@@ -59,46 +59,57 @@ public class RankCommand implements CommandExecutor, TabCompleter {
 						int id0 = Integer.valueOf(id);
 						
 						if(id0 == 0) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.JOUEUR, target); 
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.JOUEUR.getRankName());
 							return true;
 						}else if(id0 == 1) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.SOUVENIR, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName());
 							return true;
 						}else if(id0 == 2) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.MEMOIRE, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MEMOIRE.getRankName());
 							return true;
 						}else if(id0 == 3) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.SAGE, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SAGE.getRankName());
 							return true;
 						}else if(id0 == 4) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.DEVELOPPEUR, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.DEVELOPPEUR.getRankName());
 							return true;
 						}else if(id0 == 5) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.ARCHITECTE, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ARCHITECTE.getRankName());
 							return true;
 						}else if(id0 == 6) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.GUIDE, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.GUIDE.getRankName());
 							return true;
 						}else if(id0 == 7) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.MODERATEUR, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR.getRankName());
 							return true;
 						}else if(id0 == 8) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.MODERATEUR_PLUS, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR_PLUS.getRankName());
 							return true;
 						}else if(id0 == 9) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.RESPONSABLE, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.RESPONSABLE.getRankName());
 							return true;
 						}else if(id0 == 10) {
+							rank.deletPlayer(target.getUniqueId().toString());
 							rank.addRank(RankList.ADMINISTRATEUR, target);
 							player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ADMINISTRATEUR.getRankName());
 							return true;

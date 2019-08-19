@@ -7,20 +7,26 @@ import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdShop;
 import fr.alterya.core.event.ShopInterractEvent;
 import fr.alterya.core.shop.Shop;
-import fr.alterya.money.money.MainAccount;
+import fr.alterya.rank.Rank;
 import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin
 {
 	public static String prefix = ChatColor.GOLD + "[Core] ";
-	
-	MainAccount accountPlugin;
-	
+		
 	Shop shop;
+	
+	public Rank rank;
+	
+	@Override
+	public void onLoad() {
+
+		rank = new Rank(this);
+	}	
 	
 	@Override
 	public void onEnable() 
-	{
+	{		
 		System.out.println("The plugin AlteryaCore is now ON !");
 		
 		getCommand("ec").setExecutor(new BasicsPlayerCommands());
@@ -29,12 +35,12 @@ public class Main extends JavaPlugin
 		getCommand("ping").setExecutor(new BasicsPlayerCommands());
 		getCommand("tipeee").setExecutor(new BasicsPlayerCommands());
 		getCommand("shop").setExecutor(new CmdShop());
-		getCommand("home").setExecutor(new CmdHome());
-		getCommand("delhome").setExecutor(new CmdHome());
-		getCommand("sethome").setExecutor(new CmdHome());
-		getCommand("homeinfo").setExecutor(new CmdHome());
+		getCommand("home").setExecutor(new CmdHome(this.rank, this));
+		getCommand("delhome").setExecutor(new CmdHome(this.rank, this));
+		getCommand("sethome").setExecutor(new CmdHome(this.rank, this));
+		getCommand("homeinfo").setExecutor(new CmdHome(this.rank, this));
 		
-		getServer().getPluginManager().registerEvents(new ShopInterractEvent(this, accountPlugin), this);
+		getServer().getPluginManager().registerEvents(new ShopInterractEvent(), this);
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 name: AlteryaMoney
 version: 1.0.1
-main: fr.alterya.money.money.Main
+main: fr.alterya.money.money.MainAccount
 description: The api, economy and account plugin of Alterya
 softdepend: [Vault]
 commands:

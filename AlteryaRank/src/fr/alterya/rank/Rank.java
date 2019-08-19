@@ -21,7 +21,7 @@ import net.minecraft.util.com.google.common.collect.Maps;
 
 public final class Rank { 
 	private Scoreboard scoreboard;
-	Plugin plugin;
+	static Plugin plugin;
 	public Map<String, RankList> playerRanks = Maps.newHashMap();
 	
 	Player player;
@@ -50,6 +50,10 @@ public final class Rank {
 	public final Scoreboard getScoreboard() 
 	{
 		return scoreboard;
+	}
+	
+	public static Rank getRank() {
+		return new Rank(plugin);
 	}
 	
 	private void initConfig() {
@@ -82,6 +86,7 @@ public final class Rank {
 		if(!config.contains(uuid)) {
 			config.set(uuid, 1);
 			saveConfig();
+			playerRanks.put(uuid, RankList.JOUEUR);
 		}
 		
 		playerRanks.put(uuid, getRankById(config.getInt(uuid)));
@@ -90,10 +95,12 @@ public final class Rank {
 	}
 	
 	public void deletPlayer(String uuid) {
-		if(playerRanks.containsKey(player.getUniqueId().toString())) {
-			playerRanks.remove(player.getUniqueId().toString());
+		if(config.contains(uuid)) {
+			config.set(uuid, null);
+			playerRanks.put(uuid, RankList.JOUEUR);
 		}
-		playerRanks.remove(player.getUniqueId().toString());
+		playerRanks.remove(uuid);
+		config.set(uuid, null);
 	}
 	
 	public RankList getPlayerRank (String uuid) {
@@ -133,33 +140,43 @@ public final class Rank {
 	public void addRank(RankList rankList, Player target) {
 		if(rankList == RankList.ADMINISTRATEUR && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.ADMINISTRATEUR);
+			config.set(target.getUniqueId().toString(), 10);
 			rankCount = 1;
 		}else if(rankList == RankList.RESPONSABLE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.RESPONSABLE);
+			config.set(target.getUniqueId().toString(), 9);
 			rankCount = 1;
 		}else if(rankList == RankList.ARCHITECTE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.ARCHITECTE);
+			config.set(target.getUniqueId().toString(), 5);
 			rankCount = 1;
 		}else if(rankList == RankList.DEVELOPPEUR && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.DEVELOPPEUR);
+			config.set(target.getUniqueId().toString(), 4);
 			rankCount = 1;
 		}else if(rankList == RankList.GUIDE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.GUIDE);
+			config.set(target.getUniqueId().toString(), 6);
 			rankCount = 1;
 		}else if(rankList == RankList.MODERATEUR && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.MODERATEUR);
+			config.set(target.getUniqueId().toString(), 7);
 			rankCount = 1;
 		}else if(rankList == RankList.MODERATEUR_PLUS && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.MODERATEUR_PLUS);
+			config.set(target.getUniqueId().toString(), 8);
 			rankCount = 1;
 		}else if(rankList == RankList.SOUVENIR && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.SOUVENIR);
+			config.set(target.getUniqueId().toString(), 1);
 			rankCount = 1;
 		}else if(rankList == RankList.MEMOIRE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.MEMOIRE);
+			config.set(target.getUniqueId().toString(), 2);
 			rankCount = 1;
 		}else if(rankList == RankList.SAGE && rankCount != 1) {
 			playerRanks.put(target.getUniqueId().toString(), RankList.SAGE);
+			config.set(target.getUniqueId().toString(), 3);
 			rankCount = 1;
 		}
 	}
