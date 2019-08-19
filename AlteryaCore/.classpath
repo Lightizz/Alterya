@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="src/" kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/NafiX/Desktop/Training local serveur (plugin)/spigot-1.7.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/NafiX/Desktop/Spigot  Bukkit assets/spigot-1.7.10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/NafiX/Desktop/Alterya/Alterya/Plugins compiled (.jar)/AlteryaRank.jar"/>
 	<classpathentry kind="lib" path="C:/Users/NafiX/Desktop/Alterya/Alterya/Plugins compiled (.jar)/AlteryaAccount.jar"/>
 	<classpathentry kind="output" path="bin"/>
