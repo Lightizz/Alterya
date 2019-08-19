@@ -5,6 +5,7 @@ Author and resp of the rank plugin: Lightiz
 */
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.alterya.rank.command.CmdKit;
@@ -16,10 +17,12 @@ public class Main extends JavaPlugin
 	
 	Rank rank;
 	
+	Player player;
+	
 	@Override
 	public void onLoad() {
 
-		rank = new Rank(this);
+		rank = new Rank(this, player);
 	}	
 	
 	@Override

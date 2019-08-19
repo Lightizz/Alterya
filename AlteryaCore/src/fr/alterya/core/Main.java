@@ -1,5 +1,6 @@
 package fr.alterya.core;
 
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
@@ -16,12 +17,14 @@ public class Main extends JavaPlugin
 		
 	Shop shop;
 	
+	Player player;
+	
 	public Rank rank;
 	
 	@Override
 	public void onLoad() {
 
-		rank = new Rank(this);
+		rank = new Rank(this, player);
 	}	
 	
 	@Override

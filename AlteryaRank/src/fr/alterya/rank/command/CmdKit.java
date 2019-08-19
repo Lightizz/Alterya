@@ -25,13 +25,13 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 	
 	Main main;
 	
-	Rank rank = new Rank(main);
+	Rank rank = new Rank(main, player0);
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args) {
 		Player player = (Player) sender;
 		if(command.getName().equalsIgnoreCase("kit")) {
-			if(rank.getPlayerRank(player.getUniqueId().toString()) == RankList.MEMOIRE) {
+			if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MEMOIRE) {
 				if(this.timer != 0) {
 					int timeRemaiting = 172800 - timer;
 					player.sendMessage(Main.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
@@ -41,7 +41,7 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 					this.runTaskTimer(main, 20, 20);
 					return true;
 				}
-			}else if(rank.getPlayerRank(player.getUniqueId().toString()) == RankList.SAGE) {
+			}else if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SAGE) {
 				if(this.timer != 0) {
 					int timeRemaiting = 259200 - timer;
 					player.sendMessage(Main.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
@@ -51,7 +51,7 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 					this.runTaskTimer(main, 20, 20);
 					return true;
 				}
-			}else if(rank.getPlayerRank(player.getUniqueId().toString()) == RankList.SOUVENIR) {
+			}else if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
 				if(this.timer != 0) {
 					int timeRemaiting = 172800 - timer;
 					player.sendMessage(Main.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
@@ -164,13 +164,13 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 	public void run()
 	{
 		//Dev note : 1h = 3 600 sec ; 24h = 86 400 sec ; 48h = 172 800 sec ; 72h = 259 200 sec
-		if(rank.getPlayerRank(player0.getUniqueId().toString()) == RankList.MEMOIRE && timer >= 172800) {
+		if(rank.getPlayerRank(player0.getUniqueId().toString(), player0) == RankList.MEMOIRE && timer >= 172800) {
 			cancel();
 			timer = 0;
-		}else if(rank.getPlayerRank(player0.getUniqueId().toString()) == RankList.SAGE && timer >= 259200) {
+		}else if(rank.getPlayerRank(player0.getUniqueId().toString(), player0) == RankList.SAGE && timer >= 259200) {
 			cancel();
 			timer = 0;
-		}else if(rank.getPlayerRank(player0.getUniqueId().toString()) == RankList.SOUVENIR && timer >= 172800) {
+		}else if(rank.getPlayerRank(player0.getUniqueId().toString(), player0) == RankList.SOUVENIR && timer >= 172800) {
 			cancel();
 			timer = 0;
 		}

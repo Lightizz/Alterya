@@ -7,6 +7,7 @@ Author and resp of the rank plugin: Lightiz
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -24,15 +25,16 @@ public final class Rank {
 	static Plugin plugin;
 	public Map<String, RankList> playerRanks = Maps.newHashMap();
 	
-	Player player;
+	static Player player;
 	
 	private FileConfiguration config;
 	private File file;
 	
 	public static int rankCount = 0;
 	
-	public Rank(Plugin plugin) 
+	public Rank(Plugin plugin, Player player) 
 	{	
+		this.player = player;
 		this.plugin = plugin;
 		initConfig();
 		
@@ -53,7 +55,7 @@ public final class Rank {
 	}
 	
 	public static Rank getRank() {
-		return new Rank(plugin);
+		return new Rank(plugin, player);
 	}
 	
 	private void initConfig() {
@@ -80,18 +82,21 @@ public final class Rank {
 		}
 	}
 	
-	public void loadPlayer(Player player) {
-		String uuid = player.getUniqueId().toString();
-		if(playerRanks.containsKey(uuid)) return;
+	public void loadPlayer(Player player1) {
+		player = player1;
+		String uuid = player1.getUniqueId().toString();
+		if(playerRanks.containsKey(uuid)) {
+			return;
+		}
 		if(!config.contains(uuid)) {
-			config.set(uuid, 1);
+			config.set(uuid, 0);
 			saveConfig();
 			playerRanks.put(uuid, RankList.JOUEUR);
 		}
 		
 		playerRanks.put(uuid, getRankById(config.getInt(uuid)));
 		
-		scoreboard.getTeam(playerRanks.get(uuid).getName()).addEntry(player.getName());
+		scoreboard.getTeam(playerRanks.get(uuid).getName()).addEntry(player1.getName());
 	}
 	
 	public void deletPlayer(String uuid) {
@@ -103,7 +108,8 @@ public final class Rank {
 		config.set(uuid, null);
 	}
 	
-	public RankList getPlayerRank (String uuid) {
+	public RankList getPlayerRank (String uuid, Player player) {
+		uuid = player.getUniqueId().toString();
 		if(!config.contains(uuid)) {
 			loadPlayer(player);
 		}

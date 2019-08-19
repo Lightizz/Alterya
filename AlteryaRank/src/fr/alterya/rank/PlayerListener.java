@@ -29,7 +29,7 @@ public final class PlayerListener implements Listener {
 	
 	@EventHandler
 	private void playerChat(AsyncPlayerChatEvent pce) {
-		RankList rankList = rank.getPlayerRank(pce.getPlayer().getUniqueId().toString());
+		RankList rankList = rank.getPlayerRank(pce.getPlayer().getUniqueId().toString(), pce.getPlayer());
 		pce.setFormat(rankList.getPrefix()+pce.getPlayer().getName()+rankList.getChatSeparator()+pce.getMessage());
 		
 	}

@@ -85,7 +85,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 14
 					&& event.getSlot() == 15
 					&& event.getSlot() == 16
-					&& event.getSlot() == 17 && rank.getPlayerRank(player.getUniqueId().toString()) == RankList.JOUEUR) {
+					&& event.getSlot() == 17 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.JOUEUR) {
 				event.setCancelled(true);
 				player.sendMessage(Main.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 			}else if(event.getCurrentItem() == new ItemStack(Material.AIR) || event.getCurrentItem() == null 
@@ -97,7 +97,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 5
 					&& event.getSlot() == 6
 					&& event.getSlot() == 7
-					&& event.getSlot() == 8 && rank.getPlayerRank(player.getUniqueId().toString()) == RankList.SOUVENIR) {
+					&& event.getSlot() == 8 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
 				event.setCancelled(true);
 				player.sendMessage(Main.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 			}

@@ -14,13 +14,12 @@ public class CmdShop implements CommandExecutor
 	@SuppressWarnings("static-access")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
-	{
+	{	
 		if(sender instanceof Player && command.getName().equalsIgnoreCase("shop")) {
 			initShop();
 			Player player = (Player) sender;
 			Shop shop = this.initShop();
 			player.openInventory(shop.shopInvMain);
-			
 			return true;
 		}else if(!(sender instanceof Player)) {
 			Player player = (Player) sender;
