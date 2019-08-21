@@ -13,8 +13,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import fr.alterya.core.Main;
-import fr.alterya.rank.Rank;
-import fr.alterya.rank.RankList;
+import fr.alterya.core.rank.Rank;
+import fr.alterya.core.rank.RankList;
 import net.minecraft.server.v1_7_R4.EntityPlayer;
 
 public class BasicsPlayerCommands implements CommandExecutor, Listener {

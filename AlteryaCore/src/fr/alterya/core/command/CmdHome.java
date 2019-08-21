@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 
 import fr.alterya.core.Main;
 import fr.alterya.core.home.HomeManager;
-import fr.alterya.rank.Rank;
-import fr.alterya.rank.RankList;
+import fr.alterya.core.rank.Rank;
+import fr.alterya.core.rank.RankList;
 
 public class CmdHome implements CommandExecutor
 {	
@@ -41,55 +41,55 @@ public class CmdHome implements CommandExecutor
 			if(args.length == 1) {
 				HomeManager homeManager = new HomeManager(player.getUniqueId().toString());
 			
-				if(homeManager.getHomes().size() >= 2 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.JOUEUR) {
+				if(homeManager.getHomes().size() >= 2 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.JOUEUR) {
 					player.sendMessage(Main.prefix + "Vous avez atteint votrel imite de home.");
 					return true;
-				}else if(homeManager.getHomes().size() < 2 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.JOUEUR) {
+				}else if(homeManager.getHomes().size() < 2 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.JOUEUR) {
 					homeManager.createHome(player.getLocation(), args[0]);
 					player.sendMessage("Le home " + args[0] + " a été crée à votre position.");
 					return true;
 				}	
 				
-				if(homeManager.getHomes().size() >= 4 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
+				if(homeManager.getHomes().size() >= 4 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
 					player.sendMessage(Main.prefix + "Vous avez atteint votrel imite de home.");
 					return true;
-				}else if(homeManager.getHomes().size() < 4 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
+				}else if(homeManager.getHomes().size() < 4 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
 					homeManager.createHome(player.getLocation(), args[0]);
 					player.sendMessage("Le home " + args[0] + " a été crée à votre position.");
 					return true;
 				}
 				
-				if(homeManager.getHomes().size() >= 6 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MEMOIRE) {
+				if(homeManager.getHomes().size() >= 6 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MEMOIRE) {
 					player.sendMessage(Main.prefix + "Vous avez atteint votrel imite de home.");
 					return true;
-				}else if(homeManager.getHomes().size() < 6 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MEMOIRE) {
+				}else if(homeManager.getHomes().size() < 6 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MEMOIRE) {
 					homeManager.createHome(player.getLocation(), args[0]);
 					player.sendMessage("Le home " + args[0] + " a été crée à votre position.");
 					return true;
 				}
 				
-				if(homeManager.getHomes().size() >= 10 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SAGE) {
+				if(homeManager.getHomes().size() >= 10 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SAGE) {
 					player.sendMessage(Main.prefix + "Vous avez atteint votrel imite de home.");
 					return true;
-				}else if(homeManager.getHomes().size() < 10 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SAGE) {
+				}else if(homeManager.getHomes().size() < 10 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SAGE) {
 					homeManager.createHome(player.getLocation(), args[0]);
 					player.sendMessage("Le home " + args[0] + " a été crée à votre position.");
 					return true;
 				}
 				
-				if(homeManager.getHomes().size() >= 20 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.RESPONSABLE) {
+				if(homeManager.getHomes().size() >= 20 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.RESPONSABLE) {
 					player.sendMessage(Main.prefix + "Vous avez atteint votrel imite de home.");
 					return true;
-				}else if(homeManager.getHomes().size() < 20 && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.RESPONSABLE) {
+				}else if(homeManager.getHomes().size() < 20 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.RESPONSABLE) {
 					homeManager.createHome(player.getLocation(), args[0]);
 					player.sendMessage("Le home " + args[0] + " a été crée à votre position.");
 					return true;
 				}
 				
-				if(homeManager.getHomes().size() >= Integer.MAX_VALUE && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.ADMINISTRATEUR) {
+				if(homeManager.getHomes().size() >= Integer.MAX_VALUE && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.ADMINISTRATEUR) {
 					player.sendMessage(Main.prefix + "Vous avez atteint votrel imite de home.");
 					return true;
-				}else if(homeManager.getHomes().size() < Integer.MAX_VALUE && main.rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.ADMINISTRATEUR) {
+				}else if(homeManager.getHomes().size() < Integer.MAX_VALUE && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.ADMINISTRATEUR) {
 					homeManager.createHome(player.getLocation(), args[0]);
 					player.sendMessage("Le home " + args[0] + " a été crée à votre position.");
 					return true;
@@ -115,7 +115,7 @@ public class CmdHome implements CommandExecutor
 					return true;
 				}else if(homeManager.homeExist(args[0])) {
 					player.teleport(homeManager.getHomeLocation(args[0]));
-					player.sendMessage("Vous avez été téléporter à votre home " + args[0] + "avec succès !");
+					player.sendMessage("Vous avez été téléporter à votre home " + args[0] + " avec succès !");
 					return true;
 				}
 			}
@@ -159,12 +159,22 @@ public class CmdHome implements CommandExecutor
 				
 				String out = "";
 				for(String s : homeManager.getHomes()) {
-					out = out + " ," + s;
+					out = "§a" + s + " §r, " + out;
+				}
+				
+				if(out.length() <= 0) {
+					player.sendMessage(Main.prefix + "Vous n'avez aucun home.");
+					return true;
 				}
 				
 				out = out.trim();
 				
-				player.sendMessage("Vos homes :" + out);
+				int outLength = out.length();
+				outLength --;
+				
+				out = out.substring(0, outLength);
+				
+				player.sendMessage("Vos homes : " + out);
 				
 				return true;
 			}

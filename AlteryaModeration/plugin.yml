@@ -1,5 +1,6 @@
 name : AlteryaModeration
 version : 1.0.0
 author : Alterya
+softdepend: [PermissionsEx]
 main: fr.alterya.moderation.Main
 commands:

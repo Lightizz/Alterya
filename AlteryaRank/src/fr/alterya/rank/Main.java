@@ -8,9 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.alterya.rank.command.CmdKit;
-import fr.alterya.rank.command.RankCommand;
-
 public class Main extends JavaPlugin
 {
 	public static String prefix = "§e[Rank] ";

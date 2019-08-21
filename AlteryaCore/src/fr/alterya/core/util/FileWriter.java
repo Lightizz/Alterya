@@ -10,8 +10,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class FileWriter
 {
-	private File file;
-	private YamlConfiguration config;
+	public File file;
+	public YamlConfiguration config;
 	
 	public FileWriter(String filePath, String fileName) {
 		//this.config = YamlConfiguration.loadConfiguration(this.file);

@@ -1,14 +1,17 @@
 name : AlteryaRank
-version : 1.0.0
+version : 1.0.1
 author : Alterya
+softdepend: [PermissionsEx]
 main: fr.alterya.rank.Main
 commands:
   rank:
+    usage: /rank <rankId> <player>
     description: A command for do everything with the ranks(the sender must be opped or already have the administrator rank / perms)
     permission: rank.use
   unrank:
+    usage: /unrank <player>
     description: A command to reset a rank of a player on the server
     permission: unrank.use
   kit:
+    usage: /kit
     description: A command to give grade kit to a player
-    permission: kit.use
