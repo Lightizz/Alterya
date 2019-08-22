@@ -4,13 +4,8 @@ author: Alterya
 main: fr.alterya.core.Main
 commands:
   rank:
-    usage: /rank <rankId> <player>
-    description: A command for do everything with the ranks(the sender must be opped or already have the administrator rank / perms)
-    permission: rank.use
-  unrank:
-    usage: /unrank <player>
-    description: A command to reset a rank of a player on the server
-    permission: unrank.use
+    description: All commands for perms and rank on the server
+    aliases: [r]
   kit:
     usage: /kit
     description: A command to give grade kit to a player
@@ -26,19 +21,19 @@ commands:
   givemoney:
     usage: /givemoney <player> <amount>
     description: Give some money to a player (doesn't take from your own balance)
-    permission: givemoney.use
+    permission: core.admin.givemoney
   setmoney:
     usage: /setmoney <player> <amount>
     description: Set a players balance
-    permission: setmoney.use
+    permission: core.admin.setmoney
   takemoney:
     usage: /takemoney <player> <amount>
     description: Take some money from a player
-    permission: takemoney.use
+    permission: core.admin.takemoney
   purgemoney:
     usage: /purgemoney
     description: Purge all accounts with default balance
-    permission: purgemoney.use
+    permission: core.admin.purgemoney
   ec:
     usage: /ec
     description: A command for open your enderchest with out have the block on the map

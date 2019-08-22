@@ -1,7 +1,7 @@
 package fr.alterya.core.rank;
 
 /*
-Author and resp of the rank plugin: Lightiz
+Author and resp of the rank /perms plugin: Lightiz
 */
 
 import java.io.File;
@@ -50,9 +50,9 @@ public class Rank {
 	}
 	
 	private void initConfig() {
-		File f = new File("plugins/Rank");
+		File f = new File("plugins/AccountsData");
 		if(!f.exists()) f.mkdirs();
-		file = new File(f, "rank.yml");
+		file = new File(f, "Ranks.yml");
 		if(!file.exists()) {
 			try {
 				file.createNewFile();

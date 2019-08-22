@@ -11,11 +11,11 @@ import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdKit;
 import fr.alterya.core.command.CmdMoney;
 import fr.alterya.core.command.CmdPay;
+import fr.alterya.core.command.CmdPermsRank;
 import fr.alterya.core.command.CmdPurgeMoney;
 import fr.alterya.core.command.CmdSetMoney;
 import fr.alterya.core.command.CmdShop;
 import fr.alterya.core.command.CmdTakeMoney;
-import fr.alterya.core.command.RankCommand;
 import fr.alterya.core.event.ShopInterractEvent;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.rank.Rank;
@@ -68,8 +68,7 @@ public class Main extends JavaPlugin
 		
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(rank), this);
 		
-		getCommand("rank").setExecutor(new RankCommand(rank));
-		getCommand("unrank").setExecutor(new RankCommand(rank));
+		getCommand("rank").setExecutor(new CmdPermsRank(rank, this));
 		getCommand("kit").setExecutor(new CmdKit());
 		
 		getServer().getPluginManager().registerEvents(new ShopInterractEvent(), this);

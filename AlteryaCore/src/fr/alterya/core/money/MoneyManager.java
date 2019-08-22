@@ -16,7 +16,7 @@ public class MoneyManager
 	public static double defaultMoney = 50.00;
 	
 	public MoneyManager(String uuid) {
-		fw = new FileWriter("plugins/AccountsData", uuid.toString() + ".yml");
+		fw = new FileWriter("plugins/AccountsData/Moneys", uuid.toString() + ".yml");
 	}
 	
 	@SuppressWarnings("unused")

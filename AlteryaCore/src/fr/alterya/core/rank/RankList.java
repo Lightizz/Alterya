@@ -1,7 +1,7 @@
 package fr.alterya.core.rank;
 
 /*
-Resp of the rank plugin: Lightiz
+Resp of the rank / perms : Lightiz
 */
 
 public enum RankList {
@@ -24,29 +24,30 @@ public enum RankList {
 	§8 = "dark_gray"
 	§0 = "black"
 	*/
-	JOUEUR(0, 1, "Joueur", "", " > "),
-	SOUVENIR(1, 3, "Souvenir", "§a[Souvenir] ", " > "),
-	MEMOIRE(2, 5, "Mémoire","§1[Mémoire] ", " > "),
-	SAGE(3, 10, "Sage", "§d[Sage] ", " > "),
-	DEVELOPPEUR(4, 15, "Développeur", "§5[Développeur] ", " > "),
-	ARCHITECTE(5, 15, "Achitecte","§5[Architecte] ", " > "),
-	GUIDE(6, 20, "Guide", "§a[Guide] ", " > "),
-	MODERATEUR(7, 40, "Modérateur","§e[Modérateur] ", " > "),
-	MODERATEUR_PLUS(8, 60, "Modérateur+", "§6[Modérateur+] ", " > §6"),
-	RESPONSABLE(9, 80, "Responsable", "§4§l[Responsable] ", " > §4"),
-	ADMINISTRATEUR(10, 100, "Administateur", "§4§l[Administrateur] ", " >> §4");
+	JOUEUR(0, 1, "Joueur", "", "", " > "),
+	SOUVENIR(1, 3, "Souvenir", "§a[Souvenir] ", "§a", " > "),
+	MEMOIRE(2, 5, "Mémoire","§1[Mémoire] ", "§1", " > "),
+	SAGE(3, 10, "Sage", "§d[Sage] ", "§d", " > "),
+	DEVELOPPEUR(4, 15, "Développeur", "§5[Développeur] ", "§5", " > "),
+	ARCHITECTE(5, 15, "Achitecte","§5[Architecte] ", "§5", " > "),
+	GUIDE(6, 20, "Guide", "§a[Guide] ", "§a", " > "),
+	MODERATEUR(7, 40, "Modérateur","§e[Modérateur] ", "§e", " > "),
+	MODERATEUR_PLUS(8, 60, "Modérateur+", "§6[Modérateur+] ", "§6", " > §6"),
+	RESPONSABLE(9, 80, "Responsable", "§4§l[Responsable] ", "§4", " > §4"),
+	ADMINISTRATEUR(10, 100, "Administateur", "§4§l[Administrateur] ", "§4", " >> §4");
 	
 	//Fields
 	private final int power, id;
-	private final String rankName, prefix, chatSeparator;
+	private final String rankName, prefix, chatSeparator, prefixColor;
 	
 	//Constructor
-	private RankList(int id, int power, String rankName, String prefix, String chatSeparator) {
+	private RankList(int id, int power, String rankName, String prefix, String prefixColor, String chatSeparator) {
 		this.id = id;
 		this.power = power;
 		this.rankName = rankName;
 		this.prefix = prefix;
 		this.chatSeparator = chatSeparator;
+		this.prefixColor = prefixColor;
 	}
 	
 	//Method Getter
@@ -67,6 +68,9 @@ public enum RankList {
 	}
 	public final String getChatSeparator() {
 		return chatSeparator;
+	}
+	public final String getPrefixColor() {
+		return prefixColor;
 	}
 }
 

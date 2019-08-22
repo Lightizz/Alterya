@@ -39,7 +39,7 @@ public class CmdPurgeMoney implements CommandExecutor
 					player.sendMessage(Main.prefix + "La money de " + target.getName() + " a été purger.");
 					return true;
 				}
-			}else {
+			}else if(!(sender instanceof Player)){
 				player.sendMessage(Main.prefix + "§4Vous devez être un joueur pour effectuer cette commande.");
 				return true;
 			}
