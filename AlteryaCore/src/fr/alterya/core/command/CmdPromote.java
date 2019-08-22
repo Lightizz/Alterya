@@ -17,13 +17,13 @@ import fr.alterya.core.Main;
 Author and resp of the rank plugin: Lightiz
 */
 
-public class CmdPermsRank implements CommandExecutor, TabCompleter {
+public class CmdPromote implements CommandExecutor, TabCompleter {
 	
 	private final Rank rank;
 	
 	Main main;
 	
-	public CmdPermsRank(Rank rank, Main main) {
+	public CmdPromote(Rank rank, Main main) {
 		this.rank = rank;
 		this.main = main;
 	}
@@ -31,23 +31,22 @@ public class CmdPermsRank implements CommandExecutor, TabCompleter {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args) {
 		Player player = (Player) sender;
-		// /r info
-		if(command.getName().equalsIgnoreCase("r") && command.getName().equalsIgnoreCase("rank")) {
-			if(args[0] == "info") {
-				String message1 = Main.prefix + "§1Voici les info sur les rangs et groupes de permissions : ";
+		// /rankinfo
+		if(command.getName().equalsIgnoreCase("rankinfo")) {
+				String message1 = Main.prefix + "Voici les info sur les rangs et groupes de permissions : ";
 				for(RankList rankList : RankList.values()) {
 					String part = "";
 					part = "" + rankList.getPrefixColor() + rankList.getRankName() + " : " + "ID : " + String.valueOf(rankList.GetId()) + " ; Power : " + String.valueOf(rankList.getPower()) + " ; Prefix : " + rankList.getPrefix() + " \n"; 
 					player.sendMessage(message1 + part);
 				}
 				return true;
-			// /r promote <ID> <joueur>
-			}else if(args[0] == "promote") {
-				Player target = Bukkit.getPlayer(args[2]);
-				String id = args[1];
+			// /promote <ID> <joueur>
+			}else if(command.getName().equalsIgnoreCase("promote")) {
+				Player target = Bukkit.getPlayer(args[1]);
+				String id = args[0];
 				int id0 = Integer.valueOf(id);
 			
-				if(! player.hasPermission(this.main.getConfig().getString("Groups." + this.main.rank.getRankById(10).getRankName() + ".permissions")) || ! player.hasPermission(this.main.getConfig().getString("Groups." + this.main.rank.getRankById(9).getRankName() + ".permissions"))) {
+				if(! player.hasPermission(this.main.getConfig().getString("Groups." + "Administrateur" + ".permissions")) || ! player.hasPermission(this.main.getConfig().getString("Groups." + "Responsable" + ".permissions"))) {
 					player.sendMessage(Main.prefix + "§4Vous n'avez pas un grade suffisant pour effectuer cette commande.");
 					return true;
 				}
@@ -142,7 +141,7 @@ public class CmdPermsRank implements CommandExecutor, TabCompleter {
 				}
 			}	
 			// /r demote <player>
-			if(args[0] == "demote") {
+			if(command.getName().equalsIgnoreCase("demote")) {
 				if(rank.config.getInt(player.getUniqueId().toString()) < 9) {
 					player.sendMessage(Main.prefix + "Vous n'êtes pas OP, Administrateur ou Responsable, vous ne pouvez pas effectuer cette commande !");
 					return true;
@@ -150,17 +149,15 @@ public class CmdPermsRank implements CommandExecutor, TabCompleter {
 				if(args.length != 2 && rank.config.getInt(player.getUniqueId().toString()) >= 9) {
 					player.sendMessage(Main.prefix + "La commande est : /r demote <joueur ciblé> !");
 				}else if(args.length == 2 && rank.config.getInt(player.getUniqueId().toString()) >= 9) {
-					Player target = Bukkit.getPlayer(args[1]);
+					Player target = Bukkit.getPlayer(args[0]);
 					rank.deletPlayer(target.getUniqueId().toString());
 					player.sendMessage(Main.prefix + target.getName() + " a été dérank !");
 					System.out.println(Main.prefix + target.getName() + " a été dérank !" + " [Log message]");
 					return true;
 				}
 			}
+			return false;
 		}
-		return false;
-	}
-
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String message, String[] args) {

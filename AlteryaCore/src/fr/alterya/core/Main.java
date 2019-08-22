@@ -11,7 +11,7 @@ import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdKit;
 import fr.alterya.core.command.CmdMoney;
 import fr.alterya.core.command.CmdPay;
-import fr.alterya.core.command.CmdPermsRank;
+import fr.alterya.core.command.CmdPromote;
 import fr.alterya.core.command.CmdPurgeMoney;
 import fr.alterya.core.command.CmdSetMoney;
 import fr.alterya.core.command.CmdShop;
@@ -19,6 +19,7 @@ import fr.alterya.core.command.CmdTakeMoney;
 import fr.alterya.core.event.ShopInterractEvent;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.rank.Rank;
+import fr.alterya.core.rank.permissions.PermissionsManager;
 import fr.alterya.core.shop.Shop;
 import net.md_5.bungee.api.ChatColor;
 
@@ -68,10 +69,15 @@ public class Main extends JavaPlugin
 		
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(rank), this);
 		
-		getCommand("rank").setExecutor(new CmdPermsRank(rank, this));
+		getCommand("promote").setExecutor(new CmdPromote(rank, this));
+		getCommand("demote").setExecutor(new CmdPromote(rank, this));
+		getCommand("rankinfo").setExecutor(new CmdPromote(rank, this));
+		
 		getCommand("kit").setExecutor(new CmdKit());
 		
 		getServer().getPluginManager().registerEvents(new ShopInterractEvent(), this);
+		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
+		getServer().getPluginManager().registerEvents(new DisconnectCombat(this), this);
 	}
 	
 	@Override

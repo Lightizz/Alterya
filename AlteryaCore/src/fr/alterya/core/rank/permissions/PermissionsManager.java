@@ -55,6 +55,7 @@ public class PermissionsManager implements Listener
 			permissionAttachment.setPermission(this.main.getConfig().getString("Groups." + this.main.rank.getRankById(rankId).getRankName() + ".permissions"), true);
 		}else if(rankId == 10) {
 			permissionAttachment.setPermission(this.main.getConfig().getString("Groups." + this.main.rank.getRankById(rankId).getRankName() + ".permissions"), true);
+			permissionAttachment.setPermission(this.main.getConfig().getString("Groups." + "Responsable" + ".permissions"), true);
 		}
 	}
 }

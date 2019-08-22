@@ -3,9 +3,15 @@ version: 1.0.3
 author: Alterya
 main: fr.alterya.core.Main
 commands:
-  rank:
-    description: All commands for perms and rank on the server
-    aliases: [r]
+  promote:
+    usage: /promote <rankId> <player>
+    description: A command to promote a player to the rank sended
+  demote:
+    usage: /demote <player>
+    description: Reset the rank a player (restet to player)
+  rankinfo:
+    usage: /rankinfo
+    description: All rank infos
   kit:
     usage: /kit
     description: A command to give grade kit to a player
