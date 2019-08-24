@@ -10,10 +10,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.PermissionAttachment;
 
 import fr.alterya.core.Main;
+import fr.alterya.factions.P;
 
 public class PermissionsManager implements Listener
 {
 	Main main;
+	
+	P mainF;
 	
 	public HashMap<UUID, PermissionAttachment> playersPermissions = new HashMap<>();
 	
@@ -35,7 +38,9 @@ public class PermissionsManager implements Listener
 	public void permissionSetter(UUID uuid, int rankId)
 	{
 		PermissionAttachment permissionAttachment = this.playersPermissions.get(uuid);
-		if(rankId == 1) {
+		if(rankId == 0){
+			permissionAttachment.setPermission(this.main.getConfig().getString("Groups." + this.main.rank.getRankById(rankId).getRankName() + ".permissions"), true);
+		}else if(rankId == 1) {
 			permissionAttachment.setPermission(this.main.getConfig().getString("Groups." + this.main.rank.getRankById(rankId).getRankName() + ".permissions"), true);
 		}else if(rankId == 2) {
 			permissionAttachment.setPermission(this.main.getConfig().getString("Groups." + this.main.rank.getRankById(rankId).getRankName() + ".permissions"), true);

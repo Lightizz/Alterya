@@ -12,6 +12,7 @@ import fr.alterya.core.rank.Rank;
 
 public class CmdPay implements CommandExecutor
 {
+	@SuppressWarnings("unused")
 	private final Rank rank;
 	
 	public CmdPay(Rank rank) {

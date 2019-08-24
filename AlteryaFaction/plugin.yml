@@ -1,13 +1,16 @@
-name: AlteryaFaction
-version: 1.0.1
-main: fr.alterya.faction.Main
-author: Alterya
+name: Factions
+version: 1.0.2
+main: fr.alterya.factions.P
+authors: [Développeurs d'Alterya]
 softdepend: [PermissionsEx, Permissions, Essentials, EssentialsChat, HeroChat, iChat, LocalAreaChat, LWC, nChat, ChatManager, CAPI, AuthMe, Vault, Spout, WorldEdit, WorldGuard, AuthDB, CaptureThePoints, CombatTag]
 commands:
   factions:
     description: The Factions base command
     aliases: [f]
 permissions:
+# -------------------------------------------- #
+# THE REAL NODES
+# -------------------------------------------- #
   factions.access: {description: grant territory access for your faction, with the proper fperm}
   factions.access.any: {description: grant territory access for any faction}
   factions.access.view: {description: view territory access info for your faction}
@@ -66,7 +69,9 @@ permissions:
   factions.unclaim: {description: unclaim the land where you are standing}
   factions.unclaimall: {description: unclaim all of your factions land}
   factions.version: {description: see the version of the plugin}
-
+# -------------------------------------------- #
+# STAR NOTATION
+# -------------------------------------------- #
   factions.cape.*:
     children:
       factions.cape.get: true
@@ -81,7 +86,9 @@ permissions:
       factions.money.f2p: true
       factions.money.p2f: true
       factions.money.withdraw: true
-
+# -------------------------------------------- #
+# KITS
+# -------------------------------------------- #
   factions.kit.admin:
     description: All faction permissions.
     children:

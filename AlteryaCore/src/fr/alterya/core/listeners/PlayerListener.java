@@ -8,10 +8,16 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
+import fr.alterya.factions.FPlayer;
+import fr.alterya.factions.FPlayers;
+import fr.alterya.factions.Faction;
 
 public final class PlayerListener implements Listener {
 
 	private final Rank rank;
+	
+	public FPlayer fme;
+	public Faction myFaction;
 	
 	public PlayerListener(Rank rank) {
 		this.rank = rank;
@@ -32,8 +38,11 @@ public final class PlayerListener implements Listener {
 	
 	@EventHandler
 	private void playerChat(AsyncPlayerChatEvent pce) {
+		this.fme = FPlayers.i.get(pce.getPlayer());
+		this.myFaction = this.fme.getFaction();
+		Faction faction = myFaction;
 		RankList rankList = rank.getPlayerRank(pce.getPlayer().getUniqueId().toString(), pce.getPlayer());
-		pce.setFormat(rankList.getPrefix()+pce.getPlayer().getName()+rankList.getChatSeparator()+pce.getMessage());
+		pce.setFormat("§r[" + faction.getTag(fme)+ "§r] " + rankList.getPrefix()+pce.getPlayer().getName()+rankList.getChatSeparator()+pce.getMessage());
 	}
 	
 }

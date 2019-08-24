@@ -34,10 +34,11 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 		// /rankinfo
 		if(command.getName().equalsIgnoreCase("rankinfo")) {
 				String message1 = Main.prefix + "Voici les info sur les rangs et groupes de permissions : ";
+				player.sendMessage(message1);
 				for(RankList rankList : RankList.values()) {
 					String part = "";
-					part = "" + rankList.getPrefixColor() + rankList.getRankName() + " : " + "ID : " + String.valueOf(rankList.GetId()) + " ; Power : " + String.valueOf(rankList.getPower()) + " ; Prefix : " + rankList.getPrefix() + " \n"; 
-					player.sendMessage(message1 + part);
+					part = "" + rankList.getPrefixColor() + rankList.getRankName() + " §r: " + "ID = " + String.valueOf(rankList.GetId()) + " ; Power = " + String.valueOf(rankList.getPower()) + " ; Prefix = " + rankList.getPrefix() + " \n"; 
+					player.sendMessage(part);
 				}
 				return true;
 			// /promote <ID> <joueur>
@@ -58,24 +59,22 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 						System.out.println(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.JOUEUR.getRankName() + " [Log message]");
 						return true;
 					}
-				}else if(rank.config.getInt(player.getUniqueId().toString()) >= 9) {
-					if(rank.config.getInt(player.getUniqueId().toString()) >= 9) {
-						rank.deletPlayer(target.getUniqueId().toString());
-						rank.addRank(RankList.SOUVENIR, target);
-						player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName());
-						System.out.println(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName() + " [Log message]");
-						return true;
-					}
-				}else if(rank.config.getInt(player.getUniqueId().toString()) >= 9) {
-					if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.ADMINISTRATEUR || rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.RESPONSABLE) {
+				}else if(rank.config.getInt(player.getUniqueId().toString()) >= 8) {
+					rank.deletPlayer(target.getUniqueId().toString());
+					rank.addRank(RankList.SOUVENIR, target);
+					player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName());
+					System.out.println(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName() + " [Log message]");
+					return true;
+				}else if(rank.config.getInt(player.getUniqueId().toString()) >= 8) {
+					if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.ADMINISTRATEUR || rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.RESPONSABLE || rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MODERATEUR_PLUS) {
 						rank.deletPlayer(target.getUniqueId().toString());
 						rank.addRank(RankList.MEMOIRE, target);
 						player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MEMOIRE.getRankName());
 						System.out.println(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MEMOIRE.getRankName() + " [Log message]");
 						return true;
 					}
-				}else if(rank.config.getInt(player.getUniqueId().toString()) >= 9) {
-					if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.ADMINISTRATEUR || rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.RESPONSABLE) {
+				}else if(rank.config.getInt(player.getUniqueId().toString()) >= 8) {
+					if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.ADMINISTRATEUR || rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.RESPONSABLE || rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MODERATEUR_PLUS) {
 						rank.deletPlayer(target.getUniqueId().toString());
 						rank.addRank(RankList.SAGE, target);
 						player.sendMessage(Main.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SAGE.getRankName());

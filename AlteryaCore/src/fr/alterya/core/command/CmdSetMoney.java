@@ -13,9 +13,11 @@ import fr.alterya.core.rank.Rank;
 public class CmdSetMoney implements CommandExecutor
 {	
 	private final Rank rank;
+	public Main main;
 	
-	public CmdSetMoney(Rank rank) {
+	public CmdSetMoney(Rank rank, Main main) {
 		this.rank = rank;
+		this.main = main;
 	}
 	
 	@Override

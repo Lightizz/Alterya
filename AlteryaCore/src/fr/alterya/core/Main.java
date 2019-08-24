@@ -1,11 +1,11 @@
 package fr.alterya.core;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
 import fr.alterya.core.command.CmdBaltop;
+import fr.alterya.core.command.CmdCombatTime;
 import fr.alterya.core.command.CmdGiveMoney;
 import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdKit;
@@ -21,6 +21,7 @@ import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.permissions.PermissionsManager;
 import fr.alterya.core.shop.Shop;
+import fr.alterya.core.util.DisconnectCombat;
 import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin
@@ -54,10 +55,10 @@ public class Main extends JavaPlugin
 		
 		getCommand("money").setExecutor(new CmdMoney(rank));
 		getCommand("pay").setExecutor(new CmdPay(rank));
-		getCommand("takemoney").setExecutor(new CmdTakeMoney(rank));
-		getCommand("givemoney").setExecutor(new CmdGiveMoney(rank));
-		getCommand("purgemoney").setExecutor(new CmdPurgeMoney(rank));
-		getCommand("setmoney").setExecutor(new CmdSetMoney(rank));
+		getCommand("takemoney").setExecutor(new CmdTakeMoney(rank, this));
+		getCommand("givemoney").setExecutor(new CmdGiveMoney(rank, this));
+		getCommand("purgemoney").setExecutor(new CmdPurgeMoney(rank, this));
+		getCommand("setmoney").setExecutor(new CmdSetMoney(rank, this));
 		getCommand("baltop").setExecutor(new CmdBaltop());
 		
 		getCommand("home").setExecutor(new CmdHome(this.rank, this));
@@ -65,9 +66,11 @@ public class Main extends JavaPlugin
 		getCommand("sethome").setExecutor(new CmdHome(this.rank, this));
 		getCommand("homeinfo").setExecutor(new CmdHome(this.rank, this));
 		
+		getCommand("combat time").setExecutor(new CmdCombatTime());
+		
 		rank.initScoreboard();
 		
-		Bukkit.getPluginManager().registerEvents(new PlayerListener(rank), this);
+		getServer().getPluginManager().registerEvents(new PlayerListener(rank), this);
 		
 		getCommand("promote").setExecutor(new CmdPromote(rank, this));
 		getCommand("demote").setExecutor(new CmdPromote(rank, this));
@@ -77,7 +80,7 @@ public class Main extends JavaPlugin
 		
 		getServer().getPluginManager().registerEvents(new ShopInterractEvent(), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
-		getServer().getPluginManager().registerEvents(new DisconnectCombat(this), this);
+		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
 	}
 	
 	@Override

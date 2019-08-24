@@ -26,6 +26,7 @@ public class Rank {
 	
 	public static int rankCount = 0;
 	
+	@SuppressWarnings("static-access")
 	public Rank(Plugin plugin, Player player) 
 	{	
 		this.player = player;
