@@ -1,10 +1,8 @@
 package fr.alterya.factions.cmd;
 
 import fr.alterya.factions.P;
-
 import fr.alterya.factions.FPlayer;
 import fr.alterya.factions.Faction;
-import fr.alterya.factions.struct.Permission;
 
 public class CmdPowerBoost extends FCommand
 {
@@ -14,7 +12,7 @@ public class CmdPowerBoost extends FCommand
 		this.aliases.add("powerboost");
 		
 		this.requiredArgs.add("p|f|player|faction");
-		this.requiredArgs.add("name");
+		this.requiredArgs.add("nom");
 		this.requiredArgs.add("#");
 		
 		//this.permission = Permission.POWERBOOST.node;

@@ -67,19 +67,19 @@ public abstract class FCommand extends MCommand<P>
 	{
 		if (p.getLocked() && this.disableOnLock)
 		{
-			msg("<b>Factions was locked by an admin. Please try again later.");
+			msg("<b>Factions a été verrouillé par un administrateur. Veuillez réessayer plus tard.");
 			return false;
 		}
 		
 		if (this.isMoneyCommand && ! Conf.econEnabled)
 		{
-			msg("<b>Faction economy features are disabled on this server.");
+			msg("<b>Les fonctionnalités d'économie de faction sont désactivées sur ce serveur.");
 			return false;
 		}
 		
 		if (this.isMoneyCommand && ! Conf.bankEnabled)
 		{
-			msg("<b>The faction bank system is disabled on this server.");
+			msg("<b> Le système de banque de faction est désactivé sur ce serveur.");
 			return false;
 		}
 		
@@ -100,19 +100,19 @@ public abstract class FCommand extends MCommand<P>
 		
 		if ( ! fplayer.hasFaction())
 		{
-			sender.sendMessage(p.txt.parse("<b>You are not member of any faction."));
+			sender.sendMessage(p.txt.parse("<b> Vous n'êtes membre d'aucune faction."));
 			return false;
 		}
 		
 		if (this.senderMustBeOfficer && ! fplayer.getRole().isAtLeast(Rel.OFFICER))
 		{
-			sender.sendMessage(p.txt.parse("<b>Only faction moderators can %s.", this.getHelpShort()));
+			sender.sendMessage(p.txt.parse("<b> Seuls les modérateurs de faction peuvent% s.", this.getHelpShort()));
 			return false;
 		}
 		
 		if (this.senderMustBeLeader && ! fplayer.getRole().isAtLeast(Rel.LEADER))
 		{
-			sender.sendMessage(p.txt.parse("<b>Only faction admins can %s.", this.getHelpShort()));
+			sender.sendMessage(p.txt.parse("<b>Seuls les administrateurs de faction peuvent %s.", this.getHelpShort()));
 			return false;
 		}
 			
@@ -129,7 +129,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if ( ! fme.hasFaction())
 		{
-			sendMessage("You are not member of any faction.");
+			sendMessage("Vous n'êtes membre d'aucune faction.");
 			return false;
 		}
 		return true;
@@ -141,7 +141,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (fme.getRole().isLessThan(role))
 		{
-			msg("<b>You <h>must be "+role+"<b> to "+this.getHelpShort()+".");
+			msg("<b>Vous <h>devez être "+role+"<b> pour "+this.getHelpShort()+".");
 			return false;
 		}
 		return true;
@@ -167,7 +167,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>No player \"<p>%s<b>\" could be found.", name);			
+			this.msg("<b>Aucun joueur \"<p>%s<b>\" pourrait être trouvé.", name);			
 		}
 		
 		return ret;
@@ -201,7 +201,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>No player match found for \"<p>%s<b>\".", name);
+			this.msg("<b>Aucun joueur trouvé pour \"<p>%s<b>\".", name);
 		}
 		
 		return ret;
@@ -258,7 +258,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>The faction or player \"<p>%s<b>\" could not be found.", name);
+			this.msg("<b> La faction ou le joueur \" <p>% s <b> \" est introuvable.", name);
 		}
 		
 		return ret;
@@ -292,7 +292,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>The faction-flag \"<p>%s<b>\" could not be found.", name);
+			this.msg("<b> Le drapeau de faction \"<p>%s<b>\" ne peut être trouvé.", name);
 		}
 		
 		return ret;
@@ -326,7 +326,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>The faction-perm \"<p>%s<b>\" could not be found.", name);
+			this.msg("<b>La permission de faction \"<p>%s<b>\" ne peut être trouvée.", name);
 		}
 		
 		return ret;
@@ -360,7 +360,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>The role \"<p>%s<b>\" could not be found.", name);
+			this.msg("<b>Le rôle \"<p>%s<b>\" ne peut être trouvé.", name);
 		}
 		
 		return ret;
@@ -386,7 +386,7 @@ public abstract class FCommand extends MCommand<P>
 	{
 		if ( ! i.getFaction().equals(you.getFaction()))
 		{
-			i.sendMessage(p.txt.parse("%s <b>is not in the same faction as you.",you.describeTo(i, true)));
+			i.sendMessage(p.txt.parse("%s <b>n'est pas dans la même faction que vous.",you.describeTo(i, true)));
 			return false;
 		}
 		
@@ -397,7 +397,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (you.getRole().equals(Rel.LEADER))
 		{
-			i.sendMessage(p.txt.parse("<b>Only the faction admin can do that."));
+			i.sendMessage(p.txt.parse("<b>Seul l'administrateur de la faction peut le faire."));
 		}
 		else if (i.getRole().equals(Rel.OFFICER))
 		{
@@ -407,12 +407,12 @@ public abstract class FCommand extends MCommand<P>
 			}
 			else
 			{
-				i.sendMessage(p.txt.parse("<b>Moderators can't control each other..."));
+				i.sendMessage(p.txt.parse("<b>Les modérateurs ne peuvent pas se contrôler ..."));
 			}
 		}
 		else
 		{
-			i.sendMessage(p.txt.parse("<b>You must be a faction moderator to do that."));
+			i.sendMessage(p.txt.parse("<b>Vous devez être un modérateur de faction pour le faire."));
 		}
 		
 		return false;

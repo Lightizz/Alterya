@@ -47,7 +47,7 @@ public class CmdOfficer extends FCommand
 		
 		if (fme != null && fme.getRole() != Rel.LEADER && !permAny)
 		{
-			msg("<b>VOus n'êtes pas le leader de votre faction.");
+			msg("<b>Vous n'êtes pas le leader de votre faction.");
 			return;
 		}
 

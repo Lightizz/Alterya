@@ -4,333 +4,189 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.core.Main;
+import fr.alterya.core.money.MoneyManager;
 import fr.alterya.core.shop.PrisesList;
 import fr.alterya.core.shop.Shop;
+import fr.alterya.core.util.ItemBuilder;
 
 public class ShopInterractEvent implements Listener 
 {	
 	PrisesList prisesList;
-	
 	Shop shop;
 	
+	//Partie qui gère l'objet de retour
 	@EventHandler
 	public void onDoorInterract(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
-		if(e.getCursor().getType() == Material.WOODEN_DOOR) {
+		if(e.getCurrentItem().getType() == Material.ANVIL) {
 			e.setCancelled(true);
 			player.getOpenInventory().close();
 		}
 	}
 	
-	@SuppressWarnings("static-access")
+	//Partie contrôlant l'interface principale du shop
 	@EventHandler
 	public void onShopInterractMain(InventoryClickEvent e) {
-		if(e.isCancelled() == true) {
-			e.setCancelled(false);
-		}
-		Player player = (Player) e.getWhoClicked();		
-		if(e.getClickedInventory() == shop.shopInvMain && e.getAction() != InventoryAction.PICKUP_ONE) {
-			if(e.getCurrentItem().getType() == Material.YELLOW_FLOWER 
-				||e.getCurrentItem().getType() == Material.EMPTY_MAP 
-				||e.getCurrentItem().getType() == Material.BLAZE_POWDER 
-				||e.getCurrentItem().getType() == Material.STONE
-				||e.getCurrentItem().getType() == Material.IRON_AXE
-				||e.getCurrentItem().getType() == Material.DIAMOND_HOE
-				||e.getCurrentItem().getType() == Material.IRON_INGOT) {
-				Material itemClicked = e.getCurrentItem().getType();
-				if(itemClicked == Material.YELLOW_FLOWER) {
-					e.setCancelled(true);
-					player.getOpenInventory().close();
-					player.openInventory(shop.shopInvFarming);
-					player.updateInventory();
-					return;
-				}else if(itemClicked == Material.EMPTY_MAP) {
-					e.setCancelled(true);
-					player.getOpenInventory().close();
-					player.openInventory(shop.shopInvUtils);
-					player.updateInventory();
-					return;
-				}else if(itemClicked == Material.BLAZE_POWDER) {
-					e.setCancelled(true);
-					player.getOpenInventory().close();
-					player.openInventory(shop.shopInvAlchemy);
-					player.updateInventory();
-					return;
-				}else if(itemClicked == Material.STONE) {
-					e.setCancelled(true);
-					player.getOpenInventory().close();
-					player.openInventory(shop.shopInvBlocks);
-					player.updateInventory();
-					return;
-				}else if(itemClicked == Material.IRON_AXE) {
-					e.setCancelled(true);
-					player.getOpenInventory().close();
-					player.openInventory(shop.shopInvPillage);
-					player.updateInventory();
-					return;
-				}else if(itemClicked == Material.DIAMOND_HOE) {
-					e.setCancelled(true);
-					player.getOpenInventory().close();
-					player.openInventory(shop.shopInvFarming);
-					player.updateInventory();
-					return;
-				}else if(itemClicked == Material.IRON_INGOT) {
-					e.setCancelled(true);
-					player.getOpenInventory().close();
-					player.openInventory(shop.shopInvMinerals);
-					player.updateInventory();
-					return;
-				}else if(itemClicked == Material.AIR) {
-					e.setCancelled(true);
-					return;
-				}
-			}
-		}
-	}
-
-	@SuppressWarnings({
-			"unlikely-arg-type", "static-access"
-	})
-	public void onShopInterractOthers(InventoryClickEvent e) {
-		if(e.isCancelled() == true) {
-			e.setCancelled(false);
-		}
 		Player player = (Player) e.getWhoClicked();
-		if(e.getClickedInventory() == shop.shopInvUtils && e.getAction() != InventoryAction.PICKUP_ONE 
-				|| e.getAction() != InventoryAction.PICKUP_ALL 
-				|| e.getAction() != InventoryAction.PICKUP_HALF
-				|| e.getAction() != InventoryAction.PICKUP_SOME) {
-			Material clickedMaterial = e.getCurrentItem().getType();
-			if(! clickedMaterial.equals(shop.prisesList)) {
-				e.setCancelled(true);
-				return;
-			}else if(clickedMaterial.equals(shop.prisesList)) {
-				ItemStack clickedItem = e.getCurrentItem();
-				clickedItem.getType().equals(clickedMaterial);
+		Inventory mainInv = e.getInventory();
+		
+		if(mainInv == null) return;
+		
+		if(e.getInventory().getName() == Shop.shopInvMain.getName()) {
+			ItemStack itemClicked = e.getCurrentItem();
+			if(itemClicked.getType() == Material.EMPTY_MAP) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
-				shop.openInvSellBuy(player, clickedItem);
+				player.openInventory(Shop.shopInvUtils);
 				player.updateInventory();
-			}else if(clickedMaterial == Material.AIR) {
-				e.setCancelled(true);
 				return;
-			}
-		}
-	}
-	
-	@SuppressWarnings({
-			"static-access", "unlikely-arg-type"
-	})
-	public void onShopInterractBlocks(InventoryClickEvent e) {
-		if(e.isCancelled() == true) {
-			e.setCancelled(false);
-		}
-		Player player = (Player) e.getWhoClicked();
-		if(e.getClickedInventory() == shop.shopInvBlocks && e.getAction() != InventoryAction.PICKUP_ONE 
-				|| e.getAction() != InventoryAction.PICKUP_ALL 
-				|| e.getAction() != InventoryAction.PICKUP_HALF
-				|| e.getAction() != InventoryAction.PICKUP_SOME) {
-			Material clickedMaterial = e.getCurrentItem().getType();
-			if(! clickedMaterial.equals(shop.prisesList)) {
-				e.setCancelled(true);
-				return;
-			}else if(clickedMaterial.equals(shop.prisesList)) {
-				ItemStack clickedItem = e.getCurrentItem();
-				clickedItem.getType().equals(clickedMaterial);
+			}else if(itemClicked.getType() == Material.BLAZE_POWDER) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
-				shop.openInvSellBuy(player, clickedItem);
+				player.openInventory(Shop.shopInvAlchemy);
 				player.updateInventory();
-			}else if(clickedMaterial == Material.AIR) {
-				e.setCancelled(true);
 				return;
-			}
-		}
-	}
-	
-	@SuppressWarnings({
-			"static-access", "unlikely-arg-type"
-	})
-	public void onShopInterractFarming(InventoryClickEvent e) {
-		if(e.isCancelled() == true) {
-			e.setCancelled(false);
-		}
-		Player player = (Player) e.getWhoClicked();
-		if(e.getClickedInventory() == shop.shopInvFarming && e.getAction() != InventoryAction.PICKUP_ONE 
-				|| e.getAction() != InventoryAction.PICKUP_ALL 
-				|| e.getAction() != InventoryAction.PICKUP_HALF
-				|| e.getAction() != InventoryAction.PICKUP_SOME) {
-			Material clickedMaterial = e.getCurrentItem().getType();
-			if(! clickedMaterial.equals(shop.prisesList)) {
-				e.setCancelled(true);
-				return;
-			}else if(clickedMaterial.equals(shop.prisesList)) {
-				ItemStack clickedItem = e.getCurrentItem();
-				clickedItem.getType().equals(clickedMaterial);
+			}else if(itemClicked.getType() == Material.STONE) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
-				shop.openInvSellBuy(player, clickedItem);
+				player.openInventory(Shop.shopInvBlocks);
 				player.updateInventory();
-			}else if(clickedMaterial == Material.AIR) {
-				e.setCancelled(true);
 				return;
-			}
-		}
-	}
-	
-	@SuppressWarnings({
-			"static-access", "unlikely-arg-type"
-	})
-	public void onShopInterractPillage(InventoryClickEvent e) {
-		if(e.isCancelled() == true) {
-			e.setCancelled(false);
-		}
-		Player player = (Player) e.getWhoClicked();
-		if(e.getClickedInventory() == shop.shopInvPillage && e.getAction() != InventoryAction.PICKUP_ONE 
-				|| e.getAction() != InventoryAction.PICKUP_ALL 
-				|| e.getAction() != InventoryAction.PICKUP_HALF
-				|| e.getAction() != InventoryAction.PICKUP_SOME) {
-			Material clickedMaterial = e.getCurrentItem().getType();
-			if(! clickedMaterial.equals(shop.prisesList)) {
-				e.setCancelled(true);
-				return;
-			}else if(clickedMaterial.equals(shop.prisesList)) {
-				ItemStack clickedItem = e.getCurrentItem();
-				clickedItem.getType().equals(clickedMaterial);
+			}else if(itemClicked.getType() == Material.IRON_AXE) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
-				shop.openInvSellBuy(player, clickedItem);
+				player.openInventory(Shop.shopInvPillage);
 				player.updateInventory();
-			}else if(clickedMaterial == Material.AIR) {
-				e.setCancelled(true);
 				return;
-			}
-		}
-	}
-	
-	@SuppressWarnings({
-			"static-access", "unlikely-arg-type"
-	})
-	public void onShopInterractAlchemy(InventoryClickEvent e) {
-		if(e.isCancelled() == true) {
-			e.setCancelled(false);
-		}
-		Player player = (Player) e.getWhoClicked();
-		if(e.getClickedInventory() == shop.shopInvAlchemy && e.getAction() != InventoryAction.PICKUP_ONE 
-				|| e.getAction() != InventoryAction.PICKUP_ALL 
-				|| e.getAction() != InventoryAction.PICKUP_HALF
-				|| e.getAction() != InventoryAction.PICKUP_SOME) {
-			Material clickedMaterial = e.getCurrentItem().getType();
-			if(! clickedMaterial.equals(shop.prisesList)) {
-				e.setCancelled(true);
-				return;
-			}else if(clickedMaterial.equals(shop.prisesList)) {
-				ItemStack clickedItem = e.getCurrentItem();
-				clickedItem.getType().equals(clickedMaterial);
+			}else if(itemClicked.getType() == Material.DIAMOND_HOE) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
-				shop.openInvSellBuy(player, clickedItem);
+				player.openInventory(Shop.shopInvFarming);
 				player.updateInventory();
-			}else if(clickedMaterial == Material.AIR) {
-				e.setCancelled(true);
 				return;
-			}
-		}
-	}
-	
-	@SuppressWarnings({
-			"static-access", "unlikely-arg-type"
-	})
-	public void onShopInterractOres(InventoryClickEvent e) {
-		if(e.isCancelled() == true) {
-			e.setCancelled(false);
-		}
-		Player player = (Player) e.getWhoClicked();
-		if(e.getClickedInventory() == shop.shopInvMinerals && e.getAction() != InventoryAction.PICKUP_ONE 
-				|| e.getAction() != InventoryAction.PICKUP_ALL 
-				|| e.getAction() != InventoryAction.PICKUP_HALF
-				|| e.getAction() != InventoryAction.PICKUP_SOME) {
-			Material clickedMaterial = e.getCurrentItem().getType();
-			if(! clickedMaterial.equals(shop.prisesList)) {
-				e.setCancelled(true);
-				return;
-			}else if(clickedMaterial.equals(shop.prisesList)) {
-				ItemStack clickedItem = e.getCurrentItem();
-				clickedItem.getType().equals(clickedMaterial);
+			}else if(itemClicked.getType() == Material.IRON_INGOT) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
-				shop.openInvSellBuy(player, clickedItem);
+				player.openInventory(Shop.shopInvMinerals);
 				player.updateInventory();
-			}else if(clickedMaterial == Material.AIR) {
-				e.setCancelled(true);
 				return;
 			}
 		}
 	}
 
-	@SuppressWarnings({
-			"deprecation", "unused"
-	})
-	public void onSellBuyInterract(InventoryClickEvent e) {
-		if(e.isCancelled() == true) {
-			e.setCancelled(false);
-		}
-		Material clickedMaterial0 = e.getCurrentItem().getType();
+	//Partie pour ouvrir l'inventaire de confirmation d'achat / de vente
+	@EventHandler
+	public void onPartInterract(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
-		shop.setInvSellBuy(player);
-		if(e.getClickedInventory() == Shop.shopInvSellBuy && shop.getShopPartOpened(player).equals(e.getClickedInventory())) {
-			if(e.getCurrentItem() == shop.Buy) {
-				Material clickedMaterial = e.getCurrentItem().getType();
-				ItemStack clickedItem = e.getCurrentItem();
-				clickedItem.getType().equals(clickedMaterial);
-				PrisesList pl__ = PrisesList.valueOf(clickedMaterial.toString());
-				prisesList = pl__;
-					
-				double amount = 0.00d;
-					
-				try {
-					amount = Double.parseDouble(prisesList.getBuyPriseS());
-				} catch(NumberFormatException e3) {
-					e.setCancelled(true);
-					return;
+		Inventory mainInv = e.getInventory();
+		
+		if(mainInv == null) return;
+		
+		if(e.getInventory().getName() == Shop.shopInvBlocks.getName() 
+		 ||e.getInventory().getName() == Shop.shopInvAlchemy.getName()
+		 ||e.getInventory().getName() == Shop.shopInvFarming.getName()
+		 ||e.getInventory().getName() == Shop.shopInvMinerals.getName()
+		 ||e.getInventory().getName() == Shop.shopInvPillage.getName()
+		 ||e.getInventory().getName() == Shop.shopInvUtils.getName()) {
+			ItemStack itemClicked = e.getCurrentItem();
+			ItemMeta itemM = itemClicked.getItemMeta();
+			for(PrisesList item : PrisesList.values()) {
+				if(itemClicked.getType() == item.getMaterial()) {
+					itemM.setDisplayName(item.getName());
 				}
-				
-				player.sendMessage(Main.prefix + "§aVous avez acheté x" + new ItemStack(prisesList.getMaterial()).getAmount() + " " + prisesList.getMaterial().toString() + " pour §e" + " $ §a!");
-				if(player.getInventory().contains(prisesList.getMaterial()) && player.getInventory().contains(clickedItem.getAmount())) {
-					clickedItem.getType().equals(clickedMaterial);
-					player.getInventory().remove(clickedMaterial);
-					e.setCancelled(true);
-					return;
+			}
+			itemClicked.setItemMeta(itemM);
+			Shop.setItemInConfirmInv();
+			if(itemClicked.getType() == Material.AIR || itemClicked.getType() == Material.ANVIL) {return;}
+			Shop.shopInvSellBuy.setItem(13, itemClicked);
+			e.setCancelled(true);
+			player.getOpenInventory().close();
+			player.openInventory(Shop.shopInvSellBuy);
+		}
+	}
+
+	//Partie concerant l'inventaire de confirmation d'achat / vente
+	@EventHandler
+	public void onSelectAmountPartInterract(InventoryClickEvent e) {
+		Inventory mainInv = e.getInventory();
+		
+		if(mainInv == null) return;
+		
+		if(e.getInventory().getName() == Shop.shopInvSellBuy.getName()) {
+			ItemStack itemClicked = e.getCurrentItem();
+			ItemStack itemAdd1 = mainInv.getItem(19);
+			ItemStack itemAdd10 = mainInv.getItem(20);
+			ItemStack itemAdd64 = mainInv.getItem(21);
+			ItemStack itemSubstract1 = mainInv.getItem(25);
+			ItemStack itemSubstract10 = mainInv.getItem(24);
+			ItemStack itemSubstract64 = mainInv.getItem(23);
+			if(itemClicked.getItemMeta().getDisplayName() == itemAdd1.getItemMeta().getDisplayName()) {
+				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); return; }
+				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() + 1);
+				e.setCancelled(true);
+			}else if(itemClicked.getItemMeta().getDisplayName() == itemAdd10.getItemMeta().getDisplayName()) {
+				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); return; }
+				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() + 10);
+				e.setCancelled(true);
+			}else if(itemClicked.getItemMeta().getDisplayName() == itemAdd64.getItemMeta().getDisplayName()) {
+				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); return; }
+				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() + 64);
+				e.setCancelled(true);
+			}else if(itemClicked.getItemMeta().getDisplayName() == itemSubstract1.getItemMeta().getDisplayName()) {
+				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); return; }
+				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() - 1);
+				e.setCancelled(true);
+			}else if(itemClicked.getItemMeta().getDisplayName() == itemSubstract10.getItemMeta().getDisplayName()) {
+				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); return; }
+				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() - 10);
+				e.setCancelled(true);
+			}else if(itemClicked.getItemMeta().getDisplayName() == itemSubstract64.getItemMeta().getDisplayName()) {
+				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); return; }
+				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() - 64);
+				e.setCancelled(true);
+			}
+			e.setCancelled(true);
+			return;
+		}
+	}
+	
+	@EventHandler
+	public void onConfirmSellBuyInterract(InventoryClickEvent e) {
+		Inventory mainInv = e.getInventory();
+		Player player = (Player) e.getWhoClicked();
+		
+		if(mainInv == null) return;
+		
+		if(e.getInventory().getName() == Shop.shopInvSellBuy.getName()) {
+			MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
+			ItemStack itemClicked = e.getCurrentItem();
+			if(itemClicked.getItemMeta().getDisplayName() == Shop.buy.getItemMeta().getDisplayName()) {
+				ItemStack itemToGive = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
+				player.getInventory().addItem(itemToGive);
+				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
+				for(PrisesList item : PrisesList.values()) {
+					if(itemToGive.getType() == item.getMaterial()) {
+						manager.substractMoney(player.getUniqueId().toString(), item.getBuyPrise());
+						player.sendMessage("§eVous avez acheter §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
+					}
 				}
-			}else if(e.getCurrentItem() == shop.sell) {
-				Material clickedMaterial = e.getCurrentItem().getType();
-				ItemStack clickedItem = e.getCurrentItem();
-				clickedItem.getType().equals(clickedMaterial);
-				PrisesList pl__ = PrisesList.valueOf(clickedMaterial.toString());
-				prisesList = pl__;
-					
-				double amount = 0.00d;
-					
-				try {
-					amount = Double.parseDouble(prisesList.getSellPriseS());
-				} catch(NumberFormatException e3) {
-					e.setCancelled(true);
-					return;
-				}
-				player.getInventory().addItem(new ItemStack(prisesList.getMaterial()));
 				e.setCancelled(true);
 				return;
-			}else if(e.getCurrentItem() == shop.backDoor) {
-				e.setCancelled(true);
-				player.getOpenInventory().close();
-				player.updateInventory();
-				return;
-			}else if(clickedMaterial0 == Material.AIR) {
+			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.sell.getItemMeta().getDisplayName()) {
+				ItemStack itemToGive = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
+				player.getInventory().removeItem(itemToGive);
+				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
+				for(PrisesList item : PrisesList.values()) {
+					if(itemToGive.getType() == item.getMaterial()) {
+						manager.addMoney(player.getUniqueId().toString(), item.getSellPrise());
+						player.sendMessage("§eVous avez vendu §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
+					}
+				}
 				e.setCancelled(true);
 				return;
 			}

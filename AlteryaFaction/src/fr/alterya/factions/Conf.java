@@ -143,6 +143,19 @@ public class Conf
 	public static double homesTeleportAllowedEnemyDistance = 32.0;
 	public static boolean homesTeleportIgnoreEnemiesIfInOwnTerritory = true;
 	
+	public static boolean apAuthorised = false;
+	public static boolean apEnabled = true;
+	public static boolean apMustBeInClaimedTerritory = true;
+	public static boolean apTeleportToOnDeath = true;
+	public static boolean apRespawnFromNoPowerLossWorlds = true;
+	public static boolean apTeleportCommandEnabled = true;
+	public static boolean apTeleportCommandEssentialsIntegration = true;
+	public static boolean apTeleportCommandSmokeEffectEnabled = true;
+	public static boolean apTeleportAllowedFromEnemyTerritory = true;
+	public static boolean apTeleportAllowedFromDifferentWorld = true;
+	public static double apTeleportAllowedEnemyDistance = 32.0;
+	public static boolean apTeleportIgnoreEnemiesIfInOwnTerritory = true;
+	
 	
 	public static Rel friendlyFireFromRel = Rel.TRUCE;
 	public static boolean disablePVPForFactionlessPlayers = false;
@@ -228,11 +241,13 @@ public class Conf
 	public static double econClaimUnconnectedFee = 0.0;
 	public static double econCostCreate = 100.0;
 	public static double econCostSethome = 30.0;
+	public static double econCostSetAp = 30.0;
 	public static double econCostJoin = 0.0;
 	public static double econCostLeave = 0.0;
 	public static double econCostKick = 0.0;
 	public static double econCostInvite = 0.0;
 	public static double econCostHome = 0.0;
+	public static double econCostAp = 0.0;
 	public static double econCostTag = 0.0;
 	public static double econCostDesc = 0.0;
 	public static double econCostTitle = 0.0;
@@ -289,6 +304,8 @@ public class Conf
 		chatSingleFormats.put("pb", " %s ");
 		
 		territoryEnemyDenyCommands.add("home");
+		territoryEnemyDenyCommands.add("ap");
+		territoryEnemyDenyCommands.add("setap");
 		territoryEnemyDenyCommands.add("sethome");
 		territoryEnemyDenyCommands.add("spawn");
 		territoryEnemyDenyCommands.add("tpahere");

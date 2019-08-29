@@ -5,7 +5,7 @@ import java.util.Set;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import fr.alterya.core.Main;
+import fr.alterya.core.MainCore;
 import fr.alterya.core.util.FileWriter;
 
 public class MoneyManager
@@ -75,7 +75,7 @@ public class MoneyManager
 			String[] accountList = (String[]) this.getMoneyBanks().toArray();
 			return accountList;
 		}
-		player.sendMessage(Main.prefix + "§4Un problème est survenu, veuillez contacter un Administrateur ou un Développeur !");
+		player.sendMessage(MainCore.prefix + "§4Un problème est survenu, veuillez contacter un Administrateur ou un Développeur !");
 		return null;
 	}
 	

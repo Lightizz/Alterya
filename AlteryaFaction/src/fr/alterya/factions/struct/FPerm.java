@@ -34,6 +34,7 @@ public enum FPerm
 	INVITE("invite", "invite players",             Rel.LEADER, Rel.OFFICER),
 	KICK("kick", "kick members",                   Rel.LEADER, Rel.OFFICER),
 	SETHOME("sethome", "set the home",             Rel.LEADER, Rel.OFFICER),
+	SETAP("setap", "postionner l'ap",              Rel.LEADER, Rel.OFFICER),
 	WITHDRAW("withdraw", "withdraw money",         Rel.LEADER, Rel.OFFICER),
 	TERRITORY("territory", "claim or unclaim",     Rel.LEADER, Rel.OFFICER),
 	CAPE("cape", "set the cape",                   Rel.LEADER, Rel.OFFICER),
@@ -84,6 +85,7 @@ public enum FPerm
 		if (str.startsWith("i"))   return INVITE;
 		if (str.startsWith("k"))   return KICK;
 		if (str.startsWith("s"))   return SETHOME;
+		if (str.startsWith("sa"))  return SETAP;
 		if (str.startsWith("w"))   return WITHDRAW;
 		if (str.startsWith("t"))   return TERRITORY;
 		if (str.startsWith("ca"))  return CAPE;
@@ -137,7 +139,7 @@ public enum FPerm
 		return TerritoryPerms.contains(this);
 	}
 
-	private static final String errorpattern = "%s<b> does not allow you to %s<b>.";
+	private static final String errorpattern = "%s<b> ne vous autorise pas à %s<b>.";
 	public boolean has(Object testSubject, Faction hostFaction, boolean informIfNot)
 	{
 		if (testSubject instanceof ConsoleCommandSender) return true;
@@ -170,7 +172,7 @@ public enum FPerm
 			fplayer.msg(errorpattern, hostFaction.describeTo(fplayer, true), this.getDescription());
 			if (Permission.ADMIN.has(fplayer.getPlayer()))
 			{
-				fplayer.msg("<i>You can bypass by using " + P.p.cmdBase.cmdBypass.getUseageTemplate(false));
+				fplayer.msg("<i>Vous pouvez contourner en utilisant " + P.p.cmdBase.cmdBypass.getUseageTemplate(false));
 			}
 		}
 		return ret;
@@ -195,7 +197,7 @@ public enum FPerm
 					else if (testSubject instanceof FPlayer)
 						notify = (FPlayer)testSubject;
 					if (notify != null)
-						notify.msg("<b>This territory owned by your faction has restricted access.");
+						notify.msg("<b>L'accès à ce territoire appartenant à votre faction est limité.");
 				}
 				return false;
 			}

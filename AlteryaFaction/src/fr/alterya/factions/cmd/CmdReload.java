@@ -66,14 +66,14 @@ public class CmdReload extends FCommand
 		}
 		else
 		{
-			P.p.log("RELOAD CANCELLED - SPECIFIED FILE INVALID");
-			msg("<b>Invalid file specified. <i>Valid files: all, conf, board, factions, players");
+			P.p.log("RECHARGEMENT ANNULE - FICHIER SPECIFIQUE NON VALIDE");
+			msg("<b>Fichier non valide spécifié. <i> Fichiers valides: tous, conf, tableau, factions, joueurs");
 			return;
 		}
 		
 		long timeReload = (System.currentTimeMillis()-timeInitStart);
 		
-		msg("<i>Reloaded <h>%s <i>from disk, took <h>%dms<i>.", fileName, timeReload);
+		msg("<i>Rechargé <h>%s <i>à partir du disque, a pris <h>%dms<i>.", fileName, timeReload);
 	}
 	
 }

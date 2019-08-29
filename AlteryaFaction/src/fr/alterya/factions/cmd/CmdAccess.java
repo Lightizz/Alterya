@@ -22,7 +22,7 @@ public class CmdAccess extends FCommand
 		this.optionalArgs.put("view|p|f|player|faction", "view");
 		this.optionalArgs.put("name", "you");
 		
-		this.setHelpShort("view or grant access for the claimed territory you are in");
+		this.setHelpShort("afficher ou accorder l'accès au territoire revendiqué dans lequel vous vous trouvez");
 
 		this.disableOnLock = true;
 		
@@ -48,7 +48,7 @@ public class CmdAccess extends FCommand
 			if ( ! accessAny && ! Permission.ACCESS_VIEW.has(sender, true)) return;
 			if ( ! accessAny && ! territory.doesHostFactionMatch(fme))
 			{
-				msg("<b>This territory isn't controlled by your faction, so you can't view the access list.");
+				msg("<b>Ce territoire n'est pas contrôlé par votre faction, vous ne pouvez donc pas voir la liste d'accès.");
 				return;
 			}
 			showAccessList(territory, locFaction);
@@ -65,9 +65,9 @@ public class CmdAccess extends FCommand
 		}
 		else if (!type.equals("p") && !type.equals("player"))
 		{
-			msg("<b>You must specify \"p\" or \"player\" to indicate a player or \"f\" or \"faction\" to indicate a faction.");
+			msg("<b>Vous devez spécifier \"p \" ou \"joueur \" pour indiquer un joueur ou \"f \" ou \"faction \" pour indiquer une faction.");
 			msg("<b>ex. /f access p SomePlayer  -or-  /f access f SomeFaction");
-			msg("<b>Alternately, you can use the command with nothing (or \"view\") specified to simply view the access list.");
+			msg("<b>Alternativement, vous pouvez utiliser la commande sans rien (ou \"view \") pour afficher simplement la liste d'accès.");
 			return;
 		}
 
@@ -89,26 +89,26 @@ public class CmdAccess extends FCommand
 			target = "Faction \""+targetFaction.getTag()+"\"";
 		}
 
-		msg("<i>%s has been %s<i> the access list for this territory.", target, TextUtil.parseColor(added ? "<lime>added to" : "<rose>removed from"));
+		msg("<i>%s a été %s <i> la liste d’accès pour ce territoire.", target, TextUtil.parseColor(added ? "<lime>ajouté à" : "<rose>retiré de"));
 		SpoutFeatures.updateAccessInfoLoc(loc);
 		showAccessList(territory, locFaction);
 	}
 
 	private void showAccessList(TerritoryAccess territory, Faction locFaction)
 	{
-		msg("<i>Host faction %s has %s<i> in this territory.", locFaction.getTag(), TextUtil.parseColor(territory.isHostFactionAllowed() ? "<lime>normal access" : "<rose>restricted access"));
+		msg("<i>Faction hôte %s a %s<i> sur ce territoire.", locFaction.getTag(), TextUtil.parseColor(territory.isHostFactionAllowed() ? "<lime>accès normal" : "<rose>accès privé"));
 
 		String players = territory.fplayerList();
 		String factions = territory.factionList();
 
 		if (factions.isEmpty())
-			msg("No factions have been explicitly granted access.");
+			msg("L'accès n'a été explicitement accordé à aucune faction.");
 		else
-			msg("Factions with explicit access: " + factions);
+			msg("Factions avec accès explicite : " + factions);
 
 		if (players.isEmpty())
-			msg("No players have been explicitly granted access.");
+			msg("Aucun joueur n'a été explicitement autorisé à accéder.");
 		else
-			msg("Players with explicit access: " + players);
+			msg("Joueurs avec accès explicite : " + players);
 	}
 }

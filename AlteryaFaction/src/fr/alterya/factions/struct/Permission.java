@@ -25,6 +25,7 @@ public enum Permission
 	FLAG("flag"),
 	FLAG_SET("flag.set"),
 	HELP("help"),
+	AUTHAP("setap"),
 	HOME("home"),
 	INVITE("invite"),
 	JOIN("join"),

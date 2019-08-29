@@ -14,7 +14,7 @@ public class CmdPower extends FCommand
 		this.aliases.add("pow");
 		
 		//this.requiredArgs.add("faction tag");
-		this.optionalArgs.put("player", "you");
+		this.optionalArgs.put("player", "vous");
 		
 		//this.permission = Permission.POWER.node;
 		this.disableOnLock = false;
@@ -34,7 +34,7 @@ public class CmdPower extends FCommand
 		if (target != fme && ! Permission.POWER_ANY.has(sender, true)) return;
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostPower, "to show player power info", "for showing player power info")) return;
+		if ( ! payForCommand(Conf.econCostPower, "afficher les informations de puissance du joueur ", " pour afficher les informations de puissance du joueur")) return;
 
 		double powerBoost = target.getPowerBoost();
 		String boost = (powerBoost == 0.0) ? "" : (powerBoost > 0.0 ? " (bonus: " : " (penalités: ") + powerBoost + ")";

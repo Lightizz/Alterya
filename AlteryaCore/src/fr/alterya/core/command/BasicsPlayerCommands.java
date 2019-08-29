@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import fr.alterya.core.Main;
+import fr.alterya.core.MainCore;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
 import net.minecraft.server.v1_7_R4.EntityPlayer;
@@ -23,26 +23,26 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args){		
-			if(command.getName().equalsIgnoreCase("ping") && sender instanceof Player){
+			if(message.equalsIgnoreCase("ping") && sender instanceof Player){
 	            Player player = (Player) sender;
 	            player.sendMessage(ChatColor.YELLOW + "Votre ping est : " + ChatColor.GOLD + getPing(player) + "ms");
 	            return true;
 	        }
 	        
-	        if(command.getName().equalsIgnoreCase("discord") && sender instanceof Player) {
+	        if(message.equalsIgnoreCase("discord") && sender instanceof Player) {
 	            Player player = (Player) sender;
 	            player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<|" );
 	            
 	            return true;
 	        }
 	        
-	        if(command.getName().equalsIgnoreCase("tipeee")) {
+	        if(message.equalsIgnoreCase("tipeee")) {
 	            Player player = (Player) sender;
 	            player.sendMessage(ChatColor.GOLD + "|>> https://fr.tipeee.com/alterya-pvp <<|");
 	            return true;
 	        }
 	        
-	        if(command.getName().equalsIgnoreCase("craft") && sender instanceof Player) {
+	        if(message.equalsIgnoreCase("craft") && sender instanceof Player) {
 	            Player player = (Player) sender;
 	            player.openWorkbench (null, true);
 	            
@@ -53,7 +53,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	        //Sage = 3 lignes
 	        //Mémoire = 3 lignes
 	        //Joueur = 1 lignes
-	        if(command.getName().equalsIgnoreCase("ec") && sender instanceof Player) {
+	        if(message.equalsIgnoreCase("ec") && sender instanceof Player) {
 	        	Player player = (Player) sender;
 	        	
 	    		player.openInventory(player.getEnderChest());
@@ -87,7 +87,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 16
 					&& event.getSlot() == 17 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.JOUEUR) {
 				event.setCancelled(true);
-				player.sendMessage(Main.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
+				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 			}else if(event.getCurrentItem() == new ItemStack(Material.AIR) || event.getCurrentItem() == null 
 					&& event.getSlot() == 0
 					&& event.getSlot() == 1
@@ -99,7 +99,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 7
 					&& event.getSlot() == 8 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
 				event.setCancelled(true);
-				player.sendMessage(Main.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
+				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 			}
 		}
 		event.setCancelled(false);

@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import fr.alterya.core.Main;
+import fr.alterya.core.MainCore;
 import fr.alterya.core.money.MoneyManager;
 
 public class CmdBaltop implements CommandExecutor
@@ -14,11 +14,11 @@ public class CmdBaltop implements CommandExecutor
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{
-		if(command.getName().equalsIgnoreCase("baltop")) {
+		if(message.equalsIgnoreCase("baltop")) {
 			Player player = (Player) sender;
 			if(sender instanceof Player) {
 				if(args.length != 0) {
-					player.sendMessage(Main.prefix + "La commande est /baltop.");
+					player.sendMessage(MainCore.prefix + "La commande est /baltop.");
 					return true;
 				}else if(args.length == 0) {
 					MoneyManager manager = new MoneyManager(player.getUniqueId().toString());

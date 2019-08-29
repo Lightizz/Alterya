@@ -13,10 +13,10 @@ public class CmdPerm extends FCommand
 		super();
 		this.aliases.add("perm");
 		
-		this.optionalArgs.put("faction", "your");
-		this.optionalArgs.put("perm", "all");
-		this.optionalArgs.put("relation", "read");
-		this.optionalArgs.put("yes/no", "read");
+		this.optionalArgs.put("faction", "votre");
+		this.optionalArgs.put("permission", "all");
+		this.optionalArgs.put("relation", "lire");
+		this.optionalArgs.put("yes/no", "lire");
 		
 		//this.permission = Permission.PERM.node;
 		this.disableOnLock = true;
@@ -49,7 +49,7 @@ public class CmdPerm extends FCommand
 		
 		if ( ! this.argIsSet(1))
 		{
-			msg(p.txt.titleize("Perms for " + faction.describeTo(fme, true)));
+			msg(p.txt.titleize("Permissons pour " + faction.describeTo(fme, true)));
 			msg(FPerm.getStateHeaders());
 			for (FPerm perm : FPerm.values())
 			{
@@ -62,7 +62,7 @@ public class CmdPerm extends FCommand
 		if (perm == null) return;
 		if ( ! this.argIsSet(2))
 		{
-			msg(p.txt.titleize("Perm pour " + faction.describeTo(fme, true)));
+			msg(p.txt.titleize("Permissions pour " + faction.describeTo(fme, true)));
 			msg(FPerm.getStateHeaders());
 			msg(perm.getStateInfo(faction.getPermittedRelations(perm), true));
 			return;
@@ -86,7 +86,7 @@ public class CmdPerm extends FCommand
 			faction.setRelationPermitted(FPerm.PERMS, Rel.LEADER, true);
 		}
 		
-		msg(p.txt.titleize("Perm pour " + faction.describeTo(fme, true)));
+		msg(p.txt.titleize("Permission pour " + faction.describeTo(fme, true)));
 		msg(FPerm.getStateHeaders());
 		msg(perm.getStateInfo(faction.getPermittedRelations(perm), true));
 	}

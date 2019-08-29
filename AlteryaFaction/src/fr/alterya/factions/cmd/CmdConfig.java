@@ -66,7 +66,7 @@ public class CmdConfig extends FCommand
 
 		if (fieldName == null || fieldName.isEmpty())
 		{
-			msg("<b>No configuration setting \"<h>%s<b>\" exists.", field);
+			msg("<b>Aucun paramètre de configuration \"<h>%s<b>\" existe.", field);
 			return;
 		}
 
@@ -90,11 +90,11 @@ public class CmdConfig extends FCommand
 				
 				if (targetValue)
 				{
-					success = "\""+fieldName+"\" option set to true (enabled).";
+					success = "\""+fieldName+"\" option définie sur true (activée).";
 				}
 				else
 				{
-					success = "\""+fieldName+"\" option set to false (disabled).";
+					success = "\""+fieldName+"\" option définie sur false (désactivé).";
 				}
 			}
 
@@ -105,11 +105,11 @@ public class CmdConfig extends FCommand
 				{
 					int intVal = Integer.parseInt(value);
 					target.setInt(null, intVal);
-					success = "\""+fieldName+"\" option set to "+intVal+".";
+					success = "\""+fieldName+"\" option définie sur "+intVal+".";
 				}
 				catch(NumberFormatException ex)
 				{
-					sendMessage("Cannot set \""+fieldName+"\": integer (whole number) value required.");
+					sendMessage("Impossible de définir \""+fieldName+"\": valeur entière (nombre entier) requise.");
 					return;
 				}
 			}
@@ -121,11 +121,11 @@ public class CmdConfig extends FCommand
 				{
 					long longVal = Long.parseLong(value);
 					target.setLong(null, longVal);
-					success = "\""+fieldName+"\" option set to "+longVal+".";
+					success = "\""+fieldName+"\" option définie sur "+longVal+".";
 				}
 				catch(NumberFormatException ex)
 				{
-					sendMessage("Cannot set \""+fieldName+"\": long integer (whole number) value required.");
+					sendMessage("Impossible de définir \""+fieldName+"\": valeur entière longue (nombre entier) requise.");
 					return;
 				}
 			}
@@ -137,11 +137,11 @@ public class CmdConfig extends FCommand
 				{
 					double doubleVal = Double.parseDouble(value);
 					target.setDouble(null, doubleVal);
-					success = "\""+fieldName+"\" option set to "+doubleVal+".";
+					success = "\""+fieldName+"\" option définie sur "+doubleVal+".";
 				}
 				catch(NumberFormatException ex)
 				{
-					sendMessage("Cannot set \""+fieldName+"\": double (numeric) value required.");
+					sendMessage("Impossible de définir \""+fieldName+"\": valeur double (numérique) requise.");
 					return;
 				}
 			}
@@ -153,11 +153,11 @@ public class CmdConfig extends FCommand
 				{
 					float floatVal = Float.parseFloat(value);
 					target.setFloat(null, floatVal);
-					success = "\""+fieldName+"\" option set to "+floatVal+".";
+					success = "\""+fieldName+"\" option définie sur "+floatVal+".";
 				}
 				catch(NumberFormatException ex)
 				{
-					sendMessage("Cannot set \""+fieldName+"\": float (numeric) value required.");
+					sendMessage("Impossible de définir \""+fieldName+"\": float (numérique) valeur requise.");
 					return;
 				}
 			}
@@ -166,7 +166,7 @@ public class CmdConfig extends FCommand
 			else if (target.getType() == String.class)
 			{
 				target.set(null, value);
-				success = "\""+fieldName+"\" option set to \""+value+"\".";
+				success = "\""+fieldName+"\" option définie sur \""+value+"\".";
 			}
 
 			// ChatColor
@@ -183,11 +183,11 @@ public class CmdConfig extends FCommand
 				}
 				if (newColor == null)
 				{
-					sendMessage("Cannot set \""+fieldName+"\": \""+value.toUpperCase()+"\" is not a valid color.");
+					sendMessage("Impossible de définir \""+fieldName+"\": \""+value.toUpperCase()+"\" n'est pas une couleur valide.");
 					return;
 				}
 				target.set(null, newColor);
-				success = "\""+fieldName+"\" color option set to \""+value.toUpperCase()+"\".";
+				success = "\""+fieldName+"\" option de couleur définie sur \""+value.toUpperCase()+"\".";
 			}
 
 			// Set<?> or other parameterized collection
@@ -213,7 +213,7 @@ public class CmdConfig extends FCommand
 						}
 						if (newMat == null)
 						{
-							sendMessage("Cannot change \""+fieldName+"\" set: \""+value.toUpperCase()+"\" is not a valid material.");
+							sendMessage("Impossible de changer \""+fieldName+"\" défini: \""+value.toUpperCase()+"\" n'est pas un matériau valide.");
 							return;
 						}
 
@@ -225,14 +225,14 @@ public class CmdConfig extends FCommand
 						{
 							matSet.remove(newMat);
 							target.set(null, matSet);
-							success = "\""+fieldName+"\" set: Material \""+value.toUpperCase()+"\" removed.";
+							success = "\""+fieldName+"\" défini: Materiau \""+value.toUpperCase()+"\" supprimé.";
 						}
 						// Material not present yet, add it
 						else
 						{
 							matSet.add(newMat);
 							target.set(null, matSet);
-							success = "\""+fieldName+"\" set: Material \""+value.toUpperCase()+"\" added.";
+							success = "\""+fieldName+"\" défini: Materiau \""+value.toUpperCase()+"\" ajouté.";
 						}
 					}
 
@@ -246,13 +246,13 @@ public class CmdConfig extends FCommand
 						if (stringSet.contains(value))
 						{
 							stringSet.remove(value);
-							success = "\""+fieldName+"\" set: \""+value+"\" removed.";
+							success = "\""+fieldName+"\" défini: \""+value+"\" supprimé.";
 						}
 						// String not present yet, add it
 						else 
 						{
 							stringSet.add(value);
-							success = "\""+fieldName+"\" set: \""+value+"\" added.";
+							success = "\""+fieldName+"\" défini: \""+value+"\" ajouté.";
 						}
 						target.set(null, stringSet);
 					}
@@ -260,7 +260,7 @@ public class CmdConfig extends FCommand
 					// Set of unknown type
 					else
 					{
-						sendMessage("\""+fieldName+"\" is not a data type set which can be modified with this command.");
+						sendMessage("\""+fieldName+"\" n'est pas un ensemble de types de données pouvant être modifié avec cette commande.");
 						return;
 					}
 				}
@@ -270,7 +270,7 @@ public class CmdConfig extends FCommand
 				{
 					if (args.size() < 3)
 					{
-						sendMessage("Cannot change \""+fieldName+"\" map: not enough arguments passed.");
+						sendMessage("Impossible de changer \"" + fieldName + "\" map: pas assez d'arguments passés.");
 						return;
 					}
 					Type innerType2 = targSet.getActualTypeArguments()[1];
@@ -290,7 +290,7 @@ public class CmdConfig extends FCommand
 
 						if (newFlag == null)
 						{
-							sendMessage("Cannot change \""+fieldName+"\" map: \""+value1+"\" is not a valid FFlag.");
+							sendMessage("Impossible de changer \""+fieldName+"\" map: \""+value1+"\" n'est pas un FFlag valide.");
 							return;
 						}
 
@@ -303,9 +303,9 @@ public class CmdConfig extends FCommand
 						target.set(null, map);
 
 						if (targetValue)
-							success = "\""+fieldName+"\" flag \""+value1+"\" set to true (enabled).";
+							success = "\""+fieldName+"\" flag \""+value1+"\" mis à true (activé).";
 						else
-							success = "\""+fieldName+"\" flag \""+value1+"\" set to false (disabled).";
+							success = "\""+fieldName+"\" flag \""+value1+"\" mis à false (désactivé).";
 					}
 
 					// Map<FPerm, Set<Rel>>
@@ -313,7 +313,7 @@ public class CmdConfig extends FCommand
 					{
 						if (((ParameterizedType)innerType2).getRawType() != Set.class)
 						{
-							sendMessage("\""+fieldName+"\" is not a data type map which can be modified with this command, due to the inner collection type.");
+							sendMessage("\""+fieldName+"\" n'est pas une carte de type de données pouvant être modifiée avec cette commande, en raison du type de collection interne.");
 							return;
 						}
 
@@ -331,12 +331,12 @@ public class CmdConfig extends FCommand
 
 						if (newPerm == null)
 						{
-							sendMessage("Cannot change \""+fieldName+"\" map: \""+value1+"\" is not a valid FPerm.");
+							sendMessage("Impossible de changer \""+fieldName+"\" map: \""+value1+"\" n'est pas une FPerm valide.");
 							return;
 						}
 						if (newRel == null)
 						{
-							sendMessage("Cannot change \""+fieldName+"\" map: \""+value2+"\" is not a valid Rel.");
+							sendMessage("Impossible de changer \""+fieldName+"\" map: \""+value2+"\" n'est pas une Rel valide.");
 							return;
 						}
 
@@ -351,13 +351,13 @@ public class CmdConfig extends FCommand
 						if (relSet.contains(newRel))
 						{
 							relSet.remove(newRel);
-							success = "\""+fieldName+"\" permission \""+value1+"\": relation \""+value2+"\" removed.";
+							success = "\""+fieldName+"\" permission \""+value1+"\": relation \""+value2+"\" supprimée.";
 						}
 						// Rel not present yet, add it
 						else 
 						{
 							relSet.add(newRel);
-							success = "\""+fieldName+"\" permission \""+value1+"\": relation \""+value2+"\" added.";
+							success = "\""+fieldName+"\" permission \""+value1+"\": relation \""+value2+"\" ajoutée.";
 						}
 
 						map.put(newPerm, relSet);
@@ -367,7 +367,7 @@ public class CmdConfig extends FCommand
 					// Map of unknown type
 					else
 					{
-						sendMessage("\""+fieldName+"\" is not a data type map which can be modified with this command.");
+						sendMessage("\""+fieldName+"\" n'est pas une carte de type de données pouvant être modifiée avec cette commande.");
 						return;
 					}
 				}
@@ -375,7 +375,8 @@ public class CmdConfig extends FCommand
 				// not a Set or Map?
 				else
 				{
-					sendMessage("\""+fieldName+"\" is not a data collection type which can be modified with this command.");
+					sendMessage("\""+fieldName+"\" n'est pas un type de collecte de données pouvant être modifié avec cette commande.");
+
 					return;
 				}
 			}
@@ -383,18 +384,18 @@ public class CmdConfig extends FCommand
 			// unknown type
 			else
 			{
-				sendMessage("\""+fieldName+"\" is not a data type which can be modified with this command.");
+				sendMessage("\""+fieldName+"\" n'est pas un type de données pouvant être modifié avec cette commande.");
 				return;
 			}
 		}
 		catch (NoSuchFieldException ex)
 		{
-			sendMessage("Configuration setting \""+fieldName+"\" couldn't be matched, though it should be... please report this error.");
+			sendMessage("Le paramètre de configuration \""+fieldName+"\" n'a pas pu être mis en correspondance, bien qu'il devrait l'être ... veuillez signaler cette erreur.");
 			return;
 		}
 		catch (IllegalAccessException ex)
 		{
-			sendMessage("Error setting configuration setting \""+fieldName+"\" to \""+value+"\".");
+			sendMessage("Error setting configuration setting \""+fieldName+"\" à \""+value+"\".");
 			return;
 		}
 
@@ -403,7 +404,7 @@ public class CmdConfig extends FCommand
 			if (sender instanceof Player)
 			{
 				sendMessage(success);
-				P.p.log(success + " Command was run by "+fme.getName()+".");
+				P.p.log(success + " La commande était dirigée par "+fme.getName()+".");
 			}
 			else  // using P.p.log() instead of sendMessage if run from server console so that "[Factions v#.#.#]" is prepended in server log
 				P.p.log(success);

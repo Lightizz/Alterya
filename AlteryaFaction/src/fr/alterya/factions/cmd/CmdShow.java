@@ -12,7 +12,6 @@ import fr.alterya.factions.Conf;
 import fr.alterya.factions.FPlayer;
 import fr.alterya.factions.Faction;
 import fr.alterya.factions.struct.FFlag;
-import fr.alterya.factions.struct.Permission;
 import fr.alterya.factions.struct.Rel;
 
 public class CmdShow extends FCommand
@@ -45,7 +44,7 @@ public class CmdShow extends FCommand
 		}
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostShow, "to show faction information", "for showing faction information")) return;
+		if ( ! payForCommand(Conf.econCostShow, "afficher les informations de faction ", " pour afficher les informations de faction")) return;
 
 		Collection<FPlayer> admins = faction.getFPlayersWhereRole(Rel.LEADER);
 		Collection<FPlayer> mods = faction.getFPlayersWhereRole(Rel.OFFICER);
@@ -67,7 +66,7 @@ public class CmdShow extends FCommand
 			msg("<a>Cette faction est pacifique - en trêve avec tout le monde.");
 		}
 		
-		msg("<a>Joining: <i>"+(faction.getOpen() ? "no invitation is needed" : "invitation is required"));
+		msg("<a>Joining: <i>"+(faction.getOpen() ? "aucune invitation n'est requise " : " une invitation est requise"));
 
 		double powerBoost = faction.getPowerBoost();
 		String boost = (powerBoost == 0.0) ? "" : (powerBoost > 0.0 ? " (bonus: " : " (penalité: ") + powerBoost + ")";
@@ -160,8 +159,8 @@ public class CmdShow extends FCommand
 				memberOfflineNames.add(follower.getNameAndTitle(fme));
 			}
 		}
-		sendMessage(p.txt.parse("<a>Members online: ") + TextUtil.implode(memberOnlineNames, sepparator));
-		sendMessage(p.txt.parse("<a>Members offline: ") + TextUtil.implode(memberOfflineNames, sepparator));
+		sendMessage(p.txt.parse("<a>Membres en ligne : ") + TextUtil.implode(memberOnlineNames, sepparator));
+		sendMessage(p.txt.parse("<a>Membres hors ligne : ") + TextUtil.implode(memberOfflineNames, sepparator));
 	}
 	
 }

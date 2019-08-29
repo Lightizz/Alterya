@@ -187,7 +187,7 @@ public class Factions extends EntityCollection<Faction>
 	{
 		if ( ! this.exists(id))
 		{
-			p.log(Level.WARNING, "Non existing factionId "+id+" requested! Issuing cleaning!");
+			p.log(Level.WARNING, "Non existant factionId "+id+" demandée! Émission de nettoyage!");
 			Board.clean();
 			FPlayers.i.clean();
 		}
@@ -277,7 +277,7 @@ public class Factions extends EntityCollection<Faction>
 				double reward = Conf.econLandReward * landCount / playerCount;
 				for (FPlayer player : players)
 				{
-					Econ.modifyMoney(player, reward, "to own faction land", "for faction owning " + landCount + " land divided among " + playerCount + " member(s)");
+					Econ.modifyMoney(player, reward, "posséder des terres de faction", "pour posséder une faction " + landCount + " land divided among " + playerCount + " member(s)");
 				}
 			}
 		}

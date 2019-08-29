@@ -27,11 +27,11 @@ public class CmdOpen extends FCommand
 	public void perform()
 	{
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostOpen, "to open or close the faction", "for opening or closing the faction")) return;
+		if ( ! payForCommand(Conf.econCostOpen, "ouvrir ou fermer la faction ", " pour ouvrir ou fermer la faction")) return;
 
 		myFaction.setOpen(this.argAsBool(0, ! myFaction.getOpen()));
 		
-		String open = myFaction.getOpen() ? "open" : "closed";
+		String open = myFaction.getOpen() ? "ouvert" : "fermé";
 		
 		if(myFaction == null) {
 			msg("<b>Une erreur est survenue : 7F. Veuillez contacter un Administrateur ou un autre staff en donnant l'ID de l'erreur.");

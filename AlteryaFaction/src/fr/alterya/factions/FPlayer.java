@@ -481,13 +481,13 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		
 		if (!perm && this.getRole() == Rel.LEADER && myFaction.getFPlayers().size() > 1)
 		{
-			msg("<b>You must give the admin role to someone else first.");
+			msg("<b>Vous devez d'abord donner le rôle d'administrateur à quelqu'un d'autre.");
 			return;
 		}
 
 		if (!Conf.canLeaveWithNegativePower && this.getPower() < 0)
 		{
-			msg("<b>You cannot leave until your power is positive.");
+			msg("<b>Vous ne pouvez pas partir tant que votre pouvoir n'est pas positif.");
 			return;
 		}
 
@@ -513,11 +513,11 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		{
 			for (FPlayer fplayer : myFaction.getFPlayersWhereOnline(true))
 			{
-				fplayer.msg("%s<i> left %s<i>.", this.describeTo(fplayer, true), myFaction.describeTo(fplayer));
+				fplayer.msg("%s<i> a quitté %s<i>.", this.describeTo(fplayer, true), myFaction.describeTo(fplayer));
 			}
 
 			if (Conf.logFactionLeave)
-				P.p.log(this.getName()+" left the faction: "+myFaction.getTag());
+				P.p.log(this.getName()+" a quitté la faction : "+myFaction.getTag());
 		}
 		
 		this.resetFactionData();
@@ -528,12 +528,12 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 			// Remove this faction
 			for (FPlayer fplayer : FPlayers.i.getOnline())
 			{
-				fplayer.msg("<i>%s<i> was disbanded.", myFaction.describeTo(fplayer, true));
+				fplayer.msg("<i>%s<i> a été dissoute.", myFaction.describeTo(fplayer, true));
 			}
 
 			myFaction.detach();
 			if (Conf.logFactionDisband)
-				P.p.log("The faction "+myFaction.getTag()+" ("+myFaction.getId()+") was disbanded due to the last player ("+this.getName()+") leaving.");
+				P.p.log("La faction "+myFaction.getTag()+" ("+myFaction.getId()+") a été dissous à cause du dernier joueur ("+this.getName()+") a quitter.");
 		}
 	}
 
@@ -548,11 +548,11 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		if (Conf.worldGuardChecking && Worldguard.checkForRegionsInChunk(location))
 		{
 			// Checks for WorldGuard regions in the chunk attempting to be claimed
-			error = P.p.txt.parse("<b>This land is protected");
+			error = P.p.txt.parse("<b>Cette terre est protégée");
 		}
 		else if (Conf.worldsNoClaiming.contains(flocation.getWorldName()))
 		{
-			error = P.p.txt.parse("<b>Sorry, this world has land claiming disabled.");
+			error = P.p.txt.parse("<b>Désolé, ce monde a des revendications de terres désactivées.");
 		}
 		else if (this.hasAdminMode())
 		{
@@ -560,7 +560,7 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		}
 		else if (forFaction == currentFaction)
 		{
-			error = P.p.txt.parse("%s<i> already own this land.", forFaction.describeTo(this, true));
+			error = P.p.txt.parse("%s<i> possédez déjà cette terre.", forFaction.describeTo(this, true));
 		}
 		else if ( ! FPerm.TERRITORY.has(this, forFaction, true))
 		{
@@ -568,23 +568,23 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		}
 		else if (forFaction.getFPlayers().size() < Conf.claimsRequireMinFactionMembers)
 		{
-			error = P.p.txt.parse("Factions must have at least <h>%s<b> members to claim land.", Conf.claimsRequireMinFactionMembers);
+			error = P.p.txt.parse("Les factions doivent avoir au moins <h>%s<b> membres à réclamer des terres.", Conf.claimsRequireMinFactionMembers);
 		}
 		else if (ownedLand >= forFaction.getPowerRounded())
 		{
-			error = P.p.txt.parse("<b>You can't claim more land! You need more power!");
+			error = P.p.txt.parse("<b>Vous ne pouvez pas réclamer plus de terres ! Vous avez besoin de plus de puissance !");
 		}
 		else if (Conf.claimedLandsMax != 0 && ownedLand >= Conf.claimedLandsMax && ! forFaction.getFlag(FFlag.INFPOWER))
 		{
-			error = P.p.txt.parse("<b>Limit reached. You can't claim more land!");
+			error = P.p.txt.parse("<b>Limite atteinte, vous ne pouvez plus claim de terre.");
 		}
 		else if ( ! Conf.claimingFromOthersAllowed && currentFaction.isNormal())
 		{
-			error = P.p.txt.parse("<b>You may not claim land from others.");
+			error = P.p.txt.parse("<b>Vous ne pouvez pas réclamer des terres à d'autres.");
 		}
 		else if (currentFaction.getRelationTo(forFaction).isAtLeast(Rel.TRUCE) && ! currentFaction.isNone())
 		{
-			error = P.p.txt.parse("<b>You can't claim this land due to your relation with the current owner.");
+			error = P.p.txt.parse("<b>Vous ne pouvez pas réclamer cette terre en raison de votre relation avec le propriétaire actuel.");
 		}
 		else if
 		(
@@ -596,20 +596,20 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		)
 		{
 			if (Conf.claimsCanBeUnconnectedIfOwnedByOtherFaction)
-				error = P.p.txt.parse("<b>You can only claim additional land which is connected to your first claim or controlled by another faction!");
+				error = P.p.txt.parse("<b>Vous ne pouvez réclamer que des terres supplémentaires qui sont liées à votre première revendication ou contrôlées par une autre faction!");
 			else
-				error = P.p.txt.parse("<b>You can only claim additional land which is connected to your first claim!");
+				error = P.p.txt.parse("<b>Vous ne pouvez réclamer que des terres supplémentaires qui sont liées à votre première revendication !");
 		}
 		else if (currentFaction.isNormal())
 		{
 			if ( ! currentFaction.hasLandInflation())
 			{
 				 // TODO more messages WARN current faction most importantly
-				error = P.p.txt.parse("%s<i> owns this land and is strong enough to keep it.", currentFaction.getTag(this));
+				error = P.p.txt.parse("%s<i> possède cette terre et est assez fort pour la garder.", currentFaction.getTag(this));
 			}
 			else if ( ! Board.isBorderLocation(flocation))
 			{
-				error = P.p.txt.parse("<b>You must start claiming land at the border of the territory.");
+				error = P.p.txt.parse("<b>Vous devez commencer à revendiquer un terrain à la frontière du territoire.");
 			}
 		}
 		
@@ -649,7 +649,7 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 			else
 				payee = this;
 
-			if ( ! Econ.hasAtLeast(payee, cost, "to claim this land")) return false;
+			if ( ! Econ.hasAtLeast(payee, cost, " pour revendiquer cette terre")) return false;
 		}
 
 		LandClaimEvent claimEvent = new LandClaimEvent(flocation, forFaction, this);
@@ -657,7 +657,7 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		if(claimEvent.isCancelled()) return false;
 
 		// then make 'em pay (if applicable)
-		if (mustPay && ! Econ.modifyMoney(payee, -cost, "to claim this land", "for claiming this land")) return false;
+		if (mustPay && ! Econ.modifyMoney(payee, -cost, "de réclamer cette terre ", " pour réclamer cette terre")) return false;
 
 		if (LWCFeatures.getEnabled() && forFaction.isNormal() && Conf.onCaptureResetLwcLocks)
 			LWCFeatures.clearOtherChests(flocation, this.getFaction());
@@ -668,14 +668,14 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		informTheseFPlayers.addAll(forFaction.getFPlayersWhereOnline(true));
 		for (FPlayer fp : informTheseFPlayers)
 		{
-			fp.msg("<h>%s<i> claimed land for <h>%s<i> from <h>%s<i>.", this.describeTo(fp, true), forFaction.describeTo(fp), currentFaction.describeTo(fp));
+			fp.msg("<h>%s<i> terre revendiquée pour <h>%s<i> de <h>%s<i>.", this.describeTo(fp, true), forFaction.describeTo(fp), currentFaction.describeTo(fp));
 		}
 		
 		Board.setFactionAt(forFaction, flocation);
 		SpoutFeatures.updateTerritoryDisplayLoc(flocation);
 
 		if (Conf.logLandClaims)
-			P.p.log(this.getName()+" claimed land at ("+flocation.getCoordString()+") for the faction: "+forFaction.getTag());
+			P.p.log(this.getName()+" terre revendiquée à ("+flocation.getCoordString()+") pour la faction :: "+forFaction.getTag());
 
 		return true;
 	}

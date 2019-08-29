@@ -13,56 +13,58 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
-import fr.alterya.core.Main;
+import fr.alterya.core.MainCore;
+
 /*
 Author : Lightiz
 */
+
 public class CmdKit extends BukkitRunnable implements CommandExecutor
 {
 	public int timer = 0;
 	
 	Player player0;
 	
-	Main main;
+	MainCore main;
 	
 	Rank rank = new Rank(main, player0);
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args) {
 		Player player = (Player) sender;
-		if(command.getName().equalsIgnoreCase("kit")) {
+		if(message.equalsIgnoreCase("kit")) {
 			if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MEMOIRE) {
 				if(this.timer != 0) {
 					int timeRemaiting = 172800 - timer;
-					player.sendMessage(Main.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
+					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
 				}else if(this.timer == 0) {
 					giveMemoireKit(player);
-					player.sendMessage(Main.prefix + "Voici votre kit du grade Mémoire !");
+					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Mémoire !");
 					this.runTaskTimer(main, 20, 20);
 					return true;
 				}
 			}else if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SAGE) {
 				if(this.timer != 0) {
 					int timeRemaiting = 259200 - timer;
-					player.sendMessage(Main.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
+					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
 				}else if(this.timer == 0) {
 					giveSageKit(player);
-					player.sendMessage(Main.prefix + "Voici votre kit du grade Sage !");
+					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Sage !");
 					this.runTaskTimer(main, 20, 20);
 					return true;
 				}
 			}else if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
 				if(this.timer != 0) {
 					int timeRemaiting = 172800 - timer;
-					player.sendMessage(Main.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
+					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
 				}else if(this.timer == 0) {
 					giveSouvenirKit(player);
-					player.sendMessage(Main.prefix + "Voici votre kit du grade Souvenir !");
+					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Souvenir !");
 					this.runTaskTimer(main, 20, 20);
 					return true;
 				}	
 			}else {
-				player.sendMessage(Main.prefix + "Vous n'avez aucun grade permettant le /kit, vous ne pouvez pas reçevoir de kit !");
+				player.sendMessage(MainCore.prefix + "Vous n'avez aucun grade permettant le /kit, vous ne pouvez pas reçevoir de kit !");
 				return true;
 			}
 		}

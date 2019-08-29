@@ -5,7 +5,6 @@ import fr.alterya.factions.zcore.util.TextUtil;
 import fr.alterya.factions.Conf;
 import fr.alterya.factions.FPlayer;
 import fr.alterya.factions.FPlayers;
-import fr.alterya.factions.struct.Permission;
 
 public class CmdDescription extends FCommand
 {
@@ -32,7 +31,7 @@ public class CmdDescription extends FCommand
 	{
 		if(this.myFaction == null) return;
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostDesc, "to change faction description", "for changing faction description")) return;
+		if ( ! payForCommand(Conf.econCostDesc, "changer de description de faction ", " pour changer de description de faction")) return;
 
 		myFaction.setDescription(TextUtil.implode(args, " ").replaceAll("(&([a-f0-9]))", "& $2"));  // since "&" color tags seem to work even through plain old FPlayer.sendMessage() for some reason, we need to break those up
 
@@ -46,7 +45,7 @@ public class CmdDescription extends FCommand
 		// Broadcast the description to everyone
 		for (FPlayer fplayer : FPlayers.i.getOnline())
 		{
-			fplayer.msg("<h>%s<i> ont changés leur description pour :", myFaction.describeTo(fplayer));
+			fplayer.msg("<h>%s<i> a changé leur description pour :", myFaction.describeTo(fplayer));
 			fplayer.sendMessage(myFaction.getDescription());  // players can inject "&" or "`" or "<i>" or whatever in their description, thus exploitable (masquerade as server messages or whatever); by the way, &k is particularly interesting looking
 		}
 	}

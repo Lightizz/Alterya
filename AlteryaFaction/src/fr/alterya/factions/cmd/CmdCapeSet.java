@@ -25,12 +25,12 @@ public class CmdCapeSet extends CapeCommand
 		{
 			capeFaction.setCape(newCape);
 			SpoutFeatures.updateCape(capeFaction, null);
-			msg("<h>%s <i>set the cape of <h>%s<i> to \"<h>%s<i>\".", RelationUtil.describeThatToMe(fme, fme, true), capeFaction.describeTo(fme), newCape);
-			capeFaction.msg("<h>%s <i>set the cape of <h>%s<i> to \"<h>%s<i>\".", RelationUtil.describeThatToMe(fme, capeFaction, true), capeFaction.describeTo(capeFaction), newCape);
+			msg("<h>%s <i>mettre le cap de <h>%s<i> à \"<h>%s<i>\".", RelationUtil.describeThatToMe(fme, fme, true), capeFaction.describeTo(fme), newCape);
+			capeFaction.msg("<h>%s <i>mettre le cap de <h>%s<i> à \"<h>%s<i>\".", RelationUtil.describeThatToMe(fme, capeFaction, true), capeFaction.describeTo(capeFaction), newCape);
 		}
 		else
 		{
-			msg("<i>\"<h>%s<i>\" is not a valid URL.", newCape);
+			msg("<i>\"<h>%s<i>\" n'est pas un URL valide.", newCape);
 		}
 	}
 	

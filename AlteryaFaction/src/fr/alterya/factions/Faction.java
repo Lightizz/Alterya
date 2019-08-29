@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import fr.alterya.factions.integration.Econ;
-import fr.alterya.factions.util.*;
 
 import fr.alterya.factions.iface.EconomyParticipator;
 import fr.alterya.factions.iface.RelationParticipator;
@@ -83,8 +82,27 @@ public class Faction extends Entity implements EconomyParticipator
 		if (!Conf.homesMustBeInClaimedTerritory || this.home == null || (this.home.getLocation() != null && Board.getFactionAt(new FLocation(this.home.getLocation())) == this))
 			return;
 
-		msg("<b>Your faction home has been un-set since it is no longer in your territory.");
+		msg("<b>Votre faction home n’a pas été définie car elle n’est plus sur votre territoire.");
 		this.home = null;
+	}
+	
+	//FIELD : ap
+	private LazyLocation ap;
+	public void setAp(Location ap) { this.ap = new LazyLocation(ap); }
+	public boolean hasAp() { return this.getAp() != null; }
+	public static boolean hasRight = false;
+	public Location getAp()
+	{
+		confirmValidAp();
+		return (this.ap != null) ? this.ap.getLocation() : null;
+	}
+	public void confirmValidAp()
+	{
+		if (!Conf.apMustBeInClaimedTerritory || this.ap == null || (this.ap.getLocation() != null && Board.getFactionAt(new FLocation(this.ap.getLocation())) == this))
+			return;
+
+		msg("<b>Votre avant poste de faction n’a pas été définie car elle n’est plus sur votre territoire.");
+		this.ap = null;
 	}
 	
 	// FIELD: lastOnlineTime

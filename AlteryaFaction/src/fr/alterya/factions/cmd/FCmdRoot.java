@@ -9,6 +9,9 @@ import fr.alterya.factions.Conf;
 public class FCmdRoot extends FCommand
 {
 	public CmdAccess cmdAccess = new CmdAccess();
+	public CmdSetAp cmdsetAp = new CmdSetAp();
+	public CmdAuthoriseAp cmdAuthoriseAp = new CmdAuthoriseAp();
+	public CmdAp cmdAp = new CmdAp();
 	public CmdLeader cmdLeader = new CmdLeader();
 	public CmdAutoClaim cmdAutoClaim = new CmdAutoClaim();
 	public CmdAdmin cmdBypass = new CmdAdmin();
@@ -67,8 +70,8 @@ public class FCmdRoot extends FCommand
 		
 		this.disableOnLock = false;
 		
-		this.setHelpShort("The faction base command");
-		this.helpLong.add(p.txt.parseTags("<i>This command contains all faction stuff."));
+		this.setHelpShort("Le commande de base de faction");
+		this.helpLong.add(p.txt.parseTags("<i>Cette commande contient tous les éléments de la faction."));
 		
 		this.addSubCommand(P.p.cmdAutoHelp);
 		this.addSubCommand(this.cmdList);
@@ -113,6 +116,9 @@ public class FCmdRoot extends FCommand
 		this.addSubCommand(this.cmdConfig);
 		this.addSubCommand(this.cmdSaveAll);
 		this.addSubCommand(this.cmdVersion);
+		this.addSubCommand(this.cmdAp);
+		this.addSubCommand(this.cmdsetAp);
+		this.addSubCommand(this.cmdAuthoriseAp);
 	}
 	
 	@Override

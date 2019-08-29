@@ -13,7 +13,7 @@ public class CmdSethome extends FCommand
 		this.aliases.add("sethome");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("faction", "votre");
 		
 		//this.permission = Permission.SETHOME.node;
 		this.disableOnLock = true;
@@ -36,10 +36,8 @@ public class CmdSethome extends FCommand
 		Faction faction = this.argAsFaction(0, myFaction);
 		if (faction == null) return;
 		
-		// Can the player set the home for this faction?
 		if ( ! FPerm.SETHOME.has(sender, faction, true)) return;
 		
-		// Can the player set the faction home HERE?
 		if
 		(
 			! fme.hasAdminMode()
@@ -54,11 +52,11 @@ public class CmdSethome extends FCommand
 		}
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostSethome, "to set the faction home", "for setting the faction home")) return;
+		if ( ! payForCommand(Conf.econCostSethome, "définir la maison de la faction ", " pour définir la maison de la faction")) return;
 
 		faction.setHome(me.getLocation());
 		
-		faction.msg("%s<i> définir la maison pour votre faction. Vous pouvez maintenant utiliser:", fme.describeTo(myFaction, true));
+		faction.msg("%s<i> a définit la maison pour votre faction. Vous pouvez maintenant utiliser:", fme.describeTo(myFaction, true));
 		faction.sendMessage(p.cmdBase.cmdHome.getUseageTemplate());
 		if (faction != myFaction)
 		{

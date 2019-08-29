@@ -22,14 +22,14 @@ public class CmdCapeRemove extends CapeCommand
 	{
 		if (currentCape == null)
 		{
-			msg("<h>%s <i>has no cape set.", capeFaction.describeTo(fme, true));
+			msg("<h>%s <i>n'a pas de cape.", capeFaction.describeTo(fme, true));
 		}
 		else
 		{
 			capeFaction.setCape(null);
 			SpoutFeatures.updateCape(capeFaction, null);
-			msg("<h>%s <i>removed the cape from <h>%s<i>.", RelationUtil.describeThatToMe(fme, fme, true), capeFaction.describeTo(fme));
-			capeFaction.msg("<h>%s <i>removed the cape from <h>%s<i>.", RelationUtil.describeThatToMe(fme, capeFaction, true), capeFaction.describeTo(capeFaction));
+			msg("<h>%s <i> a enlevé la cape <h>%s<i>.", RelationUtil.describeThatToMe(fme, fme, true), capeFaction.describeTo(fme));
+			capeFaction.msg("<h>%s <i>a enlevé la cape <h>%s<i>.", RelationUtil.describeThatToMe(fme, capeFaction, true), capeFaction.describeTo(capeFaction));
 		}
 	}
 }

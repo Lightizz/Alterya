@@ -17,7 +17,7 @@ public class CmdMoneyBalance extends FCommand
 		this.optionalArgs.put("faction", "your");
 		
 		//this.permission = Permission.MONEY_BALANCE.node;
-		this.setHelpShort("show faction balance");
+		this.setHelpShort("montrer le solde de la faction");
 		
 		senderMustBePlayer = false;
 		senderMustBeMember = false;

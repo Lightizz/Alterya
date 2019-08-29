@@ -1,7 +1,6 @@
 package fr.alterya.factions.cmd;
 
 import fr.alterya.factions.FPlayer;
-import fr.alterya.factions.struct.Permission;
 import fr.alterya.factions.struct.Rel;
 
 public class CmdDemote extends FCommand

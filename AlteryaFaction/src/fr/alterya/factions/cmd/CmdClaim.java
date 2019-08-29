@@ -3,9 +3,7 @@ package fr.alterya.factions.cmd;
 import fr.alterya.factions.Conf;
 import fr.alterya.factions.FLocation;
 import fr.alterya.factions.Faction;
-import fr.alterya.factions.struct.Permission;
 import fr.alterya.factions.util.SpiralTask;
-
 
 public class CmdClaim extends FCommand
 {
@@ -38,7 +36,7 @@ public class CmdClaim extends FCommand
 
 			if (radius < 1)
 			{
-				msg("<b>If you specify a radius, it must be at least 1.");
+				msg("<b>Si vous spécifiez un rayon, il doit être au moins égal à 1.");
 				return;
 			}
 

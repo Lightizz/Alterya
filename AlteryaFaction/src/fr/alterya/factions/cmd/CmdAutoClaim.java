@@ -2,7 +2,7 @@ package fr.alterya.factions.cmd;
 
 import fr.alterya.factions.Faction;
 import fr.alterya.factions.struct.FPerm;
-import fr.alterya.factions.struct.Permission;
+//import fr.alterya.factions.struct.Permission;
 
 public class CmdAutoClaim extends FCommand
 {
@@ -14,7 +14,7 @@ public class CmdAutoClaim extends FCommand
 		//this.requiredArgs.add("");
 		this.optionalArgs.put("faction", "your");
 		
-		this.permission = Permission.AUTOCLAIM.node;
+		//this.permission = Permission.AUTOCLAIM.node;
 		this.disableOnLock = true;
 		
 		senderMustBePlayer = true;
@@ -30,15 +30,15 @@ public class CmdAutoClaim extends FCommand
 		if (forFaction == null || forFaction == fme.getAutoClaimFor())
 		{
 			fme.setAutoClaimFor(null);
-			msg("<i>Auto-claiming of land disabled.");
+			msg("<i>Revendication automatique de terres désactivées.");
 			return;
 		}
 		
-		//if ( ! FPerm.TERRITORY.has(fme, forFaction, true)) return;
+		if ( ! FPerm.TERRITORY.has(fme, forFaction, true)) return;
 		
 		fme.setAutoClaimFor(forFaction);
 		
-		msg("<i>Now auto-claiming land for <h>%s<i>.", forFaction.describeTo(fme));
+		msg("<i>Maintenant, auto-réclamant des terres pour <h>%s<i>.", forFaction.describeTo(fme));
 		fme.attemptClaim(forFaction, me.getLocation(), true);
 	}
 	

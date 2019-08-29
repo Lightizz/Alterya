@@ -1,7 +1,6 @@
 package fr.alterya.factions.cmd;
 
 import fr.alterya.factions.FPlayer;
-import fr.alterya.factions.struct.Permission;
 
 public class CmdDeinvite extends FCommand
 {
@@ -33,15 +32,15 @@ public class CmdDeinvite extends FCommand
 			
 			if (you.getFaction() == myFaction)
 			{
-				msg("%s<i> is already a member of %s", you.getName(), myFaction.getTag());
-				msg("<i>You might want to: %s", p.cmdBase.cmdKick.getUseageTemplate(false));
+				msg("%s<i> est déjà membre de %s", you.getName(), myFaction.getTag());
+				msg("<i>Tu pourrais vouloir : %s", p.cmdBase.cmdKick.getUseageTemplate(false));
 				return;
 			}
 			myFaction.deinvite(you);
 			
-			you.msg("%s<i> revoked your invitation to <h>%s<i>.", fme.describeTo(you), myFaction.describeTo(you));
+			you.msg("%s<i> a révoqué votre invitation à <h>%s<i>.", fme.describeTo(you), myFaction.describeTo(you));
 			
-			myFaction.msg("%s<i> revoked %s's<i> invitation.", fme.describeTo(myFaction), you.describeTo(myFaction));
+			myFaction.msg("%s<i> a révoqué l'invitation de %s<i>.", fme.describeTo(myFaction), you.describeTo(myFaction));
 		}
 	}
 }

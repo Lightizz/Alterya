@@ -19,7 +19,7 @@ public class CmdJoin extends FCommand
 		this.aliases.add("join");
 		
 		this.requiredArgs.add("faction");
-		this.optionalArgs.put("player", "you");
+		this.optionalArgs.put("player", "Vous");
 		
 		//this.permission = Permission.JOIN.node;
 		this.disableOnLock = true;
@@ -41,25 +41,25 @@ public class CmdJoin extends FCommand
 
 		if (!samePlayer  && ! Permission.JOIN_OTHERS.has(sender, false))
 		{
-			msg("<b>You do not have permission to move other players into a faction.");
+			msg("<b>Vous n'avez pas la permission de déplacer un joueur dans une autre faction.");
 			return;
 		}
 
 		if (faction == fplayer.getFaction())
 		{
-			msg("<b>%s %s déjà un membre de %s", fplayer.describeTo(fme, true), (samePlayer ? "sont" : "est"), faction.getTag(fme));
+			msg("<b>%s %s déjà un membre de %s", fplayer.describeTo(fme, true), (samePlayer ? "est" : "est"), faction.getTag(fme));
 			return;
 		}
 
 		if (Conf.factionMemberLimit > 0 && faction.getFPlayers().size() >= Conf.factionMemberLimit)
 		{
-			msg(" <b>!<white> La faction %s est à la limite du nombre de %d membres, donc %s ne peut actuellement pas adhérer.", faction.getTag(fme), Conf.factionMemberLimit, fplayer.describeTo(fme, false));
+			msg("<b>!<white>La faction %s est à la limite du nombre de %d membres, donc %s ne peut actuellement pas adhérer.", faction.getTag(fme), Conf.factionMemberLimit, fplayer.describeTo(fme, false));
 			return;
 		}
 
 		if (fplayer.hasFaction())
 		{
-			msg("<b>%s doit quitter %s faction actuelle avant.", fplayer.describeTo(fme, true), (samePlayer ? "Vous" : "their"));
+			msg("<b>%s doit quitter %s faction actuelle avant.", fplayer.describeTo(fme, true), (samePlayer ? "Vous" : "leur"));
 			return;
 		}
 
@@ -78,7 +78,7 @@ public class CmdJoin extends FCommand
 		}
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make sure they can pay
-		if (samePlayer && ! canAffordCommand(Conf.econCostJoin, "to join a faction")) return;
+		if (samePlayer && ! canAffordCommand(Conf.econCostJoin, "rejoindre une faction")) return;
 
 		// trigger the join event (cancellable)
 		FPlayerJoinEvent joinEvent = new FPlayerJoinEvent(FPlayers.i.get(me),faction,FPlayerJoinEvent.PlayerJoinReason.COMMAND);
@@ -86,10 +86,10 @@ public class CmdJoin extends FCommand
 		if (joinEvent.isCancelled()) return;
 
 		// then make 'em pay (if applicable)
-		if (samePlayer && ! payForCommand(Conf.econCostJoin, "to join a faction", "for joining a faction")) return;
+		if (samePlayer && ! payForCommand(Conf.econCostJoin, "rejoindre une faction ", " pour rejoindre une faction")) return;
 
 		if (!samePlayer)
-			fplayer.msg("<i>%s moved you into the faction %s.", fme.describeTo(fplayer, true), faction.getTag(fplayer));
+			fplayer.msg("<i>%s vous a déplacé dans la faction %s.", fme.describeTo(fplayer, true), faction.getTag(fplayer));
 		faction.msg("<i>%s a rejoin votre faction.", fplayer.describeTo(faction, true));
 		fme.msg("<i>%s faction rejoin avec succès %s.", fplayer.describeTo(fme, true), faction.getTag(fme));
 		
@@ -105,7 +105,7 @@ public class CmdJoin extends FCommand
 			if (samePlayer)
 				P.p.log("%s a rejoin la faction %s.", fplayer.getName(), faction.getTag());
 			else
-				P.p.log("%s moved the player %s into the faction %s.", fme.getName(), fplayer.getName(), faction.getTag());
+				P.p.log("%sdéplacé le joueur% s dans la faction %s.", fme.getName(), fplayer.getName(), faction.getTag());
 		}
 	}
 }

@@ -38,13 +38,13 @@ public class CmdHelp extends FCommand
 		
 		int page = this.argAsInt(0, 1);
 		
-		sendMessage(p.txt.titleize("Factions Help ("+page+"/"+helpPages.size()+")"));
+		sendMessage(p.txt.titleize("Aide factions ("+page+"/"+helpPages.size()+")"));
 		
 		page -= 1;
 		
 		if (page < 0 || page >= helpPages.size())
 		{
-			msg("<b>This page does not exist");
+			msg("<b>Cette page n'existe pas.");
 			return;
 		}
 		sendMessage(helpPages.get(page));
@@ -69,27 +69,27 @@ public class CmdHelp extends FCommand
 		pageLines.add( p.cmdBase.cmdJoin.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdLeave.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdHome.getUseageTemplate(true) );
-		pageLines.add( p.txt.parse("<i>Learn how to create a faction on the next page.") );
+		pageLines.add( p.txt.parse("<i>Apprenez à créer une faction à la page suivante.") );
 		helpPages.add(pageLines);
 		
 		pageLines = new ArrayList<String>();
 		pageLines.add( p.cmdBase.cmdCreate.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdDescription.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdTag.getUseageTemplate(true) );
-		pageLines.add( p.txt.parse("<i>You might want to close it and use invitations:" ));
+		pageLines.add( p.txt.parse("<i>Vous voudrez peut-être le fermer et utiliser des invitations:" ));
 		pageLines.add( p.cmdBase.cmdOpen.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdInvite.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdDeinvite.getUseageTemplate(true) );
-		pageLines.add( p.txt.parse("<i>And don't forget to set your home:" ));
+		pageLines.add( p.txt.parse("<i>Et n'oubliez pas de définir votre maison de faction :" ));
 		pageLines.add( p.cmdBase.cmdSethome.getUseageTemplate(true) );
 		helpPages.add(pageLines);
 		
 		if (Econ.isSetup() && Conf.econEnabled && Conf.bankEnabled)
 		{
 			pageLines = new ArrayList<String>();
-			pageLines.add( p.txt.parse("<i>Your faction has a bank which is used to pay for certain" ));
-			pageLines.add( p.txt.parse("<i>things, so it will need to have money deposited into it." ));
-			pageLines.add( p.txt.parse("<i>To learn more, use the money command." ));
+			pageLines.add( p.txt.parse("<i>Votre faction a une banque qui est utilisée pour payer certains" ));
+			pageLines.add( p.txt.parse("<i>choses, alors il aura besoin d'avoir l'argent déposé dans elle." ));
+			pageLines.add( p.txt.parse("<i>Pour en savoir plus, utilisez la commande d'argent." ));
 			pageLines.add( "" );
 			pageLines.add( p.cmdBase.cmdMoney.getUseageTemplate(true) );
 			pageLines.add( "" );
@@ -109,15 +109,15 @@ public class CmdHelp extends FCommand
 		pageLines.add( p.cmdBase.cmdOfficer.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdLeader.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdTitle.getUseageTemplate(true) );
-		pageLines.add( p.txt.parse("<i>Player titles are just for fun. No rules connected to them." ));
+		pageLines.add( p.txt.parse("<i>Les titres de joueurs sont juste pour le plaisir. Aucune règle ne leur est connectée." ));
 		helpPages.add(pageLines);
 		
 		pageLines = new ArrayList<String>();
 		pageLines.add( p.cmdBase.cmdMap.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdSeeChunks.getUseageTemplate(true) );
-		pageLines.add(p.txt.parse("<i>Claimed land with ownership set is further protected so"));
-		pageLines.add(p.txt.parse("<i>that only the owner(s), faction admin, and possibly the"));
-		pageLines.add(p.txt.parse("<i>faction moderators have full access."));
+		pageLines.add(p.txt.parse("<i>Les terres revendiquées avec la propriété définie sont en outre protégées"));
+		pageLines.add(p.txt.parse("<i>que seuls les propriétaires, l’administrateur de la faction et éventuellement le"));
+		pageLines.add(p.txt.parse("<i>les modérateurs des factions ont un accès complet."));
 		helpPages.add(pageLines);
 		
 		pageLines = new ArrayList<String>();
@@ -127,47 +127,47 @@ public class CmdHelp extends FCommand
 		pageLines.add( p.cmdBase.cmdRelationTruce.getUseageTemplate(true) ); 
 		pageLines.add( p.cmdBase.cmdRelationNeutral.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdRelationEnemy.getUseageTemplate(true) );
-		pageLines.add(p.txt.parse("<i>Set the relation you WISH to have with another faction."));
-		pageLines.add(p.txt.parse("<i>Your default relation with other factions will be neutral."));
-		pageLines.add(p.txt.parse("<i>If BOTH factions choose \"ally\" you will be allies."));
-		pageLines.add(p.txt.parse("<i>If ONE faction chooses \"enemy\" you will be enemies."));
+		pageLines.add(p.txt.parse("<i>Définissez la relation que vous souhaitez avoir avec une autre faction."));
+		pageLines.add(p.txt.parse("<i>Votre relation par défaut avec les autres factions sera neutre."));
+		pageLines.add(p.txt.parse("<i>Si les DEUX factions choisissent \"allié\", vous serez des alliés."));
+		pageLines.add(p.txt.parse("<i>Si UNE faction choisit \"ennemi\", vous serez des ennemis."));
 		helpPages.add(pageLines);
 		
 		pageLines = new ArrayList<String>();
-		pageLines.add(p.txt.parse("<i>You can never hurt members or allies."));
-		pageLines.add(p.txt.parse("<i>You can not hurt neutrals in their own territory."));
-		pageLines.add(p.txt.parse("<i>You can always hurt enemies and players without faction."));
+		pageLines.add(p.txt.parse("<i>Vous ne pouvez jamais blesser des membres ou des alliés."));
+		pageLines.add(p.txt.parse("<i>Vous ne pouvez pas blesser les neutres sur leur propre territoire."));
+		pageLines.add(p.txt.parse("<i>Vous pouvez toujours blesser les ennemis et les joueurs sans faction."));
 		pageLines.add("");
-		pageLines.add(p.txt.parse("<i>Damage from enemies is reduced in your own territory."));
-		pageLines.add(p.txt.parse("<i>When you die you lose power. It is restored over time."));
-		pageLines.add(p.txt.parse("<i>The power of a faction is the sum of all member power."));
-		pageLines.add(p.txt.parse("<i>The power of a faction determines how much land it can hold."));
-		pageLines.add(p.txt.parse("<i>You can claim land from factions with too little power."));
+		pageLines.add(p.txt.parse("<i>Les dégâts causés par les ennemis sont réduits sur votre propre territoire."));
+		pageLines.add(p.txt.parse("<i>Quand tu meurs tu perds le pouvoir. Il est restauré au fil du temps."));
+		pageLines.add(p.txt.parse("<i>Le pouvoir d'une faction est la somme de tous les membres."));
+		pageLines.add(p.txt.parse("<i>TLe pouvoir d'une faction détermine la quantité de terres qu'elle peut contenir."));
+		pageLines.add(p.txt.parse("<i>Vous pouvez réclamer des terres à des factions avec trop peu de pouvoir."));
 		helpPages.add(pageLines);
 		
 		pageLines = new ArrayList<String>();
-		pageLines.add(p.txt.parse("<i>Only faction members can build and destroy in their own"));
-		pageLines.add(p.txt.parse("<i>territory. Usage of the following items is also restricted:"));
-		pageLines.add(p.txt.parse("<i>Door, Chest, Furnace, Dispenser, Diode."));
+		pageLines.add(p.txt.parse("<i>Seuls les membres des factions peuvent construire et détruire eux-mêmes."));
+		pageLines.add(p.txt.parse("<i>territoire. L'utilisation des éléments suivants est également limitée :"));
+		pageLines.add(p.txt.parse("<i>Porte, coffre, four, distributeur, diode."));
 		pageLines.add("");
-		pageLines.add(p.txt.parse("<i>Make sure to put pressure plates in front of doors for your"));
-		pageLines.add(p.txt.parse("<i>guest visitors. Otherwise they can't get through. You can"));
-		pageLines.add(p.txt.parse("<i>also use this to create member only areas."));
-		pageLines.add(p.txt.parse("<i>As dispensers are protected, you can create traps without"));
-		pageLines.add(p.txt.parse("<i>worrying about those arrows getting stolen."));
+		pageLines.add(p.txt.parse("<i>Assurez-vous de placer des plaques de pression devant les portes pour votre"));
+		pageLines.add(p.txt.parse("<i>visiteurs invités. Sinon, ils ne peuvent pas passer. Vous pouvez"));
+		pageLines.add(p.txt.parse("<i>utilisez également cette option pour créer des zones réservées aux membres."));
+		pageLines.add(p.txt.parse("<i>Les distributeurs étant protégés, vous pouvez créer des pièges sans"));
+		pageLines.add(p.txt.parse("<i>se soucier de ces flèches se faire voler."));
 		helpPages.add(pageLines);
 		
 		pageLines = new ArrayList<String>();
-		pageLines.add("Finally some commands for the server admins:");
+		pageLines.add("Enfin quelques commandes pour les administrateurs du serveur :");
 		pageLines.add( p.cmdBase.cmdBypass.getUseageTemplate(true) );
-		pageLines.add(p.txt.parse("<c>/f claim safezone <i>claim land for the Safe Zone"));
-		pageLines.add(p.txt.parse("<c>/f claim warzone <i>claim land for the War Zone"));
-		pageLines.add(p.txt.parse("<c>/f autoclaim [safezone|warzone] <i>take a guess"));
-		pageLines.add(p.txt.parse("<i>Note: " + p.cmdBase.cmdUnclaim.getUseageTemplate(false) + P.p.txt.parse("<i>") + " works on safe/war zones as well."));
+		pageLines.add(p.txt.parse("<c>/f claim safezone <i>réclamer des terres pour la Safe Zone"));
+		pageLines.add(p.txt.parse("<c>/f claim warzone <i>réclamer des terres pour la War Zone"));
+		pageLines.add(p.txt.parse("<c>/f autoclaim [safezone|warzone] <i>deviner"));
+		pageLines.add(p.txt.parse("<i>Note: " + p.cmdBase.cmdUnclaim.getUseageTemplate(false) + P.p.txt.parse("<i>") + " travaille également sur les zones de sécurité / zones de guerre."));
 		helpPages.add(pageLines);
 		
 		pageLines = new ArrayList<String>();
-		pageLines.add(p.txt.parse("<i>More commands for server admins:"));
+		pageLines.add(p.txt.parse("<i>Plus de commandes pour les administrateurs de serveur :"));
 		pageLines.add( p.cmdBase.cmdPowerBoost.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdLock.getUseageTemplate(true) );
 		pageLines.add( p.cmdBase.cmdReload.getUseageTemplate(true) );

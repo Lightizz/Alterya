@@ -14,7 +14,7 @@ public abstract class CapeCommand extends FCommand
 	
 	public CapeCommand()
 	{
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("faction", "votre");
 		
 		this.disableOnLock = true;
 		
@@ -35,7 +35,7 @@ public abstract class CapeCommand extends FCommand
 		
 		if (this.myFaction == null && ! this.argIsSet(this.requiredArgs.size()))
 		{
-			msg("<b>You must specify a faction from console.");
+			msg("<b>Vous devez spécifier une faction depuis la console.");
 			return false;
 		}
 		

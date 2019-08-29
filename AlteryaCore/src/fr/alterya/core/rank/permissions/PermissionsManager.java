@@ -9,18 +9,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.PermissionAttachment;
 
-import fr.alterya.core.Main;
+import fr.alterya.core.MainCore;
 import fr.alterya.factions.P;
 
 public class PermissionsManager implements Listener
 {
-	Main main;
+	MainCore main;
 	
 	P mainF;
 	
 	public HashMap<UUID, PermissionAttachment> playersPermissions = new HashMap<>();
 	
-	public PermissionsManager(Main main) {
+	public PermissionsManager(MainCore main) {
 		this.main = main;
 	}
 	

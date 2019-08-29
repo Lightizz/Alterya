@@ -14,7 +14,6 @@ import fr.alterya.factions.event.FactionDisbandEvent;
 import fr.alterya.factions.integration.SpoutFeatures;
 import fr.alterya.factions.struct.FFlag;
 import fr.alterya.factions.struct.FPerm;
-import fr.alterya.factions.struct.Permission;
 
 public class CmdDisband extends FCommand
 {
@@ -35,6 +34,7 @@ public class CmdDisband extends FCommand
 		senderMustBeLeader = false;
 	}
 	
+	@SuppressWarnings("static-access")
 	@Override
 	public void perform()
 	{
@@ -63,18 +63,18 @@ public class CmdDisband extends FCommand
 		// Inform all players
 		for (FPlayer fplayer : FPlayers.i.getOnline())
 		{
-			String who = senderIsConsole ? "A server admin" : fme.describeTo(fplayer);
+			String who = senderIsConsole ? "Un administrateur de serveur" : fme.describeTo(fplayer);
 			if (fplayer.getFaction() == faction)
 			{
-				fplayer.msg("<h>%s<i> a disaband votre faction.", who);
+				fplayer.msg("<h>%s<i> a dissous votre faction.", who);
 			}
 			else
 			{
-				fplayer.msg("<h>%s<i> a disaband la faction %s.", who, faction.getTag(fplayer));
+				fplayer.msg("<h>%s<i> a dissous la faction %s.", who, faction.getTag(fplayer));
 			}
 		}
 		if (Conf.logFactionDisband)
-			P.p.log("La faction "+faction.getTag()+" ("+faction.getId()+") a été disband par "+(senderIsConsole ? "console command" : fme.getName())+".");
+			P.p.log("La faction "+faction.getTag()+" ("+faction.getId()+") a été dissoute par "+(senderIsConsole ? "commande de la console" : fme.getName())+".");
 
 		if (Econ.shouldBeUsed() && ! senderIsConsole)
 		{
@@ -86,10 +86,11 @@ public class CmdDisband extends FCommand
 			{
 				String amountString = Econ.moneyString(amount);
 				msg("<i>On vous a donné la banque de la faction dissoute, pour un total de %s.", amountString);
-				P.p.log(fme.getName() + " has been given bank holdings of "+amountString+" from disbanding "+faction.getTag()+".");
+				P.p.log(fme.getName() + " a été donné les contenus bancaires de "+amountString+" en dissoudant "+faction.getTag()+".");
 			}
 		}		
 		
+		faction.hasRight = false;
 		faction.detach();
 
 		SpoutFeatures.updateTitle(null, null);

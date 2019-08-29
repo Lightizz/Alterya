@@ -3,7 +3,6 @@ package fr.alterya.factions.cmd;
 import fr.alterya.factions.Conf;
 import fr.alterya.factions.FPlayer;
 import fr.alterya.factions.struct.FPerm;
-import fr.alterya.factions.struct.Permission;
 
 public class CmdInvite extends FCommand
 {
@@ -41,7 +40,7 @@ public class CmdInvite extends FCommand
 		if (fme != null && ! FPerm.INVITE.has(fme, myFaction)) return;
 		
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostInvite, "to invite someone", "for inviting someone")) return;
+		if ( ! payForCommand(Conf.econCostInvite, "inviter quelqu'un ", " pour inviter quelqu'un")) return;
 
 		myFaction.invite(you);
 		

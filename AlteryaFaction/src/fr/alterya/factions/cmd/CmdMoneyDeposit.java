@@ -21,7 +21,7 @@ public class CmdMoneyDeposit extends FCommand
 		this.optionalArgs.put("faction", "your");
 		
 		//this.permission = Permission.MONEY_DEPOSIT.node;
-		this.setHelpShort("deposit money");
+		this.setHelpShort("déposer de l'argent");
 		
 		senderMustBePlayer = true;
 		senderMustBeMember = false;

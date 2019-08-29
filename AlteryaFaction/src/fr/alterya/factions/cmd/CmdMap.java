@@ -33,7 +33,7 @@ public class CmdMap extends FCommand
 				// Turn on
 
 				// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-				if ( ! payForCommand(Conf.econCostMap, "to show the map", "for showing the map")) return;
+				if ( ! payForCommand(Conf.econCostMap, "pour afficher la carte ", " pour afficher la carte")) return;
 
 				fme.setMapAutoUpdating(true);
 				msg("<i>Carte automatique <green>activée.");
@@ -51,7 +51,7 @@ public class CmdMap extends FCommand
 		else
 		{
 			// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-			if ( ! payForCommand(Conf.econCostMap, "to show the map", "for showing the map")) return;
+			if ( ! payForCommand(Conf.econCostMap, "pour afficher la carte ", " pour afficher la carte")) return;
 
 			showMap();
 		}

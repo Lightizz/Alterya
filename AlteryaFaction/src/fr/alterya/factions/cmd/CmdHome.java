@@ -7,8 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import fr.alterya.factions.zcore.util.SmokeUtil;
-
 import fr.alterya.factions.Board;
 import fr.alterya.factions.Conf;
 import fr.alterya.factions.FLocation;
@@ -131,7 +129,7 @@ public class CmdHome extends FCommand
 		if (EssentialsFeatures.handleTeleport(me, myFaction.getHome())) return;
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostHome, "to teleport to your faction home", "for teleporting to your faction home")) return;
+		if ( ! payForCommand(Conf.econCostHome, "se téléporter dans votre foyer de faction "," pour se téléporter dans votre foyer de faction")) return;
 
 		// Create a smoke effect
 		if (Conf.homesTeleportCommandSmokeEffectEnabled)
@@ -141,7 +139,7 @@ public class CmdHome extends FCommand
 			smokeLocations.add(loc.add(0, 1, 0));
 			smokeLocations.add(myFaction.getHome());
 			smokeLocations.add(myFaction.getHome().clone().add(0, 1, 0));
-			SmokeUtil.spawnCloudRandom(smokeLocations, 3f);
+			//SmokeUtil.spawnCloudRandom(smokeLocations, 3f);
 		}
 
 		me.teleport(myFaction.getHome());

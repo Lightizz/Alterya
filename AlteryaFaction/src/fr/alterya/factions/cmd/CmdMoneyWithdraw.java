@@ -14,13 +14,13 @@ public class CmdMoneyWithdraw extends FCommand
 	public CmdMoneyWithdraw()
 	{
 		this.aliases.add("w");
-		this.aliases.add("withdraw");
+		this.aliases.add("retirer");
 		
 		this.requiredArgs.add("amount");
 		this.optionalArgs.put("faction", "your");
 		
 		//this.permission = Permission.MONEY_WITHDRAW.node;
-		this.setHelpShort("withdraw money");
+		this.setHelpShort("retirer de l'argent");
 		
 		senderMustBePlayer = true;
 		senderMustBeMember = false;
