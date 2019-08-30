@@ -2,18 +2,15 @@ package fr.alterya.core.util;
 
 import java.util.HashMap;
 
-import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import fr.alterya.core.MainCore;
-import net.minecraft.server.v1_7_R4.DamageSource;
-import net.minecraft.server.v1_7_R4.EntityHuman;
 
 public class DisconnectCombat extends BukkitRunnable implements Listener
 {
@@ -24,55 +21,49 @@ public class DisconnectCombat extends BukkitRunnable implements Listener
 	Player attacker;
 	Player player;
 	
-	public static HashMap<String, String> onCombatPlayers = new HashMap<>();
+	public static HashMap<String, Boolean> onCombatPlayers = new HashMap<>();
 
 	@EventHandler
-	public void startComabat(EntityDamageEvent e) {
-		Player player = Bukkit.getPlayer(e.getEntity().getUniqueId());
-		this.player = player;
-		if(e.getCause() == DamageCause.ENTITY_ATTACK && ! onCombatPlayers.containsKey(player.getUniqueId().toString()) || ! onCombatPlayers.containsKey(attacker.getUniqueId().toString()) || isOnCombat(player.getUniqueId().toString()) == false) {
-			Player attacker = (Player) DamageSource.playerAttack((EntityHuman) player.getKiller());
-			this.attacker = attacker;
-			attacker.sendMessage(MainCore.prefix + "§4Vous êtes maintenant en combat !");
-			player.sendMessage(MainCore.prefix + "§4Vous êtes maintenant en combat !");
-			this.runTaskTimer(main, 0L, 20L);
-			onCombatPlayers.put(player.getUniqueId().toString(), String.valueOf(timer));
-			onCombatPlayers.put(attacker.getUniqueId().toString(), String.valueOf(timer));
-		}else if(e.getCause() == DamageCause.ENTITY_ATTACK && onCombatPlayers.containsKey(player.getUniqueId().toString()) || onCombatPlayers.containsKey(attacker.getUniqueId().toString()) || isOnCombat(player.getUniqueId().toString()) == true) {
-			Player attacker = (Player) DamageSource.playerAttack((EntityHuman) player.getKiller());
-			this.attacker = attacker;
-			onCombatPlayers.get(player.getUniqueId().toString()).equals(String.valueOf(timer));
-			onCombatPlayers.get(attacker.getUniqueId().toString()).equals(String.valueOf(timer));
-		}
-		return;
+	public void onJoin(PlayerJoinEvent e) {
+		Player player = e.getPlayer();
+		onCombatPlayers.put(player.getUniqueId().toString(), false);
 	}
 	
 	@EventHandler
-	public void onCommand(AsyncPlayerChatEvent e) {
-		Player player = e.getPlayer();
-		if(isOnCombat(player.getUniqueId().toString()) == true && e.getMessage().contains("/lobby") || e.getMessage().contains("/hub") || e.getMessage().contains("/tpa") || e.getMessage().contains("/tpyes") || e.getMessage().contains("/f home") || e.getMessage().contains("/home") || e.getMessage().contains("/f ap")) {
-			player.sendMessage(MainCore.prefix + "Vous êtes en combat, il vous reste " + onCombatPlayers.get(player.getUniqueId().toString()) + " sec.");
-		}
+	public void onStartCombat(EntityDamageEvent e) {
+		Player player = (Player) e.getEntity();
+		Player attacker = player.getKiller();
+		this.attacker = attacker;
+		this.player = player;
+		player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
+		attacker.playSound(attacker.getLocation(), Sound.ORB_PICKUP, 50, 50);
+		player.sendMessage(MainCore.prefix + "§aVous êtes maintenant en combat !");
+		attacker.sendMessage(MainCore.prefix + "§aVous êtes maintenant en combat !");
+		onCombatPlayers.replace(player.getUniqueId().toString(), true);
+		onCombatPlayers.replace(attacker.getUniqueId().toString(), true);
 	}
 	
-	public static boolean isOnCombat(String uuid) {
-		if(onCombatPlayers.containsKey(uuid)) {
+	public static boolean isOnCombat(Player player) {
+		if(onCombatPlayers.containsKey(player.getUniqueId().toString())) {
 			return true;
 		}
 		return false;
 	}
+	
+	public void stopCombat(Player player) {
+		onCombatPlayers.replace(player.getUniqueId().toString(), false);
+		player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
+		player.sendMessage(MainCore.prefix + "§aVous n'êtes plus en combat !");
+	}
+	
 	@Override
 	public void run()
 	{
-		if(onCombatPlayers.containsKey(player.getUniqueId().toString()) || onCombatPlayers.containsKey(attacker.getUniqueId().toString()) 
-				|| isOnCombat(player.getUniqueId().toString()) == true || isOnCombat(attacker.getUniqueId().toString()) == true 
-				&& onCombatPlayers.get(player.getUniqueId().toString()) == String.valueOf(0) || onCombatPlayers.get(attacker.getUniqueId().toString()) == String.valueOf(0)) {
-			onCombatPlayers.remove(attacker.getUniqueId().toString());
-			onCombatPlayers.remove(player.getUniqueId().toString());
+		if(timer == 0) {
+			stopCombat(this.attacker);
+			stopCombat(this.player);
 			cancel();
 		}
 		timer --;
-		onCombatPlayers.get(attacker.getUniqueId().toString()).equals(String.valueOf(timer));
-		onCombatPlayers.get(player.getUniqueId().toString()).equals(String.valueOf(timer));
 	}
 }

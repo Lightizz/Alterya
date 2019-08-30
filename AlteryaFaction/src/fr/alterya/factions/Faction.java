@@ -221,7 +221,7 @@ public class Faction extends Entity implements EconomyParticipator
 		this.invites = new HashSet<String>();
 		this.open = Conf.newFactionsDefaultOpen;
 		this.tag = "???";
-		this.description = "Default faction description :(";
+		this.description = "Cette faction n'a pas de description";
 		this.money = 0.0;
 		this.powerBoost = 0.0;
 		this.flagOverrides = new LinkedHashMap<FFlag, Boolean>();
@@ -517,7 +517,7 @@ public class Faction extends Entity implements EconomyParticipator
 
 			for (FPlayer fplayer : FPlayers.i.getOnline())
 			{
-				fplayer.msg("The faction %s<i> was disbanded.", this.getTag(fplayer));
+				fplayer.msg("La faction %s<i> a été dissous.", this.getTag(fplayer));
 			}
 
 			this.detach();
@@ -527,8 +527,8 @@ public class Faction extends Entity implements EconomyParticipator
 			if (oldLeader != null)
 				oldLeader.setRole(Rel.MEMBER);
 			replacements.get(0).setRole(Rel.LEADER);
-			this.msg("<i>Faction leader <h>%s<i> has been removed. %s<i> has been promoted as the new faction leader.", oldLeader == null ? "" : oldLeader.getName(), replacements.get(0).getName());
-			P.p.log("Faction "+this.getTag()+" ("+this.getId()+") leader was removed. Replacement leader: "+replacements.get(0).getName());
+			this.msg("<i>Le chef de faction <h>%s<i> a été supprimer. %s<i> a été promu comme le nouveau chef de faction.", oldLeader == null ? "" : oldLeader.getName(), replacements.get(0).getName());
+			P.p.log("La faction "+this.getTag()+" ("+this.getId()+") le chef a été supprimer. Replacement leader: "+replacements.get(0).getName());
 		}
 	}
 

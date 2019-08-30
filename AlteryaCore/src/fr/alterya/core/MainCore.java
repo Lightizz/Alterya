@@ -31,7 +31,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class MainCore extends JavaPlugin
 {
-	public static String prefix = ChatColor.GOLD + "[Core] ";
+	public static String prefix = ChatColor.AQUA + "[Core] ";
 		
 	public Shop shop;
 	Player player;

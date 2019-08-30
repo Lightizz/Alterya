@@ -14,10 +14,10 @@ public class CmdCombatTime implements CommandExecutor
 	{
 		if(message.equalsIgnoreCase("combattime")) {
 			Player player = (Player) sender;
-			if (sender instanceof Player && DisconnectCombat.isOnCombat(player.getUniqueId().toString()) == true) {
+			if (sender instanceof Player && DisconnectCombat.isOnCombat(player) == true) {
 				player.sendMessage("Vous êtes en combat, il vous reste " + DisconnectCombat.onCombatPlayers.get(player.getUniqueId().toString()) + " sec, une fois à 0 si vous ne vous faites pas attaquer, vous ne serez plsu en combat");
 				return true;
-			}else if (sender instanceof Player && DisconnectCombat.isOnCombat(player.getUniqueId().toString()) == false) {
+			}else if (sender instanceof Player && DisconnectCombat.isOnCombat(player) == false) {
 				player.sendMessage("Vous n'êtes pas en combat.");
 				return true;
 			}else {

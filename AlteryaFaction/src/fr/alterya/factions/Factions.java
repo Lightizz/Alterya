@@ -187,7 +187,7 @@ public class Factions extends EntityCollection<Faction>
 	{
 		if ( ! this.exists(id))
 		{
-			p.log(Level.WARNING, "Non existant factionId "+id+" demandée! Émission de nettoyage!");
+			p.log(Level.WARNING, "ID de faction non existant "+id+" demandée! Émission de nettoyage!");
 			Board.clean();
 			FPlayers.i.clean();
 		}
@@ -210,19 +210,19 @@ public class Factions extends EntityCollection<Faction>
 		
 		if(MiscUtil.getComparisonString(str).length() < Conf.factionTagLengthMin)
 		{
-			errors.add(P.p.txt.parse("<i>The faction tag can't be shorter than <h>%s<i> chars.", Conf.factionTagLengthMin));
+			errors.add(P.p.txt.parse("<i>La balise de faction ne peut pas être inférieure à <h>% s <i> caractères.", Conf.factionTagLengthMin));
 		}
 		
 		if(str.length() > Conf.factionTagLengthMax)
 		{
-			errors.add(P.p.txt.parse("<i>The faction tag can't be longer than <h>%s<i> chars.", Conf.factionTagLengthMax));
+			errors.add(P.p.txt.parse("<i>La balise de faction ne peut pas dépasser <h>% s <i> caractères.", Conf.factionTagLengthMax));
 		}
 		
 		for (char c : str.toCharArray())
 		{
 			if ( ! MiscUtil.substanceChars.contains(String.valueOf(c)))
 			{
-				errors.add(P.p.txt.parse("<i>Faction tag must be alphanumeric. \"<h>%s<i>\" is not allowed.", c));
+				errors.add(P.p.txt.parse("<i>L'étiquette de faction doit être alphanumérique.  \"<h>% s <i> \" n'est pas autorisé.", c));
 			}
 		}
 		
@@ -266,7 +266,7 @@ public class Factions extends EntityCollection<Faction>
 	{
 		if ( ! Econ.shouldBeUsed()) return;
 
-		P.p.log("Running econLandRewardRoutine...");
+		P.p.log("Démarrage de econLandRewardRoutine...");
 		for (Faction faction : this.get())
 		{
 			int landCount = faction.getLandRounded();
@@ -277,7 +277,7 @@ public class Factions extends EntityCollection<Faction>
 				double reward = Conf.econLandReward * landCount / playerCount;
 				for (FPlayer player : players)
 				{
-					Econ.modifyMoney(player, reward, "posséder des terres de faction", "pour posséder une faction " + landCount + " land divided among " + playerCount + " member(s)");
+					Econ.modifyMoney(player, reward, "posséder des terres de faction", "pour posséder une faction " + landCount + " et divisé entre " + playerCount + " membre(s)");
 				}
 			}
 		}

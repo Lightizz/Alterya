@@ -1,6 +1,7 @@
 package fr.alterya.core.event;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -172,7 +173,8 @@ public class ShopInterractEvent implements Listener
 				for(PrisesList item : PrisesList.values()) {
 					if(itemToGive.getType() == item.getMaterial()) {
 						manager.substractMoney(player.getUniqueId().toString(), item.getBuyPrise());
-						player.sendMessage("§eVous avez acheter §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
+						player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
+						player.sendMessage("§eVous avez acheté §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
 					}
 				}
 				e.setCancelled(true);
@@ -184,6 +186,7 @@ public class ShopInterractEvent implements Listener
 				for(PrisesList item : PrisesList.values()) {
 					if(itemToGive.getType() == item.getMaterial()) {
 						manager.addMoney(player.getUniqueId().toString(), item.getSellPrise());
+						player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 						player.sendMessage("§eVous avez vendu §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
 					}
 				}
