@@ -31,7 +31,7 @@ public class Shop implements Listener {
 	
 	public HashMap<Integer, PrisesList> prisesList = new HashMap<>();
 	
-	public HashMap<Integer, PrisesList> unsellableItems = new HashMap<>();
+	public static HashMap<Integer, PrisesList> unsellableItems = new HashMap<>();
 	
 	public HashMap<Integer, PrisesList> pillageList = new HashMap<>();
 	public HashMap<Integer, PrisesList> oresList = new HashMap<>();
@@ -271,7 +271,7 @@ public class Shop implements Listener {
 		for(PrisesList pl : blocksList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getMaterial().toString(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
 			shopInvBlocks.addItem(item);
 		}
 		shopInvBlocks.setItem(40, backDoor);
@@ -282,7 +282,7 @@ public class Shop implements Listener {
 		for(PrisesList pl : oresList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getMaterial().toString(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
 			shopInvMinerals.addItem(item);
 		}
 		shopInvMinerals.setItem(40, backDoor);
@@ -293,7 +293,7 @@ public class Shop implements Listener {
 		for(PrisesList pl : othersList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getMaterial().toString(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
 			shopInvUtils.addItem(item);
 		}
 		shopInvUtils.setItem(40, backDoor);
@@ -304,7 +304,7 @@ public class Shop implements Listener {
 		for(PrisesList pl : farmingList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getMaterial().toString(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
 			shopInvFarming.addItem(item);
 		}
 		shopInvFarming.setItem(40, backDoor);
@@ -315,7 +315,7 @@ public class Shop implements Listener {
 		for(PrisesList pl : pillageList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getMaterial().toString(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
 			shopInvPillage.addItem(item);
 		}
 		shopInvPillage.setItem(40, backDoor);
@@ -326,7 +326,7 @@ public class Shop implements Listener {
 		for(PrisesList pl : alchemyList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getMaterial().toString(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
 			shopInvAlchemy.addItem(item);
 		}
 		shopInvAlchemy.setItem(40, backDoor);

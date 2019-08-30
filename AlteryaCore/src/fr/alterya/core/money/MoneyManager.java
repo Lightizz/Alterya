@@ -72,10 +72,10 @@ public class MoneyManager
 	
 	public String[] getMoneyTop(Player player){
 		if(this.getMoneyBanks() != null) {
-			String[] accountList = (String[]) this.getMoneyBanks().toArray();
+			String[] accountList = (String[]) getMoneyBanks().toArray();
 			return accountList;
 		}
-		player.sendMessage(MainCore.prefix + "§4Un problème est survenu, veuillez contacter un Administrateur ou un Développeur !");
+		player.sendMessage(MainCore.prefix + "§4Un problème est survenu : 0C, veuillez contacter un Administrateur ou un Développeur !");
 		return null;
 	}
 	

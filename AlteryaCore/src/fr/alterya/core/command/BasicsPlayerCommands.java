@@ -23,7 +23,8 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args){		
-			if(message.equalsIgnoreCase("ping") && sender instanceof Player){
+		
+		if(message.equalsIgnoreCase("ping") && sender instanceof Player){
 	            Player player = (Player) sender;
 	            player.sendMessage(ChatColor.YELLOW + "Votre ping est : " + ChatColor.GOLD + getPing(player) + "ms");
 	            return true;

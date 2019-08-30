@@ -1,5 +1,6 @@
 package fr.alterya.core.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -142,10 +143,42 @@ public class CmdHome implements CommandExecutor
 					return true;
 				}
 			}
-		//	/homeinfo
+		//	/homeinfo (optionnel : <joueur>, pour voir les homes d'un joueur)
 		}else if(message.equalsIgnoreCase("homeinfo")) {
 			if(!(sender instanceof Player)) {
 				player.sendMessage(MainCore.prefix + "Vous devez être un joueur !");
+				return true;
+			}
+			
+			if(args.length == 1) {
+				Player target = Bukkit.getPlayer(args[0]);
+				if(rank.config.getInt(target.getUniqueId().toString()) <= 7 ) { player.sendMessage(MainCore.prefix + "Vous n'avez pas le rang requis pour faire cela."); return true; }
+				HomeManager homeManager = new HomeManager(target.getUniqueId().toString());
+				
+				if(homeManager.getHomes() == null) {
+					player.sendMessage(MainCore.prefix + "Ce joueur n'a aucun home.");
+					return true;
+				}
+				
+				String out = "";
+				for(String s : homeManager.getHomes()) {
+					out = "§a" + s + " §r, " + out;
+				}
+				
+				if(out.length() <= 0) {
+					player.sendMessage(MainCore.prefix + "Ce joueur n'a aucun home.");
+					return true;
+				}
+				
+				out = out.trim();
+				
+				int outLength = out.length();
+				outLength --;
+				
+				out = out.substring(0, outLength);
+				
+				player.sendMessage("Homes de " + target.getName() + " : " + out);
+				
 				return true;
 			}
 			

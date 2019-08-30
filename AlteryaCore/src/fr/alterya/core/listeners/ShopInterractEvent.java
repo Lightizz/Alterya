@@ -1,4 +1,4 @@
-package fr.alterya.core.event;
+package fr.alterya.core.listeners;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.alterya.core.MainCore;
 import fr.alterya.core.money.MoneyManager;
 import fr.alterya.core.shop.PrisesList;
 import fr.alterya.core.shop.Shop;
@@ -168,7 +169,6 @@ public class ShopInterractEvent implements Listener
 			ItemStack itemClicked = e.getCurrentItem();
 			if(itemClicked.getItemMeta().getDisplayName() == Shop.buy.getItemMeta().getDisplayName()) {
 				ItemStack itemToGive = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
-				player.getInventory().addItem(itemToGive);
 				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
 				for(PrisesList item : PrisesList.values()) {
 					if(itemToGive.getType() == item.getMaterial()) {
@@ -177,11 +177,20 @@ public class ShopInterractEvent implements Listener
 						player.sendMessage("§eVous avez acheté §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
 					}
 				}
+				player.getInventory().addItem(itemToGive);
 				e.setCancelled(true);
 				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.sell.getItemMeta().getDisplayName()) {
 				ItemStack itemToGive = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
-				player.getInventory().removeItem(itemToGive);
+				for(PrisesList item : PrisesList.values()) {
+					if(itemToGive.getType() == item.getMaterial()) {
+						if(Shop.unsellableItems.containsValue(item)) {
+							player.sendMessage(MainCore.prefix + "§aL'item §e\"" + item.getName() + "\"§a n'est pas vendable.");
+							e.setCancelled(true);
+							return;
+						}
+					}
+				}
 				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
 				for(PrisesList item : PrisesList.values()) {
 					if(itemToGive.getType() == item.getMaterial()) {
@@ -190,6 +199,7 @@ public class ShopInterractEvent implements Listener
 						player.sendMessage("§eVous avez vendu §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
 					}
 				}
+				player.getInventory().removeItem(itemToGive);
 				e.setCancelled(true);
 				return;
 			}

@@ -55,7 +55,7 @@ public class Factions extends EntityCollection<Faction>
 		if ( ! this.exists("0"))
 		{
 			Faction faction = this.create("0");
-			faction.setTag(ChatColor.DARK_GREEN+"Wilderness");
+			faction.setTag(ChatColor.DARK_GREEN+"Nature");
 			faction.setDescription("");
 			this.setFlagsForWilderness(faction);
 		}
