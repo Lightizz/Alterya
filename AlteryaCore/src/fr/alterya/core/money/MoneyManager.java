@@ -1,5 +1,6 @@
 package fr.alterya.core.money;
 
+import java.util.List;
 import java.util.Set;
 
 import org.bukkit.entity.Player;
@@ -70,9 +71,9 @@ public class MoneyManager
 		return fw.getString(uuid) != null;
 	}
 	
-	public String[] getMoneyTop(Player player){
+	public List<Double> getMoneyTop(Player player){
 		if(this.getMoneyBanks() != null) {
-			String[] accountList = (String[]) getMoneyBanks().toArray();
+			List<Double> accountList = fw.getDoubleList(player.getUniqueId().toString());
 			return accountList;
 		}
 		player.sendMessage(MainCore.prefix + "§4Un problème est survenu : 0C, veuillez contacter un Administrateur ou un Développeur !");

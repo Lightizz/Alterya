@@ -2,12 +2,14 @@ package fr.alterya.core;
 
 import java.util.Collections;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
 import fr.alterya.core.command.CmdBaltop;
 import fr.alterya.core.command.CmdCombatTime;
+import fr.alterya.core.command.CmdFurnace;
 import fr.alterya.core.command.CmdGiveMoney;
 import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdKit;
@@ -21,13 +23,12 @@ import fr.alterya.core.command.CmdTakeMoney;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
 import fr.alterya.core.listeners.PlayerListener;
-import fr.alterya.core.listeners.ShopInterractEvent;
+import fr.alterya.core.listeners.ShopListener;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.permissions.PermissionsManager;
 import fr.alterya.core.shop.Shop;
 import fr.alterya.core.util.DCommand;
 import fr.alterya.core.util.DisconnectCombat;
-import net.md_5.bungee.api.ChatColor;
 
 public class MainCore extends JavaPlugin
 {
@@ -47,13 +48,13 @@ public class MainCore extends JavaPlugin
 	}	
 	
 	@Override
-	public void onEnable() 
-	{		
+	public void onEnable() {		
 		System.out.println("==== AlteryaCore -> ON ====");
 		
-		//Créer les commandes
+		// Créer les commandes
 		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("/enderchest"), new BasicsPlayerCommands(), this);
 		new DCommand("Craft", "/craft", "Permet d'ouvrir une table de craft", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
+		new DCommand("Furnace", "/furnace", "Permet de faire cuire l'item dans la main de l'envoyeur de la commande", null, Collections.singletonList(""), new CmdFurnace(this), this);
 		new DCommand("Discord", "/discord", "Envoie le lien du serveur discord officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
 		new DCommand("Ping", "/ping", "Envoie le ping du joueur sur le serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
 		new DCommand("Tipeee", "/tipeee", "Envoie le lien du tipeee officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
@@ -84,41 +85,11 @@ public class MainCore extends JavaPlugin
 		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
 		
 		new DCommand("Kit", "/kit", "Donne le kit au joueur coorespondant à son grade", null, Collections.singletonList(""), new CmdKit(), this);
-		/*
-		getCommand("ec").setExecutor(new BasicsPlayerCommands());
-		getCommand("craft").setExecutor(new BasicsPlayerCommands());
-		getCommand("discord").setExecutor(new BasicsPlayerCommands());
-		getCommand("ping").setExecutor(new BasicsPlayerCommands());
-		getCommand("tipeee").setExecutor(new BasicsPlayerCommands());
 		
-		getCommand("shop").setExecutor(new CmdShop());
-		
-		getCommand("money").setExecutor(new CmdMoney(rank));
-		getCommand("pay").setExecutor(new CmdPay(rank));
-		getCommand("takemoney").setExecutor(new CmdTakeMoney(rank, this));
-		getCommand("givemoney").setExecutor(new CmdGiveMoney(rank, this));
-		getCommand("purgemoney").setExecutor(new CmdPurgeMoney(rank, this));
-		getCommand("setmoney").setExecutor(new CmdSetMoney(rank, this));
-		getCommand("baltop").setExecutor(new CmdBaltop());
-		
-		getCommand("home").setExecutor(new CmdHome(this.rank, this));
-		getCommand("delhome").setExecutor(new CmdHome(this.rank, this));
-		getCommand("sethome").setExecutor(new CmdHome(this.rank, this));
-		getCommand("homeinfo").setExecutor(new CmdHome(this.rank, this));
-		
-		getCommand("combat time").setExecutor(new CmdCombatTime());
-		*/
 		rank.initScoreboard();
 		
 		getServer().getPluginManager().registerEvents(new PlayerListener(rank), this);
-		/*
-		getCommand("promote").setExecutor(new CmdPromote(rank, this));
-		getCommand("demote").setExecutor(new CmdPromote(rank, this));
-		getCommand("rankinfo").setExecutor(new CmdPromote(rank, this));
-		
-		getCommand("kit").setExecutor(new CmdKit());
-		*/
-		getServer().getPluginManager().registerEvents(new ShopInterractEvent(), this);
+		getServer().getPluginManager().registerEvents(new ShopListener(), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
 		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
 	}

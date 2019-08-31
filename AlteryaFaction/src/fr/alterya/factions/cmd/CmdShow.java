@@ -18,8 +18,8 @@ public class CmdShow extends FCommand
 {
 	public CmdShow()
 	{
+		this.aliases.add("f");
 		this.aliases.add("show");
-		this.aliases.add("who");
 		
 		//this.requiredArgs.add("");
 		this.optionalArgs.put("faction", "your");

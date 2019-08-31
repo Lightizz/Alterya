@@ -11,9 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import fr.alterya.core.MainCore;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
-import fr.alterya.core.MainCore;
 
 /*
 Author : Lightiz

@@ -39,7 +39,7 @@ public class CmdAp extends FCommand
 	public void perform()
 	{
 		// TODO: Hide this command on help also.
-		if ( ! Conf.homesEnabled)
+		if ( ! Conf.apEnabled)
 		{
 			fme.msg("<b>Désolé, les f ap sont désactivés sur ce monde.");
 			return;
@@ -47,26 +47,26 @@ public class CmdAp extends FCommand
 
 		if (myFaction == null) return;
 		
-		if ( ! Conf.homesTeleportCommandEnabled)
+		if ( ! Conf.apTeleportCommandEnabled)
 		{
 			fme.msg("<b>Désolé, les téléportation au f ap sont désactivés sur ce monde.");
 			return;
 		}
 		
-		if ( ! myFaction.hasHome())
+		if ( ! myFaction.hasAp())
 		{
 			fme.msg("<b>Votre faction n'a pas de f ap " + (fme.getRole().isLessThan(Rel.OFFICER) ? "<i> Demander à votre chef de le faire:" : "<i>Vous devez:"));
-			fme.sendMessage(p.cmdBase.cmdSethome.getUseageTemplate());
+			fme.sendMessage(p.cmdBase.cmdsetAp.getUseageTemplate());
 			return;
 		}
 		
-		if ( ! Conf.homesTeleportAllowedFromEnemyTerritory && fme.isInEnemyTerritory())
+		if ( ! Conf.apTeleportAllowedFromEnemyTerritory && fme.isInEnemyTerritory())
 		{
 			fme.msg("<b>Vous ne pouvez pas vous teleporter à votre f ap dans un claim qui ne vous appartiens pas.");
 			return;
 		}
 		
-		if ( ! Conf.homesTeleportAllowedFromDifferentWorld && me.getWorld().getUID() != myFaction.getHome().getWorld().getUID())
+		if ( ! Conf.apTeleportAllowedFromDifferentWorld && me.getWorld().getUID() != myFaction.getAp().getWorld().getUID())
 		{
 			fme.msg("<b>Vous ne pouvez pas teleporter à votre f ap dans un autre monde.");
 			return;
@@ -77,7 +77,7 @@ public class CmdAp extends FCommand
 		
 		if
 		(
-			Conf.homesTeleportAllowedEnemyDistance > 0
+			Conf.apTeleportAllowedEnemyDistance > 0
 			&&
 			faction.getFlag(FFlag.PVP)
 			&&
@@ -87,7 +87,7 @@ public class CmdAp extends FCommand
 				(
 					fme.isInOwnTerritory()
 					&&
-					! Conf.homesTeleportIgnoreEnemiesIfInOwnTerritory
+					! Conf.apTeleportIgnoreEnemiesIfInOwnTerritory
 				)
 			)
 		)
@@ -110,13 +110,13 @@ public class CmdAp extends FCommand
 				double dx = Math.abs(x - l.getX());
 				double dy = Math.abs(y - l.getY());
 				double dz = Math.abs(z - l.getZ());
-				double max = Conf.homesTeleportAllowedEnemyDistance;
+				double max = Conf.apTeleportAllowedEnemyDistance;
 
 				// box-shaped distance check
 				if (dx > max || dy > max || dz > max)
 					continue;
 
-				fme.msg("<b>Vous ne pouvez pas vous téléporter dans votre avant poste de faction tant qu'un ennemi est à l'intérieur. " + Conf.homesTeleportAllowedEnemyDistance + " blocks de vous.");
+				fme.msg("<b>Vous ne pouvez pas vous téléporter dans votre avant poste de faction tant qu'un ennemi est à l'intérieur. " + Conf.apTeleportAllowedEnemyDistance + " blocks de vous.");
 				return;
 			}
 		}

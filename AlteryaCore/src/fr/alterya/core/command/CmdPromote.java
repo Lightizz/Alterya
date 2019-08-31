@@ -9,9 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import fr.alterya.core.MainCore;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
-import fr.alterya.core.MainCore;
 
 /*
 Author and resp of the rank plugin: Lightiz

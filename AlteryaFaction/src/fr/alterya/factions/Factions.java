@@ -55,7 +55,7 @@ public class Factions extends EntityCollection<Faction>
 		if ( ! this.exists("0"))
 		{
 			Faction faction = this.create("0");
-			faction.setTag(ChatColor.DARK_GREEN+"Nature");
+			faction.setTag(ChatColor.DARK_GREEN+"Wilderness");
 			faction.setDescription("");
 			this.setFlagsForWilderness(faction);
 		}
@@ -63,7 +63,7 @@ public class Factions extends EntityCollection<Faction>
 		{
 			Faction faction = this.create("-1");
 			faction.setTag("SafeZone");
-			faction.setDescription("Free from PVP and monsters");
+			faction.setDescription("Libre de PVP et de monstres");
 			
 			this.setFlagsForSafeZone(faction);
 		}
@@ -71,7 +71,7 @@ public class Factions extends EntityCollection<Faction>
 		{
 			Faction faction = this.create("-2");
 			faction.setTag("WarZone");
-			faction.setDescription("Not the safest place to be");
+			faction.setDescription("L'enfer est vide, tous les démons sont ici.");
 			this.setFlagsForWarZone(faction);
 		}
 		

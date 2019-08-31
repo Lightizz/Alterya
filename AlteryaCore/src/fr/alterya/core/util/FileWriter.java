@@ -68,6 +68,10 @@ public class FileWriter
 		return config.getStringList(valuePath);
 	}
 	
+	public List<Double> getDoubleList(String valuePath) {
+		return config.getDoubleList(valuePath);
+	}
+	
 	public Set<String> getKeys(boolean deep){
 		return config.getKeys(deep);
 	}

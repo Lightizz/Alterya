@@ -1,5 +1,7 @@
 package fr.alterya.core.command;
 
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,13 +19,13 @@ public class CmdBaltop implements CommandExecutor
 		if(message.equalsIgnoreCase("baltop")) {
 			Player player = (Player) sender;
 			if(sender instanceof Player) {
+				MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
 				if(args.length != 0) {
 					player.sendMessage(MainCore.prefix + "La commande est /baltop.");
 					return true;
 				}else if(args.length == 0) {
-					MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
 					
-					String[] accountList1 = manager.getMoneyTop(player);
+					Set<String> accountList1 = manager.getMoneyBanks();
 					String message1 = "§4§l->Top 10 money accounts<-\n";
 					
 					for(String part : accountList1) {
