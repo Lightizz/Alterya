@@ -22,7 +22,7 @@ public class CmdShow extends FCommand
 		this.aliases.add("show");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("faction", "votre");
 		
 		//this.permission = Permission.SHOW.node;
 		this.disableOnLock = false;
@@ -66,7 +66,7 @@ public class CmdShow extends FCommand
 			msg("<a>Cette faction est pacifique - en trêve avec tout le monde.");
 		}
 		
-		msg("<a>Joining: <i>"+(faction.getOpen() ? "aucune invitation n'est requise " : " une invitation est requise"));
+		msg("<a>Rejoindre: <i>"+(faction.getOpen() ? "aucune invitation n'est requise " : " une invitation est requise"));
 
 		double powerBoost = faction.getPowerBoost();
 		String boost = (powerBoost == 0.0) ? "" : (powerBoost > 0.0 ? " (bonus: " : " (penalité: ") + powerBoost + ")";

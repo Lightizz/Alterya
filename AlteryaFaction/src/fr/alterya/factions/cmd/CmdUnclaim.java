@@ -66,7 +66,7 @@ public class CmdUnclaim extends FCommand
 
 		Board.removeAt(flocation);
 		SpoutFeatures.updateTerritoryDisplayLoc(flocation);
-		myFaction.msg("%s<i> a unclaim plusieurs terres.", fme.describeTo(myFaction, true));
+		myFaction.msg("%s<i> avez unclaim plusieurs terres.", fme.describeTo(myFaction, true));
 
 		if (Conf.logLandUnclaims)
 			P.p.log(fme.getName()+" a unclaim une terre à ("+flocation.getCoordString()+") à la faction : "+otherFaction.getTag());

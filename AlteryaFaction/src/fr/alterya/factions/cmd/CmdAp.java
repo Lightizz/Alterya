@@ -125,20 +125,8 @@ public class CmdAp extends FCommand
 		if (EssentialsFeatures.handleTeleport(me, myFaction.getAp())) return;
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostHome, "se téléporter dans votre avant poste de faction "," pour se téléporter dans votre avant poste de faction")) return;
+		if ( ! payForCommand(Conf.econCostAp, "se téléporter dans votre avant poste de faction "," pour se téléporter dans votre avant poste de faction")) return;
 
-		/*
-		// Create a smoke effect
-		if (Conf.homesTeleportCommandSmokeEffectEnabled)
-		{
-			List<Location> smokeLocations = new ArrayList<Location>();
-			smokeLocations.add(loc);
-			smokeLocations.add(loc.add(0, 1, 0));
-			smokeLocations.add(myFaction.getAp());
-			smokeLocations.add(myFaction.getAp().clone().add(0, 1, 0));
-			//SmokeUtil.spawnCloudRandom(smokeLocations, 3f);
-		}
-		*/
 		me.teleport(myFaction.getAp());
 	}
 	

@@ -23,7 +23,7 @@ public class CmdDisband extends FCommand
 		this.aliases.add("disband");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("faction", "votre");
 		
 		//this.permission = Permission.DISBAND.node;
 		this.disableOnLock = true;
@@ -63,10 +63,10 @@ public class CmdDisband extends FCommand
 		// Inform all players
 		for (FPlayer fplayer : FPlayers.i.getOnline())
 		{
-			String who = senderIsConsole ? "Un administrateur de serveur" : fme.describeTo(fplayer);
+			String who = senderIsConsole ? "Un administrateur" : fme.describeTo(fplayer);
 			if (fplayer.getFaction() == faction)
 			{
-				fplayer.msg("<h>%s<i> a dissous votre faction.", who);
+				fplayer.msg("<h>%s<i> avez dissous votre faction.", who);
 			}
 			else
 			{

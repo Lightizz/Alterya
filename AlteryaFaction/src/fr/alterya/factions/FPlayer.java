@@ -668,7 +668,7 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		informTheseFPlayers.addAll(forFaction.getFPlayersWhereOnline(true));
 		for (FPlayer fp : informTheseFPlayers)
 		{
-			fp.msg("<h>%s<i> terre revendiquée pour <h>%s<i> de <h>%s<i>.", this.describeTo(fp, true), forFaction.describeTo(fp), currentFaction.describeTo(fp));
+			fp.msg("<h>%s<i> avez revendiquée cette terre pour <h>%s<i> de <h>%s<i>.", this.describeTo(fp, true), forFaction.describeTo(fp), currentFaction.describeTo(fp));
 		}
 		
 		Board.setFactionAt(forFaction, flocation);

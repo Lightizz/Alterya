@@ -20,7 +20,7 @@ public class CmdAccess extends FCommand
 		this.aliases.add("access");
 		
 		this.optionalArgs.put("view|p|f|player|faction", "view");
-		this.optionalArgs.put("name", "you");
+		this.optionalArgs.put("nom", "vous");
 		
 		this.setHelpShort("afficher ou accorder l'accès au territoire revendiqué dans lequel vous vous trouvez");
 

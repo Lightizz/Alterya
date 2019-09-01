@@ -18,7 +18,7 @@ public class CmdLeader extends FCommand
 		this.aliases.add("leader");
 		
 		this.requiredArgs.add("player");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("faction", "votre");
 		
 		//this.permission = Permission.LEADER.node;
 		this.disableOnLock = true;
@@ -102,7 +102,7 @@ public class CmdLeader extends FCommand
 		// Inform all players
 		for (FPlayer fplayer : FPlayers.i.getOnline())
 		{
-			fplayer.msg("%s<i> a donné %s<i> le chef de %s<i>.", senderIsConsole ? "Un administrateur" : RelationUtil.describeThatToMe(fme, fplayer, true), newLeader.describeTo(fplayer), targetFaction.describeTo(fplayer));
+			fplayer.msg("%s<i> avez donné %s<i> le chef de %s<i>.", senderIsConsole ? "Un administrateur" : RelationUtil.describeThatToMe(fme, fplayer, true), newLeader.describeTo(fplayer), targetFaction.describeTo(fplayer));
 		}
 	}
 }

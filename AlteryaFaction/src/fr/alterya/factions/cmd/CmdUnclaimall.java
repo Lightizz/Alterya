@@ -50,7 +50,7 @@ public class CmdUnclaimall extends FCommand
 		// this event cannot be cancelled
 
 		Board.unclaimAll(myFaction.getId());
-		myFaction.msg("%s<i> a unclaim TOUTES les terres.", fme.describeTo(myFaction, true));
+		myFaction.msg("%s<i> avez unclaim TOUTES les terres.", fme.describeTo(myFaction, true));
 		SpoutFeatures.updateTerritoryDisplayLoc(null);
 
 		if (Conf.logLandUnclaims)

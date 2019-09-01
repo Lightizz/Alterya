@@ -92,7 +92,7 @@ public class CmdCreate extends FCommand
 
 		for (FPlayer follower : FPlayers.i.getOnline())
 		{
-			follower.msg("%s<i> créé une nouvelle faction %s", fme.describeTo(follower, true), faction.getTag(follower));
+			follower.msg("%s<i> avez créé une nouvelle faction %s", fme.describeTo(follower, true), faction.getTag(follower));
 		}
 		
 		msg("<i>Tu devrais maintenant : %s", p.cmdBase.cmdDescription.getUseageTemplate());

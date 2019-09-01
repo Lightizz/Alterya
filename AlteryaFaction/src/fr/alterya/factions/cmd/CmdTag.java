@@ -17,6 +17,7 @@ public class CmdTag extends FCommand
 	public CmdTag()
 	{
 		this.aliases.add("tag");
+		this.aliases.add("name");
 		
 		this.requiredArgs.add("new tag");
 		//this.optionalArgs.put("", "");
@@ -70,7 +71,7 @@ public class CmdTag extends FCommand
 		myFaction.setTag(tag);
 
 		// Inform
-		myFaction.msg("%s<i> vous avez changé votre nom de faction pour %s", fme.describeTo(myFaction, true), myFaction.getTag(myFaction));
+		myFaction.msg("%s<i> avez changé votre nom de faction pour %s", fme.describeTo(myFaction, true), myFaction.getTag(myFaction));
 		for (Faction faction : Factions.i.get())
 		{
 			if (faction == myFaction)

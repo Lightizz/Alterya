@@ -14,7 +14,7 @@ public class CmdClaim extends FCommand
 		this.aliases.add("claim");
 		
 		//this.requiredArgs.add("");
-		this.optionalArgs.put("faction", "your");
+		this.optionalArgs.put("faction", "votre");
 		this.optionalArgs.put("radius", "1");
 		
 		//this.permission = Permission.CLAIM.node;

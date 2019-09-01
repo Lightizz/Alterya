@@ -47,7 +47,7 @@ public class CmdJoin extends FCommand
 
 		if (faction == fplayer.getFaction())
 		{
-			msg("<b>%s %s déjà un membre de %s", fplayer.describeTo(fme, true), (samePlayer ? "est" : "est"), faction.getTag(fme));
+			msg("<b>%s %s êtes déjà un membre de %s", fplayer.describeTo(fme, true), (samePlayer ? "est" : "est"), faction.getTag(fme));
 			return;
 		}
 
@@ -59,7 +59,7 @@ public class CmdJoin extends FCommand
 
 		if (fplayer.hasFaction())
 		{
-			msg("<b>%s doit quitter %s faction actuelle avant.", fplayer.describeTo(fme, true), (samePlayer ? "Vous" : "leur"));
+			msg("<b>%s devez quitter %s faction actuelle avant.", fplayer.describeTo(fme, true), (samePlayer ? "Vous" : "leur"));
 			return;
 		}
 
@@ -89,7 +89,7 @@ public class CmdJoin extends FCommand
 		if (samePlayer && ! payForCommand(Conf.econCostJoin, "rejoindre une faction ", " pour rejoindre une faction")) return;
 
 		if (!samePlayer)
-			fplayer.msg("<i>%s vous a déplacé dans la faction %s.", fme.describeTo(fplayer, true), faction.getTag(fplayer));
+			fplayer.msg("<i>%s vous avez déplacé dans la faction %s.", fme.describeTo(fplayer, true), faction.getTag(fplayer));
 		faction.msg("<i>%s a rejoin votre faction.", fplayer.describeTo(faction, true));
 		fme.msg("<i>%s faction rejoin avec succès %s.", fplayer.describeTo(fme, true), faction.getTag(fme));
 		
