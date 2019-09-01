@@ -28,14 +28,17 @@ public class HomeManager
 		fw.saveConfig();
 	}
 	
+	//Regarder si le home indiqué existe
 	public boolean homeExist(String homeName) {
 		return fw.getString(homeName) != null;
 	}
 	
-	public Set<String> getHomes(){
+	//Récuperer la liste des homes d'un joueur
+	public Set<String> getHomes() {
 		return fw.getKeys(false);
 	}
 	
+	//Récuperer la location d'un home
 	public Location getHomeLocation(String homeName) {
 		return new Location(Bukkit.getWorld(fw.getString(homeName + ".world"))
 				, fw.getDouble(homeName + ".x")
@@ -45,6 +48,7 @@ public class HomeManager
 				, (float) fw.getDouble(homeName + ".pitch"));
 	}
 	
+	//Supprimer un home de la liste du joueur
 	public void deleteHome(String homeName) {
 		fw.setValue(homeName, null);
 		fw.saveConfig();

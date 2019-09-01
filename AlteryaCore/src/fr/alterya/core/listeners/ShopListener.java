@@ -39,6 +39,7 @@ public class ShopListener implements Listener
 		
 		if(mainInv == null) return;
 		
+		//Interraction avec l'inventaire principal
 		if(e.getInventory().getName() == Shop.shopInvMain.getName()) {
 			ItemStack itemClicked = e.getCurrentItem();
 			if(itemClicked.getType() == Material.EMPTY_MAP) {
@@ -97,16 +98,19 @@ public class ShopListener implements Listener
 		 ||e.getInventory().getName() == Shop.shopInvUtils.getName()) {
 			ItemStack itemClicked = e.getCurrentItem();
 			ItemMeta itemM = itemClicked.getItemMeta();
+			//Pour chaque item dans le shop regarde s'il coorespond à l'item cliqué, si oui il lui donne le nom en français
 			for(PrisesList item : PrisesList.values()) {
 				if(itemClicked.getType() == item.getMaterial()) {
 					itemM.setDisplayName(item.getName());
 				}
 			}
 			itemClicked.setItemMeta(itemM);
+			//Positionne les item dans l'inventaire pour confirmer vos achats / ventes
 			Shop.setItemInConfirmInv();
 			if(itemClicked.getType() == Material.AIR || itemClicked.getType() == Material.ANVIL) {return;}
 			Shop.shopInvSellBuy.setItem(13, itemClicked);
 			e.setCancelled(true);
+			//Ferme et ouvre l'inventaire concerner pour éviter les bugs
 			player.getOpenInventory().close();
 			player.openInventory(Shop.shopInvSellBuy);
 		}
@@ -127,6 +131,7 @@ public class ShopListener implements Listener
 			ItemStack itemSubstract1 = mainInv.getItem(25);
 			ItemStack itemSubstract10 = mainInv.getItem(24);
 			ItemStack itemSubstract64 = mainInv.getItem(23);
+			//Toutes les conditions qui vont avec les items Add1, Add10, etc...
 			if(itemClicked.getItemMeta().getDisplayName() == itemAdd1.getItemMeta().getDisplayName()) {
 				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); return; }
 				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() + 1);
@@ -172,33 +177,53 @@ public class ShopListener implements Listener
 				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
 				for(PrisesList item : PrisesList.values()) {
 					if(itemToGive.getType() == item.getMaterial()) {
+						//Retire la money
+						if (manager.getMoney(player.getUniqueId().toString()) < item.getBuyPrise()) {
+							player.sendMessage(MainCore.prefix + "§eVous devez avoir §a" + item.getBuyPrise() + " §a$ §epour acheter §a" + itemToGive.getAmount() + " " + item.getName() + ".");
+							player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
+							return;
+						}
 						manager.substractMoney(player.getUniqueId().toString(), item.getBuyPrise());
+						//Joue un son
 						player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
+						//Envoie le message de confirmation
 						player.sendMessage("§eVous avez acheté §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
 					}
 				}
+				//Ajoute l'item
 				player.getInventory().addItem(itemToGive);
 				e.setCancelled(true);
 				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.sell.getItemMeta().getDisplayName()) {
 				ItemStack itemToGive = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
 				for(PrisesList item : PrisesList.values()) {
+					//Voir si l'item choisi est vendable ou pas
 					if(itemToGive.getType() == item.getMaterial()) {
 						if(Shop.unsellableItems.containsValue(item)) {
 							player.sendMessage(MainCore.prefix + "§aL'item §e\"" + item.getName() + "\"§a n'est pas vendable.");
+							player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 							e.setCancelled(true);
 							return;
 						}
 					}
 				}
+				if(! player.getInventory().contains(itemToGive)) {
+					player.sendMessage(MainCore.prefix + "§eVous devez avoir §a" + itemToGive.getAmount() + " §a" + itemToGive.getType().name() + " §edans votre inventaire.");
+					player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
+					return;
+				}
 				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
 				for(PrisesList item : PrisesList.values()) {
 					if(itemToGive.getType() == item.getMaterial()) {
+						//Ajoute la money
 						manager.addMoney(player.getUniqueId().toString(), item.getSellPrise());
+						//Joue un son
 						player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
+						//Envoie le message de confirmation
 						player.sendMessage("§eVous avez vendu §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
 					}
 				}
+				//Enlève l'item de l'inventaire du joueur
 				player.getInventory().removeItem(itemToGive);
 				e.setCancelled(true);
 				return;

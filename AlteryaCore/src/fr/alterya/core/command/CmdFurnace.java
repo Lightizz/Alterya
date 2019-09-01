@@ -22,6 +22,7 @@ public class CmdFurnace implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{
 		Player player = (Player) sender;
+		//	/furnace
 		if(message.equalsIgnoreCase("furnace")) {
 			if(mainCore.rank.config.getInt(player.getUniqueId().toString()) != 3) { player.sendMessage(MainCore.prefix + "Vous n'avez pas le grade suffisant pour effectuer cette commande"); return true; }
 			if(player.getItemInHand().getType() == Material.COAL_ORE) {

@@ -29,12 +29,14 @@ public class PermissionsManager implements Listener
 		Player player = e.getPlayer();
 		this.setupPermissions(player);
 	}
+	
 	public void setupPermissions(Player player) {
 		PermissionAttachment permissionAttachment = player.addAttachment(main);
 		this.playersPermissions.put(player.getUniqueId(), permissionAttachment);
 		permissionSetter(player.getUniqueId(), this.main.rank.config.getInt(player.getUniqueId().toString()));
 	}
 
+	//Set permissions
 	public void permissionSetter(UUID uuid, int rankId)
 	{
 		PermissionAttachment permissionAttachment = this.playersPermissions.get(uuid);

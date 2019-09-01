@@ -8,9 +8,6 @@ commands:
     description: The Factions base command
     aliases: [f]
 permissions:
-# -------------------------------------------- #
-# THE REAL NODES
-# -------------------------------------------- #
   factions.access: {description: grant territory access for your faction, with the proper fperm}
   factions.admin.setap: {description: Positionne l'ap pour les factions qui en demande une}
   factions.access.any: {description: grant territory access for any faction}

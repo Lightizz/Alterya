@@ -25,7 +25,11 @@ public class CmdGiveMoney implements CommandExecutor
 	{
 		if(message.equalsIgnoreCase("givemoney")) {
 			Player player = (Player) sender;
-			if(sender instanceof Player && rank.config.getInt(player.getUniqueId().toString()) >= 8) {
+			if(sender instanceof Player) {
+				if(rank.config.getInt(player.getUniqueId().toString()) < 9) {
+					player.sendMessage(MainCore.prefix + "§4Vous n'êtes pas OP, Administrateur ou Responsable, vous ne pouvez pas effectuer cette commande !");
+					return true;
+				}
 				if(args.length != 2) {
 					player.sendMessage(MainCore.prefix + "La commande est /givemoney <joueur> <montant>.");
 					return true;
@@ -34,9 +38,8 @@ public class CmdGiveMoney implements CommandExecutor
 					MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
 					double amount = Double.valueOf(args[1]);
 					
-					if(manager.moneyBankExist(target.getUniqueId().toString()) == false) {
-						player.sendMessage(MainCore.prefix + "Ce joueur est introuvable.");
-					}
+					//Si le joueur indiqué n'existe pas :
+					if(manager.moneyBankExist(target.getUniqueId().toString()) == false) { player.sendMessage(MainCore.prefix + "Ce joueur est introuvable."); return true; }
 					
 					manager.addMoney(target.getUniqueId().toString(), amount);
 					player.sendMessage(MainCore.prefix + target.getName() + " a reçu " + amount + " $.");

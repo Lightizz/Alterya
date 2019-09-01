@@ -38,18 +38,22 @@ public class Rank {
 		}
 	}
 	
+	//Récuperer la class main
 	public final Plugin getPlugin() {
 		return plugin;
 	}
 	
+	//Récuperer le scoreboard
 	public final Scoreboard getScoreboard() {
 		return scoreboard;
 	}
 	
+	//Récuperer la class
 	public static Rank getRank() {
 		return new Rank(plugin, player);
 	}
 	
+	//Initialiser la configuration
 	private void initConfig() {
 		File f = new File("plugins/AccountsData");
 		if(!f.exists()) f.mkdirs();
@@ -63,6 +67,7 @@ public class Rank {
 		saveConfig();
 	}
 	
+	//Initialiser le scoreboard
 	public void initScoreboard() {
 		
 		if(scoreboard != null) throw new UnsupportedOperationException("ScoreBoard déja initialisé.");
@@ -75,6 +80,7 @@ public class Rank {
 		}
 	}
 	
+	//Charger le rang d'un joueur
 	public void loadPlayer(Player player1) {
 		player = player1;
 		String uuid = player1.getUniqueId().toString();
@@ -89,6 +95,7 @@ public class Rank {
 		config.set(uuid, 0);
 	}
 	
+	//Supprimer un rang (= réinitialiser)
 	public void deletPlayer(String uuid) {
 		if(config.contains(uuid)) {
 			config.set(uuid, 0);
@@ -98,6 +105,7 @@ public class Rank {
 		saveConfig();
 	}
 	
+	//Récuprer le rang à partir d'un joueur
 	public RankList getPlayerRank (String uuid, Player player) {
 		uuid = player.getUniqueId().toString();
 		if(!config.contains(uuid)) {
@@ -106,6 +114,7 @@ public class Rank {
 			return getRankById(config.getInt(uuid));
 	}
 	
+	//Récuperer le rang à partir d'un uuid
 	public RankList getRankById(int id) {
 			if(id == 0) {
 				return RankList.JOUEUR;
@@ -133,6 +142,7 @@ public class Rank {
 			return null;
 	}
 	
+	//Ajouter un rang
 	public void addRank(RankList rankList, Player target) {
 		if(rankList == RankList.ADMINISTRATEUR && rankCount != 1) {
 			config.set(target.getUniqueId().toString(), 10);
@@ -177,6 +187,7 @@ public class Rank {
 		}
 	}
 	
+	//Retirer / réinitialiser le rang
 	public void removeRank(RankList rankList, Player target) {
 		if(rankList == RankList.ADMINISTRATEUR && rankCount != 0) {
 			config.set(target.getUniqueId().toString(), 0);

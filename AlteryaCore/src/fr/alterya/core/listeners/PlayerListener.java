@@ -34,7 +34,6 @@ public final class PlayerListener implements Listener {
 	@EventHandler
 	private void playerQuit(PlayerQuitEvent pqe) {
 		rank.deletPlayer(pqe.getPlayer().getUniqueId().toString());
-		
 	}
 	
 	@EventHandler
@@ -43,12 +42,14 @@ public final class PlayerListener implements Listener {
 		this.myFaction = this.fme.getFaction();
 		Faction faction = myFaction;
 		RankList rankList = rank.getPlayerRank(pce.getPlayer().getUniqueId().toString(), pce.getPlayer());
+		//Positionne la faction du joueur + son rang + son pseudo avant sont message
 		pce.setFormat("§r[" + faction.getTag(fme)+ "§r] " + rankList.getPrefix()+pce.getPlayer().getName()+rankList.getChatSeparator()+pce.getMessage());
 	}
 	
 	@EventHandler
 	private void playerChatColorEvent(AsyncPlayerChatEvent e) {
 		Player player = e.getPlayer();
+		//Regarde si le joueur veut mettre de la couleur
 		if(rank.config.getInt(player.getUniqueId().toString()) >= 6) {
 			if(e.getFormat().startsWith("&a")) {
 				e.setFormat("§a" + e.getMessage());

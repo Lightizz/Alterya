@@ -38,6 +38,7 @@ public class MainCore extends JavaPlugin
 	Player player;
 	public Rank rank;
 	
+	//Faire une instance accéssible par toutes les class
 	public static MainCore instance;
 	public static MainCore getInstance() { return instance; }
 	
@@ -86,8 +87,10 @@ public class MainCore extends JavaPlugin
 		
 		new DCommand("Kit", "/kit", "Donne le kit au joueur coorespondant à son grade", null, Collections.singletonList(""), new CmdKit(), this);
 		
+		//Initialiser le scoreboard des rangs
 		rank.initScoreboard();
 		
+		//Enregistrer tous les évenements 
 		getServer().getPluginManager().registerEvents(new PlayerListener(rank), this);
 		getServer().getPluginManager().registerEvents(new ShopListener(), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);

@@ -26,13 +26,19 @@ public class CmdBaltop implements CommandExecutor
 				}else if(args.length == 0) {
 					
 					Set<String> accountList1 = manager.getMoneyBanks();
+					if(manager.getMoneyBanks().isEmpty() == true) {
+						player.sendMessage(MainCore.prefix + "§4Une erreur est survenue : 1C. Veuillez contacter un staff en donner l'identifiant (Exemple d'ID : 0C)");
+						return true;
+					}
+					
 					String message1 = "§4§l->Top 10 money accounts<-\n";
+					player.sendMessage(message1);
 					
 					for(String part : accountList1) {
 						Player player1 = Bukkit.getPlayer(part);
-						message1 = "§2" + player1.getName() + " §r: §e" + manager.getMoney(player1.getUniqueId().toString()) + "§2$\n";
+						String message2 = "§2" + player1.getDisplayName() + " §r: §e" + manager.getMoney(player1.getUniqueId().toString()) + "§2$\n";
+						player.sendMessage(message2);
 					}
-					player.sendMessage(message1);
 					return true;
 				}
 			}else {

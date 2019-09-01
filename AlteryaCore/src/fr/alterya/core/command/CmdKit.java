@@ -13,7 +13,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import fr.alterya.core.MainCore;
 import fr.alterya.core.rank.Rank;
-import fr.alterya.core.rank.RankList;
 
 /*
 Author : Lightiz
@@ -22,45 +21,43 @@ Author : Lightiz
 public class CmdKit extends BukkitRunnable implements CommandExecutor
 {
 	public int timer = 0;
-	
 	Player player0;
-	
 	MainCore main;
-	
 	Rank rank = new Rank(main, player0);
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args) {
 		Player player = (Player) sender;
+		this.player0 = player;
 		if(message.equalsIgnoreCase("kit")) {
-			if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.MEMOIRE) {
+			if(rank.config.getInt(player.getUniqueId().toString()) == 2) {
 				if(this.timer != 0) {
 					int timeRemaiting = 172800 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
 				}else if(this.timer == 0) {
 					giveMemoireKit(player);
 					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Mémoire !");
-					this.runTaskTimer(main, 20, 20);
+					this.runTaskTimer(main, 0, 20);
 					return true;
 				}
-			}else if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SAGE) {
+			}else if(rank.config.getInt(player.getUniqueId().toString()) == 3) {
 				if(this.timer != 0) {
 					int timeRemaiting = 259200 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
 				}else if(this.timer == 0) {
 					giveSageKit(player);
 					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Sage !");
-					this.runTaskTimer(main, 20, 20);
+					this.runTaskTimer(main, 0, 20);
 					return true;
 				}
-			}else if(rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
+			}else if(rank.config.getInt(player.getUniqueId().toString()) == 1) {
 				if(this.timer != 0) {
 					int timeRemaiting = 172800 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
 				}else if(this.timer == 0) {
 					giveSouvenirKit(player);
 					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Souvenir !");
-					this.runTaskTimer(main, 20, 20);
+					this.runTaskTimer(main, 0, 20);
 					return true;
 				}	
 			}else {
@@ -71,6 +68,7 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 		return false;
 	}
 	
+	//Préparer et donner les kits 
 	public void giveSageKit(Player player) {
 		ItemStack kitBoots = new ItemStack(Material.IRON_BOOTS);
 		ItemMeta bootsMeta = kitBoots.getItemMeta();
@@ -162,19 +160,17 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 		player.updateInventory();
 	}
 
+	//Le timer pour utiliser les kits
 	@Override
 	public void run()
 	{
-		//Dev note : 1h = 3 600 sec ; 24h = 86 400 sec ; 48h = 172 800 sec ; 72h = 259 200 sec
-		if(rank.getPlayerRank(player0.getUniqueId().toString(), player0) == RankList.MEMOIRE && timer >= 172800) {
+		//1h = 3 600 sec ; 24h = 86 400 sec ; 48h = 172 800 sec ; 72h = 259 200 sec
+		if(rank.config.getInt(player0.getUniqueId().toString()) == 2 && timer >= 172800) {
 			cancel();
-			timer = 0;
-		}else if(rank.getPlayerRank(player0.getUniqueId().toString(), player0) == RankList.SAGE && timer >= 259200) {
+		}else if(rank.config.getInt(player0.getUniqueId().toString()) == 3 && timer >= 259200) {
 			cancel();
-			timer = 0;
-		}else if(rank.getPlayerRank(player0.getUniqueId().toString(), player0) == RankList.SOUVENIR && timer >= 172800) {
+		}else if(rank.config.getInt(player0.getUniqueId().toString()) == 1 && timer >= 172800) {
 			cancel();
-			timer = 0;
 		}
 		timer ++;
 	}

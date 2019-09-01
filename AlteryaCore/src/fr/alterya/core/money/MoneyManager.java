@@ -1,18 +1,15 @@
 package fr.alterya.core.money;
 
-import java.util.List;
 import java.util.Set;
 
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import fr.alterya.core.MainCore;
 import fr.alterya.core.util.FileWriter;
 
 public class MoneyManager
 {			
 	Plugin plugin;
-	private FileWriter fw;
+	public FileWriter fw;
 	
 	public static double defaultMoney = 50.00;
 	
@@ -69,15 +66,6 @@ public class MoneyManager
 	public boolean moneyBankExist(String uuid) {
 		fw.saveConfig();
 		return fw.getString(uuid) != null;
-	}
-	
-	public List<Double> getMoneyTop(Player player){
-		if(this.getMoneyBanks() != null) {
-			List<Double> accountList = fw.getDoubleList(player.getUniqueId().toString());
-			return accountList;
-		}
-		player.sendMessage(MainCore.prefix + "§4Un problème est survenu : 0C, veuillez contacter un Administrateur ou un Développeur !");
-		return null;
 	}
 	
 	public Set<String> getMoneyBanks(){

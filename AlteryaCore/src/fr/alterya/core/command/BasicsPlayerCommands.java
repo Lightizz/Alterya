@@ -10,11 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
 
 import fr.alterya.core.MainCore;
 import fr.alterya.core.rank.Rank;
-import fr.alterya.core.rank.RankList;
 import net.minecraft.server.v1_7_R4.EntityPlayer;
 
 public class BasicsPlayerCommands implements CommandExecutor, Listener {
@@ -24,51 +22,72 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args){		
 		
+		//	/ping
 		if(message.equalsIgnoreCase("ping") && sender instanceof Player){
-	            Player player = (Player) sender;
-	            player.sendMessage(ChatColor.YELLOW + "Votre ping est : " + ChatColor.GOLD + getPing(player) + "ms");
-	            return true;
-	        }
+			Player player = (Player) sender;
+			if(getPing(player) < 0) {
+				player.sendMessage(MainCore.prefix + "§4Une erreur est survenue : 3C. Veuillez contacter un staff en donner l'identifiant (Exemple d'ID : 0C)");
+				return true;
+			}
+			player.sendMessage(ChatColor.YELLOW + "Votre ping est : " + ChatColor.GOLD + getPing(player) + "ms");
+			
+			return true;
+	    }
 	        
-	        if(message.equalsIgnoreCase("discord") && sender instanceof Player) {
-	            Player player = (Player) sender;
-	            player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<|" );
+		//	/discord
+		if(message.equalsIgnoreCase("discord") && sender instanceof Player) {
+			Player player = (Player) sender;
+	        player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<|" );
+	        return true;
+	    }
+	      
+		//	/tipeee
+	    if(message.equalsIgnoreCase("tipeee")) {
+	    	Player player = (Player) sender;
+	    	player.sendMessage(ChatColor.GOLD + "|>> https://fr.tipeee.com/alterya-pvp <<|");
+	        return true;
+	    }
+	        
+	    //	/craft
+	    if(message.equalsIgnoreCase("craft") && sender instanceof Player) {
+	    	Player player = (Player) sender;
+	    	player.openWorkbench (null, true);
 	            
-	            return true;
-	        }
-	        
-	        if(message.equalsIgnoreCase("tipeee")) {
-	            Player player = (Player) sender;
-	            player.sendMessage(ChatColor.GOLD + "|>> https://fr.tipeee.com/alterya-pvp <<|");
-	            return true;
-	        }
-	        
-	        if(message.equalsIgnoreCase("craft") && sender instanceof Player) {
-	            Player player = (Player) sender;
-	            player.openWorkbench (null, true);
-	            
-	            return true;
-	        }
-	        
-	        //Souvenir = 2 lignes
-	        //Sage = 3 lignes
-	        //Mémoire = 3 lignes
-	        //Joueur = 1 lignes
-	        if(message.equalsIgnoreCase("ec") && sender instanceof Player) {
-	        	Player player = (Player) sender;
-	        	
-	    		player.openInventory(player.getEnderChest());
-	    		return true;
-	        }
+	    	return true;
+	    }
+	    
+	    /*
+	    /ec		|		/enderchest
+	    Souvenir = 2 lignes
+	    Sage = 3 lignes
+	    Mémoire = 3 lignes
+	    Joueur = 1 lignes
+	     */
+	    if(message.equalsIgnoreCase("ec") && sender instanceof Player) {
+	    	Player player = (Player) sender;
+	    	if(player.getEnderChest() == null) {
+				player.sendMessage(MainCore.prefix + "§4Une erreur est survenue : 2C. Veuillez contacter un staff en donner l'identifiant (Exemple d'ID : 0C)");
+				return true;
+			}
+	    	player.openInventory(player.getEnderChest());
+	    	return true;
+	    }else if(message.equalsIgnoreCase("enderchest") && sender instanceof Player) {
+	    	Player player = (Player) sender;
+	    	if(player.getEnderChest() == null) {
+				player.sendMessage(MainCore.prefix + "§4Une erreur est survenue : 2C. Veuillez contacter un staff en donner l'identifiant (Exemple d'ID : 0C)");
+				return true;
+			}
+	    	player.openInventory(player.getEnderChest());
+	    	return true;
+	    }
 	    return false;
 	}
 	
 	@EventHandler
 	public void onInterract(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked();
-		
-		if(event.getClickedInventory() == player.getEnderChest()) {
-			if(event.getCurrentItem() == new ItemStack(Material.AIR) || event.getCurrentItem() == null 
+		if(event.getInventory() == player.getEnderChest()) {
+			if(event.getCurrentItem().getType() == Material.AIR || event.getCurrentItem() == null 
 					&& event.getSlot() == 0
 					&& event.getSlot() == 1
 					&& event.getSlot() == 2
@@ -86,10 +105,10 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 14
 					&& event.getSlot() == 15
 					&& event.getSlot() == 16
-					&& event.getSlot() == 17 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.JOUEUR) {
+					&& event.getSlot() == 17 && rank.config.getInt(player.getUniqueId().toString()) == 0) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
-			}else if(event.getCurrentItem() == new ItemStack(Material.AIR) || event.getCurrentItem() == null 
+			}else if(event.getCurrentItem().getType() == Material.AIR || event.getCurrentItem() == null 
 					&& event.getSlot() == 0
 					&& event.getSlot() == 1
 					&& event.getSlot() == 2
@@ -98,16 +117,15 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 5
 					&& event.getSlot() == 6
 					&& event.getSlot() == 7
-					&& event.getSlot() == 8 && rank.getPlayerRank(player.getUniqueId().toString(), player) == RankList.SOUVENIR) {
+					&& event.getSlot() == 8 && rank.config.getInt(player.getUniqueId().toString()) == 1) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 			}
 		}
-		event.setCancelled(false);
 	}
 	
-	public double getPing(Player player) 
-	{
+	//Récupérer le ping du joueur (en ms)
+	public double getPing(Player player) {
 		CraftPlayer pingC = (CraftPlayer) player;
 		EntityPlayer pingE = pingC.getHandle();
 		

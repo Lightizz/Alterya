@@ -25,7 +25,11 @@ public class CmdTakeMoney implements CommandExecutor
 	{
 		if(message.equalsIgnoreCase("takemoney")) {
 			Player player = (Player) sender;
-			if(sender instanceof Player && rank.config.getInt(player.getUniqueId().toString()) >= 8) {
+			if(sender instanceof Player) {
+				if(rank.config.getInt(player.getUniqueId().toString()) < 9) {
+					player.sendMessage(MainCore.prefix + "§4Vous n'êtes pas OP, Administrateur ou Responsable, vous ne pouvez pas effectuer cette commande !");
+					return true;
+				}
 				if(args.length != 2) {
 					player.sendMessage(MainCore.prefix + "La commande est /takemoney <joueur> <montant>.");
 					return true;

@@ -25,7 +25,11 @@ public class CmdPurgeMoney implements CommandExecutor
 	{
 		if(message.equalsIgnoreCase("purgemoney")) {
 			Player player = (Player) sender;
-			if(sender instanceof Player && rank.config.getInt(player.getUniqueId().toString()) >= 8) {
+			if(sender instanceof Player) {
+				if(rank.config.getInt(player.getUniqueId().toString()) < 8) {
+					player.sendMessage(MainCore.prefix + "§4Vous n'êtes pas OP, Administrateur ou Responsable, vous ne pouvez pas effectuer cette commande !");
+					return true;
+				}
 				if(args.length != 1) {
 					player.sendMessage(MainCore.prefix + "La commande est /purgemoney <joueur>.");
 					return true;
