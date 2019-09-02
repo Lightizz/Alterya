@@ -29,9 +29,15 @@ public class Commands implements CommandExecutor {
     		ItemMeta customM = customban.getItemMeta();
     		customM.setDisplayName(ChatColor.BOLD + "Liste des joueurs");
     		customban.setItemMeta(customM);
+    		if(player.getInventory().contains(customban) == true) {
+    			player.getInventory().remove(customban);
+    			player.sendMessage(prefix + " Desactivé");
+    			return true;
+    		}
     		player.getInventory().addItem(customban);
     		player.updateInventory();
-    		player.sendMessage(prefix + "Activer"); 
+    		player.sendMessage(prefix + " Activé");
+    		return true;
         	}
         
         if(label.equalsIgnoreCase("alert") && main.rank.config.getInt(player.getUniqueId().toString()) >= 10) {

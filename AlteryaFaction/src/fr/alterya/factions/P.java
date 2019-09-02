@@ -47,7 +47,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 
-
 public class P extends MPlugin
 {
 	// Our single plugin instance

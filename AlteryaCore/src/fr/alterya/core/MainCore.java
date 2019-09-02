@@ -67,7 +67,7 @@ public class MainCore extends JavaPlugin
 		new DCommand("Shop", "/shop", "Ouvre l'interface du shop", null, Collections.singletonList(""), new CmdShop(this), this);
 		
 		new DCommand("Money", "/money", "Envoie le montant de la bank du joueur", null, Collections.singletonList(""), new CmdMoney(this.rank), this);
-		new DCommand("Pay", "/pay <cible>", "Permet de payer un autre joueur", null, Collections.singletonList(""), new CmdPay(this.rank), this);
+		new DCommand("Pay", "/pay <cible> <montant>", "Permet de payer un autre joueur", null, Collections.singletonList(""), new CmdPay(this.rank), this);
 		new DCommand("Takemoney", "/takemoney <cible> <montant>", "Prend la money d'un joueur (OP)", null, Collections.singletonList(""), new CmdTakeMoney(this.rank, this), this);
 		new DCommand("Givemoney", "/givemoney <cible> <montant>", "Donne de la money à un joueur (OP) (Pas pris sur la money de l'executeur de la commande)", null, Collections.singletonList(""), new CmdGiveMoney(this.rank, this), this);
 		new DCommand("Purgemoney", "/purgemoney <cible>", "Remet la money du joueur au montant de départ (50 $) (OP)", null, Collections.singletonList(""), new CmdPurgeMoney(rank, this), this);

@@ -22,7 +22,6 @@ import fr.alterya.factions.zcore.persist.SaveTask;
 import fr.alterya.factions.zcore.util.LibLoader;
 import fr.alterya.factions.zcore.util.PermUtil;
 
-
 public abstract class MPlugin extends JavaPlugin
 {
 	// Some utils
@@ -45,11 +44,9 @@ public abstract class MPlugin extends JavaPlugin
 	// -------------------------------------------- //
 	// ENABLE
 	// -------------------------------------------- //
-	private long timeEnableStart;
 	public boolean preEnable()
 	{
-		log("=== ENABLE START ===");
-		timeEnableStart = System.currentTimeMillis();
+		log("==== AlteryaCore -> OFF ====");
 		
 		// Ensure basefolder exists!
 		this.getDataFolder().mkdirs();
@@ -82,7 +79,7 @@ public abstract class MPlugin extends JavaPlugin
 	
 	public void postEnable()
 	{
-		log("=== ENABLE DONE (Took "+(System.currentTimeMillis()-timeEnableStart)+"ms) ===");
+		log("==== AlteryaCore -> ON ====");
 	}
 	
 	public void onDisable()
