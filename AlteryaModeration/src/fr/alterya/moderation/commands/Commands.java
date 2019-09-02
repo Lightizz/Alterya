@@ -10,13 +10,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.moderation.Main;
+import fr.alterya.moderation.MainModeration;
 
 public class Commands implements CommandExecutor {
 
-	public Main main;
+	public MainModeration main;
 	
-	public Commands(Main main) {
+	public Commands(MainModeration main) {
 		this.main = main;
 	}
 	

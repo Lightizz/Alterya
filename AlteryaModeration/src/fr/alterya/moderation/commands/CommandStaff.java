@@ -14,13 +14,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.alterya.moderation.Main;
+import fr.alterya.moderation.MainModeration;
 
 public class CommandStaff implements CommandExecutor {
 	
-	public Main main;
+	public MainModeration main;
 	
-	public CommandStaff(Main main) {
+	public CommandStaff(MainModeration main) {
 		this.main = main;
 	}
 

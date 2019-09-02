@@ -5,8 +5,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.PlayerInventory;
 
+import fr.alterya.moderation.MainModeration;
 import fr.alterya.moderation.gui.AbstractGui;
 import fr.alterya.moderation.gui.GuiManager;
 
@@ -44,5 +46,14 @@ public class GuiListener implements Listener {
     public void onInventoryClose(InventoryCloseEvent event) {
         if (manager.getPlayerGui(event.getPlayer()) != null)
             manager.removeClosedGui((Player) event.getPlayer());
+    }
+    
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+    	Player player = event.getPlayer();
+    	if(GuiManager.freezPlayerList.contains(player.getUniqueId().toString())) {
+    		event.setCancelled(true);
+    		player.sendMessage(MainModeration.prefix + "Vous êtes freez vous ne pouvez pas bouger.");
+    	}
     }
 }

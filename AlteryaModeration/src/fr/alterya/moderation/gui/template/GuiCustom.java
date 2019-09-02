@@ -1,6 +1,5 @@
 package fr.alterya.moderation.gui.template;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bukkit.ChatColor;
@@ -11,20 +10,19 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.moderation.Main;
+import fr.alterya.moderation.MainModeration;
 import fr.alterya.moderation.gui.AbstractGui;
+import fr.alterya.moderation.gui.GuiManager;
 
 public class GuiCustom extends AbstractGui {
 
-	private final Main plugin;
+	private final MainModeration plugin;
 	private Player target;
 	private int topluck;
 	private long tempdejeu;
 	private long tempensec;
 
-	ArrayList<Player> freezPlayerList = new ArrayList<Player>();
-
-	public GuiCustom(Main plugin, Player target) {
+	public GuiCustom(MainModeration plugin, Player target) {
 		super(plugin);
 		this.plugin = plugin;
 		this.target = target;
@@ -80,9 +78,8 @@ public class GuiCustom extends AbstractGui {
 		this.setSlotData(customTemp, 31, "");
 		
 		for(int i = 0; i != 12; i++){
-					this.setSlotData(customGlas, i, null);
+			this.setSlotData(customGlas, i, null);
 		}
-	
 		for(int i = 15; i != 22; i++){
 			this.setSlotData(customGlas, i, null);
 		}
@@ -96,14 +93,12 @@ public class GuiCustom extends AbstractGui {
 			this.setSlotData(customGlas, i, null);
 		}
 		
-		if(player.isOp() == true) {
 		player.openInventory(this.inventory);
-		}
 	}
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onClick(Player player, ItemStack stack, String action, ClickType clickType) {
-		if(player.isOp() == true) {
 		if (action.equalsIgnoreCase("close")) {
 			this.plugin.getGuiManager().closeGui(player);
 		} else if (action.equalsIgnoreCase("tp")) {
@@ -121,16 +116,21 @@ public class GuiCustom extends AbstractGui {
 		} else if (action.equalsIgnoreCase("UnBan")) {
 			target.setBanned(false);
 		} else if (action.equalsIgnoreCase("Kick")) {
-
 			target.kickPlayer(ChatColor.GOLD + "Kick Par " + ChatColor.RED + player.getName());
-
 		} else if (action.equalsIgnoreCase("tphere")) {
 			target.teleport(player);
-        
+		}else if(action.equalsIgnoreCase("freeze")) {
+			if(GuiManager.freezPlayerList.contains(target.getUniqueId().toString())) {
+				GuiManager.freezPlayerList.remove(target.getUniqueId().toString());
+				target.sendMessage(MainModeration.prefix + "Vous êtes maintenant unfreez !");
+			}else if(! GuiManager.freezPlayerList.contains(target.getUniqueId().toString())) {
+				GuiManager.freezPlayerList.add(target.getUniqueId().toString());
+				target.sendMessage(MainModeration.prefix + "Vous êtes maintenant freez !");
+			}
 		}
 		return;
-		}
 	}
+	
 }
 
 

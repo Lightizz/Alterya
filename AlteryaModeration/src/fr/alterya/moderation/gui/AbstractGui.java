@@ -1,6 +1,5 @@
 package fr.alterya.moderation.gui;
 
-
 import java.util.Arrays;
 import java.util.TreeMap;
 
@@ -11,15 +10,15 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.moderation.Main;
+import fr.alterya.moderation.MainModeration;
 
 public abstract class AbstractGui {
 
-    protected final Main plugin;
+    protected final MainModeration plugin;
     protected TreeMap<Integer, String> actions = new TreeMap<>();
     protected Inventory inventory;
 
-    public AbstractGui(Main plugin) {
+    public AbstractGui(MainModeration plugin) {
         this.plugin = plugin;
     }
 

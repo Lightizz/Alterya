@@ -7,14 +7,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import fr.alterya.moderation.Main;
+import fr.alterya.moderation.MainModeration;
 import fr.alterya.moderation.gui.template.GuiPlayers;
 
 public class PlayerListener implements Listener {
 	
-	private final Main plugin;
+	private final MainModeration plugin;
 
-	public PlayerListener(Main plugin) {
+	public PlayerListener(MainModeration plugin) {
 		this.plugin = plugin;
 	}
 

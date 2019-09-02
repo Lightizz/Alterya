@@ -2,6 +2,7 @@ package fr.alterya.moderation;
 
 import java.util.Collections;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,9 +16,11 @@ import fr.alterya.moderation.listeners.PlayerListener;
 import fr.alterya.moderation.tools.DCommand;
 
 
-public class Main extends JavaPlugin implements Listener{
+public class MainModeration extends JavaPlugin implements Listener{
 	
-	private static Main instance;
+	public static String prefix = ChatColor.GOLD + "[Modération] ";
+	
+	private static MainModeration instance;
 	private GuiManager guiManager;
 	
 	Player player;
@@ -51,7 +54,7 @@ public class Main extends JavaPlugin implements Listener{
 	
     public GuiManager getGuiManager() {	return guiManager; }
 
-	public static Main getInstance() { return instance; }
+	public static MainModeration getInstance() { return instance; }
 }
 
 
