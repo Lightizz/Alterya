@@ -35,8 +35,9 @@ public class MainCore extends JavaPlugin
 	public static String prefix = ChatColor.AQUA + "[Core] ";
 		
 	public Shop shop;
-	Player player;
 	public Rank rank;
+	public CodeRecipe codeRecipe;
+	Player player;
 	
 	//Faire une instance accéssible par toutes les class
 	public static MainCore instance;
@@ -46,11 +47,12 @@ public class MainCore extends JavaPlugin
 	public void onLoad() { 
 		rank = new Rank(this, player); 
 		shop = new Shop();
+		codeRecipe = new CodeRecipe(this);
 	}	
 	
 	@Override
 	public void onEnable() {		
-		System.out.println("==== AlteryaCore -> ON ====");
+		System.out.println("== AlteryaCore [ON] ==");
 		
 		// Créer les commandes
 		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("/enderchest"), new BasicsPlayerCommands(), this);
@@ -100,6 +102,6 @@ public class MainCore extends JavaPlugin
 	@Override
 	public void onDisable() 
 	{	
-		System.out.println("==== AlteryaCore -> OFF ====");
+		System.out.println("== AlteryaFaction [OFF] ==");
 	}
 }

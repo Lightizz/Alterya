@@ -70,7 +70,7 @@ public class MoneyManager
 	
 	public Set<String> getMoneyBanks(){
 		fw.saveConfig();
-		return fw.getKeys(false);
+		return fw.config.getKeys(false);
 	}
 	
 	public double getMoney(String uuid) {

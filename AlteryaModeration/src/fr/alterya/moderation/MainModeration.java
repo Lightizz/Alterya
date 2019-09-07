@@ -35,7 +35,7 @@ public class MainModeration extends JavaPlugin implements Listener{
 	@Override
 	public void onEnable() {
 		instance = this;
-		System.out.println("==== AlteryaModeration -> ON ====");
+		System.out.println("== AlteryaModeration [ON] ==");
 	
 		this.guiManager = new GuiManager(this);
 		this.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
@@ -50,7 +50,7 @@ public class MainModeration extends JavaPlugin implements Listener{
 	}
 	
 	@Override
-	public void onDisable() { System.out.println("==== AlteryaModeration -> OFF ===="); }
+	public void onDisable() { System.out.println("== AlteryaModeration [OFF] =="); }
 	
     public GuiManager getGuiManager() {	return guiManager; }
 

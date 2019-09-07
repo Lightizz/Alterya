@@ -46,7 +46,7 @@ public abstract class MPlugin extends JavaPlugin
 	// -------------------------------------------- //
 	public boolean preEnable()
 	{
-		log("==== AlteryaCore -> OFF ====");
+		log("== AlteryaFaction [ON] ==");
 		
 		// Ensure basefolder exists!
 		this.getDataFolder().mkdirs();
@@ -79,7 +79,7 @@ public abstract class MPlugin extends JavaPlugin
 	
 	public void postEnable()
 	{
-		log("==== AlteryaCore -> ON ====");
+		log("== AlteryaFaction [OFF] ==");
 	}
 	
 	public void onDisable()
