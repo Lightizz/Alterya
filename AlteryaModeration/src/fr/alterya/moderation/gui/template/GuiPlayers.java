@@ -42,7 +42,4 @@ public class GuiPlayers extends AbstractGui {
 	public void onClick(Player player, ItemStack stack, String action, ClickType clickType) {
 		plugin.getGuiManager().openGui(player, new GuiCustom(this.plugin, Bukkit.getPlayer(action)));
 	}
-	
-	
-
 }

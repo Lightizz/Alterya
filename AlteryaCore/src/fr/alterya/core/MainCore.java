@@ -13,6 +13,7 @@ import fr.alterya.core.command.CmdFurnace;
 import fr.alterya.core.command.CmdGiveMoney;
 import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdKit;
+import fr.alterya.core.command.CmdMenu;
 import fr.alterya.core.command.CmdMoney;
 import fr.alterya.core.command.CmdPay;
 import fr.alterya.core.command.CmdPromote;
@@ -23,6 +24,7 @@ import fr.alterya.core.command.CmdTakeMoney;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
 import fr.alterya.core.listeners.PlayerListener;
+import fr.alterya.core.listeners.PlayerMenuListener;
 import fr.alterya.core.listeners.ShopListener;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.permissions.PermissionsManager;
@@ -36,7 +38,7 @@ public class MainCore extends JavaPlugin
 		
 	public Shop shop;
 	public Rank rank;
-	public CodeRecipe codeRecipe;
+	public Recipes recipes;
 	Player player;
 	
 	//Faire une instance accéssible par toutes les class
@@ -47,7 +49,7 @@ public class MainCore extends JavaPlugin
 	public void onLoad() { 
 		rank = new Rank(this, player); 
 		shop = new Shop();
-		codeRecipe = new CodeRecipe(this);
+		recipes = new Recipes(this);
 	}	
 	
 	@Override
@@ -55,6 +57,7 @@ public class MainCore extends JavaPlugin
 		System.out.println("== AlteryaCore [ON] ==");
 		
 		// Créer les commandes
+		new DCommand("Menu", "/menu", "Ouvre le menu du joueur", null, Collections.singletonList(""), new CmdMenu(this), this);
 		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("/enderchest"), new BasicsPlayerCommands(), this);
 		new DCommand("Craft", "/craft", "Permet d'ouvrir une table de craft", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
 		new DCommand("Furnace", "/furnace", "Permet de faire cuire l'item dans la main de l'envoyeur de la commande", null, Collections.singletonList(""), new CmdFurnace(this), this);
@@ -95,6 +98,7 @@ public class MainCore extends JavaPlugin
 		//Enregistrer tous les évenements 
 		getServer().getPluginManager().registerEvents(new PlayerListener(rank), this);
 		getServer().getPluginManager().registerEvents(new ShopListener(), this);
+		getServer().getPluginManager().registerEvents(new PlayerMenuListener(), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
 		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
 	}
