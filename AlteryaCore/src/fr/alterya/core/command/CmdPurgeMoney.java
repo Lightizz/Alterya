@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.money.MoneyManager;
 import fr.alterya.core.rank.Rank;
@@ -42,7 +43,8 @@ public class CmdPurgeMoney implements CommandExecutor
 					}
 					
 					manager.purgeMoney(target.getUniqueId().toString());
-					player.sendMessage(MainCore.prefix + "La money de " + target.getName() + " a été purger.");
+					player.sendMessage(MainCore.prefix + "La money de " + target.getName() + " a été purgée.");
+					MainCore.log(LogType.INFO, "La money de " + target.getName() + " a été purgée par " + player.getDisplayName() + ".");
 					return true;
 				}
 			}else if(!(sender instanceof Player)){

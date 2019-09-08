@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
@@ -63,7 +64,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					//Message au joueur
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.JOUEUR.getRankName());
 					//Message pour les logs
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.JOUEUR.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.JOUEUR.getRankName());
 					return true;
 				}
 			}else if(id0 == 1) {
@@ -71,7 +72,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.SOUVENIR, target); /* Donner le rang */
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SOUVENIR.getRankName());
 					return true;
 				}
 			}else if(id0 == 2) {
@@ -79,7 +80,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.MEMOIRE, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MEMOIRE.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MEMOIRE.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MEMOIRE.getRankName());
 					return true;
 				}
 			}else if(id0 == 3) {
@@ -87,7 +88,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.SAGE, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SAGE.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SAGE.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.SAGE.getRankName());
 					return true;
 				}
 			}else if(id0 == 4) {
@@ -95,7 +96,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.DEVELOPPEUR, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.DEVELOPPEUR.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.DEVELOPPEUR.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.DEVELOPPEUR.getRankName());
 					return true;
 				}
 			}else if(id0 == 5) {
@@ -103,7 +104,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.ARCHITECTE, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ARCHITECTE.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ARCHITECTE.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ARCHITECTE.getRankName());System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ARCHITECTE.getRankName() + " [Log message]");
 					return true;
 				}
 			}else if(id0 == 6) {
@@ -111,7 +112,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.GUIDE, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.GUIDE.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.GUIDE.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.GUIDE.getRankName());
 					return true;
 				}
 			}else if(id0 == 7) {
@@ -119,7 +120,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.MODERATEUR, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR.getRankName());
 					return true;
 				}
 			}else if(id0 == 8) {
@@ -127,7 +128,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.MODERATEUR_PLUS, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR_PLUS.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR_PLUS.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.MODERATEUR_PLUS.getRankName());
 					return true;
 				}
 			}else if(id0 == 9) {
@@ -135,7 +136,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.RESPONSABLE, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.RESPONSABLE.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.RESPONSABLE.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.RESPONSABLE.getRankName());
 					return true;
 				}
 			}else if(id0 == 10) {
@@ -143,7 +144,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 					rank.deletPlayer(target.getUniqueId().toString());
 					rank.addRank(RankList.ADMINISTRATEUR, target);
 					player.sendMessage(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ADMINISTRATEUR.getRankName());
-					System.out.println(MainCore.prefix + "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ADMINISTRATEUR.getRankName() + " [Log message]");
+					MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a reçu le grade de " + RankList.ADMINISTRATEUR.getRankName());
 					return true;
 				}
 			}
@@ -160,7 +161,7 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 				Player target = Bukkit.getPlayer(args[0]);
 				rank.deletPlayer(target.getUniqueId().toString());
 				player.sendMessage(MainCore.prefix + target.getName() + " a été dérank !");
-				System.out.println(MainCore.prefix + target.getName() + " a été dérank !" + " [Log message]");
+				MainCore.log(LogType.WARNING, "Le joueur " + target.getName() + " a été dérank !");
 				return true;
 			}
 		}

@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.money.MoneyManager;
 import fr.alterya.core.shop.PrisesList;
@@ -188,6 +189,7 @@ public class ShopListener implements Listener
 						player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 						//Envoie le message de confirmation
 						player.sendMessage("§eVous avez acheté §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
+						MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a acheté " + itemToGive.getAmount() + " " + item.getName() + " pour " + item.getBuyPriseS() + "$.");
 					}
 				}
 				//Ajoute l'item
@@ -195,10 +197,10 @@ public class ShopListener implements Listener
 				e.setCancelled(true);
 				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.sell.getItemMeta().getDisplayName()) {
-				ItemStack itemToGive = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
+				ItemStack itemToSell = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
 				for(PrisesList item : PrisesList.values()) {
 					//Voir si l'item choisi est vendable ou pas
-					if(itemToGive.getType() == item.getMaterial()) {
+					if(itemToSell.getType() == item.getMaterial()) {
 						if(Shop.unsellableItems.containsValue(item)) {
 							player.sendMessage(MainCore.prefix + "§aL'item §e\"" + item.getName() + "\"§a n'est pas vendable.");
 							player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
@@ -207,24 +209,25 @@ public class ShopListener implements Listener
 						}
 					}
 				}
-				if(! player.getInventory().contains(itemToGive)) {
-					player.sendMessage(MainCore.prefix + "§eVous devez avoir §a" + itemToGive.getAmount() + " §a" + itemToGive.getType().name() + " §edans votre inventaire.");
+				if(! player.getInventory().contains(itemToSell)) {
+					player.sendMessage(MainCore.prefix + "§eVous devez avoir §a" + itemToSell.getAmount() + " §a" + itemToSell.getType().name() + " §edans votre inventaire.");
 					player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 					return;
 				}
 				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
 				for(PrisesList item : PrisesList.values()) {
-					if(itemToGive.getType() == item.getMaterial()) {
+					if(itemToSell.getType() == item.getMaterial()) {
 						//Ajoute la money
 						manager.addMoney(player.getUniqueId().toString(), item.getSellPrise());
 						//Joue un son
 						player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 						//Envoie le message de confirmation
-						player.sendMessage("§eVous avez vendu §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
+						player.sendMessage("§eVous avez vendu §a" + itemToSell.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
+						MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a vendu " + itemToSell.getAmount() + " " + item.getName() + " et il a reçu " + item.getSellPriseS() + "$.");
 					}
 				}
 				//Enlève l'item de l'inventaire du joueur
-				player.getInventory().removeItem(itemToGive);
+				player.getInventory().removeItem(itemToSell);
 				e.setCancelled(true);
 				return;
 			}

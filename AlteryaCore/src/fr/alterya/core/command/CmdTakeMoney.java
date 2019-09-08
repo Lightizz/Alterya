@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.money.MoneyManager;
 import fr.alterya.core.rank.Rank;
@@ -44,6 +45,7 @@ public class CmdTakeMoney implements CommandExecutor
 					
 					manager.substractMoney(target.getUniqueId().toString(), amount);
 					player.sendMessage(MainCore.prefix + "Vous avez pris " + amount + " $ à " + target.getName() + ".");
+					MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + "a pris " + amount + "$ à " + target.getName() + ".");
 					return true;
 				}
 			}else {

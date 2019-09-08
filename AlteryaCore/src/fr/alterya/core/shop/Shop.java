@@ -144,6 +144,13 @@ public class Shop implements Listener {
 		unsellableItems.put(PrisesList.COOKED_STEAK.getID(), PrisesList.COOKED_STEAK);
 		unsellableItems.put(PrisesList.COOKED_CHIKEN.getID(), PrisesList.COOKED_CHIKEN);
 		unsellableItems.put(PrisesList.COOKED_PORCKCHOP.getID(), PrisesList.COOKED_PORCKCHOP);
+		
+		//Blocks
+		unsellableItems.put(PrisesList.GRASS.getID(), PrisesList.GRASS);
+		unsellableItems.put(PrisesList.DIRT.getID(), PrisesList.DIRT);
+		unsellableItems.put(PrisesList.PACKED_ICE.getID(), PrisesList.PACKED_ICE);
+		unsellableItems.put(PrisesList.ICE.getID(), PrisesList.ICE);
+		unsellableItems.put(PrisesList.GRAVEL.getID(), PrisesList.GRAVEL);
 	}
 	public void setPillageItems() {
 		pillageList.put(PrisesList.ENDER_PEARL.getID(), PrisesList.ENDER_PEARL);

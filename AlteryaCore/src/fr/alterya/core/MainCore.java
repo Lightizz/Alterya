@@ -15,6 +15,7 @@ import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdKit;
 import fr.alterya.core.command.CmdMenu;
 import fr.alterya.core.command.CmdMoney;
+import fr.alterya.core.command.CmdMsg;
 import fr.alterya.core.command.CmdPay;
 import fr.alterya.core.command.CmdPromote;
 import fr.alterya.core.command.CmdPurgeMoney;
@@ -57,8 +58,9 @@ public class MainCore extends JavaPlugin
 		System.out.println("== AlteryaCore [ON] ==");
 		
 		// Créer les commandes
+		new DCommand("Message", "/msg <joueur> <message>", "Envoie un message privé au joueur cilbé", null, Collections.singletonList("m"), new CmdMsg(this), this);
 		new DCommand("Menu", "/menu", "Ouvre le menu du joueur", null, Collections.singletonList(""), new CmdMenu(this), this);
-		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("/enderchest"), new BasicsPlayerCommands(), this);
+		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("enderchest"), new BasicsPlayerCommands(), this);
 		new DCommand("Craft", "/craft", "Permet d'ouvrir une table de craft", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
 		new DCommand("Furnace", "/furnace", "Permet de faire cuire l'item dans la main de l'envoyeur de la commande", null, Collections.singletonList(""), new CmdFurnace(this), this);
 		new DCommand("Discord", "/discord", "Envoie le lien du serveur discord officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
@@ -77,7 +79,7 @@ public class MainCore extends JavaPlugin
 		new DCommand("Givemoney", "/givemoney <cible> <montant>", "Donne de la money à un joueur (OP) (Pas pris sur la money de l'executeur de la commande)", null, Collections.singletonList(""), new CmdGiveMoney(this.rank, this), this);
 		new DCommand("Purgemoney", "/purgemoney <cible>", "Remet la money du joueur au montant de départ (50 $) (OP)", null, Collections.singletonList(""), new CmdPurgeMoney(rank, this), this);
 		new DCommand("Setmoney", "/setmoney <cible> <montant>", "Met le montant de la bank de la cible au montant indiqué", null, Collections.singletonList(""), new CmdSetMoney(rank, this), this);
-		new DCommand("Baltop", "/baltop", "Affiche le top 10 des joueurs les plus richent sur le serveur", null, Collections.singletonList("/moneytop"), new CmdBaltop(), this);
+		new DCommand("Baltop", "/baltop", "Affiche le top 10 des joueurs les plus richent sur le serveur", null, Collections.singletonList("moneytop"), new CmdBaltop(), this);
 		
 		new DCommand("Home", "/home <nom>", "Teleporte l'executeur de la commande au home choisi à partir du nom indiqué", null, Collections.singletonList(""), new CmdHome(rank, this), this);
 		new DCommand("Delhome", "/delhome <nom>", "Supprime le home indiqué dans la commande de la liste des homes du joueur", null, Collections.singletonList(""), new CmdHome(rank, this), this);
@@ -107,5 +109,9 @@ public class MainCore extends JavaPlugin
 	public void onDisable() 
 	{	
 		System.out.println("== AlteryaFaction [OFF] ==");
+	}
+	
+	public static void log(LogType logType, String message) {
+		System.out.println("[Log] (" + logType.string() + ") " + message);
 	}
 }

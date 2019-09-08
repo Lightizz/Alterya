@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 
 public class CmdTpno implements CommandExecutor
@@ -30,6 +31,8 @@ public class CmdTpno implements CommandExecutor
 			CmdTpa.requestSenderPlayers.remove(player.getUniqueId().toString());
 			CmdTpa.requestedPlayers.remove(target.getUniqueId().toString());
 				
+			MainCore.log(LogType.INFO, "Le joueur " + target.getDisplayName() + " a refusé la requête de téléportation de " + player.getDisplayName() + ".");
+			
 			return true;
 		}
 		return false;

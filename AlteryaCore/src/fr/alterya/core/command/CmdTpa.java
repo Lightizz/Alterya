@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 
 public class CmdTpa extends BukkitRunnable implements CommandExecutor
@@ -56,6 +57,8 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 			target.sendMessage("§eFaites §2/tpyes §epour accepter.");
 			target.sendMessage("§eOu faites §2/tpno §epour refuser.");
 			
+			MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a demander à " + target.getDisplayName() + " si il peut se téléport à sa postion.");
+			
 			//Ajouter les joueurs dans les listes
 			requestSenderPlayers.add(player.getUniqueId().toString());
 			requestedPlayers.add(target.getUniqueId().toString());
@@ -82,7 +85,9 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 			//Retire les joueurs des listes
 			requestSenderPlayers.remove(player.getUniqueId().toString());
 			requestedPlayers.remove(target.getUniqueId().toString());
-				
+			
+			MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " s'est téléporter à " + target.getDisplayName() + ".");
+			
 			return true;
 		}
 		return false;

@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.money.MoneyManager;
 import fr.alterya.core.rank.Rank;
@@ -37,6 +38,7 @@ public class CmdPay implements CommandExecutor
 					if(manager.moneyBankExist(target.getUniqueId().toString()) == false) {
 						player.sendMessage(MainCore.prefix + "Ce joueur est introuvable.");
 					}else {
+						MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a payé " + target.getDisplayName() + " de " + amount + "$.");
 						//Envoyer et soustraire la money
 						manager.addMoney(target.getUniqueId().toString(), amount);
 						manager.substractMoney(player.getUniqueId().toString(), amount);

@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.money.MoneyManager;
 import fr.alterya.core.rank.Rank;
@@ -44,6 +45,7 @@ public class CmdSetMoney implements CommandExecutor
 					
 					manager.setMoney(target.getUniqueId().toString(), amount);
 					player.sendMessage(MainCore.prefix + "La money de " + target.getName() + " a été mise à " + amount + " $.");
+					MainCore.log(LogType.INFO, "La money de " + target.getName() + " a été mise à " + amount + " $ par " + player.getDisplayName() + ".");
 					return true;
 				}
 			}else {
