@@ -30,7 +30,7 @@ public class Recipes {
 	  
 	    ItemStack customALTERYOMS = new ItemStack(Material.DIAMOND_SWORD);
 	    ItemMeta customas = customALTERYOMS.getItemMeta();
-	    customas.setDisplayName(ChatColor.GOLD + "Epée en Alteryom");
+	    customas.setDisplayName(ChatColor.GOLD + "Epée en Alteryum");
 	    customas.addEnchant(Enchantment.DAMAGE_ALL, 6, true);
 	    customALTERYOMS.setItemMeta(customas);
 	      
@@ -43,7 +43,7 @@ public class Recipes {
 	  
 	    ItemStack customALTERYOMA = new ItemStack(Material.DIAMOND_AXE);
 	    ItemMeta customah = customALTERYOMA.getItemMeta();
-	    customah.setDisplayName(ChatColor.GOLD + "Hache en Alteryom");
+	    customah.setDisplayName(ChatColor.GOLD + "Hache en Alteryum");
 	    customah.addEnchant(Enchantment.DAMAGE_ALL, 6, true);
 	    customah.addEnchant(Enchantment.DIG_SPEED, 6, true);
 	    customALTERYOMA.setItemMeta(customah);
@@ -70,7 +70,7 @@ public class Recipes {
 	  
 	    ItemStack customH = new ItemStack(Material.DIAMOND_HELMET);
 	    ItemMeta customch = customH.getItemMeta();
-	    customch.setDisplayName(ChatColor.GOLD + "Casque en Alteryom");
+	    customch.setDisplayName(ChatColor.GOLD + "Casque en Alteryum");
 	    customch.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, true);
 	    customH.setItemMeta(customch);
 	  
@@ -82,7 +82,7 @@ public class Recipes {
 	    
 	    ItemStack customC = new ItemStack(Material.DIAMOND_CHESTPLATE);
 	    ItemMeta customcc = customC.getItemMeta();
-	    customcc.setDisplayName(ChatColor.GOLD + "Plastron en Alteryom");
+	    customcc.setDisplayName(ChatColor.GOLD + "Plastron en Alteryum");
 	    customcc.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, true);
 	    customC.setItemMeta(customcc);
 	      
@@ -94,7 +94,7 @@ public class Recipes {
 	      
 	    ItemStack customL = new ItemStack(Material.DIAMOND_LEGGINGS);
 	    ItemMeta customcl = customL.getItemMeta();
-	    customcl.setDisplayName(ChatColor.GOLD + "Jambière en Alteryom");
+	    customcl.setDisplayName(ChatColor.GOLD + "Jambière en Alteryum");
 	    customcl.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, true);
 	    customL.setItemMeta(customcl);
 	  
@@ -106,7 +106,7 @@ public class Recipes {
 	      
 	    ItemStack customB = new ItemStack(Material.DIAMOND_BOOTS);
 	    ItemMeta customcb = customB.getItemMeta();
-	    customcb.setDisplayName(ChatColor.GOLD + "Botte en Alteryom");
+	    customcb.setDisplayName(ChatColor.GOLD + "Botte en Alteryum");
 	    customcb.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, true);
 	    customB.setItemMeta(customcb);
 	      

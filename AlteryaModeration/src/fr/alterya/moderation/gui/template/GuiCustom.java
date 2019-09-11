@@ -10,19 +10,19 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.moderation.MainModeration;
+import fr.alterya.moderation.Main;
 import fr.alterya.moderation.gui.AbstractGui;
 import fr.alterya.moderation.gui.GuiManager;
 
 public class GuiCustom extends AbstractGui {
 
-	private final MainModeration plugin;
+	private final Main plugin;
 	private Player target;
 	private int topluck;
 	private long tempdejeu;
 	private long tempensec;
 
-	public GuiCustom(MainModeration plugin, Player target) {
+	public GuiCustom(Main plugin, Player target) {
 		super(plugin);
 		this.plugin = plugin;
 		this.target = target;
@@ -122,10 +122,10 @@ public class GuiCustom extends AbstractGui {
 		}else if(action.equalsIgnoreCase("freeze")) {
 			if(GuiManager.freezPlayerList.contains(target.getUniqueId().toString())) {
 				GuiManager.freezPlayerList.remove(target.getUniqueId().toString());
-				target.sendMessage(MainModeration.prefix + "Vous êtes maintenant unfreez !");
+				target.sendMessage(Main.prefix + "Vous êtes maintenant unfreez !");
 			}else if(! GuiManager.freezPlayerList.contains(target.getUniqueId().toString())) {
 				GuiManager.freezPlayerList.add(target.getUniqueId().toString());
-				target.sendMessage(MainModeration.prefix + "Vous êtes maintenant freez !");
+				target.sendMessage(Main.prefix + "Vous êtes maintenant freez !");
 			}
 		}
 		return;

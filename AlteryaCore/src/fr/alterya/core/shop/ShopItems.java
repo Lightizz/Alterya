@@ -2,7 +2,7 @@ package fr.alterya.core.shop;
 
 import org.bukkit.Material;
 
-public enum PrisesList
+public enum ShopItems
 {	
 	//Blocks
 	DIRT(0.0, 0.0, 0, Material.DIRT, "Terre"),
@@ -80,7 +80,7 @@ public enum PrisesList
 	private final Material itemMaterial;
 	private final String name;
 	
-	private PrisesList(double buyPrise, double sellPrise, int id, Material itemMaterial, String name) {
+	private ShopItems(double buyPrise, double sellPrise, int id, Material itemMaterial, String name) {
 		this.buyPrise = buyPrise;
 		this.sellPrise = sellPrise;
 		this.id = id;

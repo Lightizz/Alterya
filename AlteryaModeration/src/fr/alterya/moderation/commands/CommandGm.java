@@ -9,14 +9,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import fr.alterya.moderation.MainModeration;
-
+import fr.alterya.moderation.Main;
 
 public class CommandGm implements CommandExecutor, Listener{
 
-	public MainModeration main;
+	public Main main;
 	
-	public CommandGm(MainModeration main) {
+	public CommandGm(Main main) {
 		this.main = main;
 	}
 	

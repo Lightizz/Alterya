@@ -4,24 +4,23 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import fr.alterya.moderation.MainModeration;
+import fr.alterya.moderation.Main;
 import fr.alterya.moderation.gui.template.GuiPlayers;
 
 public class PlayerListener implements Listener {
 	
-	private final MainModeration plugin;
+	private final Main plugin;
 
-	public PlayerListener(MainModeration plugin) {
+	public PlayerListener(Main plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler
 	public void onInteractEvent(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
-		if(event.getAction() == Action.RIGHT_CLICK_AIR && player.getItemInHand().getType() == Material.PAPER) {
+		if(player.getItemInHand().getType() == Material.PAPER && player.getItemInHand().getItemMeta().getDisplayName() == "§4Liste des joueurs") {
 			this.plugin.getGuiManager().openGui(player, new GuiPlayers(this.plugin));
 		}
 	}

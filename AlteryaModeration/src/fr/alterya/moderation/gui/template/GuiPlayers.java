@@ -7,15 +7,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
-import fr.alterya.moderation.MainModeration;
+import fr.alterya.moderation.Main;
 import fr.alterya.moderation.gui.AbstractGui;
 import fr.alterya.moderation.tools.ItemBuilder;
 
 public class GuiPlayers extends AbstractGui {
 
-	private final MainModeration plugin;
+	private final Main plugin;
 	
-	public GuiPlayers(MainModeration plugin) {
+	public GuiPlayers(Main plugin) {
 		super(plugin);
 		this.plugin = plugin;
 	}

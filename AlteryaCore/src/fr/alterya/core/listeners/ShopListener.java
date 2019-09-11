@@ -13,13 +13,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.money.MoneyManager;
-import fr.alterya.core.shop.PrisesList;
 import fr.alterya.core.shop.Shop;
+import fr.alterya.core.shop.ShopItems;
 import fr.alterya.core.util.ItemBuilder;
 
 public class ShopListener implements Listener 
 {	
-	PrisesList prisesList;
+	ShopItems prisesList;
 	Shop shop;
 	
 	//Partie qui gère l'objet de retour
@@ -100,7 +100,7 @@ public class ShopListener implements Listener
 			ItemStack itemClicked = e.getCurrentItem();
 			ItemMeta itemM = itemClicked.getItemMeta();
 			//Pour chaque item dans le shop regarde s'il coorespond à l'item cliqué, si oui il lui donne le nom en français
-			for(PrisesList item : PrisesList.values()) {
+			for(ShopItems item : ShopItems.values()) {
 				if(itemClicked.getType() == item.getMaterial()) {
 					itemM.setDisplayName(item.getName());
 				}
@@ -176,7 +176,7 @@ public class ShopListener implements Listener
 			if(itemClicked.getItemMeta().getDisplayName() == Shop.buy.getItemMeta().getDisplayName()) {
 				ItemStack itemToGive = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
 				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
-				for(PrisesList item : PrisesList.values()) {
+				for(ShopItems item : ShopItems.values()) {
 					if(itemToGive.getType() == item.getMaterial()) {
 						//Retire la money
 						if (manager.getMoney(player.getUniqueId().toString()) < item.getBuyPrise()) {
@@ -198,7 +198,7 @@ public class ShopListener implements Listener
 				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.sell.getItemMeta().getDisplayName()) {
 				ItemStack itemToSell = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
-				for(PrisesList item : PrisesList.values()) {
+				for(ShopItems item : ShopItems.values()) {
 					//Voir si l'item choisi est vendable ou pas
 					if(itemToSell.getType() == item.getMaterial()) {
 						if(Shop.unsellableItems.containsValue(item)) {
@@ -215,7 +215,7 @@ public class ShopListener implements Listener
 					return;
 				}
 				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
-				for(PrisesList item : PrisesList.values()) {
+				for(ShopItems item : ShopItems.values()) {
 					if(itemToSell.getType() == item.getMaterial()) {
 						//Ajoute la money
 						manager.addMoney(player.getUniqueId().toString(), item.getSellPrise());

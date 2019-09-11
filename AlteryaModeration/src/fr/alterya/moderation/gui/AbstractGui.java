@@ -10,15 +10,15 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.moderation.MainModeration;
+import fr.alterya.moderation.Main;
 
 public abstract class AbstractGui {
 
-    protected final MainModeration plugin;
+    protected final Main plugin;
     protected TreeMap<Integer, String> actions = new TreeMap<>();
     protected Inventory inventory;
 
-    public AbstractGui(MainModeration plugin) {
+    public AbstractGui(Main plugin) {
         this.plugin = plugin;
     }
 

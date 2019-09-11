@@ -10,13 +10,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.alterya.moderation.MainModeration;
+import fr.alterya.moderation.Main;
 
 public class Commands implements CommandExecutor {
 
-	public MainModeration main;
+	public Main main;
 	
-	public Commands(MainModeration main) {
+	public Commands(Main main) {
 		this.main = main;
 	}
 	
@@ -27,7 +27,7 @@ public class Commands implements CommandExecutor {
         if(label.equalsIgnoreCase("admin") && main.rank.config.getInt(player.getUniqueId().toString()) >= 10) {
     		ItemStack customban = new ItemStack(Material.PAPER, 1);
     		ItemMeta customM = customban.getItemMeta();
-    		customM.setDisplayName(ChatColor.BOLD + "Liste des joueurs");
+    		customM.setDisplayName("§4Liste des joueurs");
     		customban.setItemMeta(customM);
     		if(player.getInventory().contains(customban) == true) {
     			player.getInventory().remove(customban);

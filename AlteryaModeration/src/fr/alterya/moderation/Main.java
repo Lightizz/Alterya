@@ -15,12 +15,11 @@ import fr.alterya.moderation.gui.GuiManager;
 import fr.alterya.moderation.listeners.PlayerListener;
 import fr.alterya.moderation.tools.DCommand;
 
-
-public class MainModeration extends JavaPlugin implements Listener{
+public class Main extends JavaPlugin implements Listener{
 	
 	public static String prefix = ChatColor.GOLD + "[Modération] ";
 	
-	private static MainModeration instance;
+	private static Main instance;
 	private GuiManager guiManager;
 	
 	Player player;
@@ -35,7 +34,7 @@ public class MainModeration extends JavaPlugin implements Listener{
 	@Override
 	public void onEnable() {
 		instance = this;
-		System.out.println("== AlteryaModeration [ON] ==");
+		System.out.println("AlteryaModeration [ON]");
 	
 		this.guiManager = new GuiManager(this);
 		this.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
@@ -54,7 +53,7 @@ public class MainModeration extends JavaPlugin implements Listener{
 	
     public GuiManager getGuiManager() {	return guiManager; }
 
-	public static MainModeration getInstance() { return instance; }
+	public static Main getInstance() { return instance; }
 }
 
 

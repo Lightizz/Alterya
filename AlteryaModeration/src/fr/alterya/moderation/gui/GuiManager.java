@@ -9,20 +9,20 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
-import fr.alterya.moderation.MainModeration;
+import fr.alterya.moderation.Main;
 import fr.alterya.moderation.listeners.GuiListener;
 
 // SamaGames extends Class
 
 public class GuiManager {
 
-    protected final MainModeration plugin;
+    protected final Main plugin;
     private final ConcurrentHashMap<UUID, AbstractGui> currentGUIs;
     private final HashMap<UUID, String> workersIds;
 
     public static ArrayList<String> freezPlayerList = new ArrayList<String>();
     
-    public GuiManager(MainModeration plugin) {
+    public GuiManager(Main plugin) {
         this.plugin = plugin;
         this.currentGUIs = new ConcurrentHashMap<>();
         this.workersIds = new HashMap<>();

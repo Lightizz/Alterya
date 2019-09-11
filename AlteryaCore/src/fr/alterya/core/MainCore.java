@@ -55,7 +55,7 @@ public class MainCore extends JavaPlugin
 	
 	@Override
 	public void onEnable() {		
-		System.out.println("== AlteryaCore [ON] ==");
+		System.out.println("AlteryaCore [ON]");
 		
 		// Créer les commandes
 		new DCommand("Message", "/msg <joueur> <message>", "Envoie un message privé au joueur cilbé", null, Collections.singletonList("m"), new CmdMsg(this), this);

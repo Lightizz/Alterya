@@ -8,7 +8,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.PlayerInventory;
 
-import fr.alterya.moderation.MainModeration;
+import fr.alterya.moderation.Main;
 import fr.alterya.moderation.gui.AbstractGui;
 import fr.alterya.moderation.gui.GuiManager;
 
@@ -53,7 +53,7 @@ public class GuiListener implements Listener {
     	Player player = event.getPlayer();
     	if(GuiManager.freezPlayerList.contains(player.getUniqueId().toString())) {
     		event.setCancelled(true);
-    		player.sendMessage(MainModeration.prefix + "Vous êtes freez vous ne pouvez pas bouger.");
+    		player.sendMessage(Main.prefix + "Vous êtes freez vous ne pouvez pas bouger.");
     	}
     }
 }

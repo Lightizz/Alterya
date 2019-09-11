@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import fr.alterya.core.shop.ShopItems;
 import fr.alterya.core.util.ItemBuilder;
 
 /*
@@ -18,7 +19,7 @@ Author : Lightiz
 
 public class Shop implements Listener {
 	
-	PrisesList pl_;
+	ShopItems pl_;
 	
 	/*public static Dye red;
 	public static Dye gray;
@@ -29,16 +30,16 @@ public class Shop implements Listener {
 	public static Dye orange;
 	public static Dye yellow;*/
 	
-	public HashMap<Integer, PrisesList> prisesList = new HashMap<>();
+	public HashMap<Integer, ShopItems> ShopItemsList = new HashMap<>();
 	
-	public static HashMap<Integer, PrisesList> unsellableItems = new HashMap<>();
+	public static HashMap<Integer, ShopItems> unsellableItems = new HashMap<>();
 	
-	public HashMap<Integer, PrisesList> pillageList = new HashMap<>();
-	public HashMap<Integer, PrisesList> oresList = new HashMap<>();
-	public HashMap<Integer, PrisesList> othersList = new HashMap<>();
-	public HashMap<Integer, PrisesList> alchemyList = new HashMap<>();
-	public HashMap<Integer, PrisesList> blocksList = new HashMap<>();
-	public HashMap<Integer, PrisesList> farmingList = new HashMap<>();
+	public HashMap<Integer, ShopItems> pillageList = new HashMap<>();
+	public HashMap<Integer, ShopItems> oresList = new HashMap<>();
+	public HashMap<Integer, ShopItems> othersList = new HashMap<>();
+	public HashMap<Integer, ShopItems> alchemyList = new HashMap<>();
+	public HashMap<Integer, ShopItems> blocksList = new HashMap<>();
+	public HashMap<Integer, ShopItems> farmingList = new HashMap<>();
 	
 	public Shop (){
 		//Place les item dans leurs listes respectives
@@ -49,7 +50,7 @@ public class Shop implements Listener {
 		setOthersItems();
 		setPillageItems();
 		setUnsellableItems();
-		setPrisesList();
+		setShopItems();
 		
 		//Placer tout les items dans leurs inventaires pour préparer le shop
 		setItemsInShopMain();
@@ -113,120 +114,120 @@ public class Shop implements Listener {
 	
 	public void setUnsellableItems() {
 		//Minerais
-		unsellableItems.put(PrisesList.EMERALD.getID(), PrisesList.EMERALD);
+		unsellableItems.put(ShopItems.EMERALD.getID(), ShopItems.EMERALD);
 		
 		//Farming
-		unsellableItems.put(PrisesList.MELON_SEEDS.getID(), PrisesList.MELON_SEEDS);
-		unsellableItems.put(PrisesList.SEEDS.getID(), PrisesList.SEEDS);
-		unsellableItems.put(PrisesList.PUMPKIN_SEEDS.getID(), PrisesList.PUMPKIN_SEEDS);
-		unsellableItems.put(PrisesList.COCOA.getID(), PrisesList.COCOA);
-		unsellableItems.put(PrisesList.CACTUS.getID(), PrisesList.CACTUS);
-		unsellableItems.put(PrisesList.VINE.getID(), PrisesList.VINE);
-		unsellableItems.put(PrisesList.SUGAR_CANE.getID(), PrisesList.SUGAR_CANE);
+		unsellableItems.put(ShopItems.MELON_SEEDS.getID(), ShopItems.MELON_SEEDS);
+		unsellableItems.put(ShopItems.SEEDS.getID(), ShopItems.SEEDS);
+		unsellableItems.put(ShopItems.PUMPKIN_SEEDS.getID(), ShopItems.PUMPKIN_SEEDS);
+		unsellableItems.put(ShopItems.COCOA.getID(), ShopItems.COCOA);
+		unsellableItems.put(ShopItems.CACTUS.getID(), ShopItems.CACTUS);
+		unsellableItems.put(ShopItems.VINE.getID(), ShopItems.VINE);
+		unsellableItems.put(ShopItems.SUGAR_CANE.getID(), ShopItems.SUGAR_CANE);
 		
 		//Loots
-		unsellableItems.put(PrisesList.EMPTY_BOTTLE.getID(), PrisesList.EMPTY_BOTTLE);
-		unsellableItems.put(PrisesList.BREWING_STAND.getID(), PrisesList.BREWING_STAND);
-		unsellableItems.put(PrisesList.GOLDEN_MELON.getID(), PrisesList.GOLDEN_MELON);
-		unsellableItems.put(PrisesList.GOLDEN_CARROT.getID(), PrisesList.GOLDEN_CARROT);
-		unsellableItems.put(PrisesList.BROWN_MUSHROOM.getID(), PrisesList.BROWN_MUSHROOM);
-		unsellableItems.put(PrisesList.RED_MUSHROOM.getID(), PrisesList.RED_MUSHROOM);
-		unsellableItems.put(PrisesList.NETHER_WARTS.getID(), PrisesList.NETHER_WARTS);
-		unsellableItems.put(PrisesList.MILK_BUCKET.getID(), PrisesList.MILK_BUCKET);
+		unsellableItems.put(ShopItems.EMPTY_BOTTLE.getID(), ShopItems.EMPTY_BOTTLE);
+		unsellableItems.put(ShopItems.BREWING_STAND.getID(), ShopItems.BREWING_STAND);
+		unsellableItems.put(ShopItems.GOLDEN_MELON.getID(), ShopItems.GOLDEN_MELON);
+		unsellableItems.put(ShopItems.GOLDEN_CARROT.getID(), ShopItems.GOLDEN_CARROT);
+		unsellableItems.put(ShopItems.BROWN_MUSHROOM.getID(), ShopItems.BROWN_MUSHROOM);
+		unsellableItems.put(ShopItems.RED_MUSHROOM.getID(), ShopItems.RED_MUSHROOM);
+		unsellableItems.put(ShopItems.NETHER_WARTS.getID(), ShopItems.NETHER_WARTS);
+		unsellableItems.put(ShopItems.MILK_BUCKET.getID(), ShopItems.MILK_BUCKET);
 		
 		//Pillage
-		unsellableItems.put(PrisesList.SOUL_SAND.getID(), PrisesList.SOUL_SAND);
-		unsellableItems.put(PrisesList.WITHER_SKULL.getID(), PrisesList.WITHER_SKULL);
+		unsellableItems.put(ShopItems.SOUL_SAND.getID(), ShopItems.SOUL_SAND);
+		unsellableItems.put(ShopItems.WITHER_SKULL.getID(), ShopItems.WITHER_SKULL);
 		
 		//Divers
-		unsellableItems.put(PrisesList.WOOL.getID(), PrisesList.WOOL);
-		unsellableItems.put(PrisesList.INK_SACK.getID(), PrisesList.INK_SACK);
-		unsellableItems.put(PrisesList.COOKED_STEAK.getID(), PrisesList.COOKED_STEAK);
-		unsellableItems.put(PrisesList.COOKED_CHIKEN.getID(), PrisesList.COOKED_CHIKEN);
-		unsellableItems.put(PrisesList.COOKED_PORCKCHOP.getID(), PrisesList.COOKED_PORCKCHOP);
+		unsellableItems.put(ShopItems.WOOL.getID(), ShopItems.WOOL);
+		unsellableItems.put(ShopItems.INK_SACK.getID(), ShopItems.INK_SACK);
+		unsellableItems.put(ShopItems.COOKED_STEAK.getID(), ShopItems.COOKED_STEAK);
+		unsellableItems.put(ShopItems.COOKED_CHIKEN.getID(), ShopItems.COOKED_CHIKEN);
+		unsellableItems.put(ShopItems.COOKED_PORCKCHOP.getID(), ShopItems.COOKED_PORCKCHOP);
 		
 		//Blocks
-		unsellableItems.put(PrisesList.GRASS.getID(), PrisesList.GRASS);
-		unsellableItems.put(PrisesList.DIRT.getID(), PrisesList.DIRT);
-		unsellableItems.put(PrisesList.PACKED_ICE.getID(), PrisesList.PACKED_ICE);
-		unsellableItems.put(PrisesList.ICE.getID(), PrisesList.ICE);
-		unsellableItems.put(PrisesList.GRAVEL.getID(), PrisesList.GRAVEL);
+		unsellableItems.put(ShopItems.GRASS.getID(), ShopItems.GRASS);
+		unsellableItems.put(ShopItems.DIRT.getID(), ShopItems.DIRT);
+		unsellableItems.put(ShopItems.PACKED_ICE.getID(), ShopItems.PACKED_ICE);
+		unsellableItems.put(ShopItems.ICE.getID(), ShopItems.ICE);
+		unsellableItems.put(ShopItems.GRAVEL.getID(), ShopItems.GRAVEL);
 	}
 	public void setPillageItems() {
-		pillageList.put(PrisesList.ENDER_PEARL.getID(), PrisesList.ENDER_PEARL);
-		pillageList.put(PrisesList.WITHER_SKULL.getID(), PrisesList.WITHER_SKULL);
-		pillageList.put(PrisesList.SOUL_SAND.getID(), PrisesList.SOUL_SAND);
+		pillageList.put(ShopItems.ENDER_PEARL.getID(), ShopItems.ENDER_PEARL);
+		pillageList.put(ShopItems.WITHER_SKULL.getID(), ShopItems.WITHER_SKULL);
+		pillageList.put(ShopItems.SOUL_SAND.getID(), ShopItems.SOUL_SAND);
 	}
 	public void setOresItems() {
-		oresList.put(PrisesList.EMERALD.getID(), PrisesList.EMERALD);
-		oresList.put(PrisesList.DIAMOND.getID(), PrisesList.DIAMOND);
-		oresList.put(PrisesList.GOLD.getID(), PrisesList.GOLD);
-		oresList.put(PrisesList.IRON.getID(), PrisesList.IRON);
-		oresList.put(PrisesList.COAL.getID(), PrisesList.COAL);
-		oresList.put(PrisesList.REDSTONE.getID(), PrisesList.REDSTONE);
+		oresList.put(ShopItems.EMERALD.getID(), ShopItems.EMERALD);
+		oresList.put(ShopItems.DIAMOND.getID(), ShopItems.DIAMOND);
+		oresList.put(ShopItems.GOLD.getID(), ShopItems.GOLD);
+		oresList.put(ShopItems.IRON.getID(), ShopItems.IRON);
+		oresList.put(ShopItems.COAL.getID(), ShopItems.COAL);
+		oresList.put(ShopItems.REDSTONE.getID(), ShopItems.REDSTONE);
 	}
 	public void setOthersItems() {
-		othersList.put(PrisesList.WOOL.getID(), PrisesList.WOOL);
-		othersList.put(PrisesList.INK_SACK.getID(), PrisesList.INK_SACK);
-		othersList.put(PrisesList.COOKED_STEAK.getID(), PrisesList.COOKED_STEAK);
-		othersList.put(PrisesList.COOKED_CHIKEN.getID(), PrisesList.COOKED_CHIKEN);
-		othersList.put(PrisesList.COOKED_PORCKCHOP.getID(), PrisesList.COOKED_PORCKCHOP);
+		othersList.put(ShopItems.WOOL.getID(), ShopItems.WOOL);
+		othersList.put(ShopItems.INK_SACK.getID(), ShopItems.INK_SACK);
+		othersList.put(ShopItems.COOKED_STEAK.getID(), ShopItems.COOKED_STEAK);
+		othersList.put(ShopItems.COOKED_CHIKEN.getID(), ShopItems.COOKED_CHIKEN);
+		othersList.put(ShopItems.COOKED_PORCKCHOP.getID(), ShopItems.COOKED_PORCKCHOP);
 	}
 	public void setAlchemyItems() {
-		alchemyList.put(PrisesList.EMPTY_BOTTLE.getID(), PrisesList.EMPTY_BOTTLE);
-		alchemyList.put(PrisesList.BREWING_STAND.getID(), PrisesList.BREWING_STAND);
-		alchemyList.put(PrisesList.MAGMA_CREAM.getID(), PrisesList.MAGMA_CREAM);
-		alchemyList.put(PrisesList.GOLDEN_MELON.getID(), PrisesList.GOLDEN_MELON);
-		alchemyList.put(PrisesList.GOLDEN_CARROT.getID(), PrisesList.GOLDEN_CARROT);
-		alchemyList.put(PrisesList.GHAST_TEAR.getID(), PrisesList.GHAST_TEAR);
-		alchemyList.put(PrisesList.FERMENTED_SPIDER_EYE.getID(), PrisesList.FERMENTED_SPIDER_EYE);
-		alchemyList.put(PrisesList.RED_MUSHROOM.getID(), PrisesList.RED_MUSHROOM);
-		alchemyList.put(PrisesList.BROWN_MUSHROOM.getID(), PrisesList.BROWN_MUSHROOM);
-		alchemyList.put(PrisesList.NETHER_WARTS.getID(), PrisesList.NETHER_WARTS);
-		alchemyList.put(PrisesList.GLOWSTONE.getID(), PrisesList.GLOWSTONE);
-		alchemyList.put(PrisesList.MILK_BUCKET.getID(), PrisesList.MILK_BUCKET);
+		alchemyList.put(ShopItems.EMPTY_BOTTLE.getID(), ShopItems.EMPTY_BOTTLE);
+		alchemyList.put(ShopItems.BREWING_STAND.getID(), ShopItems.BREWING_STAND);
+		alchemyList.put(ShopItems.MAGMA_CREAM.getID(), ShopItems.MAGMA_CREAM);
+		alchemyList.put(ShopItems.GOLDEN_MELON.getID(), ShopItems.GOLDEN_MELON);
+		alchemyList.put(ShopItems.GOLDEN_CARROT.getID(), ShopItems.GOLDEN_CARROT);
+		alchemyList.put(ShopItems.GHAST_TEAR.getID(), ShopItems.GHAST_TEAR);
+		alchemyList.put(ShopItems.FERMENTED_SPIDER_EYE.getID(), ShopItems.FERMENTED_SPIDER_EYE);
+		alchemyList.put(ShopItems.RED_MUSHROOM.getID(), ShopItems.RED_MUSHROOM);
+		alchemyList.put(ShopItems.BROWN_MUSHROOM.getID(), ShopItems.BROWN_MUSHROOM);
+		alchemyList.put(ShopItems.NETHER_WARTS.getID(), ShopItems.NETHER_WARTS);
+		alchemyList.put(ShopItems.GLOWSTONE.getID(), ShopItems.GLOWSTONE);
+		alchemyList.put(ShopItems.MILK_BUCKET.getID(), ShopItems.MILK_BUCKET);
 	}
 	public void setBlocksItems() {
-		blocksList.put(PrisesList.COBBLESTONE.getID(), PrisesList.COBBLESTONE);
-		blocksList.put(PrisesList.GRAVEL.getID(), PrisesList.GRAVEL);
-		blocksList.put(PrisesList.ICE.getID(), PrisesList.ICE);
-		blocksList.put(PrisesList.PACKED_ICE.getID(), PrisesList.PACKED_ICE);
-		blocksList.put(PrisesList.GRASS.getID(), PrisesList.GRASS);
-		blocksList.put(PrisesList.SAND.getID(), PrisesList.SAND);
-		blocksList.put(PrisesList.WOOD.getID(), PrisesList.WOOD);
-		blocksList.put(PrisesList.OBSIDIAN.getID(), PrisesList.OBSIDIAN);
-		blocksList.put(PrisesList.STONE.getID(), PrisesList.STONE);
+		blocksList.put(ShopItems.COBBLESTONE.getID(), ShopItems.COBBLESTONE);
+		blocksList.put(ShopItems.GRAVEL.getID(), ShopItems.GRAVEL);
+		blocksList.put(ShopItems.ICE.getID(), ShopItems.ICE);
+		blocksList.put(ShopItems.PACKED_ICE.getID(), ShopItems.PACKED_ICE);
+		blocksList.put(ShopItems.GRASS.getID(), ShopItems.GRASS);
+		blocksList.put(ShopItems.SAND.getID(), ShopItems.SAND);
+		blocksList.put(ShopItems.WOOD.getID(), ShopItems.WOOD);
+		blocksList.put(ShopItems.OBSIDIAN.getID(), ShopItems.OBSIDIAN);
+		blocksList.put(ShopItems.STONE.getID(), ShopItems.STONE);
 	}
 	public void setFarmingItems() {
 		//Plantes
-		farmingList.put(PrisesList.MELON_SEEDS.getID(), PrisesList.MELON_SEEDS);
-		farmingList.put(PrisesList.PUMPKIN_SEEDS.getID(), PrisesList.PUMPKIN_SEEDS);
-		farmingList.put(PrisesList.SEEDS.getID(), PrisesList.SEEDS);
-		farmingList.put(PrisesList.CARROT.getID(), PrisesList.CARROT);
-		farmingList.put(PrisesList.POTATO.getID(), PrisesList.POTATO);			 
-		farmingList.put(PrisesList.SUGAR_CANE.getID(), PrisesList.SUGAR_CANE);
-		farmingList.put(PrisesList.APPLE.getID(), PrisesList.APPLE);
-		farmingList.put(PrisesList.CACTUS.getID(), PrisesList.CACTUS);
-		farmingList.put(PrisesList.COCOA.getID(), PrisesList.COCOA);
-		farmingList.put(PrisesList.VINE.getID(), PrisesList.VINE);
+		farmingList.put(ShopItems.MELON_SEEDS.getID(), ShopItems.MELON_SEEDS);
+		farmingList.put(ShopItems.PUMPKIN_SEEDS.getID(), ShopItems.PUMPKIN_SEEDS);
+		farmingList.put(ShopItems.SEEDS.getID(), ShopItems.SEEDS);
+		farmingList.put(ShopItems.CARROT.getID(), ShopItems.CARROT);
+		farmingList.put(ShopItems.POTATO.getID(), ShopItems.POTATO);			 
+		farmingList.put(ShopItems.SUGAR_CANE.getID(), ShopItems.SUGAR_CANE);
+		farmingList.put(ShopItems.APPLE.getID(), ShopItems.APPLE);
+		farmingList.put(ShopItems.CACTUS.getID(), ShopItems.CACTUS);
+		farmingList.put(ShopItems.COCOA.getID(), ShopItems.COCOA);
+		farmingList.put(ShopItems.VINE.getID(), ShopItems.VINE);
 		
 		//Loots 
-		farmingList.put(PrisesList.STRING.getID(), PrisesList.STRING);
-		farmingList.put(PrisesList.BLAZE_ROD.getID(), PrisesList.BLAZE_ROD);
-		farmingList.put(PrisesList.BONE.getID(), PrisesList.BONE);
-		farmingList.put(PrisesList.ROTTEN_FLESH.getID(), PrisesList.ROTTEN_FLESH);
-		farmingList.put(PrisesList.GUNPOWDER.getID(), PrisesList.GUNPOWDER);
-		farmingList.put(PrisesList.ARROW.getID(), PrisesList.ARROW);
-		farmingList.put(PrisesList.LEATHER.getID(), PrisesList.LEATHER);
-		farmingList.put(PrisesList.EGG.getID(), PrisesList.EGG);
-		farmingList.put(PrisesList.FEATHER.getID(), PrisesList.FEATHER);
-		farmingList.put(PrisesList.SLIME_BALL.getID(), PrisesList.SLIME_BALL);
+		farmingList.put(ShopItems.STRING.getID(), ShopItems.STRING);
+		farmingList.put(ShopItems.BLAZE_ROD.getID(), ShopItems.BLAZE_ROD);
+		farmingList.put(ShopItems.BONE.getID(), ShopItems.BONE);
+		farmingList.put(ShopItems.ROTTEN_FLESH.getID(), ShopItems.ROTTEN_FLESH);
+		farmingList.put(ShopItems.GUNPOWDER.getID(), ShopItems.GUNPOWDER);
+		farmingList.put(ShopItems.ARROW.getID(), ShopItems.ARROW);
+		farmingList.put(ShopItems.LEATHER.getID(), ShopItems.LEATHER);
+		farmingList.put(ShopItems.EGG.getID(), ShopItems.EGG);
+		farmingList.put(ShopItems.FEATHER.getID(), ShopItems.FEATHER);
+		farmingList.put(ShopItems.SLIME_BALL.getID(), ShopItems.SLIME_BALL);
 	}
 	
-	public void setPrisesList() {
-		for(PrisesList pl : PrisesList.values()) {
+	public void setShopItems() {
+		for(ShopItems pl : ShopItems.values()) {
 			this.pl_ = pl;
-			prisesList.put(pl.getID(), pl);
+			ShopItemsList.put(pl.getID(), pl);
 		}
 	}
 	
@@ -275,7 +276,7 @@ public class Shop implements Listener {
 	
 	//Set items in blocks page of the shop
 	public void setItemInShopBlocks() {
-		for(PrisesList pl : blocksList.values()) {
+		for(ShopItems pl : blocksList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
 			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
@@ -286,7 +287,7 @@ public class Shop implements Listener {
 	
 	//Set items in minerals page of the shop
 	public void setItemInShopMinerals() {	
-		for(PrisesList pl : oresList.values()) {
+		for(ShopItems pl : oresList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
 			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
@@ -297,7 +298,7 @@ public class Shop implements Listener {
 	
 	//Set items in utils page of the shop
 	public void setItemInShopUtils() {
-		for(PrisesList pl : othersList.values()) {
+		for(ShopItems pl : othersList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
 			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
@@ -308,7 +309,7 @@ public class Shop implements Listener {
 	
 	//Set items in plants page of the shop
 	public void setItemInShopFarming() {
-		for(PrisesList pl : farmingList.values()) {
+		for(ShopItems pl : farmingList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
 			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
@@ -319,7 +320,7 @@ public class Shop implements Listener {
 
 	//Set items in pillage page of the shop
 	public void setItemInShopPillage() {
-		for(PrisesList pl : pillageList.values()) {
+		for(ShopItems pl : pillageList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
 			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
@@ -330,7 +331,7 @@ public class Shop implements Listener {
 	
 	//Set items in alchemy page of the shop
 	public void setItemInShopAlchemy() {
-		for(PrisesList pl : alchemyList.values()) {
+		for(ShopItems pl : alchemyList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
 			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
