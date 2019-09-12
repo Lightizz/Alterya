@@ -108,7 +108,7 @@ public class MainCore extends JavaPlugin
 	@Override
 	public void onDisable() 
 	{	
-		System.out.println("== AlteryaFaction [OFF] ==");
+		System.out.println("AlteryaFaction [OFF]");
 	}
 	
 	public static void log(LogType logType, String message) {

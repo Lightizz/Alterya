@@ -49,7 +49,7 @@ public class Main extends JavaPlugin implements Listener{
 	}
 	
 	@Override
-	public void onDisable() { System.out.println("== AlteryaModeration [OFF] =="); }
+	public void onDisable() { System.out.println("AlteryaModeration [OFF] "); }
 	
     public GuiManager getGuiManager() {	return guiManager; }
 

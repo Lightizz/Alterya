@@ -79,7 +79,7 @@ public abstract class MPlugin extends JavaPlugin
 	
 	public void postEnable()
 	{
-		log("== AlteryaFaction [OFF] ==");
+		log("AlteryaFaction [OFF]");
 	}
 	
 	public void onDisable()
