@@ -13,7 +13,6 @@ import fr.alterya.core.rank.Rank;
 public class CmdHome implements CommandExecutor
 {	
 	MainCore main;
-	
 	Rank rank;
 	
 	public CmdHome(Rank rank, MainCore main) {
@@ -132,14 +131,13 @@ public class CmdHome implements CommandExecutor
 			HomeManager homeManager = new HomeManager(player.getUniqueId().toString());
 			
 			if(args.length != 1) { player.sendMessage(MainCore.prefix + "La commande est /home <nom>"); return true; }
-			
 			if(args.length == 1) {
 				if(! homeManager.homeExist(args[0])) {
 					player.sendMessage("Ce home n'éxiste pas.");
 					return true;
 				}else if(homeManager.homeExist(args[0])) {
 					player.teleport(homeManager.getHomeLocation(args[0]));
-					player.sendMessage("Vous avez été téléporter à votre home " + args[0] + " avec succès !");
+					player.sendMessage("Vous avez été téléporté à votre home " + args[0] + " avec succès.");
 					return true;
 				}
 			}

@@ -140,7 +140,7 @@ public class Conf
 	public static boolean homesTeleportCommandSmokeEffectEnabled = true;
 	public static boolean homesTeleportAllowedFromEnemyTerritory = true;
 	public static boolean homesTeleportAllowedFromDifferentWorld = true;
-	public static double homesTeleportAllowedEnemyDistance = 32.0;
+	public static double homesTeleportAllowedEnemyDistance = 3.0;
 	public static boolean homesTeleportIgnoreEnemiesIfInOwnTerritory = true;
 	
 	public static boolean apAuthorised = false;
@@ -153,7 +153,7 @@ public class Conf
 	public static boolean apTeleportCommandSmokeEffectEnabled = true;
 	public static boolean apTeleportAllowedFromEnemyTerritory = true;
 	public static boolean apTeleportAllowedFromDifferentWorld = true;
-	public static double apTeleportAllowedEnemyDistance = 32.0;
+	public static double apTeleportAllowedEnemyDistance = 1.0;
 	public static boolean apTeleportIgnoreEnemiesIfInOwnTerritory = true;
 	
 	
@@ -309,8 +309,9 @@ public class Conf
 		territoryEnemyDenyCommands.add("sethome");
 		territoryEnemyDenyCommands.add("spawn");
 		territoryEnemyDenyCommands.add("tpahere");
-		territoryEnemyDenyCommands.add("tpaccept");
 		territoryEnemyDenyCommands.add("tpa");
+		territoryEnemyDenyCommands.add("tpyes");
+		territoryEnemyDenyCommands.add("tpno");
 		territoryEnemyDenyCommands.add("warp");
 
 		materialsContainer.add(Material.DISPENSER);

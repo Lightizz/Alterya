@@ -11,10 +11,10 @@ public class MoneyManager
 	Plugin plugin;
 	public FileWriter fw;
 	
-	public static double defaultMoney = 50.00;
+	public static double defaultMoney = 200.00;
 	
 	public MoneyManager(String uuid) {
-		fw = new FileWriter("plugins/AccountsData/Moneys", uuid.toString() + ".yml");
+		fw = new FileWriter("ServerData/Moneys", "PlayersMoney" + ".yml");
 	}
 	
 	@SuppressWarnings("unused")
@@ -70,12 +70,12 @@ public class MoneyManager
 	
 	public Set<String> getMoneyBanks(){
 		fw.saveConfig();
-		return fw.config.getKeys(false);
+		return fw.getKeys(false);
 	}
 	
 	public double getMoney(String uuid) {
 		if(moneyBankExist(uuid) == false) {
-			this.createMoneyBank(uuid, 50.00);
+			this.createMoneyBank(uuid, 200.00);
 		}
 		fw.saveConfig();
 		return fw.getDouble(uuid);

@@ -14,7 +14,7 @@ public class HomeManager
 	private FileWriter fw;
 	
 	public HomeManager(String uuid) {
-		fw = new FileWriter("plugins/AccountsData/Homes", uuid.toString() + ".yml");
+		fw = new FileWriter("ServerData/Homes", uuid.toString() + ".yml");
 	}
 	
 	public void createHome(Location homeLoc, String homeName) {

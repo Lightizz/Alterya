@@ -1,5 +1,7 @@
 package fr.alterya.core.listeners;
 
+import java.util.Arrays;
+
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -26,7 +28,8 @@ public class ShopListener implements Listener
 	@EventHandler
 	public void onDoorInterract(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
-		if(e.getCurrentItem().getType() == Material.ANVIL) {
+		if(e.getCurrentItem().getType() == Material.AIR) { e.setCancelled(true); return; }
+		if(e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
 			e.setCancelled(true);
 			player.getOpenInventory().close();
 		}
@@ -43,37 +46,38 @@ public class ShopListener implements Listener
 		//Interraction avec l'inventaire principal
 		if(e.getInventory().getName() == Shop.shopInvMain.getName()) {
 			ItemStack itemClicked = e.getCurrentItem();
-			if(itemClicked.getType() == Material.EMPTY_MAP) {
+			if(e.getCurrentItem().getType() == Material.AIR) { e.setCancelled(true); return; }
+			if(itemClicked.getItemMeta().getDisplayName() == Shop.utils.getItemMeta().getDisplayName()) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
 				player.openInventory(Shop.shopInvUtils);
 				player.updateInventory();
 				return;
-			}else if(itemClicked.getType() == Material.BLAZE_POWDER) {
+			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.alchemy.getItemMeta().getDisplayName()) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
 				player.openInventory(Shop.shopInvAlchemy);
 				player.updateInventory();
 				return;
-			}else if(itemClicked.getType() == Material.STONE) {
+			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.blocks.getItemMeta().getDisplayName()) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
 				player.openInventory(Shop.shopInvBlocks);
 				player.updateInventory();
 				return;
-			}else if(itemClicked.getType() == Material.IRON_AXE) {
+			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.pillage.getItemMeta().getDisplayName()) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
 				player.openInventory(Shop.shopInvPillage);
 				player.updateInventory();
 				return;
-			}else if(itemClicked.getType() == Material.DIAMOND_HOE) {
+			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.farming.getItemMeta().getDisplayName()) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
 				player.openInventory(Shop.shopInvFarming);
 				player.updateInventory();
 				return;
-			}else if(itemClicked.getType() == Material.IRON_INGOT) {
+			}else if(itemClicked.getItemMeta().getDisplayName() == Shop.minerals.getItemMeta().getDisplayName()) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
 				player.openInventory(Shop.shopInvMinerals);
@@ -132,31 +136,38 @@ public class ShopListener implements Listener
 			ItemStack itemSubstract1 = mainInv.getItem(25);
 			ItemStack itemSubstract10 = mainInv.getItem(24);
 			ItemStack itemSubstract64 = mainInv.getItem(23);
+			if(itemClicked.getType() == Material.AIR) { e.setCancelled(true); return; }
 			//Toutes les conditions qui vont avec les items Add1, Add10, etc...
 			if(itemClicked.getItemMeta().getDisplayName() == itemAdd1.getItemMeta().getDisplayName()) {
-				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); return; }
+				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); mainInv.getItem(13).setAmount(64); return; }
 				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() + 1);
 				e.setCancelled(true);
+				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == itemAdd10.getItemMeta().getDisplayName()) {
-				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); return; }
+				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); mainInv.getItem(13).setAmount(64); return; }
 				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() + 10);
 				e.setCancelled(true);
+				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == itemAdd64.getItemMeta().getDisplayName()) {
-				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); return; }
+				if(mainInv.getItem(13).getAmount() > 64) { e.setCancelled(true); mainInv.getItem(13).setAmount(64); return; }
 				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() + 64);
 				e.setCancelled(true);
+				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == itemSubstract1.getItemMeta().getDisplayName()) {
-				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); return; }
+				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); mainInv.getItem(13).setAmount(64); return; }
 				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() - 1);
 				e.setCancelled(true);
+				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == itemSubstract10.getItemMeta().getDisplayName()) {
-				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); return; }
+				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); mainInv.getItem(13).setAmount(64); return; }
 				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() - 10);
 				e.setCancelled(true);
+				return;
 			}else if(itemClicked.getItemMeta().getDisplayName() == itemSubstract64.getItemMeta().getDisplayName()) {
-				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); return; }
+				if(mainInv.getItem(13).getAmount() <= 1) { e.setCancelled(true); mainInv.getItem(13).setAmount(64); return; }
 				mainInv.getItem(13).setAmount(mainInv.getItem(13).getAmount() - 64);
 				e.setCancelled(true);
+				return;
 			}
 			e.setCancelled(true);
 			return;
@@ -173,23 +184,32 @@ public class ShopListener implements Listener
 		if(e.getInventory().getName() == Shop.shopInvSellBuy.getName()) {
 			MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
 			ItemStack itemClicked = e.getCurrentItem();
+			for(ShopItems item : ShopItems.values()) {
+				if(item.getMaterial() == mainInv.getItem(13).getType()) {
+					String buyPrise = String.valueOf(item.getBuyPrise() * mainInv.getItem(13).getAmount());
+					String sellPrise = String.valueOf(item.getSellPrise() * mainInv.getItem(13).getAmount());
+					mainInv.setItem(4*9, ItemBuilder.createItem(Material.BED, "§dPrix séléctionnés :", Arrays.asList("§aPrix d'achat actuel : " + buyPrise, "§aPrix de vente actuel : " + sellPrise)));
+					player.updateInventory();
+				}
+			}
+			if(itemClicked.getType() == Material.AIR) { e.setCancelled(true); return; }
 			if(itemClicked.getItemMeta().getDisplayName() == Shop.buy.getItemMeta().getDisplayName()) {
 				ItemStack itemToGive = ItemBuilder.createItem(mainInv.getItem(13).getType(), mainInv.getItem(13).getAmount());
 				if (manager.moneyBankExist(player.getUniqueId().toString()) == false) {e.setCancelled(true); return;}
 				for(ShopItems item : ShopItems.values()) {
 					if(itemToGive.getType() == item.getMaterial()) {
 						//Retire la money
-						if (manager.getMoney(player.getUniqueId().toString()) < item.getBuyPrise()) {
-							player.sendMessage(MainCore.prefix + "§eVous devez avoir §a" + item.getBuyPrise() + " §a$ §epour acheter §a" + itemToGive.getAmount() + " " + item.getName() + ".");
+						if (manager.getMoney(player.getUniqueId().toString()) < item.getBuyPrise() * itemToGive.getAmount()) {
+							player.sendMessage(MainCore.prefix + "§eVous devez avoir §a" + item.getBuyPrise() * itemToGive.getAmount() + " §a$ §epour acheter §a" + itemToGive.getAmount() + " " + item.getName() + ".");
 							player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 							return;
 						}
-						manager.substractMoney(player.getUniqueId().toString(), item.getBuyPrise());
+						manager.substractMoney(player.getUniqueId().toString(), item.getBuyPrise() * itemToGive.getAmount());
 						//Joue un son
 						player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 						//Envoie le message de confirmation
-						player.sendMessage("§eVous avez acheté §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
-						MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a acheté " + itemToGive.getAmount() + " " + item.getName() + " pour " + item.getBuyPriseS() + "$.");
+						player.sendMessage("§eVous avez acheté §a" + itemToGive.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() * itemToGive.getAmount() + "§e $.");
+						MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a acheté " + itemToGive.getAmount() + " " + item.getName() + " pour " + item.getBuyPrise() * itemToGive.getAmount() + "$.");
 					}
 				}
 				//Ajoute l'item
@@ -218,12 +238,12 @@ public class ShopListener implements Listener
 				for(ShopItems item : ShopItems.values()) {
 					if(itemToSell.getType() == item.getMaterial()) {
 						//Ajoute la money
-						manager.addMoney(player.getUniqueId().toString(), item.getSellPrise());
+						manager.addMoney(player.getUniqueId().toString(), item.getSellPrise() * itemToSell.getAmount());
 						//Joue un son
 						player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 						//Envoie le message de confirmation
-						player.sendMessage("§eVous avez vendu §a" + itemToSell.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() + "§e $.");
-						MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a vendu " + itemToSell.getAmount() + " " + item.getName() + " et il a reçu " + item.getSellPriseS() + "$.");
+						player.sendMessage("§eVous avez vendu §a" + itemToSell.getAmount() + " §a" + item.getName() + "§e pour §a" + item.getBuyPrise() * itemToSell.getAmount() + "§e $.");
+						MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a vendu " + itemToSell.getAmount() + " " + item.getName() + " et il a reçu " + item.getSellPrise() * itemToSell.getAmount() + "$.");
 					}
 				}
 				//Enlève l'item de l'inventaire du joueur

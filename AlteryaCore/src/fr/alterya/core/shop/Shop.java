@@ -65,32 +65,32 @@ public class Shop implements Listener {
 	}
 	
 	//Créer les listes d'items
-	List<String> lores = Arrays.asList("Ici, vous trouverez des items pour faire de l'achimie !", "Cliquez pour plus d'informations !");
-	public ItemStack alchemy = ItemBuilder.createItem(Material.BLAZE_POWDER, "§1Items dédiés à l'alchimie", (String[]) lores.toArray());
+	static List<String> lores = Arrays.asList("Ici, vous trouverez des items pour faire de l'achimie !", "Cliquez pour plus d'informations !");
+	public static ItemStack alchemy = ItemBuilder.createItem(Material.BLAZE_POWDER, "§1Items dédiés à l'alchimie", lores);
 	
-	List<String> lores0 = Arrays.asList("Ici, vous trouverez des blocks de toutes sortes d'items / de loots !", "Cliquez pour plus d'informations !");
-	public ItemStack farming = ItemBuilder.createItem(Material.DIAMOND_HOE, "§1Plantes et végétations", (String[]) lores0.toArray());
+	static List<String> lores0 = Arrays.asList("Ici, vous trouverez des blocks de toutes sortes d'items / de loots !", "Cliquez pour plus d'informations !");
+	public static ItemStack farming = ItemBuilder.createItem(Material.DIAMOND_HOE, "§1Plantes et végétations", lores0);
 	
-	List<String> lores1 = Arrays.asList("Ici, vous trouverez tout les minerais !", "Cliquez pour plus d'informations !");
-	public ItemStack minerals = ItemBuilder.createItem(Material.IRON_INGOT, "§1Minerais", (String[]) lores.toArray());
+	static List<String> lores1 = Arrays.asList("Ici, vous trouverez tout les minerais !", "Cliquez pour plus d'informations !");
+	public static ItemStack minerals = ItemBuilder.createItem(Material.IRON_INGOT, "§1Minerais", lores1);
 	
-	List<String> lores2 = Arrays.asList("Ici, vous trouverez des blocks de toutes sortes et des blocks décoratifs !", "Cliquez pour plus d'informations !");
-	public ItemStack blocks = ItemBuilder.createItem(Material.STONE, "§1Blocks / Décorations", (String[]) lores.toArray());
+	static List<String> lores2 = Arrays.asList("Ici, vous trouverez des blocks de toutes sortes et des blocks décoratifs !", "Cliquez pour plus d'informations !");
+	public static ItemStack blocks = ItemBuilder.createItem(Material.STONE, "§1Blocks / Décorations", lores2);
 	
-	List<String> lores3 = Arrays.asList("Ici, vous trouverez des items pour réaliser des pillages !", "Cliquez pour plus d'informations !");
-	public ItemStack pillage = ItemBuilder.createItem(Material.IRON_AXE, "§1Items utilisés pour les pillages", (String[]) lores.toArray());
+	static List<String> lores3 = Arrays.asList("Ici, vous trouverez des items pour réaliser des pillages !", "Cliquez pour plus d'informations !");
+	public static ItemStack pillage = ItemBuilder.createItem(Material.IRON_AXE, "§1Items utilisés pour les pillages", lores3);
 	
-	List<String> lores4 = Arrays.asList("Ici, vous trouverez des items de toutes sortes confondues mais qui ne sont ni des blocks ni des plantes ni des minéraux, ni autre !", "Cliquez pour plus d'informations !");
-	public ItemStack utils = ItemBuilder.createItem(Material.EMPTY_MAP, "§1Items sans catégorie attribuée", (String[]) lores.toArray());
+	static List<String> lores4 = Arrays.asList("Ici, vous trouverez des items de toutes sortes confondues mais qui ne sont ni des blocks ni des plantes ni des minéraux, ni autre !", "Cliquez pour plus d'informations !");
+	public static ItemStack utils = ItemBuilder.createItem(Material.EMPTY_MAP, "§1Items sans catégorie attribuée", lores4);
 	
-	static List<String> lores5 = Arrays.asList("Prix de vente séléctionner : ");
-	public static ItemStack sell = ItemBuilder.createItem(Material.ARROW, "§1Vendre", (String []) lores5.toArray());
+	//public static List<String> lores5 = Arrays.asList("Prix de vente séléctionner : ");
+	public static ItemStack sell = ItemBuilder.createItem(Material.ARROW, "§1Vendre"/*, (String []) lores5.toArray()*/);
 	
 	static List<String> lores6 = Arrays.asList("§4§lRetour / Fermer l'inventaire");
-	public static ItemStack backDoor = ItemBuilder.createItem(Material.ANVIL, "§4§lQuitter", (String []) lores6.toArray());
+	public static ItemStack backDoor = ItemBuilder.createItem(Material.ANVIL, "§4§lQuitter"/*, (String []) lores6.toArray()*/);
 	
-	static List<String> lores7 = Arrays.asList("Prix d'achat séléctionner : ");
-	public static ItemStack buy = ItemBuilder.createItem(Material.BEACON, "§1Acheter", (String []) lores7.toArray());
+	//public static List<String> lores7 = Arrays.asList("Prix d'achat séléctionner : ");
+	public static ItemStack buy = ItemBuilder.createItem(Material.BEACON, "§1Acheter"/*, (String []) lores7.toArray()*/);
 	
 	public static ItemStack add1 = ItemBuilder.createItem(Material.RED_MUSHROOM, "§lAjouter 1");
 	public static ItemStack add10 = ItemBuilder.createItem(Material.RED_MUSHROOM, "§lAjouter 10");
@@ -279,7 +279,7 @@ public class Shop implements Listener {
 		for(ShopItems pl : blocksList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), lores8);
 			shopInvBlocks.addItem(item);
 		}
 		shopInvBlocks.setItem(40, backDoor);
@@ -290,7 +290,7 @@ public class Shop implements Listener {
 		for(ShopItems pl : oresList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), lores8);
 			shopInvMinerals.addItem(item);
 		}
 		shopInvMinerals.setItem(40, backDoor);
@@ -301,7 +301,7 @@ public class Shop implements Listener {
 		for(ShopItems pl : othersList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), lores8);
 			shopInvUtils.addItem(item);
 		}
 		shopInvUtils.setItem(40, backDoor);
@@ -312,7 +312,7 @@ public class Shop implements Listener {
 		for(ShopItems pl : farmingList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), lores8);
 			shopInvFarming.addItem(item);
 		}
 		shopInvFarming.setItem(40, backDoor);
@@ -323,7 +323,7 @@ public class Shop implements Listener {
 		for(ShopItems pl : pillageList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), lores8);
 			shopInvPillage.addItem(item);
 		}
 		shopInvPillage.setItem(40, backDoor);
@@ -334,7 +334,7 @@ public class Shop implements Listener {
 		for(ShopItems pl : alchemyList.values()) {
 			pl_ = pl;
 			List<String> lores8 = Arrays.asList("§2Prix d'achat / u : " + pl.getBuyPrise() + "$", "§2Prix de vente / u : " + pl.getSellPrise() + "$");
-			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), (String []) lores8.toArray());
+			ItemStack item = ItemBuilder.createItem(pl.getMaterial(), pl.getName(), lores8);
 			shopInvAlchemy.addItem(item);
 		}
 		shopInvAlchemy.setItem(40, backDoor);

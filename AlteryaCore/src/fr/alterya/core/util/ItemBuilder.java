@@ -1,6 +1,7 @@
 package fr.alterya.core.util;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -28,11 +29,11 @@ public class ItemBuilder
 		return item;
 	}
 	
-	public static ItemStack createItem(Material material, String dislayName, String[] lores) {
+	public static ItemStack createItem(Material material, String dislayName, List<String> lores) {
 		ItemStack item = new ItemStack(material);
 		ItemMeta itemM = item.getItemMeta();
 		itemM.setDisplayName(dislayName);
-		itemM.setLore(Arrays.asList(lores));
+		itemM.setLore(lores);
 		item.setItemMeta(itemM);
 		return item;
 	}

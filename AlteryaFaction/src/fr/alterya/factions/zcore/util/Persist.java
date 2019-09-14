@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.util.logging.Level;
 
+import fr.alterya.factions.P;
 import fr.alterya.factions.zcore.MPlugin;
 
 // TODO: Give better name and place to differenciate from the entity-orm-ish system in "com.massivecraft.core.persist".
@@ -41,7 +42,7 @@ public class Persist {
 	
 	public File getFile(String name)
 	{
-		return new File(p.getDataFolder(), name+".json");
+		return new File(P.p.getDataFolder(), name+".json");
 	}
 	
 	public File getFile(Class<?> clazz)

@@ -55,9 +55,9 @@ public class Rank {
 	
 	//Initialiser la configuration
 	private void initConfig() {
-		File f = new File("plugins/AccountsData");
+		File f = new File("ServerData");
 		if(!f.exists()) f.mkdirs();
-		file = new File(f, "Ranks.yml");
+		file = new File(f, "PlayersRank.yml");
 		if(!file.exists()) {
 			try {
 				file.createNewFile();

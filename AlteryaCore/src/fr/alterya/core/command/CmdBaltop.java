@@ -2,10 +2,10 @@ package fr.alterya.core.command;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +29,7 @@ public class CmdBaltop implements CommandExecutor
 				}else if(args.length == 0) {
 					
 					Set<String> accountList1 = manager.getMoneyBanks();
-					if(manager.getMoneyBanks().isEmpty() == true) {
+					if(manager.getMoneyBanks().isEmpty() == true || accountList1.size() < 5) {
 						player.sendMessage(MainCore.prefix + "§4Une erreur est survenue : 1C. Veuillez contacter un staff en donner l'identifiant (Exemple d'ID : 0C)");
 						return true;
 					}
@@ -41,12 +41,8 @@ public class CmdBaltop implements CommandExecutor
 					
 					for (String s : accountList1) {
 						accountList2.add(s);
-					}
-					
-					for(String part : accountList2) {
-						@SuppressWarnings("deprecation")
-						OfflinePlayer player1 = Bukkit.getOfflinePlayer(part);
-						String message2 = "§2" + player1.getName() + " §r: §e" + manager.getMoney(player1.getUniqueId().toString()) + "§2$\n";
+						Player player1 = Bukkit.getPlayer(UUID.fromString(s));
+						String message2 = "§2" + player1.getPlayer().getDisplayName() + " §r: §e" + manager.getMoney(player1.getUniqueId().toString()) + "§2$\n";
 						player.sendMessage(message2);
 					}
 					return true;

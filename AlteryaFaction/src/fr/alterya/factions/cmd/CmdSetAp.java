@@ -4,6 +4,8 @@ import fr.alterya.factions.Board;
 import fr.alterya.factions.Conf;
 import fr.alterya.factions.FLocation;
 import fr.alterya.factions.Faction;
+import fr.alterya.factions.Factions;
+import fr.alterya.factions.integration.SpoutFeatures;
 import fr.alterya.factions.struct.FPerm;
 
 public class CmdSetAp extends FCommand
@@ -38,19 +40,6 @@ public class CmdSetAp extends FCommand
 		
 		if ( ! FPerm.SETAP.has(sender, faction, true)) return;
 		
-		if
-		(
-			! fme.hasAdminMode()
-			&&
-			Conf.apMustBeInClaimedTerritory
-			&& 
-			Board.getFactionAt(new FLocation(me)) != faction
-		)
-		{
-			fme.msg("<b>Désolé, votre avant poste de faction ne peut être situé que sur votre propre territoire(claim).");
-			return;
-		}
-
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
 		if ( ! payForCommand(Conf.econCostSetAp, "définir l'avant poste de la faction ", " pour définir l'avant poste de la faction")) return;
 
@@ -58,13 +47,33 @@ public class CmdSetAp extends FCommand
 			Conf.apAuthorised = true;
 		}
 		
-		if(Conf.apAuthorised == true) {
-			faction.setAp(me.getLocation());
+		if(Conf.apAuthorised == false) {
+			fme.msg("<b>Vous n'avez pas les permissions d'un Responsable ou d'un Administrateur pour poser un avant poste");
+			return;
 		}
 		
-		if(Conf.apAuthorised == false) {
-			fme.msg("<b>Vous n'avez pas les permissions d'un Responsalbe ou d'un Administrateur pour poser un avant poste");
+		if(Conf.apMustBeInClaimedTerritory && Board.getFactionAt(new FLocation(me)) != Factions.i.getByTag("ApZone")) {
+			fme.msg("§eVous §apouvez positionner votre avant poste uniquement en zone d'Ap (§eApZone§a).");
 			return;
+		}
+		
+		if(Conf.apAuthorised == true) {
+			Board.removeAt(new FLocation(me));
+			SpoutFeatures.updateTerritoryDisplayLoc(new FLocation(me));
+			fme.attemptClaim(myFaction, me.getLocation(), true);
+			if
+			(
+				! fme.hasAdminMode()
+				&&
+				Conf.apMustBeInClaimedTerritory
+				&& 
+				Board.getFactionAt(new FLocation(me)) != faction
+			)
+			{
+				fme.msg("<b>Désolé, votre avant poste de faction ne peut être situé que sur votre propre territoire(claim).");
+				return;
+			}
+			faction.setAp(me.getLocation());
 		}
 		
 		faction.msg("%s<i> a définit l'avant poste pour votre faction. Vous pouvez maintenant utiliser:", fme.describeTo(myFaction, true));

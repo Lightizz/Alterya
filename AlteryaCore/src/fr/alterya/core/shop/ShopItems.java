@@ -20,12 +20,12 @@ public enum ShopItems
 	//Plantes
 	MELON_SEEDS(0.0, 0.0, 21, Material.MELON_SEEDS, "Graines de melon"),
 	PUMPKIN_SEEDS(0.0, 0.0, 22, Material.PUMPKIN_SEEDS, "Graines de citrouille"),
-	SEEDS(0.0, 0.0, 23, Material.SEEDS, "Graines de blé"),
-	CARROT(0.0, 0.0, 24, Material.CARROT_ITEM, "Carotte"),
-	POTATO(0.0, 0.0, 25, Material.POTATO_ITEM, "Pomme de terre"),
-	SUGAR_CANE(0.0, 0.0, 26, Material.SUGAR_CANE, "Canne à sucre"),
+	SEEDS(50.0, 0.5, 23, Material.SEEDS, "Graines de blé"),
+	CARROT(30.0, 0.3, 24, Material.CARROT_ITEM, "Carotte"),
+	POTATO(30.0, 0.3, 25, Material.POTATO_ITEM, "Pomme de terre"),
+	SUGAR_CANE(100.0, 0.5, 26, Material.SUGAR_CANE, "Canne à sucre"),
 	APPLE(0.0, 0.0, 27, Material.APPLE, "Pomme rouge"),
-	CACTUS(0.0, 0.0, 28, Material.CACTUS, "Cactus"),
+	CACTUS(75.0, 0.0, 28, Material.CACTUS, "Cactus"),
 	COCOA(0.0, 0.0, 29, Material.COCOA, "Cacao"),
 	VINE(0.0, 0.0, 30, Material.VINE, "Vigne"),
 	
@@ -58,7 +58,7 @@ public enum ShopItems
 	//Divers
 	WOOL(0.0, 0.0, 58, Material.WOOL, "Laine blanche"),
 	INK_SACK(0.0, 0.0, 59, Material.INK_SACK, "Poche d'encre"),
-	COOKED_STEAK(0.0, 0.0, 67, Material.COOKED_BEEF, "Steak cuit"),
+	COOKED_STEAK(3.0, 0.0, 67, Material.COOKED_BEEF, "Steak cuit"),
 	COOKED_CHIKEN(0.0, 0.0, 68, Material.COOKED_CHICKEN, "Cuisse de poulet cuite"),
 	COOKED_PORCKCHOP(0.0, 0.0, 69, Material.GRILLED_PORK, "Côte de porc cuite"),
 	

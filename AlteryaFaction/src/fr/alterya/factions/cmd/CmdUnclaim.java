@@ -69,7 +69,7 @@ public class CmdUnclaim extends FCommand
 		myFaction.msg("%s<i> avez unclaim plusieurs terres.", fme.describeTo(myFaction, true));
 
 		if (Conf.logLandUnclaims)
-			P.p.log(fme.getName()+" a unclaim une terre à ("+flocation.getCoordString()+") à la faction : "+otherFaction.getTag());
+			P.p.log(fme.getName() + " a unclaim une terre aux coordonnées :" + flocation.getCoordString() + ", à la faction : " + otherFaction.getTag());
 	}
 	
 }

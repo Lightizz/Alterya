@@ -74,6 +74,13 @@ public class Factions extends EntityCollection<Faction>
 			faction.setDescription("L'enfer est vide, tous les démons sont ici.");
 			this.setFlagsForWarZone(faction);
 		}
+		if ( ! this.exists("-3"))
+		{
+			Faction faction = this.create("-3");
+			faction.setTag("ApZone");
+			faction.setDescription("Zone d'avant poste.");
+			this.setFlagsForWarZone(faction);
+		}
 		
 		//----------------------------------------------//
 		// Fix From Old Formats
@@ -81,12 +88,15 @@ public class Factions extends EntityCollection<Faction>
 		Faction wild = this.get("0");
 		Faction safeZone = this.get("-1");
 		Faction warZone = this.get("-2");
+		Faction apzone = this.get("-3");
 		
 		// Remove troublesome " " from old pre-1.6.0 names
 		if (safeZone != null && safeZone.getTag().contains(" "))
 			safeZone.setTag("SafeZone");
 		if (warZone != null && warZone.getTag().contains(" "))
 			warZone.setTag("WarZone");
+		if(apzone != null && apzone.getTag().contains(" "))
+			apzone.setTag("ApZone");
 		
 		// Set Flags if they are not set already.
 		if (wild != null && ! wild.getFlag(FFlag.PERMANENT))
@@ -95,7 +105,9 @@ public class Factions extends EntityCollection<Faction>
 			setFlagsForSafeZone(safeZone);
 		if (warZone != null && ! warZone.getFlag(FFlag.PERMANENT))
 			setFlagsForWarZone(warZone);
-
+		if(apzone != null && ! apzone.getFlag(FFlag.PERMANENT))
+			setFlagsForApZone(apzone);
+		
 		// populate all faction player lists
 		for (Faction faction : i.get())
 		{
@@ -129,6 +141,28 @@ public class Factions extends EntityCollection<Faction>
 		faction.setPermittedRelations(FPerm.CONTAINER, Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.TRUCE, Rel.NEUTRAL, Rel.ENEMY);
 		faction.setPermittedRelations(FPerm.BUTTON, Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.TRUCE, Rel.NEUTRAL, Rel.ENEMY);
 		faction.setPermittedRelations(FPerm.LEVER, Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.TRUCE, Rel.NEUTRAL, Rel.ENEMY);
+	}
+	
+	public void setFlagsForApZone(Faction faction) {
+		faction.setOpen(false);
+		
+		faction.setFlag(FFlag.PERMANENT, true);
+		faction.setFlag(FFlag.PEACEFUL, true);
+		faction.setFlag(FFlag.INFPOWER, true);
+		faction.setFlag(FFlag.POWERLOSS, false);
+		faction.setFlag(FFlag.PVP, true);
+		faction.setFlag(FFlag.FRIENDLYFIRE, false);
+		faction.setFlag(FFlag.MONSTERS, false);
+		faction.setFlag(FFlag.EXPLOSIONS, false);
+		faction.setFlag(FFlag.FIRESPREAD, false);
+		//faction.setFlag(FFlag.LIGHTNING, false);
+		faction.setFlag(FFlag.ENDERGRIEF, false);
+		
+		faction.setPermittedRelations(FPerm.DOOR, Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.TRUCE, Rel.NEUTRAL, Rel.ENEMY);
+		faction.setPermittedRelations(FPerm.CONTAINER, Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.TRUCE, Rel.NEUTRAL, Rel.ENEMY);
+		faction.setPermittedRelations(FPerm.BUTTON, Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.TRUCE, Rel.NEUTRAL, Rel.ENEMY);
+		faction.setPermittedRelations(FPerm.LEVER, Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.TRUCE, Rel.NEUTRAL, Rel.ENEMY);
+		faction.setPermittedRelations(FPerm.TERRITORY, Rel.LEADER, Rel.OFFICER, Rel.MEMBER);
 	}
 	
 	public void setFlagsForSafeZone(Faction faction)
