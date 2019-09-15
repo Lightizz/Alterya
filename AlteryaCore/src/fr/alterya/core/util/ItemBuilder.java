@@ -21,7 +21,13 @@ public class ItemBuilder
 		return item;
 	}
 	
-	public static ItemStack createItem(Material material, String dislayName) {
+	public static ItemStack createItem(Material material, int amount, int b) {
+		ItemStack item = new ItemStack(material, (byte) b);
+		item.setAmount(amount);
+		return item;
+	}
+	
+	public static ItemStack createItem(String dislayName, Material material) {
 		ItemStack item = new ItemStack(material);
 		ItemMeta itemM = item.getItemMeta();
 		itemM.setDisplayName(dislayName);
@@ -35,6 +41,18 @@ public class ItemBuilder
 		itemM.setDisplayName(dislayName);
 		itemM.setLore(lores);
 		item.setItemMeta(itemM);
+		return item;
+	}
+	
+	public static ItemStack createItem(Material material, String dislayName, List<String> lores, int amount) {
+		ItemStack item = new ItemStack(material);
+		ItemMeta itemM = item.getItemMeta();
+		itemM.setDisplayName(dislayName);
+		itemM.setLore(lores);
+		item.setItemMeta(itemM);
+		if(amount == 1) {
+			item.setAmount(0);
+		}
 		return item;
 	}
 	

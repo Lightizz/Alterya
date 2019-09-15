@@ -14,7 +14,7 @@ public class MoneyManager
 	public static double defaultMoney = 200.00;
 	
 	public MoneyManager(String uuid) {
-		fw = new FileWriter("ServerData/Moneys", "PlayersMoney" + ".yml");
+		fw = new FileWriter("ServerData/Moneys", "PlayersMoney");
 	}
 	
 	@SuppressWarnings("unused")

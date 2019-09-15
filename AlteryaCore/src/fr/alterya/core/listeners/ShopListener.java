@@ -28,10 +28,19 @@ public class ShopListener implements Listener
 	@EventHandler
 	public void onDoorInterract(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
-		if(e.getCurrentItem().getType() == Material.AIR) { e.setCancelled(true); return; }
-		if(e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
-			e.setCancelled(true);
-			player.getOpenInventory().close();
+		if(e.getInventory() == Shop.shopInvAlchemy 
+				|| e.getInventory() == Shop.shopInvUtils
+				|| e.getInventory() == Shop.shopInvBlocks
+				|| e.getInventory() == Shop.shopInvFarming
+				|| e.getInventory() == Shop.shopInvMain
+				|| e.getInventory() == Shop.shopInvMinerals
+				|| e.getInventory() == Shop.shopInvPillage
+				|| e.getInventory() == Shop.shopInvSellBuy) {
+			if(e.getCurrentItem().getType() == Material.AIR || e.getCurrentItem() == null) { e.setCancelled(true); return; }
+			if(e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+				e.setCancelled(true);
+				player.getOpenInventory().close();
+			}
 		}
 	}
 	

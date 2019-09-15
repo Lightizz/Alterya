@@ -7,9 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.alterya.core.MainCore;
-import fr.alterya.core.util.MenuManager;
+import fr.alterya.core.playerMenu.MenuManager;
 
-public class CmdMenu implements CommandExecutor
+public class CmdMenu extends MenuManager implements CommandExecutor
 {
 	public MainCore main;
 	
@@ -21,15 +21,10 @@ public class CmdMenu implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{
 		if(!(sender instanceof Player)) { sender.sendMessage(ChatColor.RED + "Vous devez être un joueur pour faire cela."); return true; }
-		
 		Player player = (Player) sender;
-		
 		if(message.equalsIgnoreCase("menu")) {
 			if(args.length != 0) { player.sendMessage(MainCore.prefix + "La commande est /menu."); return true; }
-			
-			MenuManager manager = new MenuManager(player);
-			
-			manager.openMenu(player);
+			openMenu(player);
 			return true;
 		}
 		return false;

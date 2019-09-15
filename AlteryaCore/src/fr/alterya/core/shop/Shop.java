@@ -83,21 +83,19 @@ public class Shop implements Listener {
 	static List<String> lores4 = Arrays.asList("Ici, vous trouverez des items de toutes sortes confondues mais qui ne sont ni des blocks ni des plantes ni des minéraux, ni autre !", "Cliquez pour plus d'informations !");
 	public static ItemStack utils = ItemBuilder.createItem(Material.EMPTY_MAP, "§1Items sans catégorie attribuée", lores4);
 	
-	//public static List<String> lores5 = Arrays.asList("Prix de vente séléctionner : ");
-	public static ItemStack sell = ItemBuilder.createItem(Material.ARROW, "§1Vendre"/*, (String []) lores5.toArray()*/);
+	public static ItemStack sell = ItemBuilder.createItem("§1Vendre", Material.ARROW);
 	
 	static List<String> lores6 = Arrays.asList("§4§lRetour / Fermer l'inventaire");
-	public static ItemStack backDoor = ItemBuilder.createItem(Material.ANVIL, "§4§lQuitter"/*, (String []) lores6.toArray()*/);
+	public static ItemStack backDoor = ItemBuilder.createItem("§4§lQuitter", Material.ANVIL);
 	
-	//public static List<String> lores7 = Arrays.asList("Prix d'achat séléctionner : ");
-	public static ItemStack buy = ItemBuilder.createItem(Material.BEACON, "§1Acheter"/*, (String []) lores7.toArray()*/);
+	public static ItemStack buy = ItemBuilder.createItem("§1Acheter", Material.BEACON);
 	
-	public static ItemStack add1 = ItemBuilder.createItem(Material.RED_MUSHROOM, "§lAjouter 1");
-	public static ItemStack add10 = ItemBuilder.createItem(Material.RED_MUSHROOM, "§lAjouter 10");
-	public static ItemStack add64 = ItemBuilder.createItem(Material.RED_MUSHROOM, "§lAjouter 64");
-	public static ItemStack substract1 = ItemBuilder.createItem(Material.BROWN_MUSHROOM, "§lRetirer 1");
-	public static ItemStack substract10 = ItemBuilder.createItem(Material.BROWN_MUSHROOM, "§lRetirer 10");
-	public static ItemStack substract64 = ItemBuilder.createItem(Material.BROWN_MUSHROOM, "§lRetirer 64");
+	public static ItemStack add1 = ItemBuilder.createItem("§lAjouter 1", Material.RED_MUSHROOM);
+	public static ItemStack add10 = ItemBuilder.createItem("§lAjouter 10", Material.RED_MUSHROOM);
+	public static ItemStack add64 = ItemBuilder.createItem("§lAjouter 64", Material.RED_MUSHROOM);
+	public static ItemStack substract1 = ItemBuilder.createItem("§lRetirer 1", Material.BROWN_MUSHROOM);
+	public static ItemStack substract10 = ItemBuilder.createItem("§lRetirer 10", Material.BROWN_MUSHROOM);
+	public static ItemStack substract64 = ItemBuilder.createItem("§lRetirer 64", Material.BROWN_MUSHROOM);
 	
 	/*
 	public void setDyesColors() {
