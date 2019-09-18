@@ -21,6 +21,14 @@ public class ItemBuilder
 		return item;
 	}
 	
+	public static ItemStack createItem(Material material, String displayName, int amount) {
+		ItemStack item = new ItemStack(material);
+		ItemMeta itemM = item.getItemMeta();
+		itemM.setDisplayName(displayName);
+		item.setAmount(amount);
+		return item;
+	}
+	
 	public static ItemStack createItem(Material material, int amount, int b) {
 		ItemStack item = new ItemStack(material, (byte) b);
 		item.setAmount(amount);

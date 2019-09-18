@@ -46,8 +46,9 @@ public class PlayerMenuListener implements Listener
 		Player player = (Player) e.getWhoClicked();
 		this.manager = new MenuManager(player.getUniqueId().toString());
 		if(e.getInventory().getName() == manager.invQuest.getName()) {
-			if(e.getCurrentItem().getType() == Material.APPLE || e.getCurrentItem().getType() == Material.AIR || e.getCurrentItem() == null) {
+			if(e.getCurrentItem().getType() == Material.APPLE || e.getCurrentItem().getType() == Material.AIR) {
 				e.setCancelled(true);
+				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 1") {
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day1.IsSucces") == true)) {
@@ -55,6 +56,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+				
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day1.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day1.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -75,7 +83,14 @@ public class PlayerMenuListener implements Listener
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
 					return;
-				} 
+				}
+				
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day2.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day2.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -96,7 +111,14 @@ public class PlayerMenuListener implements Listener
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
 					return;
-				} 
+				}
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day3.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day3.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -118,6 +140,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day4.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day4.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -139,6 +168,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day5.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day5.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -160,6 +196,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day6.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day6.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -181,6 +224,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day7.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day7.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -202,6 +252,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day8.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day8.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -223,6 +280,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day9.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day9.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -244,6 +308,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day10.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day10.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -265,6 +336,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day11.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day11.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -286,6 +364,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day12.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day12.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -307,6 +392,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day13.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day13.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -328,6 +420,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day14.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day14.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -349,6 +448,13 @@ public class PlayerMenuListener implements Listener
 					e.setCancelled(true);
 					return;
 				} 
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				ItemStack itemToRemove = new ItemStack(Material.valueOf(manager.getQuestFile(player.getUniqueId().toString()).getString("Day15.ItemRequire")), manager.getQuestFile(player.getUniqueId().toString()).getInt("Day15.ItemRequireAmount"));
 				if(! player.getInventory().contains(itemToRemove)) {
 					player.sendMessage(MainCore.prefix + "§aVous n'avez pas l'item demandé pour réussir la quête dans votre inventaire.");
@@ -365,6 +471,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 16") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day16.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -386,6 +499,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 17") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day17.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -407,6 +527,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 18") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day18.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -428,6 +555,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 19") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day19.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -449,6 +583,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 20") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day20.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -470,6 +611,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 21") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day21.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -491,6 +639,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 22") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day22.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -512,6 +667,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 23") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day23.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -533,6 +695,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 24") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day24.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -554,6 +723,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 25") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day25.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -575,6 +751,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 26") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day26.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -596,6 +779,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 27") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day27.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -617,6 +807,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 28") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day28.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -638,6 +835,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 29") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day29.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -659,6 +863,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 30") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day30.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);
@@ -680,6 +891,13 @@ public class PlayerMenuListener implements Listener
 				return;
 			}
 			if(e.getCurrentItem().getItemMeta().getDisplayName() == "Jour 31") {
+
+				if(! e.getCurrentItem().getItemMeta().getLore().contains("§aCliquez pour faire la quête !")) {
+					player.sendMessage("Cette quête n'est pas celle du jour !");
+					e.setCancelled(true);
+					return;
+				}
+				
 				if((manager.getQuestFile(player.getUniqueId().toString()).config.getBoolean("Day31.IsSucces") == true)) {
 					player.sendMessage(MainCore.prefix + "Vous avez déjà accomplis cette quête.");
 					e.setCancelled(true);

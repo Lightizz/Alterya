@@ -17,11 +17,11 @@ public class MoneyManager
 		fw = new FileWriter("ServerData/Moneys", "PlayersMoney");
 	}
 	
-	@SuppressWarnings("unused")
 	public void setMoney(String uuid, double moneyToSet) {
 		if(moneyBankExist(uuid) == false) {
 			this.createMoneyBank(uuid, defaultMoney);
 		}
+		@SuppressWarnings("unused")
 		double oldMoney = fw.getDouble(uuid);
 		double newMoney = moneyToSet;
 		oldMoney = newMoney;

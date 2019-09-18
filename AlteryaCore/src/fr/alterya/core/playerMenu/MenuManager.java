@@ -1,5 +1,6 @@
 package fr.alterya.core.playerMenu;
 
+import java.util.Date;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -38,6 +39,12 @@ public class MenuManager
 	public Inventory invQuest = Bukkit.createInventory(null, 5*9, "§aQuêtes journalières");
 	public static Inventory invStats = Bukkit.createInventory(null, 5*9, "§3Statistiques");
 	public static Inventory invRecipes = Bukkit.createInventory(null, 5*9, "§cRecetes");
+	
+	public Date d = new Date();
+	
+	public void setTodayQuest(ItemStack itemToShow) {
+		
+	}
 	
 	public FileWriter getQuestFile(String uuid) {
 		fw0 = new FileWriter("ServerData/DailyQuests", uuid + " quests");
