@@ -10,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import fr.alterya.core.shop.ShopItems;
 import fr.alterya.core.util.ItemBuilder;
 
 /*

@@ -32,3 +32,245 @@ Groups:
   Administrateur:
     permissions:
       user.admin
+
+Quests:
+  D1:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D2:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D3:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D4:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D5:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D6:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D7:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D8:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D9:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D10:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D11:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D12:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D13:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D14:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D15:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D16:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D17:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D18:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D19:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D20:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D21:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D22:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D23:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D24:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D25:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D26:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D27:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D28:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D29:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D30:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D31:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D32:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D33:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D34:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D35:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D36:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D37:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D38:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D39:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2
+  D40:
+    Desc: test
+    ItemRequire: GLOWSTONE_DUST
+    ItemRequireAmount: 10
+    ItemSucces: BEACON
+    ItemSuccesAount: 2

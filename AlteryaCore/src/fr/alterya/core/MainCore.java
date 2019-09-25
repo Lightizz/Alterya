@@ -8,7 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
 import fr.alterya.core.command.CmdBaltop;
-import fr.alterya.core.command.CmdCombatTime;
 import fr.alterya.core.command.CmdFurnace;
 import fr.alterya.core.command.CmdGiveMoney;
 import fr.alterya.core.command.CmdHome;
@@ -24,6 +23,8 @@ import fr.alterya.core.command.CmdShop;
 import fr.alterya.core.command.CmdTakeMoney;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
+import fr.alterya.core.command.CmdSetSpawn;
+import fr.alterya.core.command.CmdSpawn;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.listeners.PlayerMenuListener;
 import fr.alterya.core.listeners.ShopListener;
@@ -67,6 +68,9 @@ public class MainCore extends JavaPlugin
 		new DCommand("Ping", "/ping", "Envoie le ping du joueur sur le serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
 		new DCommand("Tipeee", "/tipeee", "Envoie le lien du tipeee officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
 		
+		new DCommand("setspawn", "/setspawn", "Positionne le spawn officiel pour le monde acutel", "spawn.set", Collections.singletonList(""), new CmdSetSpawn(rank), this);
+		new DCommand("spawn", "/spawn", "Teleport le joueur au spawn", null, Collections.singletonList("s"), new CmdSpawn(this), this);
+		
 		new DCommand("Tpa", "/tpa <joueur>", "Envoie une requête de téléportation à la cible", null, Collections.singletonList(""), new CmdTpa(this), this);
 		new DCommand("Tpyes", "/tpyes <joueur>", "Accepte la quête de téléportation", null, Collections.singletonList(""), new CmdTpa(this), this);
 		new DCommand("Tpno", "/tpno <joueur>", "Refuse la requête de téléportation", null, Collections.singletonList(""), new CmdTpno(), this);
@@ -86,8 +90,6 @@ public class MainCore extends JavaPlugin
 		new DCommand("Sethome", "/sethome <nom>", "Ajouter le home indiqué dans la commande de la liste des homes du joueur", null, Collections.singletonList(""), new CmdHome(rank, this), this);
 		new DCommand("Homeinfo", "/homeinfo", "Affiche la liste des homes positionés", null, Collections.singletonList(""), new CmdHome(rank, this), this);
 		
-		new DCommand("Combattime", "/combattime", "Affiche le temps restant en combat", null, Collections.singletonList(""), new CmdCombatTime(), this);
-		
 		new DCommand("Promote", "/promote <id> <joueur>", "Promouvoir un joueur au rang indiqué avec l'id", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
 		new DCommand("Demote", "/demote <joueur>", "Remettre le rang d'un joueur à 0", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
 		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
@@ -100,7 +102,7 @@ public class MainCore extends JavaPlugin
 		//Enregistrer tous les évenements 
 		getServer().getPluginManager().registerEvents(new PlayerListener(rank), this);
 		getServer().getPluginManager().registerEvents(new ShopListener(), this);
-		getServer().getPluginManager().registerEvents(new PlayerMenuListener(), this);
+		getServer().getPluginManager().registerEvents(new PlayerMenuListener(this), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
 		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
 	}
