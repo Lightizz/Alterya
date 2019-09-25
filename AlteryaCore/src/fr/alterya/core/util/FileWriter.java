@@ -81,9 +81,6 @@ public class FileWriter
 	}
 	
 	public void saveConfig() {
-		try {
-			config.save(file);
-		} catch (IOException ioe) {ioe.printStackTrace();}
-			
-		}
+		try { config.save(file); }catch (IOException ioe) { ioe.printStackTrace(); }
+	}
 }
