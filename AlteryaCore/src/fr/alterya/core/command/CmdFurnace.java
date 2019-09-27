@@ -25,7 +25,7 @@ public class CmdFurnace implements CommandExecutor
 		Player player = (Player) sender;
 		//	/furnace
 		if(message.equalsIgnoreCase("furnace")) {
-			if(mainCore.rank.config.getInt(player.getUniqueId().toString()) != 3) { player.sendMessage(MainCore.prefix + "Vous n'avez pas le grade suffisant pour effectuer cette commande"); return true; }
+			if(mainCore.rank.config.getInt(player.getUniqueId().toString()) != 3 && !(mainCore.rank.config.getInt(player.getUniqueId().toString()) >= 9)) { player.sendMessage(MainCore.prefix + "Vous n'avez pas le grade suffisant pour effectuer cette commande"); return true; }
 			if(player.getItemInHand().getType() == Material.COAL_ORE) {
 				int amount = player.getItemInHand().getAmount();
 				ItemStack itemToReplace = ItemBuilder.createItem(Material.COAL);

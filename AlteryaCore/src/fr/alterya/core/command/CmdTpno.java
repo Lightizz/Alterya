@@ -15,13 +15,13 @@ public class CmdTpno implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{
 		Player player0 = (Player) sender;
+		if(args[0] == null) {
+			player0.sendMessage(MainCore.prefix + "La commande est /tpyes <joueur>.");
+			return true;
+		}
 		Player target0 = Bukkit.getPlayer(args[0]);
 		
 		if(message.equalsIgnoreCase("tpno") && CmdTpa.requestSenderPlayers.contains(player0.getUniqueId().toString()) || CmdTpa.requestedPlayers.contains(target0.getUniqueId().toString())) {
-			if(args[0] == null) {
-				player0.sendMessage(MainCore.prefix + "La commande est /tpno <joueur>.");
-			}
-			
 			Player player = (Player) sender;
 			Player target = Bukkit.getPlayer(args[0]);
 				

@@ -1,7 +1,6 @@
 package fr.alterya.core.command;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,20 +21,33 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args){		
 		
+		if(message.equalsIgnoreCase("feed") && sender instanceof Player) {
+			Player player = (Player) sender;
+			if(!(rank.config.getInt(player.getUniqueId().toString()) == 3) 
+				|| !(rank.config.getInt(player.getUniqueId().toString()) == 2) 
+				|| !(rank.config.getInt(player.getUniqueId().toString()) == 1) 
+				|| !(rank.config.getInt(player.getUniqueId().toString()) >= 8)) {
+				player.sendMessage(MainCore.prefix + "Vous n'avez pas le grade suffisant pour effectuer cette commande");
+				return true; 
+			}
+			player.setFoodLevel(20);
+			player.sendMessage("§eVotre barre de faim est maintenant au maximum");
+			return true;
+		}
+		
 		//	/ping
-		if(message.equalsIgnoreCase("ping") && sender instanceof Player){
+		if(message.equalsIgnoreCase("ping") && sender instanceof Player) {
 			Player player = (Player) sender;
 			if(getPing(player) < 0) {
 				player.sendMessage(MainCore.prefix + "§4Une erreur est survenue : 3C. Veuillez contacter un staff en donner l'identifiant (Exemple d'ID : 0C)");
 				return true;
 			}
-			player.sendMessage(ChatColor.YELLOW + "Votre ping est : " + ChatColor.GOLD + getPing(player) + "ms");
-			
+			player.sendMessage(ChatColor.YELLOW + "Votre ping : " + ChatColor.GOLD + getPing(player) + " ms");
 			return true;
 	    }
 	        
 		//	/discord
-		if(message.equalsIgnoreCase("discord") && sender instanceof Player) {
+		if(message.equalsIgnoreCase("discord")) {
 			Player player = (Player) sender;
 	        player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<|" );
 	        return true;
@@ -87,8 +99,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	public void onInterract(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked();
 		if(event.getInventory() == player.getEnderChest()) {
-			if(event.getCurrentItem().getType() == Material.AIR || event.getCurrentItem() == null 
-					&& event.getSlot() == 0
+			if(event.getSlot() == 0
 					&& event.getSlot() == 1
 					&& event.getSlot() == 2
 					&& event.getSlot() == 3
@@ -105,11 +116,13 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 14
 					&& event.getSlot() == 15
 					&& event.getSlot() == 16
-					&& event.getSlot() == 17 && rank.config.getInt(player.getUniqueId().toString()) == 0) {
+					&& event.getSlot() == 17 
+					&& rank.config.getInt(player.getUniqueId().toString()) <= 0) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
-			}else if(event.getCurrentItem().getType() == Material.AIR || event.getCurrentItem() == null 
-					&& event.getSlot() == 0
+				return;
+			}
+			if( event.getSlot() == 0
 					&& event.getSlot() == 1
 					&& event.getSlot() == 2
 					&& event.getSlot() == 3
@@ -120,6 +133,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 8 && rank.config.getInt(player.getUniqueId().toString()) == 1) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
+				return;
 			}
 		}
 	}

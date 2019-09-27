@@ -24,7 +24,7 @@ public class Commands implements CommandExecutor {
     	Player player = (Player) sender;
 		String prefix = ChatColor.GRAY + "[" + ChatColor.AQUA + "Modo" + ChatColor.GRAY + "]";
         
-        if(label.equalsIgnoreCase("admin") && main.rank.config.getInt(player.getUniqueId().toString()) >= 10) {
+        if(label.equalsIgnoreCase("admin") && main.rank.config.getInt(player.getUniqueId().toString()) >= 9) {
     		ItemStack customban = new ItemStack(Material.PAPER, 1);
     		ItemMeta customM = customban.getItemMeta();
     		customM.setDisplayName("§4Liste des joueurs");
@@ -40,7 +40,7 @@ public class Commands implements CommandExecutor {
     		return true;
         	}
         
-        if(label.equalsIgnoreCase("alert") && main.rank.config.getInt(player.getUniqueId().toString()) >= 10) {
+        if(label.equalsIgnoreCase("alert") && main.rank.config.getInt(player.getUniqueId().toString()) >= 9) {
         	if(args.length == 0) {
     			player.sendMessage("La commande est : /alert <Message>");
     		}
@@ -59,7 +59,7 @@ public class Commands implements CommandExecutor {
         	Bukkit.shutdown();
         }
         
-        if(label.equalsIgnoreCase("clearchat") && main.rank.config.getInt(player.getUniqueId().toString()) >= 7) {
+        if(label.equalsIgnoreCase("clearchat") && main.rank.config.getInt(player.getUniqueId().toString()) >= 8) {
         	
         	 Bukkit.broadcastMessage("");
              Bukkit.broadcastMessage("");

@@ -36,9 +36,7 @@ public class CommandStaff implements CommandExecutor {
 		
 		Player p = (Player) sender;
 		
-		if (cmd.getName().equalsIgnoreCase("vanish") && main.rank.config.getInt(p.getUniqueId().toString()) >= 7) {
-			// Check perms
-			if(sender.isOp() == true) {
+		if (cmd.getName().equalsIgnoreCase("vanish") && main.rank.config.getInt(p.getUniqueId().toString()) >= 9) {
 			Player player = (Player) sender;
 			
 			if (!vanished.contains(p)) {
@@ -60,7 +58,6 @@ public class CommandStaff implements CommandExecutor {
 				return true;
 			}
 		}
-	}
 		return true;
 	}
 	

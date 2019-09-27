@@ -25,6 +25,10 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 	MainCore main;
 	Rank rank = new Rank(main, player0);
 	
+	public CmdKit(MainCore m) {
+		main = m;
+	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args) {
 		Player player = (Player) sender;
@@ -37,7 +41,7 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 				}else if(this.timer == 0) {
 					giveMemoireKit(player);
 					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Mémoire !");
-					this.runTaskTimer(main, 0, 20);
+					runTaskTimer(main, 0, 20);
 					return true;
 				}
 			}else if(rank.config.getInt(player.getUniqueId().toString()) == 3) {

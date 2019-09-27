@@ -6,8 +6,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import fr.alterya.core.MainCore;
+import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
 import fr.alterya.factions.FPlayer;
@@ -18,26 +21,28 @@ public final class PlayerListener implements Listener {
 
 	private final Rank rank;
 	
-	public FPlayer fme;
-	public Faction myFaction;
+	MainCore m;
+	FPlayer fme;
+	Faction myFaction;
 	
-	public PlayerListener(Rank rank) {
+	public PlayerListener(Rank rank, MainCore main) {
 		this.rank = rank;
+		m = main;
 	}
 	
 	@EventHandler
-	private void playerJoin(PlayerJoinEvent pje) {
+	void playerJoin(PlayerJoinEvent pje) {
 		rank.loadPlayer(pje.getPlayer());
 		pje.getPlayer().setScoreboard(rank.getScoreboard());
 	}
 	
 	@EventHandler
-	private void playerQuit(PlayerQuitEvent pqe) {
+	void playerQuit(PlayerQuitEvent pqe) {
 		rank.deletPlayer(pqe.getPlayer().getUniqueId().toString());
 	}
 	
 	@EventHandler
-	private void playerChat(AsyncPlayerChatEvent pce) {
+	void playerChat(AsyncPlayerChatEvent pce) {
 		Player player = pce.getPlayer();
 		this.fme = FPlayers.i.get(pce.getPlayer());
 		this.myFaction = this.fme.getFaction();
@@ -46,7 +51,8 @@ public final class PlayerListener implements Listener {
 		//Positionne la faction du joueur + son rang + son pseudo avant sont message
 		pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + pce.getMessage());
 		
-		if(rank.config.getInt(player.getUniqueId().toString()) >= 6) {
+		if(rank.config.getInt(player.getUniqueId().toString()) != 3 
+				|| !(rank.config.getInt(player.getUniqueId().toString()) >= 4)) {
 			if(pce.getFormat().contains("!a")) {
 				pce.setMessage(pce.getMessage().replaceAll("!a", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.GREEN + pce.getMessage());
@@ -137,6 +143,23 @@ public final class PlayerListener implements Listener {
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.BOLD + pce.getMessage());
 				return;
 			}
+		}
+	}
+	/*
+	//Le briquet est à bloqué sur le serveur cet événement bloque le fait qu'un joueur puisse en avoir un.
+	@EventHandler
+	void onGetFlintAndStill(PrepareItemCraftEvent e) {
+		
+	}
+	*/
+	
+	@EventHandler
+	void onMove(PlayerMoveEvent e) {
+		Player player = e.getPlayer();
+		if(CmdTpa.requestedPlayers.contains(player.getUniqueId().toString()) || CmdTpa.requestSenderPlayers.contains(player.getUniqueId().toString())) {
+			player.sendMessage("t");
+			CmdTpa c = new CmdTpa(m);
+			c.cancelTeleport();
 		}
 	}
 }

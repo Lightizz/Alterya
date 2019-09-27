@@ -36,7 +36,7 @@ import fr.alterya.core.util.DisconnectCombat;
 
 public class MainCore extends JavaPlugin
 {
-	public static String prefix = ChatColor.AQUA + "[Core] ";
+	public static String prefix = ChatColor.AQUA + "[Alterya] ";
 		
 	public Shop shop;
 	public Rank rank;
@@ -94,13 +94,13 @@ public class MainCore extends JavaPlugin
 		new DCommand("Demote", "/demote <joueur>", "Remettre le rang d'un joueur à 0", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
 		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
 		
-		new DCommand("Kit", "/kit", "Donne le kit au joueur coorespondant à son grade", null, Collections.singletonList(""), new CmdKit(), this);
+		new DCommand("Kit", "/kit", "Donne le kit au joueur coorespondant à son grade", null, Collections.singletonList(""), new CmdKit(this), this);
 		
 		//Initialiser le scoreboard des rangs
 		rank.initScoreboard();
 		
 		//Enregistrer tous les évenements 
-		getServer().getPluginManager().registerEvents(new PlayerListener(rank), this);
+		getServer().getPluginManager().registerEvents(new PlayerListener(rank, this), this);
 		getServer().getPluginManager().registerEvents(new ShopListener(), this);
 		getServer().getPluginManager().registerEvents(new PlayerMenuListener(this), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);

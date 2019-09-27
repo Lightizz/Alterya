@@ -20,8 +20,8 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 	
 	public static int timer = 0;
 	
-	public Player player1;
-	public Player target1;
+	public static Player player1;
+	public static Player target1;
 	
 	public MainCore mainCore;
 	
@@ -34,21 +34,24 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 	{
 		Player player0 = (Player) sender;
 		
-		if(player0 == Bukkit.getPlayer(args[0])) {
+		/*if(player0 == Bukkit.getPlayer(args[0])) {
 			player0.sendMessage(MainCore.prefix + "§2Vous§e ne pouvez pas vous téléporter à vous même.");
 			return true;
-		}
-		
+		}*/		
 		Player target0 = Bukkit.getPlayer(args[0]);
 		
 		if(message.equalsIgnoreCase("tpa")) {
 			if(args[0] == null) {
 				player0.sendMessage(MainCore.prefix + "La commande est /tpa <joueur>.");
+				return true;
 			}
 			
 			//Créer les joueurs
 			Player player = (Player) sender;
 			Player target = Bukkit.getPlayer(args[0]);
+			
+			player1 = player;
+			target1 = target;
 			
 			//Envoyer les messages
 			player.sendMessage(MainCore.prefix + "§eVous avez demander à §2" + target.getName() + " §esi vous pouvez vous téléporter à sa position.");
@@ -65,11 +68,11 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 			
 			return true;
 		}else if(message.equalsIgnoreCase("tpyes") && requestSenderPlayers.contains(player0.getUniqueId().toString()) || requestedPlayers.contains(target0.getUniqueId().toString())) {
+			Player player = (Player) sender;
 			if(args[0] == null) {
 				player0.sendMessage(MainCore.prefix + "La commande est /tpyes <joueur>.");
+				return true;
 			}
-			
-			Player player = (Player) sender;
 			Player target = Bukkit.getPlayer(args[0]);
 			
 			//Envoyer les messages
@@ -79,8 +82,8 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 			//Démarre le timer de 5 sec avant de se faire téléporter
 			this.runTaskTimer(mainCore, 0, 20);
 			
-			this.player1 = player;
-			this.target1 = target;
+			player1 = player;
+			target1 = target;
 			
 			//Retire les joueurs des listes
 			requestSenderPlayers.remove(player.getUniqueId().toString());
@@ -97,8 +100,16 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 	public void confirmTeleport(Player player, Player target) {
 		player.teleport(target.getLocation());
 			
-		target.sendMessage(MainCore.prefix + "Le joueur " + player.getName() + " a été téléporter.");
-		player.sendMessage(MainCore.prefix + "Vous avez été téléporter à " + target.getName() + " avec succès.");
+		target.sendMessage(MainCore.prefix + "§eLe joueur §2" + player.getName() + "§e a été téléporter.");
+		player.sendMessage(MainCore.prefix + "§eVous avez été téléporter à §2" + target.getName() + "§e avec succès.");
+	}
+	
+	public void cancelTeleport() {
+		target1.sendMessage(MainCore.prefix + "§eLe joueur §2" + player1.getDisplayName() + "§e a annulé la requête.");
+		requestedPlayers.remove(target1.getUniqueId().toString());
+		requestSenderPlayers.remove(player1.getUniqueId().toString());
+		player1.sendMessage(MainCore.prefix + "§2Vous§e avez fait un mouvement, requête de téléportation annulée.");
+		cancel();
 	}
 	
 	@Override

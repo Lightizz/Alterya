@@ -104,19 +104,19 @@ public class CmdHome implements CommandExecutor
 					return true;
 				}
 				
-				if(homeManager.getHomes().size() >= 20 && rank.config.getInt(player.getUniqueId().toString()) == 9) {
+				if(homeManager.getHomes().size() >= 15 && rank.config.getInt(player.getUniqueId().toString()) == 9) {
 					player.sendMessage(MainCore.prefix + "Vous avez atteint votrel imite de home.");
 					return true;
-				}else if(homeManager.getHomes().size() < 20 && rank.config.getInt(player.getUniqueId().toString()) == 9) {
+				}else if(homeManager.getHomes().size() < 15 && rank.config.getInt(player.getUniqueId().toString()) == 9) {
 					homeManager.createHome(player.getLocation(), args[0]);
 					player.sendMessage("Le home " + args[0] + " a été crée à votre position.");
 					return true;
 				}
 				
-				if(homeManager.getHomes().size() >= Integer.MAX_VALUE && rank.config.getInt(player.getUniqueId().toString()) == 10) {
+				if(homeManager.getHomes().size() >= 20 && rank.config.getInt(player.getUniqueId().toString()) == 10) {
 					player.sendMessage(MainCore.prefix + "Vous avez atteint votrel imite de home.");
 					return true;
-				}else if(homeManager.getHomes().size() < Integer.MAX_VALUE && rank.config.getInt(player.getUniqueId().toString()) == 10) {
+				}else if(homeManager.getHomes().size() < 20 && rank.config.getInt(player.getUniqueId().toString()) == 10) {
 					homeManager.createHome(player.getLocation(), args[0]);
 					player.sendMessage("Le home " + args[0] + " a été crée à votre position.");
 					return true;

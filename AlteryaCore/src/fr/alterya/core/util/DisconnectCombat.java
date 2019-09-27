@@ -34,6 +34,7 @@ public class DisconnectCombat extends BukkitRunnable implements Listener
 	public void onStartCombat(EntityDamageByEntityEvent e) {
 		Player player = (Player) e.getEntity();
 		Player attacker = (Player) e.getDamager();
+		
 		this.attacker = attacker;
 		this.player = player;
 		
@@ -43,13 +44,22 @@ public class DisconnectCombat extends BukkitRunnable implements Listener
 			return;
 		}
 		
+		//Joue un son d'alerte
 		player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 		attacker.playSound(attacker.getLocation(), Sound.ORB_PICKUP, 50, 50);
+		
+		//Envoie les messages
 		player.sendMessage(MainCore.prefix + "§aVous êtes maintenant en combat !");
 		attacker.sendMessage(MainCore.prefix + "§aVous êtes maintenant en combat !");
+		
+		//Active le mode en comabt pour les joueurs
 		onCombatPlayersBoolean.replace(player.getUniqueId().toString(), true);
 		onCombatPlayersBoolean.replace(attacker.getUniqueId().toString(), true);
+		
+		//Commence le timer
 		runTaskTimer(main, 0, 20);
+		
+		//Ajoute les timers des joueurs
 		onCombatPlayersTimers.put(player.getUniqueId().toString(), timer);
 		onCombatPlayersTimers.put(player.getUniqueId().toString(), timer);
 	}
