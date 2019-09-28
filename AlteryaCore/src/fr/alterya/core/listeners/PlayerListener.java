@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.alterya.core.MainCore;
+import fr.alterya.core.command.CmdMute;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
@@ -48,6 +49,15 @@ public final class PlayerListener implements Listener {
 	@EventHandler
 	void playerQuit(PlayerQuitEvent pqe) {
 		rank.deletPlayer(pqe.getPlayer().getUniqueId().toString());
+	}
+	
+	@EventHandler
+	void onPlayerMute(AsyncPlayerChatEvent e) {
+		Player player = e.getPlayer();
+		if(CmdMute.fw.getBoolean(player.getUniqueId().toString()) == true) {
+			player.sendMessage(MainCore.prefix + "§4Vous êtes mute.");
+			e.setCancelled(true);
+		}
 	}
 	
 	@EventHandler

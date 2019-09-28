@@ -32,40 +32,40 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args) {
 		Player player = (Player) sender;
-		this.player0 = player;
+		player0 = player;
 		if(message.equalsIgnoreCase("kit")) {
 			if(rank.config.getInt(player.getUniqueId().toString()) == 2) {
-				if(this.timer != 0) {
+				if(timer != 0) {
 					int timeRemaiting = 172800 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
-				}else if(this.timer == 0) {
+				}else if(timer == 0) {
 					giveMemoireKit(player);
 					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Mémoire !");
 					runTaskTimer(main, 0, 20);
 					return true;
 				}
 			}else if(rank.config.getInt(player.getUniqueId().toString()) == 3) {
-				if(this.timer != 0) {
+				if(timer != 0) {
 					int timeRemaiting = 259200 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
-				}else if(this.timer == 0) {
+				}else if(timer == 0) {
 					giveSageKit(player);
 					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Sage !");
-					this.runTaskTimer(main, 0, 20);
+					runTaskTimer(main, 0, 20);
 					return true;
 				}
 			}else if(rank.config.getInt(player.getUniqueId().toString()) == 1) {
-				if(this.timer != 0) {
+				if(timer != 0) {
 					int timeRemaiting = 172800 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
-				}else if(this.timer == 0) {
+				}else if(timer == 0) {
 					giveSouvenirKit(player);
 					player.sendMessage(MainCore.prefix + "Voici votre kit du grade Souvenir !");
-					this.runTaskTimer(main, 0, 20);
+					runTaskTimer(main, 0, 20);
 					return true;
 				}	
 			}else {
-				player.sendMessage(MainCore.prefix + "Vous n'avez aucun grade permettant le /kit, vous ne pouvez pas reçevoir de kit !");
+				player.sendMessage(MainCore.prefix + "§aVous§e n'avez aucun grade permettant le /kit, vous ne pouvez pas reçevoir de kit !");
 				return true;
 			}
 		}

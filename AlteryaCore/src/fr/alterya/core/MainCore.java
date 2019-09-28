@@ -15,6 +15,7 @@ import fr.alterya.core.command.CmdKit;
 import fr.alterya.core.command.CmdMenu;
 import fr.alterya.core.command.CmdMoney;
 import fr.alterya.core.command.CmdMsg;
+import fr.alterya.core.command.CmdMute;
 import fr.alterya.core.command.CmdPay;
 import fr.alterya.core.command.CmdPromote;
 import fr.alterya.core.command.CmdPurgeMoney;
@@ -99,6 +100,9 @@ public class MainCore extends JavaPlugin
 		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
 		
 		new DCommand("Kit", "/kit", "Donne le kit au joueur coorespondant à son grade", null, Collections.singletonList(""), new CmdKit(this), this);
+		
+		new DCommand("Mute", "/mute <joueur> <temps>", "Mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
+		new DCommand("UnMute", "/unmute <joueur>", "Dé-mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		
 		//Initialiser le scoreboard des rangs
 		rank.initScoreboard();
