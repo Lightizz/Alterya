@@ -34,10 +34,10 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 	{
 		Player player0 = (Player) sender;
 		
-		/*if(player0 == Bukkit.getPlayer(args[0])) {
+		if(player0 == Bukkit.getPlayer(args[0])) {
 			player0.sendMessage(MainCore.prefix + "§2Vous§e ne pouvez pas vous téléporter à vous même.");
 			return true;
-		}*/		
+		}
 		Player target0 = Bukkit.getPlayer(args[0]);
 		
 		if(message.equalsIgnoreCase("tpa")) {

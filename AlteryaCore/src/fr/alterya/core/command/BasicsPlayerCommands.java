@@ -16,23 +16,24 @@ import net.minecraft.server.v1_7_R4.EntityPlayer;
 
 public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	
+	MainCore m;
 	Rank rank;
 	
+	public BasicsPlayerCommands(MainCore main, Rank r) {
+		m = main;
+		r = rank;
+	}
+	
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String message, String[] args){		
+	public boolean onCommand(CommandSender sender, Command command, String message, String[] args) {		
 		
 		if(message.equalsIgnoreCase("feed") && sender instanceof Player) {
 			Player player = (Player) sender;
-			if(rank.config.getInt(player.getUniqueId().toString()) != 3
-				|| rank.config.getInt(player.getUniqueId().toString()) != 2
-				|| rank.config.getInt(player.getUniqueId().toString()) != 1 
-				|| !(rank.config.getInt(player.getUniqueId().toString()) >= 8)) {
-				player.sendMessage(MainCore.prefix + "Vous n'avez pas le grade suffisant pour effectuer cette commande");
-				return true; 
+			if(m.rank.config.getInt(player.getUniqueId().toString()) >= 3) {
+				player.setFoodLevel(20);
+				player.sendMessage("§eVotre barre de faim est maintenant au maximum");
+				return true;
 			}
-			player.setFoodLevel(20);
-			player.sendMessage("§eVotre barre de faim est maintenant au maximum");
-			return true;
 		}
 		
 		//	/ping
@@ -64,7 +65,6 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	    if(message.equalsIgnoreCase("craft") && sender instanceof Player) {
 	    	Player player = (Player) sender;
 	    	player.openWorkbench (null, true);
-	            
 	    	return true;
 	    }
 	    
@@ -117,7 +117,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 15
 					&& event.getSlot() == 16
 					&& event.getSlot() == 17 
-					&& rank.config.getInt(player.getUniqueId().toString()) <= 0) {
+					&& rank.config.getInt(player.getUniqueId().toString()) == 0) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 				return;

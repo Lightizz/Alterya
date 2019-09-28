@@ -35,7 +35,7 @@ public class HomeManager
 	
 	//Récuperer la liste des homes d'un joueur
 	public Set<String> getHomes() {
-		return fw.getKeys(true);
+		return fw.getKeys(false);
 	}
 	
 	//Récuperer la location d'un home

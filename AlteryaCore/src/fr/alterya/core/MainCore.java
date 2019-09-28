@@ -62,13 +62,13 @@ public class MainCore extends JavaPlugin
 		// Créer les commandes
 		new DCommand("Message", "/msg <joueur> <message>", "Envoie un message privé au joueur cilbé", null, Collections.singletonList("m"), new CmdMsg(this), this);
 		new DCommand("Menu", "/menu", "Ouvre le menu du joueur", null, Collections.singletonList(""), new CmdMenu(this), this);
-		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("enderchest"), new BasicsPlayerCommands(), this);
-		new DCommand("Craft", "/craft", "Permet d'ouvrir une table de craft", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
+		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("enderchest"), new BasicsPlayerCommands(this, rank), this);
+		new DCommand("Craft", "/craft", "Permet d'ouvrir une table de craft", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
 		new DCommand("Furnace", "/furnace", "Permet de faire cuire l'item dans la main de l'envoyeur de la commande", null, Collections.singletonList(""), new CmdFurnace(this), this);
-		new DCommand("Discord", "/discord", "Envoie le lien du serveur discord officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
-		new DCommand("Feed", "/feed", "Met la barre de faim au maximum", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
-		new DCommand("Ping", "/ping", "Envoie le ping du joueur sur le serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
-		new DCommand("Tipeee", "/tipeee", "Envoie le lien du tipeee officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
+		new DCommand("Discord", "/discord", "Envoie le lien du serveur discord officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
+		new DCommand("Feed", "/feed", "Met la barre de faim au maximum", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
+		new DCommand("Ping", "/ping", "Envoie le ping du joueur sur le serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
+		new DCommand("Tipeee", "/tipeee", "Envoie le lien du tipeee officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
 		
 		new DCommand("Staff", "/staff", "Affiche tous les membres du staff connectés sur le serveur", null, Collections.singletonList(""), new CmdStaffList(rank), this);
 		

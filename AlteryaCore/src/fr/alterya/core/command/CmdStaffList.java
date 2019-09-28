@@ -1,5 +1,8 @@
 package fr.alterya.core.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,6 +22,8 @@ public class CmdStaffList implements CommandExecutor
 		r = rank;
 	}
 	
+	List<String> onlineStaff = new ArrayList<String>();
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
@@ -29,11 +34,15 @@ public class CmdStaffList implements CommandExecutor
 				return true;
 			}
 			Player player = (Player) sender;
-			player.sendMessage(ChatColor.BOLD + "--------------=Staff Connecté=---------------");
+			player.sendMessage(ChatColor.BOLD + "----------------=" + ChatColor.AQUA + "Staff Connecté" + ChatColor.RESET + "=----------------");
 			player.sendMessage(" ");
 			for(Player p : Bukkit.getOnlinePlayers()) {
 				if(r.config.getInt(p.getUniqueId().toString()) >= 4) {
 					player.sendMessage(r.getRankById(r.config.getInt(p.getUniqueId().toString())).getPrefix() + p.getDisplayName());
+					onlineStaff.add(player.getUniqueId().toString());
+				}
+				if(onlineStaff.isEmpty() == true) {
+					player.sendMessage("Aucun staff n'est en ligne.");
 				}
 			}
 			player.sendMessage(" ");
