@@ -1,9 +1,11 @@
 package fr.alterya.core.listeners;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -145,13 +147,15 @@ public final class PlayerListener implements Listener {
 			}
 		}
 	}
-	/*
+	
 	//Le briquet est à bloqué sur le serveur cet événement bloque le fait qu'un joueur puisse en avoir un.
 	@EventHandler
-	void onGetFlintAndStill(PrepareItemCraftEvent e) {
-		
+	void onGetFlintAndSteel(CraftItemEvent e) {
+		if(e.getCurrentItem().getType() == Material.FLINT_AND_STEEL) {
+			e.setCancelled(true);
+		}
 	}
-	*/
+	
 	
 	@EventHandler
 	void onMove(PlayerMoveEvent e) {
