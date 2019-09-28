@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -30,6 +31,12 @@ public final class PlayerListener implements Listener {
 	public PlayerListener(Rank rank, MainCore main) {
 		this.rank = rank;
 		m = main;
+	}
+	
+	@EventHandler
+	void playerLogin(PlayerLoginEvent e) {
+		Player player = e.getPlayer();
+		player.sendMessage(ChatColor.AQUA + "§lBienvenue sur Alterya !");
 	}
 	
 	@EventHandler
