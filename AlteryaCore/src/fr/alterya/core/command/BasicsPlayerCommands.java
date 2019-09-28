@@ -23,9 +23,9 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 		
 		if(message.equalsIgnoreCase("feed") && sender instanceof Player) {
 			Player player = (Player) sender;
-			if(!(rank.config.getInt(player.getUniqueId().toString()) == 3) 
-				|| !(rank.config.getInt(player.getUniqueId().toString()) == 2) 
-				|| !(rank.config.getInt(player.getUniqueId().toString()) == 1) 
+			if(rank.config.getInt(player.getUniqueId().toString()) != 3
+				|| rank.config.getInt(player.getUniqueId().toString()) != 2
+				|| rank.config.getInt(player.getUniqueId().toString()) != 1 
 				|| !(rank.config.getInt(player.getUniqueId().toString()) >= 8)) {
 				player.sendMessage(MainCore.prefix + "Vous n'avez pas le grade suffisant pour effectuer cette commande");
 				return true; 
