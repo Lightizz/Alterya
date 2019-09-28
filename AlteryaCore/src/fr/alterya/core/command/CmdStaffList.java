@@ -29,15 +29,15 @@ public class CmdStaffList implements CommandExecutor
 				return true;
 			}
 			Player player = (Player) sender;
-			player.sendMessage(ChatColor.BOLD + "_____________________________________________");
+			player.sendMessage(ChatColor.BOLD + "--------------=Staff Connecté=---------------");
 			player.sendMessage(" ");
 			for(Player p : Bukkit.getOnlinePlayers()) {
 				if(r.config.getInt(p.getUniqueId().toString()) >= 4) {
-					player.sendMessage(r.getRankById(r.config.getInt(p.getUniqueId().toString())).getPrefix()+ " " + p.getDisplayName());
+					player.sendMessage(r.getRankById(r.config.getInt(p.getUniqueId().toString())).getPrefix() + p.getDisplayName());
 				}
 			}
 			player.sendMessage(" ");
-			player.sendMessage(ChatColor.BOLD + "_____________________________________________");
+			player.sendMessage(ChatColor.BOLD + "---------------------------------------------");
 			return true;
 		}
 		return false;
