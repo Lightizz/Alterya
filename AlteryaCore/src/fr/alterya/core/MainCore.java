@@ -25,6 +25,7 @@ import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
 import fr.alterya.core.command.CmdSetSpawn;
 import fr.alterya.core.command.CmdSpawn;
+import fr.alterya.core.command.CmdStaffList;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.listeners.PlayerMenuListener;
 import fr.alterya.core.listeners.ShopListener;
@@ -67,6 +68,8 @@ public class MainCore extends JavaPlugin
 		new DCommand("Discord", "/discord", "Envoie le lien du serveur discord officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
 		new DCommand("Ping", "/ping", "Envoie le ping du joueur sur le serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
 		new DCommand("Tipeee", "/tipeee", "Envoie le lien du tipeee officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(), this);
+		
+		new DCommand("Staff", "/staff", "Affiche tous les membres du staff connectés sur le serveur", null, Collections.singletonList(""), new CmdStaffList(rank), this);
 		
 		new DCommand("setspawn", "/setspawn", "Positionne le spawn officiel pour le monde acutel", "spawn.set", Collections.singletonList(""), new CmdSetSpawn(rank), this);
 		new DCommand("spawn", "/spawn", "Teleport le joueur au spawn", null, Collections.singletonList("s"), new CmdSpawn(this), this);
