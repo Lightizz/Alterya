@@ -21,7 +21,7 @@ public class CmdMute implements CommandExecutor
 	
 	boolean isToCancel = false;
 	
-	int timeMutedMin;
+	int timeMutedHour;
 	int timeMutedSec;
 	
 	Rank r;
@@ -58,8 +58,8 @@ public class CmdMute implements CommandExecutor
 				return true;
 			}
 			
-			timeMutedMin = Integer.valueOf(args[1]);
-			timeMutedSec = timeMutedMin * 60;
+			timeMutedHour = Integer.valueOf(args[1]);
+			timeMutedSec = timeMutedHour * 3600;
 			
 			fw.setValue(target.getUniqueId().toString(), true);
 			fw.saveConfig();
