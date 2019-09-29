@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.alterya.core.MainCore;
 import fr.alterya.core.command.CmdMute;
+import fr.alterya.core.command.CmdTempBan;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
@@ -35,7 +36,7 @@ public final class PlayerListener implements Listener {
 	}
 	
 	@EventHandler
-	void playerLogin(PlayerLoginEvent e) {
+	void playerLogin(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
 		player.sendMessage(ChatColor.AQUA + "§lBienvenue sur Alterya !");
 	}
@@ -52,10 +53,18 @@ public final class PlayerListener implements Listener {
 	}
 	
 	@EventHandler
+	void playerTempBan(PlayerLoginEvent e) {
+		Player player = e.getPlayer();
+		if(CmdTempBan.timePlayersBanned.containsKey(player.getUniqueId().toString())) {
+			e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "§4Vous avez été banni pendant §e" + CmdTempBan.timePlayersBanned.get(player.getUniqueId().toString()) + "j§4, raison : §e" + CmdTempBan.reason_ + "§4.");
+		}
+	}
+	
+	@EventHandler
 	void onPlayerMute(AsyncPlayerChatEvent e) {
 		Player player = e.getPlayer();
 		if(CmdMute.fw.getBoolean(player.getUniqueId().toString()) == true) {
-			player.sendMessage(MainCore.prefix + "§4Vous êtes mute.");
+			player.sendMessage(MainCore.prefix + "§4Vous êtes mute, vous ne pouvez pas parler.");
 			e.setCancelled(true);
 		}
 	}

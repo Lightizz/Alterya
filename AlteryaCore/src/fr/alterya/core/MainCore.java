@@ -22,6 +22,7 @@ import fr.alterya.core.command.CmdPurgeMoney;
 import fr.alterya.core.command.CmdSetMoney;
 import fr.alterya.core.command.CmdShop;
 import fr.alterya.core.command.CmdTakeMoney;
+import fr.alterya.core.command.CmdTempBan;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
 import fr.alterya.core.command.CmdSetSpawn;
@@ -103,6 +104,8 @@ public class MainCore extends JavaPlugin
 		
 		new DCommand("Mute", "/mute <joueur> <temps>", "Mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		new DCommand("UnMute", "/unmute <joueur>", "Dé-mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
+		new DCommand("TempBan", "/tempban <joueur> <temps> <raison>", "Banni temporairement un joueur de serveur", null, Collections.singletonList(""), new CmdTempBan(rank, this), this);
+		
 		
 		//Initialiser le scoreboard des rangs
 		rank.initScoreboard();

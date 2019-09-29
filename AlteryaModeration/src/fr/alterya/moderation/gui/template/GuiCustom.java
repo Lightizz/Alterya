@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.alterya.core.command.CmdTempBan;
 import fr.alterya.moderation.Main;
 import fr.alterya.moderation.gui.AbstractGui;
 import fr.alterya.moderation.gui.GuiManager;
@@ -46,11 +47,11 @@ public class GuiCustom extends AbstractGui {
 		ItemMeta customS = customSta.getItemMeta();
 		customS.setDisplayName(ChatColor.DARK_PURPLE + "Statistiques");
 		customS.setLore(Arrays.asList(
-				"" + ChatColor.DARK_RED + "Stone Miner >" + ChatColor.WHITE
+				"" + ChatColor.DARK_RED + "Stone Miner > " + ChatColor.WHITE
 						+ target.getStatistic(Statistic.MINE_BLOCK, Material.STONE),
-				"" + ChatColor.DARK_RED + "Diams Miner >" + ChatColor.WHITE
+				"" + ChatColor.DARK_RED + "Diams Miner > " + ChatColor.WHITE
 						+ target.getStatistic(Statistic.MINE_BLOCK, Material.DIAMOND_ORE),
-				ChatColor.GOLD + "TopLuck >" + topluck + "%"));
+				ChatColor.GOLD + "TopLuck > " + topluck + "%"));
 		customSta.setItemMeta(customS);
 
 		ItemStack customTemp = new ItemStack(Material.COMPASS, 1);
@@ -115,6 +116,9 @@ public class GuiCustom extends AbstractGui {
 			target.setBanned(true);
 		} else if (action.equalsIgnoreCase("UnBan")) {
 			target.setBanned(false);
+			if(CmdTempBan.timePlayersBanned.containsKey(target.getUniqueId().toString())) {
+				CmdTempBan.timePlayersBanned.remove(target.getUniqueId().toString());
+			}
 		} else if (action.equalsIgnoreCase("Kick")) {
 			target.kickPlayer(ChatColor.GOLD + "Kick Par " + ChatColor.RED + player.getName());
 		} else if (action.equalsIgnoreCase("tphere")) {
