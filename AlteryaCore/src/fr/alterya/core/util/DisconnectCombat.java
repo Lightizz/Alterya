@@ -3,6 +3,7 @@ package fr.alterya.core.util;
 import java.util.HashMap;
 
 import org.bukkit.Sound;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,11 +33,11 @@ public class DisconnectCombat extends BukkitRunnable implements Listener
 	
 	@EventHandler
 	public void onStartCombat(EntityDamageByEntityEvent e) {
-		Player player = (Player) e.getEntity();
+		LivingEntity player = (LivingEntity) e.getEntity();
 		Player attacker = (Player) e.getDamager();
 		
 		this.attacker = attacker;
-		this.player = player;
+		this.player = (Player) player;
 		
 		if(isOnCombat((Player) player) == true || isOnCombat(attacker) == true) {
 			onCombatPlayersTimers.replace(player.getUniqueId().toString(), 10);
@@ -45,11 +46,11 @@ public class DisconnectCombat extends BukkitRunnable implements Listener
 		}
 		
 		//Joue un son d'alerte
-		player.playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
+		((Player) player).playSound(player.getLocation(), Sound.ORB_PICKUP, 50, 50);
 		attacker.playSound(attacker.getLocation(), Sound.ORB_PICKUP, 50, 50);
 		
 		//Envoie les messages
-		player.sendMessage(MainCore.prefix + "§aVous êtes maintenant en combat !");
+		((Player) player).sendMessage(MainCore.prefix + "§aVous êtes maintenant en combat !");
 		attacker.sendMessage(MainCore.prefix + "§aVous êtes maintenant en combat !");
 		
 		//Active le mode en comabt pour les joueurs

@@ -33,13 +33,13 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 		Player player = (Player) sender;
 		// /rankinfo
 		if(message.equalsIgnoreCase("rankinfo")) {
-			String message1 = MainCore.prefix + "Voici les info sur les rangs et groupes de permissions : ";
-			player.sendMessage(message1);
-			
 			if(rank.config.getInt(player.getUniqueId().toString()) < 8) {
 				player.sendMessage(MainCore.prefix + "§4Vous n'êtes pas OP, Administrateur ou Responsable, vous ne pouvez pas effectuer cette commande !");
 				return true;
 			}
+			
+			String message1 = MainCore.prefix + "Voici les info sur les rangs et groupes de permissions : ";
+			player.sendMessage(message1);
 			
 			for(RankList rankList : RankList.values()) {
 				String part = "";

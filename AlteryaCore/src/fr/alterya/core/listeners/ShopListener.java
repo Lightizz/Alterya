@@ -37,7 +37,7 @@ public class ShopListener implements Listener
 				|| e.getInventory() == Shop.shopInvPillage
 				|| e.getInventory() == Shop.shopInvSellBuy) {
 			if(e.getCurrentItem().getType() == Material.AIR || e.getCurrentItem() == null) { e.setCancelled(true); return; }
-			if(e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+			if(e.getCurrentItem().getType() == Material.ANVIL) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
 			}
@@ -93,6 +93,10 @@ public class ShopListener implements Listener
 				player.updateInventory();
 				return;
 			}
+			if(e.getCurrentItem().getType() == Material.ANVIL && e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+				e.setCancelled(true);
+				player.getOpenInventory().close();
+			}
 		}
 	}
 
@@ -103,6 +107,11 @@ public class ShopListener implements Listener
 		Inventory mainInv = e.getInventory();
 		
 		if(mainInv == null) return;
+		
+		if(e.getCurrentItem().getType() == Material.ANVIL && e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+			e.setCancelled(true);
+			player.getOpenInventory().close();
+		}
 		
 		if(e.getInventory().getName() == Shop.shopInvBlocks.getName() 
 		 ||e.getInventory().getName() == Shop.shopInvAlchemy.getName()
@@ -133,9 +142,15 @@ public class ShopListener implements Listener
 	//Partie concerant l'inventaire de confirmation d'achat / vente
 	@EventHandler
 	public void onSelectAmountPartInterract(InventoryClickEvent e) {
+		Player player = (Player) e.getWhoClicked();
 		Inventory mainInv = e.getInventory();
 		
 		if(mainInv == null) return;
+		
+		if(e.getCurrentItem().getType() == Material.ANVIL && e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+			e.setCancelled(true);
+			player.getOpenInventory().close();
+		}
 		
 		if(e.getInventory().getName() == Shop.shopInvSellBuy.getName()) {
 			ItemStack itemClicked = e.getCurrentItem();
@@ -189,6 +204,11 @@ public class ShopListener implements Listener
 		Player player = (Player) e.getWhoClicked();
 		
 		if(mainInv == null) return;
+		
+		if(e.getCurrentItem().getType() == Material.ANVIL && e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+			e.setCancelled(true);
+			player.getOpenInventory().close();
+		}
 		
 		if(e.getInventory().getName() == Shop.shopInvSellBuy.getName()) {
 			MoneyManager manager = new MoneyManager(player.getUniqueId().toString());

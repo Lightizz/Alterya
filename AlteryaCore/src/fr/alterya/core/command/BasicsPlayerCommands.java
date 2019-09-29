@@ -29,6 +29,10 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 		
 		if(message.equalsIgnoreCase("feed") && sender instanceof Player) {
 			Player player = (Player) sender;
+			if(m.rank.config.getInt(player.getUniqueId().toString()) < 3) {
+				player.sendMessage(MainCore.prefix + "§eVous n'avez pas le grade requis pour faire cela.");
+				return true;
+			}
 			if(m.rank.config.getInt(player.getUniqueId().toString()) >= 3) {
 				player.setFoodLevel(20);
 				player.sendMessage("§eVotre barre de faim est maintenant au maximum");
@@ -64,7 +68,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	    //	/craft
 	    if(message.equalsIgnoreCase("craft") && sender instanceof Player) {
 	    	Player player = (Player) sender;
-	    	player.openWorkbench (null, true);
+	    	player.openWorkbench(null, true);
 	    	return true;
 	    }
 	    
@@ -96,7 +100,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	}
 	
 	@EventHandler
-	public void onInterract(InventoryClickEvent event) {
+	void onInterract(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked();
 		if(event.getInventory() == player.getEnderChest()) {
 			if(event.getSlot() == 0
@@ -116,13 +120,13 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					&& event.getSlot() == 14
 					&& event.getSlot() == 15
 					&& event.getSlot() == 16
-					&& event.getSlot() == 17 
+					&& event.getSlot() == 17
 					&& rank.config.getInt(player.getUniqueId().toString()) == 0) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 				return;
 			}
-			if( event.getSlot() == 0
+			if(event.getSlot() == 0
 					&& event.getSlot() == 1
 					&& event.getSlot() == 2
 					&& event.getSlot() == 3
