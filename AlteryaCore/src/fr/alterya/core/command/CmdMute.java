@@ -5,19 +5,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
+//import org.bukkit.scheduler.BukkitRunnable;
 
 import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.util.FileWriter;
 
-public class CmdMute extends BukkitRunnable implements CommandExecutor
+public class CmdMute implements CommandExecutor
 {
 	public int timer = 0;
 	
 	Player player_;
 	Player target_;
+	
+	boolean isToCancel = false;
 	
 	int timeMutedMin;
 	int timeMutedSec;
@@ -65,8 +67,26 @@ public class CmdMute extends BukkitRunnable implements CommandExecutor
 			target.sendMessage(MainCore.prefix + "§eVous §aavez été mute par §e" + player.getDisplayName() + "§a pendant §e" + args[1] + "m§a.");
 			player.sendMessage(MainCore.prefix + "§eVous §aavez mute §e" + target.getDisplayName() + "§a pendant §e" + args[1] + "m§a.");
 			
-			runTaskTimer(m, 0, 20);
-
+			int taskID = Bukkit.getScheduler().runTaskTimer(m, new Runnable() {
+				@Override
+				public void run()
+				{
+					if(timer == timeMutedSec && fw.getBoolean(target.getUniqueId().toString()) == true) {
+						fw.setValue(target.getUniqueId().toString(), false);
+						fw.saveConfig();
+						target.sendMessage(MainCore.prefix + "§aVous §eêtes maintenant unmute.");
+						timer = 0;
+						isToCancel = true;
+					}
+					timer ++;
+				}
+			}, 0, 20).getTaskId();
+			
+			if(isToCancel == true) {
+				Bukkit.getScheduler().cancelTask(taskID);
+				isToCancel = false;
+			}
+			
 			MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a mute " + target.getDisplayName() + ".");
 			
 			return true;
@@ -103,15 +123,5 @@ public class CmdMute extends BukkitRunnable implements CommandExecutor
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public void run()
-	{
-		if(timer >= timeMutedSec) {
-			cancel();
-			fw.setValue(target_.getUniqueId().toString(), false);
-		}
-		timer ++;
 	}
 }

@@ -155,9 +155,10 @@ public class CmdPromote implements CommandExecutor, TabCompleter {
 				player.sendMessage(MainCore.prefix + "§4Vous n'êtes pas OP, Administrateur ou Responsable, vous ne pouvez pas effectuer cette commande !");
 				return true;
 			}
-			if(args.length != 2 && rank.config.getInt(player.getUniqueId().toString()) >= 9) {
+			if(args.length != 1 && rank.config.getInt(player.getUniqueId().toString()) >= 9) {
 				player.sendMessage(MainCore.prefix + "La commande est : /r demote <joueur ciblé> !");
-			}else if(args.length == 2 && rank.config.getInt(player.getUniqueId().toString()) >= 9) {
+				return true;
+			}else if(args.length == 1 && rank.config.getInt(player.getUniqueId().toString()) >= 9) {
 				Player target = Bukkit.getPlayer(args[0]);
 				rank.deletPlayer(target.getUniqueId().toString());
 				player.sendMessage(MainCore.prefix + target.getName() + " a été dérank !");
