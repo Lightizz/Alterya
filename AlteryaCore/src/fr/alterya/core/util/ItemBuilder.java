@@ -43,6 +43,14 @@ public class ItemBuilder
 		return item;
 	}
 	
+	public static ItemStack createItem(String dislayName, Material material, int b) {
+		ItemStack item = new ItemStack(material, (byte) b);
+		ItemMeta itemM = item.getItemMeta();
+		itemM.setDisplayName(dislayName);
+		item.setItemMeta(itemM);
+		return item;
+	}
+	
 	public static ItemStack createItem(Material material, String dislayName, List<String> lores) {
 		ItemStack item = new ItemStack(material);
 		ItemMeta itemM = item.getItemMeta();

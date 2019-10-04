@@ -23,7 +23,6 @@ import fr.alterya.factions.struct.Rel;
 import fr.alterya.factions.util.RelationUtil;
 import fr.alterya.factions.zcore.persist.PlayerEntity;
 
-
 /**
  * Logged in players always have exactly one FPlayer instance.
  * Logged out players may or may not have an FPlayer instance. They will always have one if they are part of a faction.

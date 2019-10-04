@@ -1,9 +1,14 @@
 package fr.alterya.core;
 
 import java.util.Collections;
+import java.util.Iterator;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
@@ -20,14 +25,14 @@ import fr.alterya.core.command.CmdPay;
 import fr.alterya.core.command.CmdPromote;
 import fr.alterya.core.command.CmdPurgeMoney;
 import fr.alterya.core.command.CmdSetMoney;
+import fr.alterya.core.command.CmdSetSpawn;
 import fr.alterya.core.command.CmdShop;
+import fr.alterya.core.command.CmdSpawn;
+import fr.alterya.core.command.CmdStaffList;
 import fr.alterya.core.command.CmdTakeMoney;
 import fr.alterya.core.command.CmdTempBan;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
-import fr.alterya.core.command.CmdSetSpawn;
-import fr.alterya.core.command.CmdSpawn;
-import fr.alterya.core.command.CmdStaffList;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.listeners.PlayerMenuListener;
 import fr.alterya.core.listeners.ShopListener;
@@ -105,7 +110,10 @@ public class MainCore extends JavaPlugin
 		new DCommand("Mute", "/mute <joueur> <temps>", "Mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		new DCommand("UnMute", "/unmute <joueur>", "Dé-mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		new DCommand("TempBan", "/tempban <joueur> <temps> <raison>", "Banni temporairement un joueur de serveur", null, Collections.singletonList(""), new CmdTempBan(rank, this), this);
+	
+		ItemStack p = new ItemStack(Material.POTION, (byte) 14);
 		
+		removeCraft(p.getType());
 		
 		//Initialiser le scoreboard des rangs
 		rank.initScoreboard();
@@ -116,6 +124,16 @@ public class MainCore extends JavaPlugin
 		getServer().getPluginManager().registerEvents(new PlayerMenuListener(this), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
 		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
+	}
+	
+	public void removeCraft(Material m) {
+		Iterator<Recipe> it = Bukkit.getServer().recipeIterator();
+		while (it.hasNext()) {
+			Recipe recipe = (Recipe)it.next();
+			if (recipe != null && recipe.getResult().getType() == m) {
+				it.remove(); 
+			}
+		} 
 	}
 	
 	@Override

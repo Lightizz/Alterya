@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.alterya.core.util.ItemBuilder;
 
@@ -27,11 +28,14 @@ public class MenuManager
 	public static Inventory invStats = Bukkit.createInventory(null, 3*9, "§3Statistiques");
 	public static Inventory invRecipes = Bukkit.createInventory(null, 3*9, "§cRecetes");
 	
+	public static ItemStack g = ItemBuilder.createItem(" ", Material.STAINED_GLASS_PANE);
+	
 	public static Date d = new Date();
 	
 	@SuppressWarnings("deprecation")
 	public MenuManager() {
 		setItemsMenu();
+		setItemsCrafts();
 		//setItemsQuests();
 		day = d.getDate();
 	}
@@ -44,6 +48,43 @@ public class MenuManager
 		menu.setItem(2, clock);
 		menu.setItem(4, stats);
 		menu.setItem(6, recipes);
+	}
+	
+	public void setItemsCrafts() {
+		ItemStack customCREEP = new ItemStack(Material.MONSTER_EGG, (byte) 0);
+		ItemMeta cC = customCREEP.getItemMeta();
+		cC.setDisplayName("Bombe");
+		customCREEP.setItemMeta(cC);
+		
+		invRecipes.setItem(0, g);
+		invRecipes.setItem(1, g);
+		invRecipes.setItem(2, g);
+		invRecipes.setItem(3, g);
+		invRecipes.setItem(4, g);
+		invRecipes.setItem(5, g);
+		invRecipes.setItem(6, g);
+		invRecipes.setItem(7, g);
+		invRecipes.setItem(8, g);
+		
+		invRecipes.setItem(9, ItemBuilder.createItem("Epée en Alteryum", Material.DIAMOND_SWORD));
+		invRecipes.setItem(10, customCREEP);
+		invRecipes.setItem(11, ItemBuilder.createItem("Hache en Alteryum", Material.DIAMOND_AXE));
+		invRecipes.setItem(12, ItemBuilder.createItem("Pioche en Remedia", Material.DIAMOND_PICKAXE));
+		invRecipes.setItem(13, g);
+		invRecipes.setItem(14, ItemBuilder.createItem("Plastron en Alteryum", Material.DIAMOND_CHESTPLATE));
+		invRecipes.setItem(15, ItemBuilder.createItem("Jambière en Alteryum", Material.DIAMOND_LEGGINGS));
+		invRecipes.setItem(16, ItemBuilder.createItem("Botte en Alteryum", Material.DIAMOND_BOOTS));
+		invRecipes.setItem(17, ItemBuilder.createItem("Casque en Alteryum", Material.DIAMOND_HELMET));
+		
+		invRecipes.setItem(18, g);
+		invRecipes.setItem(19, g);
+		invRecipes.setItem(20, g);
+		invRecipes.setItem(21, g);
+		invRecipes.setItem(22, g);
+		invRecipes.setItem(23, g);
+		invRecipes.setItem(24, g);
+		invRecipes.setItem(25, g);
+		invRecipes.setItem(26, g);
 	}
 	
 	/*

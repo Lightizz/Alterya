@@ -182,7 +182,6 @@ public final class PlayerListener implements Listener {
 		}
 	}
 	
-	
 	@EventHandler
 	void onMove(PlayerMoveEvent e) {
 		Player player = e.getPlayer();
