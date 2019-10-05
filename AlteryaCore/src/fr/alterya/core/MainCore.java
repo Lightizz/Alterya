@@ -46,6 +46,8 @@ public class MainCore extends JavaPlugin
 {
 	public static String prefix = ChatColor.AQUA + "[Alterya] ";
 		
+	public ItemStack p = new ItemStack(Material.POTION, (byte) 373);
+	
 	public Shop shop;
 	public Rank rank;
 	public Recipes recipes;
@@ -111,8 +113,6 @@ public class MainCore extends JavaPlugin
 		new DCommand("UnMute", "/unmute <joueur>", "Dé-mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		new DCommand("TempBan", "/tempban <joueur> <temps> <raison>", "Banni temporairement un joueur de serveur", null, Collections.singletonList(""), new CmdTempBan(rank, this), this);
 	
-		ItemStack p = new ItemStack(Material.POTION, (byte) 14);
-		
 		removeCraft(p.getType());
 		
 		//Initialiser le scoreboard des rangs
