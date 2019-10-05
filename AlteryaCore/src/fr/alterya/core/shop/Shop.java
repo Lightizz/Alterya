@@ -19,16 +19,7 @@ Author : Lightiz
 public class Shop implements Listener {
 	
 	ShopItems pl_;
-	
-	/*public static Dye red;
-	public static Dye gray;
-	public static Dye green;
-	public static Dye cyan;
-	public static Dye bleue;
-	public static Dye light_bleue;
-	public static Dye orange;
-	public static Dye yellow;*/
-	
+
 	public HashMap<Integer, ShopItems> ShopItemsList = new HashMap<>();
 	
 	public static HashMap<Integer, ShopItems> unsellableItems = new HashMap<>();
@@ -59,8 +50,6 @@ public class Shop implements Listener {
 		setItemInShopMinerals();
 		setItemInShopAlchemy();
 		setItemInShopPillage();
-		
-		//setDyesColors();
 	}
 	
 	//Créer les listes d'items
@@ -96,101 +85,104 @@ public class Shop implements Listener {
 	public static ItemStack substract10 = ItemBuilder.createItem("§lRetirer 10", Material.BROWN_MUSHROOM);
 	public static ItemStack substract64 = ItemBuilder.createItem("§lRetirer 64", Material.BROWN_MUSHROOM);
 	
-	/*
-	public void setDyesColors() {
-		red.setColor(DyeColor.RED);
-		bleue.setColor(DyeColor.BLUE);
-		light_bleue.setColor(DyeColor.LIGHT_BLUE);
-		green.setColor(DyeColor.GREEN);
-		gray.setColor(DyeColor.GRAY);
-		yellow.setColor(DyeColor.YELLOW);
-		cyan.setColor(DyeColor.CYAN);
-		orange.setColor(DyeColor.ORANGE);
-	}
-	*/
+	public static ItemStack witherSkull = new ItemStack(Material.SKULL, (byte) 397);
+	public static ItemStack redSand = new ItemStack(Material.SAND, (byte) 12);
 	
 	public void setUnsellableItems() {
 		//Minerais
-		unsellableItems.put(ShopItems.EMERALD.getID(), ShopItems.EMERALD);
+//		unsellableItems.put(ShopItems.EMERALD.getID(), ShopItems.EMERALD);
+		unsellableItems.put(ShopItems.REDSTONE.getID(), ShopItems.REDSTONE);
+		unsellableItems.put(ShopItems.DIAMOND.getID(), ShopItems.DIAMOND);
+		unsellableItems.put(ShopItems.QUARTZ.getID(), ShopItems.QUARTZ);
 		
 		//Farming
 		unsellableItems.put(ShopItems.MELON_SEEDS.getID(), ShopItems.MELON_SEEDS);
-		unsellableItems.put(ShopItems.SEEDS.getID(), ShopItems.SEEDS);
 		unsellableItems.put(ShopItems.PUMPKIN_SEEDS.getID(), ShopItems.PUMPKIN_SEEDS);
+		unsellableItems.put(ShopItems.SEEDS.getID(), ShopItems.SEEDS);
+		unsellableItems.put(ShopItems.CARROT.getID(), ShopItems.CARROT);
+		unsellableItems.put(ShopItems.POTATO.getID(), ShopItems.POTATO);
 		unsellableItems.put(ShopItems.COCOA.getID(), ShopItems.COCOA);
 		unsellableItems.put(ShopItems.CACTUS.getID(), ShopItems.CACTUS);
-		unsellableItems.put(ShopItems.VINE.getID(), ShopItems.VINE);
+		//unsellableItems.put(ShopItems.VINE.getID(), ShopItems.VINE);
 		unsellableItems.put(ShopItems.SUGAR_CANE.getID(), ShopItems.SUGAR_CANE);
 		
 		//Loots
-		unsellableItems.put(ShopItems.EMPTY_BOTTLE.getID(), ShopItems.EMPTY_BOTTLE);
-		unsellableItems.put(ShopItems.BREWING_STAND.getID(), ShopItems.BREWING_STAND);
-		unsellableItems.put(ShopItems.GOLDEN_MELON.getID(), ShopItems.GOLDEN_MELON);
-		unsellableItems.put(ShopItems.GOLDEN_CARROT.getID(), ShopItems.GOLDEN_CARROT);
+//		unsellableItems.put(ShopItems.EMPTY_BOTTLE.getID(), ShopItems.EMPTY_BOTTLE);
+//		unsellableItems.put(ShopItems.BREWING_STAND.getID(), ShopItems.BREWING_STAND);
+//		unsellableItems.put(ShopItems.GOLDEN_MELON.getID(), ShopItems.GOLDEN_MELON);
+//		unsellableItems.put(ShopItems.GOLDEN_CARROT.getID(), ShopItems.GOLDEN_CARROT);
 		unsellableItems.put(ShopItems.BROWN_MUSHROOM.getID(), ShopItems.BROWN_MUSHROOM);
 		unsellableItems.put(ShopItems.RED_MUSHROOM.getID(), ShopItems.RED_MUSHROOM);
 		unsellableItems.put(ShopItems.NETHER_WARTS.getID(), ShopItems.NETHER_WARTS);
-		unsellableItems.put(ShopItems.MILK_BUCKET.getID(), ShopItems.MILK_BUCKET);
+//		unsellableItems.put(ShopItems.MILK_BUCKET.getID(), ShopItems.MILK_BUCKET);
 		
 		//Pillage
-		unsellableItems.put(ShopItems.SOUL_SAND.getID(), ShopItems.SOUL_SAND);
+//		unsellableItems.put(ShopItems.SOUL_SAND.getID(), ShopItems.SOUL_SAND);
 		unsellableItems.put(ShopItems.WITHER_SKULL.getID(), ShopItems.WITHER_SKULL);
+		unsellableItems.put(ShopItems.ENDER_PEARL.getID(), ShopItems.ENDER_PEARL);
 		
 		//Divers
-		unsellableItems.put(ShopItems.WOOL.getID(), ShopItems.WOOL);
-		unsellableItems.put(ShopItems.INK_SACK.getID(), ShopItems.INK_SACK);
+		//unsellableItems.put(ShopItems.WOOL.getID(), ShopItems.WOOL);
+		//unsellableItems.put(ShopItems.INK_SACK.getID(), ShopItems.INK_SACK);
 		unsellableItems.put(ShopItems.COOKED_STEAK.getID(), ShopItems.COOKED_STEAK);
 		unsellableItems.put(ShopItems.COOKED_CHIKEN.getID(), ShopItems.COOKED_CHIKEN);
 		unsellableItems.put(ShopItems.COOKED_PORCKCHOP.getID(), ShopItems.COOKED_PORCKCHOP);
 		
 		//Blocks
-		unsellableItems.put(ShopItems.GRASS.getID(), ShopItems.GRASS);
+		//unsellableItems.put(ShopItems.GRASS.getID(), ShopItems.GRASS);
 		unsellableItems.put(ShopItems.DIRT.getID(), ShopItems.DIRT);
-		unsellableItems.put(ShopItems.PACKED_ICE.getID(), ShopItems.PACKED_ICE);
-		unsellableItems.put(ShopItems.ICE.getID(), ShopItems.ICE);
+		unsellableItems.put(ShopItems.OBSIDIAN.getID(), ShopItems.SEEDS);
+		unsellableItems.put(ShopItems.COBBLESTONE.getID(), ShopItems.SEEDS);
+		unsellableItems.put(ShopItems.STONE.getID(), ShopItems.SEEDS);
+		unsellableItems.put(ShopItems.RED_SAND.getID(), ShopItems.SEEDS);
+		unsellableItems.put(ShopItems.SAND.getID(), ShopItems.SEEDS);
+		//unsellableItems.put(ShopItems.PACKED_ICE.getID(), ShopItems.PACKED_ICE);
+		//unsellableItems.put(ShopItems.ICE.getID(), ShopItems.ICE);
 		unsellableItems.put(ShopItems.GRAVEL.getID(), ShopItems.GRAVEL);
 	}
 	public void setPillageItems() {
 		pillageList.put(ShopItems.ENDER_PEARL.getID(), ShopItems.ENDER_PEARL);
 		pillageList.put(ShopItems.WITHER_SKULL.getID(), ShopItems.WITHER_SKULL);
-		pillageList.put(ShopItems.SOUL_SAND.getID(), ShopItems.SOUL_SAND);
+//		pillageList.put(ShopItems.SOUL_SAND.getID(), ShopItems.SOUL_SAND);
 	}
 	public void setOresItems() {
-		oresList.put(ShopItems.EMERALD.getID(), ShopItems.EMERALD);
+//		oresList.put(ShopItems.EMERALD.getID(), ShopItems.EMERALD);
 		oresList.put(ShopItems.DIAMOND.getID(), ShopItems.DIAMOND);
+		oresList.put(ShopItems.QUARTZ.getID(), ShopItems.QUARTZ);
 		oresList.put(ShopItems.GOLD.getID(), ShopItems.GOLD);
 		oresList.put(ShopItems.IRON.getID(), ShopItems.IRON);
 		oresList.put(ShopItems.COAL.getID(), ShopItems.COAL);
 		oresList.put(ShopItems.REDSTONE.getID(), ShopItems.REDSTONE);
 	}
 	public void setOthersItems() {
-		othersList.put(ShopItems.WOOL.getID(), ShopItems.WOOL);
-		othersList.put(ShopItems.INK_SACK.getID(), ShopItems.INK_SACK);
+		//othersList.put(ShopItems.WOOL.getID(), ShopItems.WOOL);
+		//othersList.put(ShopItems.INK_SACK.getID(), ShopItems.INK_SACK);
 		othersList.put(ShopItems.COOKED_STEAK.getID(), ShopItems.COOKED_STEAK);
 		othersList.put(ShopItems.COOKED_CHIKEN.getID(), ShopItems.COOKED_CHIKEN);
 		othersList.put(ShopItems.COOKED_PORCKCHOP.getID(), ShopItems.COOKED_PORCKCHOP);
 	}
 	public void setAlchemyItems() {
-		alchemyList.put(ShopItems.EMPTY_BOTTLE.getID(), ShopItems.EMPTY_BOTTLE);
-		alchemyList.put(ShopItems.BREWING_STAND.getID(), ShopItems.BREWING_STAND);
-		alchemyList.put(ShopItems.MAGMA_CREAM.getID(), ShopItems.MAGMA_CREAM);
-		alchemyList.put(ShopItems.GOLDEN_MELON.getID(), ShopItems.GOLDEN_MELON);
-		alchemyList.put(ShopItems.GOLDEN_CARROT.getID(), ShopItems.GOLDEN_CARROT);
+//		alchemyList.put(ShopItems.EMPTY_BOTTLE.getID(), ShopItems.EMPTY_BOTTLE);
+//		alchemyList.put(ShopItems.BREWING_STAND.getID(), ShopItems.BREWING_STAND);
+//		alchemyList.put(ShopItems.MAGMA_CREAM.getID(), ShopItems.MAGMA_CREAM);
+//		alchemyList.put(ShopItems.GOLDEN_MELON.getID(), ShopItems.GOLDEN_MELON);
+//		alchemyList.put(ShopItems.GOLDEN_CARROT.getID(), ShopItems.GOLDEN_CARROT);
 		alchemyList.put(ShopItems.GHAST_TEAR.getID(), ShopItems.GHAST_TEAR);
-		alchemyList.put(ShopItems.FERMENTED_SPIDER_EYE.getID(), ShopItems.FERMENTED_SPIDER_EYE);
+//		alchemyList.put(ShopItems.FERMENTED_SPIDER_EYE.getID(), ShopItems.FERMENTED_SPIDER_EYE);
 		alchemyList.put(ShopItems.RED_MUSHROOM.getID(), ShopItems.RED_MUSHROOM);
 		alchemyList.put(ShopItems.BROWN_MUSHROOM.getID(), ShopItems.BROWN_MUSHROOM);
 		alchemyList.put(ShopItems.NETHER_WARTS.getID(), ShopItems.NETHER_WARTS);
 		alchemyList.put(ShopItems.GLOWSTONE.getID(), ShopItems.GLOWSTONE);
-		alchemyList.put(ShopItems.MILK_BUCKET.getID(), ShopItems.MILK_BUCKET);
+//		alchemyList.put(ShopItems.MILK_BUCKET.getID(), ShopItems.MILK_BUCKET);
 	}
 	public void setBlocksItems() {
 		blocksList.put(ShopItems.COBBLESTONE.getID(), ShopItems.COBBLESTONE);
 		blocksList.put(ShopItems.GRAVEL.getID(), ShopItems.GRAVEL);
-		blocksList.put(ShopItems.ICE.getID(), ShopItems.ICE);
-		blocksList.put(ShopItems.PACKED_ICE.getID(), ShopItems.PACKED_ICE);
-		blocksList.put(ShopItems.GRASS.getID(), ShopItems.GRASS);
+		//blocksList.put(ShopItems.ICE.getID(), ShopItems.ICE);
+		//blocksList.put(ShopItems.PACKED_ICE.getID(), ShopItems.PACKED_ICE);
+		//blocksList.put(ShopItems.GRASS.getID(), ShopItems.GRASS);
 		blocksList.put(ShopItems.SAND.getID(), ShopItems.SAND);
+		blocksList.put(ShopItems.RED_SAND.getID(), ShopItems.RED_SAND);
 		blocksList.put(ShopItems.WOOD.getID(), ShopItems.WOOD);
 		blocksList.put(ShopItems.OBSIDIAN.getID(), ShopItems.OBSIDIAN);
 		blocksList.put(ShopItems.STONE.getID(), ShopItems.STONE);
@@ -206,7 +198,7 @@ public class Shop implements Listener {
 		farmingList.put(ShopItems.APPLE.getID(), ShopItems.APPLE);
 		farmingList.put(ShopItems.CACTUS.getID(), ShopItems.CACTUS);
 		farmingList.put(ShopItems.COCOA.getID(), ShopItems.COCOA);
-		farmingList.put(ShopItems.VINE.getID(), ShopItems.VINE);
+		//farmingList.put(ShopItems.VINE.getID(), ShopItems.VINE);
 		
 		//Loots 
 		farmingList.put(ShopItems.STRING.getID(), ShopItems.STRING);
@@ -254,14 +246,6 @@ public class Shop implements Listener {
 	
 	//Set items in main page of the shop
 	public void setItemsInShopMain() {
-		/*
-		ItemStack backDoor = new ItemStack(Material.WOODEN_DOOR);
-		ItemMeta doorMeta = backDoor.getItemMeta();
-		doorMeta.setLore(Arrays.asList("Clickez pour fermer / retourner en arrière !"));
-		doorMeta.setDisplayName("§4Fermer / Retour");
-		backDoor.setItemMeta(doorMeta);*/
-		
-		//3rd line
 		shopInvMain.setItem(0, blocks);
 		shopInvMain.setItem(3, minerals);
 		shopInvMain.setItem(5, farming);

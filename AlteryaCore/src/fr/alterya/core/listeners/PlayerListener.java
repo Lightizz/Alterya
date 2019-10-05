@@ -1,11 +1,9 @@
 package fr.alterya.core.listeners;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
@@ -171,14 +169,6 @@ public final class PlayerListener implements Listener {
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.BOLD + pce.getMessage());
 				return;
 			}
-		}
-	}
-	
-	//Le briquet est à bloqué sur le serveur cet événement bloque le fait qu'un joueur puisse en avoir un.
-	@EventHandler
-	void onGetFlintAndSteel(CraftItemEvent e) {
-		if(e.getCurrentItem().getType() == Material.FLINT_AND_STEEL) {
-			e.setCancelled(true);
 		}
 	}
 	

@@ -93,7 +93,7 @@ public class ShopListener implements Listener
 				player.updateInventory();
 				return;
 			}
-			if(e.getCurrentItem().getType() == Material.ANVIL && e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+			if(e.getCurrentItem().getType() == Material.ANVIL) {
 				e.setCancelled(true);
 				player.getOpenInventory().close();
 			}
@@ -108,7 +108,7 @@ public class ShopListener implements Listener
 		
 		if(mainInv == null) return;
 		
-		if(e.getCurrentItem().getType() == Material.ANVIL && e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+		if(e.getCurrentItem().getType() == Material.ANVIL) {
 			e.setCancelled(true);
 			player.getOpenInventory().close();
 		}
@@ -147,7 +147,7 @@ public class ShopListener implements Listener
 		
 		if(mainInv == null) return;
 		
-		if(e.getCurrentItem().getType() == Material.ANVIL && e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+		if(e.getCurrentItem().getType() == Material.ANVIL) {
 			e.setCancelled(true);
 			player.getOpenInventory().close();
 		}
@@ -205,7 +205,7 @@ public class ShopListener implements Listener
 		
 		if(mainInv == null) return;
 		
-		if(e.getCurrentItem().getType() == Material.ANVIL && e.getCurrentItem().getItemMeta().getDisplayName() == Shop.backDoor.getItemMeta().getDisplayName()) {
+		if(e.getCurrentItem().getType() == Material.ANVIL) {
 			e.setCancelled(true);
 			player.getOpenInventory().close();
 		}
