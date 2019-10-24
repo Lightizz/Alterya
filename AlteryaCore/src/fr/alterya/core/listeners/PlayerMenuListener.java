@@ -49,6 +49,13 @@ public class PlayerMenuListener implements Listener
 		}
 	}
 	
+	@EventHandler
+	void onInventoryInterractStats(InventoryClickEvent e) {
+		if(e.getInventory() == MenuManager.invStats) {
+			e.setCancelled(true);
+		}
+	}
+	
 	Inventory craftInv = Bukkit.createInventory(null, 3*9, "Craft");
 	
 	@EventHandler

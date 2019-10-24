@@ -50,6 +50,41 @@ public class MenuManager
 		menu.setItem(6, recipes);
 	}
 	
+	public void setItemsStats(Player opener) {
+		invStats.setItem(0, g);
+		invStats.setItem(1, g);
+		invStats.setItem(2, g);
+		invStats.setItem(3, g);
+		invStats.setItem(4, g);
+		invStats.setItem(5, g);
+		invStats.setItem(6, g);
+		invStats.setItem(7, g);
+		invStats.setItem(8, g);
+		
+		/*
+		invStats.setItem(9, ItemBuilder.createItem("Eliminations : ", Material.IRON_SWORD));
+		invStats.setItem(9, ItemBuilder.createItem("Morts : ", Material.IRON_SWORD));
+		invStats.setItem(9, ItemBuilder.createItem(" : ", Material.IRON_SWORD));
+		invStats.setItem(9, ItemBuilder.createItem("Kills : ", Material.IRON_SWORD));
+		
+		invRecipes.setItem(13, g);
+		invStats.setItem(9, ItemBuilder.createItem("Kills : ", Material.IRON_SWORD));
+		invStats.setItem(9, ItemBuilder.createItem("Kills : ", Material.IRON_SWORD));
+		invStats.setItem(9, ItemBuilder.createItem("Kills : ", Material.IRON_SWORD));
+		invStats.setItem(9, ItemBuilder.createItem("Kills : ", Material.IRON_SWORD));
+		*/
+		
+		invStats.setItem(18, g);
+		invStats.setItem(19, g);
+		invStats.setItem(20, g);
+		invStats.setItem(21, g);
+		invStats.setItem(22, g);
+		invStats.setItem(23, g);
+		invStats.setItem(24, g);
+		invStats.setItem(25, g);
+		invStats.setItem(26, g);
+	}
+	
 	public void setItemsCrafts() {
 		ItemStack customCREEP = new ItemStack(Material.MONSTER_EGG, (byte) 0);
 		ItemMeta cC = customCREEP.getItemMeta();
