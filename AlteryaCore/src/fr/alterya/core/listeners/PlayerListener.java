@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
@@ -31,6 +32,16 @@ public final class PlayerListener implements Listener {
 	public PlayerListener(Rank rank, MainCore main) {
 		this.rank = rank;
 		m = main;
+	}
+	
+	@EventHandler
+	void bookAndQuill(SignChangeEvent e) {
+		if(e.getLines()[0].length() == 15 
+				&& e.getLines()[1].length() == 15 
+				&& e.getLines()[2].length() == 15 
+				&& e.getLines()[3].length() == 15) {
+			e.setCancelled(true);
+		}
 	}
 	
 	@EventHandler

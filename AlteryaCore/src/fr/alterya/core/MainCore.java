@@ -47,6 +47,7 @@ public class MainCore extends JavaPlugin
 	public static String prefix = ChatColor.AQUA + "[Alterya] ";
 		
 	public ItemStack p = new ItemStack(Material.POTION, (byte) 373);
+	public ItemStack b = new ItemStack(Material.BOOK_AND_QUILL);
 	
 	public Shop shop;
 	public Rank rank;
@@ -114,6 +115,7 @@ public class MainCore extends JavaPlugin
 		new DCommand("TempBan", "/tempban <joueur> <temps> <raison>", "Banni temporairement un joueur de serveur", null, Collections.singletonList(""), new CmdTempBan(rank, this), this);
 	
 		removeCraft(p.getType());
+		removeCraft(b.getType());
 		
 		//Initialiser le scoreboard des rangs
 		rank.initScoreboard();
