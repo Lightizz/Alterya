@@ -48,6 +48,7 @@ public class MainCore extends JavaPlugin
 		
 	public ItemStack p = new ItemStack(Material.POTION, (byte) 373);
 	public ItemStack b = new ItemStack(Material.BOOK_AND_QUILL);
+	public ItemStack i = new ItemStack(Material.ITEM_FRAME);
 	
 	public Shop shop;
 	public Rank rank;
@@ -116,6 +117,7 @@ public class MainCore extends JavaPlugin
 	
 		removeCraft(p.getType());
 		removeCraft(b.getType());
+		removeCraft(i.getType());
 		
 		//Initialiser le scoreboard des rangs
 		rank.initScoreboard();

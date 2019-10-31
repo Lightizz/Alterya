@@ -1,15 +1,18 @@
 package fr.alterya.core.listeners;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
 import fr.alterya.core.MainCore;
 import fr.alterya.core.command.CmdMute;
@@ -66,6 +69,14 @@ public final class PlayerListener implements Listener {
 		Player player = e.getPlayer();
 		if(CmdTempBan.timePlayersBanned.containsKey(player.getUniqueId().toString())) {
 			e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "§4Vous avez été banni pendant §e" + CmdTempBan.timePlayersBanned.get(player.getUniqueId().toString()) + "j§4, raison : §e" + CmdTempBan.reason_ + "§4.");
+		}
+	}
+	
+	@EventHandler
+	void lockInvisibilityPotion(PlayerInteractEvent e) {
+		Player p = e.getPlayer();
+		if(p.getInventory().contains(new ItemStack(Material.POTION, (byte) 373).getType())) {
+			p.getInventory().remove(new ItemStack(Material.POTION, (byte) 373).getType());
 		}
 	}
 	

@@ -108,17 +108,18 @@ public class ShopListener implements Listener
 		
 		if(mainInv == null) return;
 		
-		if(e.getCurrentItem().getType() == Material.ANVIL) {
-			e.setCancelled(true);
-			player.getOpenInventory().close();
-		}
-		
 		if(e.getInventory().getName() == Shop.shopInvBlocks.getName() 
 		 ||e.getInventory().getName() == Shop.shopInvAlchemy.getName()
 		 ||e.getInventory().getName() == Shop.shopInvFarming.getName()
 		 ||e.getInventory().getName() == Shop.shopInvMinerals.getName()
 		 ||e.getInventory().getName() == Shop.shopInvPillage.getName()
 		 ||e.getInventory().getName() == Shop.shopInvUtils.getName()) {
+			
+			if(e.getCurrentItem().getType() == Material.ANVIL) {
+				e.setCancelled(true);
+				player.getOpenInventory().close();
+			}
+			
 			ItemStack itemClicked = e.getCurrentItem();
 			ItemMeta itemM = itemClicked.getItemMeta();
 			//Pour chaque item dans le shop regarde s'il coorespond à l'item cliqué, si oui il lui donne le nom en français
@@ -147,12 +148,13 @@ public class ShopListener implements Listener
 		
 		if(mainInv == null) return;
 		
-		if(e.getCurrentItem().getType() == Material.ANVIL) {
-			e.setCancelled(true);
-			player.getOpenInventory().close();
-		}
-		
 		if(e.getInventory().getName() == Shop.shopInvSellBuy.getName()) {
+			
+			if(e.getCurrentItem().getType() == Material.ANVIL) {
+				e.setCancelled(true);
+				player.getOpenInventory().close();
+			}
+			
 			ItemStack itemClicked = e.getCurrentItem();
 			ItemStack itemAdd1 = mainInv.getItem(19);
 			ItemStack itemAdd10 = mainInv.getItem(20);
@@ -205,12 +207,13 @@ public class ShopListener implements Listener
 		
 		if(mainInv == null) return;
 		
-		if(e.getCurrentItem().getType() == Material.ANVIL) {
-			e.setCancelled(true);
-			player.getOpenInventory().close();
-		}
-		
 		if(e.getInventory().getName() == Shop.shopInvSellBuy.getName()) {
+			
+			if(e.getCurrentItem().getType() == Material.ANVIL) {
+				e.setCancelled(true);
+				player.getOpenInventory().close();
+			}
+			
 			MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
 			ItemStack itemClicked = e.getCurrentItem();
 			for(ShopItems item : ShopItems.values()) {
