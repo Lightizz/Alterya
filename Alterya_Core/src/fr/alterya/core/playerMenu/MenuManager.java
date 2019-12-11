@@ -21,7 +21,7 @@ public class MenuManager
 	
 	public ItemStack clock = ItemBuilder.createItem("§aQuêtes journalières", Material.WATCH);
 	public ItemStack stats = ItemBuilder.createItem("§3Statistiques", Material.SKULL_ITEM);
-	public ItemStack recipes = ItemBuilder.createItem("§cRecttes", Material.BOOK);
+	public ItemStack recipes = ItemBuilder.createItem("§cRecettes", Material.BOOK);
 	
 	public static Inventory menu = Bukkit.createInventory(null, 1*9, "§bMenu joueur");
 	public Inventory invQuest = Bukkit.createInventory(null, 3*9, "§aQuêtes journalières");
