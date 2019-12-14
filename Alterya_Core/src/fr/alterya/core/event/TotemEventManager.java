@@ -5,7 +5,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.command.CmdFurnace;
 
-public class EventManager extends BukkitRunnable
+public class TotemEventManager extends BukkitRunnable
 {
 	private MainCore m;
 	
@@ -13,9 +13,9 @@ public class EventManager extends BukkitRunnable
 	
 	public int timerTotemEvent = 0;
 	//6hrs = 21 600 sec
-	private int timerLimitTotemEvent = 21600;
+	private final int timerLimitTotemEvent = 21600;
 	
-	public EventManager(MainCore main) {
+	public TotemEventManager(MainCore main) {
 		m = main;
 	}
 
@@ -34,5 +34,4 @@ public class EventManager extends BukkitRunnable
 		}
 		timerTotemEvent ++;
 	}
-	
 }

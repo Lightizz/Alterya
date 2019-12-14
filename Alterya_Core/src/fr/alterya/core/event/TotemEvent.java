@@ -38,7 +38,7 @@ import fr.alterya.factions.Factions;
 
 public class TotemEvent implements Listener
 {
-	private EventManager eManager;
+	private TotemEventManager etManager;
 	private static Objective objective;
 	
 	Player me;
@@ -84,9 +84,9 @@ public class TotemEvent implements Listener
 	
 	public MainCore m;
 	
-	public TotemEvent(MainCore main, EventManager e) {
+	public TotemEvent(MainCore main, TotemEventManager e) {
 		m = main;
-		eManager = e;
+		etManager = e;
 		
 		obsiM1.setDisplayName("ObsiEvent1");
 		obsiM2.setDisplayName("ObsiEvent2");
@@ -110,13 +110,13 @@ public class TotemEvent implements Listener
 				if(blockCountRemainting <= 0) {
 					Bukkit.broadcastMessage(MainCore.prefix + "§4§lLe totem a été miné entièrement ! L'event est donc finit, prochain totem dans §r§e6 heures§4§l.");
 					for(Player p : Bukkit.getOnlinePlayers()) {
-						p.playSound(p.getLocation(), Sound.WATER, 50, 50);
+						p.playSound(p.getLocation(), Sound.ORB_PICKUP, 50, 50);
 					}
 					isEventOn = false;
 					endEvent();
 					cancel();
-					eManager = new EventManager(CmdFurnace.mainCore);
-					eManager.restartTimerTotem();
+					etManager = new TotemEventManager(CmdFurnace.mainCore);
+					etManager.restartTimerTotem();
 					return;
 				}
 				
@@ -128,11 +128,11 @@ public class TotemEvent implements Listener
 					endEvent();
 					Bukkit.broadcastMessage(MainCore.prefix + "§4§lLe totem n'a pas été miner à temps ! Le totem a dispawn, prochain totem dans §r§e6 heures§4§l.");
 					for(Player p : Bukkit.getOnlinePlayers()) {
-						p.playSound(p.getLocation(), Sound.WATER, 50, 50);
+						p.playSound(p.getLocation(), Sound.ORB_PICKUP, 50, 50);
 					}
 					cancel();
-					eManager = new EventManager(CmdFurnace.mainCore);
-					eManager.restartTimerTotem();
+					etManager = new TotemEventManager(CmdFurnace.mainCore);
+					etManager.restartTimerTotem();
 					return;
 				}
 				timer ++;
@@ -201,7 +201,7 @@ public class TotemEvent implements Listener
 		blockCountRemainting = obsiBList.size();
 		Bukkit.broadcastMessage(MainCore.prefix + "§4§lUn Totem est apparu en X: §r§e" + String.valueOf(randomPosX) + "§4§l, Y: §r§e" + String.valueOf(randomPosY) + "§4§l, Z: §r§e" + String.valueOf(randomPosZ) + "§4§l.");
 		for(Player p : Bukkit.getOnlinePlayers()) {
-			p.playSound(p.getLocation(), Sound.WATER, 50, 50);
+			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 50, 50);
 		}
 		isEventOn = true;
 	}
@@ -262,7 +262,7 @@ public class TotemEvent implements Listener
 				}
 				Bukkit.broadcastMessage(MainCore.prefix + "§4§lLe joueur §e§e" + e.getPlayer().getDisplayName() + "§4§l a cassé un block du totem ! Il reste §r§e" + String.valueOf(blockCountRemainting) + "§4§l blocks, faites vite !");
 				for(Player p : Bukkit.getOnlinePlayers()) {
-					p.playSound(p.getLocation(), Sound.WATER, 50, 50);
+					p.playSound(p.getLocation(), Sound.ORB_PICKUP, 50, 50);
 				}
 			}
 		}

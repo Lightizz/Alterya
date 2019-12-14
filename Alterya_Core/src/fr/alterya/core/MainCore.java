@@ -34,9 +34,10 @@ import fr.alterya.core.command.CmdTakeMoney;
 import fr.alterya.core.command.CmdTempBan;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
-import fr.alterya.core.event.EventManager;
 import fr.alterya.core.event.KOTHEvent;
+import fr.alterya.core.event.KOTHEventManager;
 import fr.alterya.core.event.TotemEvent;
+import fr.alterya.core.event.TotemEventManager;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.listeners.PlayerMenuListener;
 import fr.alterya.core.listeners.ShopListener;
@@ -59,7 +60,8 @@ public class MainCore extends JavaPlugin
 	public Shop shop;
 	public Rank rank;
 	public Recipes recipes;
-	public EventManager eManager;
+	public TotemEventManager etManager;
+	public KOTHEventManager ekManager;
 	public Player player;
 	
 	@Override
@@ -73,8 +75,11 @@ public class MainCore extends JavaPlugin
 	public void onEnable() {	
 		System.out.println("AlteryaCore [ON]");
 		
-		eManager = new EventManager(this);
-		eManager.runTaskTimer(this, 0, 20);
+		ekManager = new KOTHEventManager(this);
+		ekManager.runTaskTimer(this, 0, 20);
+		
+		etManager = new TotemEventManager(this);
+		etManager.runTaskTimer(this, 0, 20);
 		
 		// Créer les commandes
 		new DCommand("Message", "/msg <joueur> <message>", "Envoie un message privé au joueur cilbé", null, Collections.singletonList("m"), new CmdMsg(this), this);
@@ -131,8 +136,8 @@ public class MainCore extends JavaPlugin
 		//Enregistrer tous les évenements 
 		getServer().getPluginManager().registerEvents(new PlayerListener(rank, this), this);
 		getServer().getPluginManager().registerEvents(new ShopListener(), this);
-		getServer().getPluginManager().registerEvents(new TotemEvent(this, eManager), this);
-		getServer().getPluginManager().registerEvents(new KOTHEvent(), this);
+		getServer().getPluginManager().registerEvents(new TotemEvent(this, etManager), this);
+		getServer().getPluginManager().registerEvents(new KOTHEvent(this, ekManager), this);
 		getServer().getPluginManager().registerEvents(new PlayerMenuListener(this), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
 		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
