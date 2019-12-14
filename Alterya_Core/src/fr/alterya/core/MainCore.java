@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Scoreboard;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
 import fr.alterya.core.command.CmdBaltop;
@@ -33,6 +34,9 @@ import fr.alterya.core.command.CmdTakeMoney;
 import fr.alterya.core.command.CmdTempBan;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
+import fr.alterya.core.event.EventManager;
+import fr.alterya.core.event.KOTHEvent;
+import fr.alterya.core.event.TotemEvent;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.listeners.PlayerMenuListener;
 import fr.alterya.core.listeners.ShopListener;
@@ -44,6 +48,8 @@ import fr.alterya.core.util.DisconnectCombat;
 
 public class MainCore extends JavaPlugin
 {
+	private Scoreboard scEmpty = Bukkit.getScoreboardManager().getNewScoreboard();
+	
 	public static String prefix = ChatColor.AQUA + "[Alterya] ";
 		
 	public ItemStack p = new ItemStack(Material.POTION, (byte) 373);
@@ -53,22 +59,22 @@ public class MainCore extends JavaPlugin
 	public Shop shop;
 	public Rank rank;
 	public Recipes recipes;
-	Player player;
-	
-	//Faire une instance accéssible par toutes les class
-	public static MainCore instance;
-	public static MainCore getInstance() { return instance; }
+	public EventManager eManager;
+	public Player player;
 	
 	@Override
-	public void onLoad() { 
+	public void onLoad() {
 		rank = new Rank(this, player); 
 		shop = new Shop();
 		recipes = new Recipes(this);
 	}	
 	
 	@Override
-	public void onEnable() {		
+	public void onEnable() {	
 		System.out.println("AlteryaCore [ON]");
+		
+		eManager = new EventManager(this);
+		eManager.runTaskTimer(this, 0, 20);
 		
 		// Créer les commandes
 		new DCommand("Message", "/msg <joueur> <message>", "Envoie un message privé au joueur cilbé", null, Collections.singletonList("m"), new CmdMsg(this), this);
@@ -125,6 +131,8 @@ public class MainCore extends JavaPlugin
 		//Enregistrer tous les évenements 
 		getServer().getPluginManager().registerEvents(new PlayerListener(rank, this), this);
 		getServer().getPluginManager().registerEvents(new ShopListener(), this);
+		getServer().getPluginManager().registerEvents(new TotemEvent(this, eManager), this);
+		getServer().getPluginManager().registerEvents(new KOTHEvent(), this);
 		getServer().getPluginManager().registerEvents(new PlayerMenuListener(this), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
 		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
@@ -140,10 +148,15 @@ public class MainCore extends JavaPlugin
 		} 
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onDisable() 
 	{	
 		System.out.println("AlteryaFaction [OFF]");
+		
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			p.setScoreboard(scEmpty);
+		}
 	}
 	
 	public static void log(LogType logType, String message) {

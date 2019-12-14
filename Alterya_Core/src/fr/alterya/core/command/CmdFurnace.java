@@ -13,10 +13,10 @@ import fr.alterya.core.util.ItemBuilder;
 
 public class CmdFurnace implements CommandExecutor
 {
-	MainCore mainCore;
+	public static MainCore mainCore;
 	
-	public CmdFurnace(MainCore mainCore) {
-		this.mainCore = mainCore;
+	public CmdFurnace(MainCore _mainCore) {
+		mainCore = _mainCore;
 	}
 	
 	@Override

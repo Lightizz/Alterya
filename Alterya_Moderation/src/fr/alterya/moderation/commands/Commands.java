@@ -243,7 +243,7 @@ public class Commands implements CommandExecutor {
              Bukkit.broadcastMessage("");
             
              Bukkit.broadcastMessage(ChatColor.GOLD + "|-------------------+====+-------------------|");
-             Bukkit.broadcastMessage(ChatColor.BOLD + "        Le chat est maintenant nettoyer.");
+             Bukkit.broadcastMessage(ChatColor.BOLD + "        Le chat est maintenant nettoyé.");
              Bukkit.broadcastMessage(ChatColor.GOLD + "|-------------------+====+-------------------|");
          }
         return false;

@@ -40,7 +40,7 @@ public class FLocation
 	
 	public FLocation(Location location)
 	{
-		this( location.getWorld().getName(), blockToChunk(location.getBlockX()), blockToChunk(location.getBlockZ()) );
+		this(location.getWorld().getName(), blockToChunk(location.getBlockX()), blockToChunk(location.getBlockZ()));
 	}
 	
 	public FLocation(Player player)
