@@ -1,15 +1,17 @@
 name: Factions
-version: 1.1.0
-main: fr.alterya.factions.P
-author: Alterya
+version: 1.8.2
+main: com.massivecraft.factions.P
+authors: [Olof Cayorion Larsson, Brett Flannigan]
 softdepend: [PermissionsEx, Permissions, Essentials, EssentialsChat, HeroChat, iChat, LocalAreaChat, LWC, nChat, ChatManager, CAPI, AuthMe, Vault, Spout, WorldEdit, WorldGuard, AuthDB, CaptureThePoints, CombatTag]
 commands:
   factions:
     description: The Factions base command
     aliases: [f]
 permissions:
+# -------------------------------------------- #
+# THE REAL NODES
+# -------------------------------------------- #
   factions.access: {description: grant territory access for your faction, with the proper fperm}
-  factions.admin.setap: {description: Positionne l'ap pour les factions qui en demande une}
   factions.access.any: {description: grant territory access for any faction}
   factions.access.view: {description: view territory access info for your faction}
   factions.adminmode: {description: enable admin bypass mode}
@@ -91,7 +93,6 @@ permissions:
     description: All faction permissions.
     children:
       factions.kit.mod: true
-      factions.setap: true
       factions.config: true
       factions.lock: true
       factions.reload: true

@@ -23,8 +23,8 @@ import fr.alterya.core.command.CmdMoney;
 import fr.alterya.core.command.CmdMsg;
 import fr.alterya.core.command.CmdMute;
 import fr.alterya.core.command.CmdPay;
-import fr.alterya.core.command.CmdPromote;
 import fr.alterya.core.command.CmdPurgeMoney;
+import fr.alterya.core.command.CmdRank;
 import fr.alterya.core.command.CmdSetMoney;
 import fr.alterya.core.command.CmdSetSpawn;
 import fr.alterya.core.command.CmdShop;
@@ -116,9 +116,9 @@ public class MainCore extends JavaPlugin
 		new DCommand("Sethome", "/sethome <nom>", "Ajouter le home indiqué dans la commande de la liste des homes du joueur", null, Collections.singletonList(""), new CmdHome(rank, this), this);
 		new DCommand("Homeinfo", "/homeinfo", "Affiche la liste des homes positionés", null, Collections.singletonList(""), new CmdHome(rank, this), this);
 		
-		new DCommand("Promote", "/promote <id> <joueur>", "Promouvoir un joueur au rang indiqué avec l'id", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
-		new DCommand("Demote", "/demote <joueur>", "Remettre le rang d'un joueur à 0", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
-		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList(""), new CmdPromote(rank, this), this);
+		new DCommand("Promote", "/promote <id> <joueur>", "Promouvoir un joueur au rang indiqué avec l'id", null, Collections.singletonList(""), new CmdRank(rank, this), this);
+		new DCommand("Demote", "/demote <joueur>", "Remettre le rang d'un joueur à 0", null, Collections.singletonList(""), new CmdRank(rank, this), this);
+		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList(""), new CmdRank(rank, this), this);
 		
 		new DCommand("Kit", "/kit", "Donne le kit au joueur coorespondant à son grade", null, Collections.singletonList(""), new CmdKit(this), this);
 		

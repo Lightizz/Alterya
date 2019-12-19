@@ -9,8 +9,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.PermissionAttachment;
 
+import com.massivecraft.factions.P;
+
 import fr.alterya.core.MainCore;
-import fr.alterya.factions.P;
 
 public class PermissionsManager implements Listener
 {

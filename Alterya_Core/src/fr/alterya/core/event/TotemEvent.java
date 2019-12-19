@@ -26,15 +26,16 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
+import com.massivecraft.factions.Board;
+import com.massivecraft.factions.Conf;
+import com.massivecraft.factions.FLocation;
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
+import com.massivecraft.factions.Faction;
+import com.massivecraft.factions.Factions;
+
 import fr.alterya.core.MainCore;
 import fr.alterya.core.command.CmdFurnace;
-import fr.alterya.factions.Board;
-import fr.alterya.factions.Conf;
-import fr.alterya.factions.FLocation;
-import fr.alterya.factions.FPlayer;
-import fr.alterya.factions.FPlayers;
-import fr.alterya.factions.Faction;
-import fr.alterya.factions.Factions;
 
 public class TotemEvent implements Listener
 {

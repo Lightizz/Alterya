@@ -45,11 +45,12 @@ public enum ShopItems
 	//Alchimie 
 //	EMPTY_BOTTLE(0.0, 0.0, 41, Material.GLASS_BOTTLE, "Bouteille vide"),
 //	BREWING_STAND(0.0, 0.0, 42, Material.BREWING_STAND, "Alambic"),
-//	MAGMA_CREAM(0.0, 0.0, 43, Material.MAGMA_CREAM, "Crème de magma"),
+	MAGMA_CREAM(0.0, 0.0, 43, Material.MAGMA_CREAM, "Crème de magma"),
 //	GOLDEN_MELON(0.0, 0.0, 44, Material.SPECKLED_MELON, "Melon en or"),
 //	GOLDEN_CARROT(0.0, 0.0, 45, Material.GOLDEN_CARROT, "Carotte en or"),
 	GHAST_TEAR(0.0, 0.0, 46, Material.GHAST_TEAR, "Larme de ghast"),
 //	FERMENTED_SPIDER_EYE(0.0, 0.0, 47, Material.FERMENTED_SPIDER_EYE, "Oeil d'araignée fermenté"),
+	SPIDER_EYE(0.0, 0.0, 58, Material.SPIDER_EYE, "Oeil d'araignée fermenté"),
 	RED_MUSHROOM(0.0, 0.0, 48, Material.RED_MUSHROOM, "Champignon rouge"),
 	BROWN_MUSHROOM(0.0, 0.0, 49, Material.BROWN_MUSHROOM, "Champignon marron"),
 	NETHER_WARTS(0.0, 0.0, 50, Material.NETHER_WARTS, "Verrues du nether"),

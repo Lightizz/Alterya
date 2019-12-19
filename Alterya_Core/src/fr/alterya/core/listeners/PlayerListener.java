@@ -14,15 +14,16 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
+import com.massivecraft.factions.Faction;
+
 import fr.alterya.core.MainCore;
 import fr.alterya.core.command.CmdMute;
 import fr.alterya.core.command.CmdTempBan;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
-import fr.alterya.factions.FPlayer;
-import fr.alterya.factions.FPlayers;
-import fr.alterya.factions.Faction;
 
 public final class PlayerListener implements Listener {
 

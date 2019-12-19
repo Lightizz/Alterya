@@ -169,6 +169,7 @@ public class Shop implements Listener {
 //		alchemyList.put(ShopItems.GOLDEN_CARROT.getID(), ShopItems.GOLDEN_CARROT);
 		alchemyList.put(ShopItems.GHAST_TEAR.getID(), ShopItems.GHAST_TEAR);
 //		alchemyList.put(ShopItems.FERMENTED_SPIDER_EYE.getID(), ShopItems.FERMENTED_SPIDER_EYE);
+		alchemyList.put(ShopItems.SPIDER_EYE.getID(), ShopItems.SPIDER_EYE);
 		alchemyList.put(ShopItems.RED_MUSHROOM.getID(), ShopItems.RED_MUSHROOM);
 		alchemyList.put(ShopItems.BROWN_MUSHROOM.getID(), ShopItems.BROWN_MUSHROOM);
 		alchemyList.put(ShopItems.NETHER_WARTS.getID(), ShopItems.NETHER_WARTS);

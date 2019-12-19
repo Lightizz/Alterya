@@ -28,9 +28,10 @@ public class KOTHEventManager extends BukkitRunnable
 	{
 		if(timerKOTHEvent >= timerLimitKOTHEvent) {
 			kothE.startEvent();
-			kothE.run();
+			kothE.runEventTimer();
 			cancel();
 			timerKOTHEvent = 0;
+			return;
 		}
 		timerKOTHEvent ++;
 	}
