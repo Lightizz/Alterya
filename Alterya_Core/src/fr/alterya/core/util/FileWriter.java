@@ -71,6 +71,11 @@ public class FileWriter
 	public List<Double> getDoubleList(String valuePath) {
 		return config.getDoubleList(valuePath);
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object> getList(String valuePath) {
+		return (List<Object>) config.getList(valuePath);
+	}
 	
 	public Set<String> getKeys(boolean deep){
 		return config.getKeys(deep);

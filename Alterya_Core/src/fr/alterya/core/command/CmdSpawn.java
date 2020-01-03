@@ -28,7 +28,7 @@ public class CmdSpawn implements CommandExecutor
 				return true;
 			}
 			Player player = (Player) sender;
-			Location l = new Location(player.getWorld(), fw.getDouble("Spawn 1.X"), fw.getDouble("Spawn 1.Y"), fw.getDouble("Spawn 1.Z"));
+			Location l = new Location(player.getWorld(), fw.getDouble(player.getWorld().getName() + "_spawn.X"), fw.getDouble(player.getWorld().getName() + "_spawn.Y"), fw.getDouble(player.getWorld().getName() + "_spawn.Z"));
 			player.teleport(l);
 			player.sendMessage(MainCore.prefix + "§dVous§a avez été téléporté au spawn avec succès !");
 			return true;

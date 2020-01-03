@@ -44,7 +44,7 @@ public class Main extends JavaPlugin implements Listener{
 		new DCommand("Admin", "/admin", "Mode Modérateur", null, Collections.singletonList(""), new Commands(this), this);
 		new DCommand("Alert", "/alert", "Annonce un message à tous", null, Collections.singletonList(""), new Commands(this), this);
 		new DCommand("Rb", "/rb", "Restart le serveur", null, Collections.singletonList(""), new Commands(this), this);
-		new DCommand("GM", "/gm", "Change de mode Rapidement", null, Collections.singletonList(""), new CommandGm(this), this);
+		new DCommand("Gm", "/gm", "Change de mode Rapidement", null, Collections.singletonList(""), new CommandGm(this), this);
 		new DCommand("ClearChat", "/clearchat", "Nettoie le Chat", null, Collections.singletonList(""), new Commands(this), this);
 	}
 	

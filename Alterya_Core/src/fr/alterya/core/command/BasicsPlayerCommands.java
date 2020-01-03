@@ -54,14 +54,14 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 		//	/discord
 		if(message.equalsIgnoreCase("discord")) {
 			Player player = (Player) sender;
-	        player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<|" );
+	        player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<|");
 	        return true;
 	    }
 	      
 		//	/tipeee
 	    if(message.equalsIgnoreCase("tipeee")) {
 	    	Player player = (Player) sender;
-	    	player.sendMessage(ChatColor.GOLD + "|>> https://fr.tipeee.com/alterya-pvp <<|");
+	    	player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://fr.tipeee.com/alterya-pvp" + ChatColor.GOLD + "<<|");
 	        return true;
 	    }
 	        
@@ -104,37 +104,38 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 		Player player = (Player) event.getWhoClicked();
 		if(event.getInventory() == player.getEnderChest()) {
 			if(event.getSlot() == 0
-					&& event.getSlot() == 1
-					&& event.getSlot() == 2
-					&& event.getSlot() == 3
-					&& event.getSlot() == 4
-					&& event.getSlot() == 5
-					&& event.getSlot() == 6
-					&& event.getSlot() == 7
-					&& event.getSlot() == 8
-					&& event.getSlot() == 9
-					&& event.getSlot() == 10
-					&& event.getSlot() == 11
-					&& event.getSlot() == 12
-					&& event.getSlot() == 13
-					&& event.getSlot() == 14
-					&& event.getSlot() == 15
-					&& event.getSlot() == 16
-					&& event.getSlot() == 17
+					|| event.getSlot() == 1
+					|| event.getSlot() == 2
+					|| event.getSlot() == 3
+					|| event.getSlot() == 4
+					|| event.getSlot() == 5
+					|| event.getSlot() == 6
+					|| event.getSlot() == 7
+					|| event.getSlot() == 8
+					|| event.getSlot() == 9
+					|| event.getSlot() == 10
+					|| event.getSlot() == 11
+					|| event.getSlot() == 12
+					|| event.getSlot() == 13
+					|| event.getSlot() == 14
+					|| event.getSlot() == 15
+					|| event.getSlot() == 16
+					|| event.getSlot() == 17
 					&& rank.config.getInt(player.getUniqueId().toString()) == 0) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 				return;
 			}
 			if(event.getSlot() == 0
-					&& event.getSlot() == 1
-					&& event.getSlot() == 2
-					&& event.getSlot() == 3
-					&& event.getSlot() == 4
-					&& event.getSlot() == 5
-					&& event.getSlot() == 6
-					&& event.getSlot() == 7
-					&& event.getSlot() == 8 && rank.config.getInt(player.getUniqueId().toString()) == 1) {
+					|| event.getSlot() == 1
+					|| event.getSlot() == 2
+					|| event.getSlot() == 3
+					|| event.getSlot() == 4
+					|| event.getSlot() == 5
+					|| event.getSlot() == 6
+					|| event.getSlot() == 7
+					|| event.getSlot() == 8 
+					&& rank.config.getInt(player.getUniqueId().toString()) == 1) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 				return;

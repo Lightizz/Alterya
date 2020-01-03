@@ -1,7 +1,9 @@
 package fr.alterya.core;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 
@@ -17,6 +20,7 @@ import fr.alterya.core.command.CmdBaltop;
 import fr.alterya.core.command.CmdFurnace;
 import fr.alterya.core.command.CmdGiveMoney;
 import fr.alterya.core.command.CmdHome;
+import fr.alterya.core.command.CmdIgnore;
 import fr.alterya.core.command.CmdKit;
 import fr.alterya.core.command.CmdMenu;
 import fr.alterya.core.command.CmdMoney;
@@ -32,8 +36,10 @@ import fr.alterya.core.command.CmdSpawn;
 import fr.alterya.core.command.CmdStaffList;
 import fr.alterya.core.command.CmdTakeMoney;
 import fr.alterya.core.command.CmdTempBan;
+import fr.alterya.core.command.CmdTpMute;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
+import fr.alterya.core.command.CmdTrade;
 import fr.alterya.core.event.KOTHEvent;
 import fr.alterya.core.event.KOTHEventManager;
 import fr.alterya.core.event.TotemEvent;
@@ -41,11 +47,13 @@ import fr.alterya.core.event.TotemEventManager;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.listeners.PlayerMenuListener;
 import fr.alterya.core.listeners.ShopListener;
+import fr.alterya.core.listeners.TradeListener;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.permissions.PermissionsManager;
 import fr.alterya.core.shop.Shop;
 import fr.alterya.core.util.DCommand;
 import fr.alterya.core.util.DisconnectCombat;
+import fr.alterya.core.util.TradeUtil;
 
 public class MainCore extends JavaPlugin
 {
@@ -53,10 +61,14 @@ public class MainCore extends JavaPlugin
 	
 	public static String prefix = ChatColor.AQUA + "[Alterya] ";
 		
+	public static List<String> ignoreMPPlayer = new ArrayList<>();
+	
 	public ItemStack p = new ItemStack(Material.POTION, (byte) 373);
 	public ItemStack b = new ItemStack(Material.BOOK_AND_QUILL);
 	public ItemStack i = new ItemStack(Material.ITEM_FRAME);
 	
+	public TradeListener tradeL;
+	public TradeUtil tradeUtil;
 	public Shop shop;
 	public Rank rank;
 	public Recipes recipes;
@@ -69,6 +81,8 @@ public class MainCore extends JavaPlugin
 		rank = new Rank(this, player); 
 		shop = new Shop();
 		recipes = new Recipes(this);
+		tradeUtil = new TradeUtil(this);
+		tradeL = new TradeListener(this);
 	}	
 	
 	@Override
@@ -83,6 +97,7 @@ public class MainCore extends JavaPlugin
 		
 		// Créer les commandes
 		new DCommand("Message", "/msg <joueur> <message>", "Envoie un message privé au joueur cilbé", null, Collections.singletonList("m"), new CmdMsg(this), this);
+		new DCommand("Ignore", "/ignore", "Empêche le joueur de reçevoir les messages privés", null, Collections.singletonList(""), new CmdIgnore(), this);
 		new DCommand("Menu", "/menu", "Ouvre le menu du joueur", null, Collections.singletonList(""), new CmdMenu(this), this);
 		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("enderchest"), new BasicsPlayerCommands(this, rank), this);
 		new DCommand("Craft", "/craft", "Permet d'ouvrir une table de craft", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
@@ -125,7 +140,11 @@ public class MainCore extends JavaPlugin
 		new DCommand("Mute", "/mute <joueur> <temps>", "Mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		new DCommand("UnMute", "/unmute <joueur>", "Dé-mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		new DCommand("TempBan", "/tempban <joueur> <temps> <raison>", "Banni temporairement un joueur de serveur", null, Collections.singletonList(""), new CmdTempBan(rank, this), this);
-	
+		new DCommand("TpMute", "/tpmute <joueur> <temps> <raison>", "Empêche le joueur d'utiliser les comandes de téléportation", null, Collections.singletonList(""), new CmdTpMute(rank, this), this);
+		new DCommand("UnTpMute", "/untpmute <joueur> <temps> <raison>", "Dé-empêche le joueur d'utiliser les comandes de téléportation", null, Collections.singletonList(""), new CmdTpMute(rank, this), this);
+		
+		new DCommand("Trade", "/trade", "Propose un échange d'item au joueur ciblé", null, Collections.singletonList(""), new CmdTrade(tradeUtil, this), this);
+		
 		removeCraft(p.getType());
 		removeCraft(b.getType());
 		removeCraft(i.getType());
@@ -141,6 +160,7 @@ public class MainCore extends JavaPlugin
 		getServer().getPluginManager().registerEvents(new PlayerMenuListener(this), this);
 		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
 		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
+		getServer().getPluginManager().registerEvents(tradeL, this);
 	}
 	
 	public void removeCraft(Material m) {
@@ -155,16 +175,60 @@ public class MainCore extends JavaPlugin
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public void onDisable() 
-	{	
+	public void onDisable() {	
 		System.out.println("AlteryaFaction [OFF]");
-		
 		for(Player p : Bukkit.getOnlinePlayers()) {
+			ignoreMPPlayer.remove(p.getUniqueId().toString());
 			p.setScoreboard(scEmpty);
+		}
+		for (Trade trade : tradeUtil.getAllTrades()) {
+		      trade.cancelTrade(true);
 		}
 	}
 	
 	public static void log(LogType logType, String message) {
 		System.out.println("[Log] (" + logType.string() + ") " + message);
 	}
+	
+	public static ItemStack getItem(Material material, int itemAmount, int itemData, String name, String... lores) {
+	    ItemStack item = new ItemStack(material, itemAmount, (byte)itemData);
+	    if (name != null) {
+	      ItemMeta meta = item.getItemMeta();
+	      meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
+	      item.setItemMeta(meta);
+	    } 
+	    if (lores != null) {
+	      List<String> lore = new ArrayList<>(); byte b; int i; String[] arrayOfString;
+	      for (i = (arrayOfString = lores).length, b = 0; b < i; ) { String l = arrayOfString[b];
+	        lore.add(ChatColor.translateAlternateColorCodes('&', l)); b++; }
+	      
+	      ItemMeta meta = item.getItemMeta();
+	      meta.setLore(lore);
+	      item.setItemMeta(meta);
+	    } 
+	    return item;
+	}
+	
+	public boolean canPlaceItem(Player p, int rawSlot) {
+	    boolean canPlace = false;
+	    if (!isTopInventory(p, rawSlot)) {
+	      canPlace = true;
+	    }
+	    if (isTopInventory(p, rawSlot)) {
+	      int slot = rawSlot;
+	      if ((slot >= 0 && slot < 4) || (slot >= 9 && slot < 13) || (slot >= 18 && slot < 22)) {
+	        canPlace = true;
+	      }
+	    } 
+	    return canPlace;
+	  }
+	  
+	  public boolean isTopInventory(Player p, int rawSlot) {
+	    boolean isTop = false;
+	    if (p instanceof Player && 
+	      rawSlot < p.getOpenInventory().getTopInventory().getSize()) {
+	      isTop = true;
+	    }
+	    return isTop;
+	  }
 }

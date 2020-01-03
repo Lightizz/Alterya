@@ -106,6 +106,7 @@ public class CmdShow extends FCommand
 		}
 		
 		sendMessage(p.txt.parse("<a>Allied to: ") + TextUtil.implode(relationTags.get(Rel.ALLY), sepparator));
+		sendMessage(p.txt.parse("<a>Childrens: ") + TextUtil.implode(relationTags.get(Rel.CHILD), sepparator));
 		sendMessage(p.txt.parse("<a>Enemies: ") + TextUtil.implode(relationTags.get(Rel.ENEMY), sepparator));
 		
 		// List the members...

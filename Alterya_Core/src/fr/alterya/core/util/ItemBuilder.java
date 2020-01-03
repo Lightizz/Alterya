@@ -87,4 +87,13 @@ public class ItemBuilder
 		item.setItemMeta(itemM);
 		return item;
 	}
+	
+	public static ItemStack createItem(Material material, Enchantment enchantment, boolean enchantmentVisibility, int enchantmentLvl, String displayName) {
+		ItemStack item = new ItemStack(material);
+		ItemMeta itemM = item.getItemMeta();
+		itemM.addEnchant(enchantment, enchantmentLvl, enchantmentVisibility);
+		itemM.setDisplayName(displayName);
+		item.setItemMeta(itemM);
+		return item;
+	}
 }

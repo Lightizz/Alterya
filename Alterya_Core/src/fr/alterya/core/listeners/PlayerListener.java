@@ -51,7 +51,7 @@ public final class PlayerListener implements Listener {
 	@EventHandler
 	void playerLogin(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
-		player.sendMessage(ChatColor.AQUA + "§lBienvenue sur Alterya !");
+		player.sendMessage(ChatColor.AQUA + "§lBienvenue sur Alterya ! Vous êtes sur le monde : " + player.getWorld().getName() + " !");
 	}
 	
 	@EventHandler
@@ -62,6 +62,9 @@ public final class PlayerListener implements Listener {
 	
 	@EventHandler
 	void playerQuit(PlayerQuitEvent pqe) {
+		if(MainCore.ignoreMPPlayer.contains(pqe.getPlayer().getUniqueId().toString())) {
+			MainCore.ignoreMPPlayer.remove(pqe.getPlayer().getUniqueId().toString());
+		}
 		rank.deletPlayer(pqe.getPlayer().getUniqueId().toString());
 	}
 	

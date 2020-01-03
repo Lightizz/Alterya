@@ -57,7 +57,7 @@ public class Recipes {
 	  
 	    ItemStack customALTERYOMP = new ItemStack(Material.DIAMOND_PICKAXE);
 	    ItemMeta customap = customALTERYOMP.getItemMeta();
-	    customap.setDisplayName(ChatColor.RED + "Pioche en Remedia");
+	    customap.setDisplayName(ChatColor.RED + "Pioche en Alteryum");
 	    customap.addEnchant(Enchantment.DIG_SPEED, 6, true);
 	    customALTERYOMP.setItemMeta(customap);
 	      

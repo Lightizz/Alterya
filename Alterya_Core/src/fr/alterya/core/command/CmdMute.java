@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 //import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
@@ -19,7 +20,7 @@ public class CmdMute implements CommandExecutor
 	Player player_;
 	Player target_;
 	
-	boolean isToCancel = false;
+	BukkitRunnable run;
 	
 	int timeMutedHour;
 	int timeMutedSec;
@@ -67,7 +68,7 @@ public class CmdMute implements CommandExecutor
 			target.sendMessage(MainCore.prefix + "§eVous §aavez été mute par §e" + player.getDisplayName() + "§a pendant §e" + args[1] + "m§a.");
 			player.sendMessage(MainCore.prefix + "§eVous §aavez mute §e" + target.getDisplayName() + "§a pendant §e" + args[1] + "m§a.");
 			
-			int taskID = Bukkit.getScheduler().runTaskTimer(m, new Runnable() {
+			run = new BukkitRunnable(){
 				@Override
 				public void run()
 				{
@@ -76,16 +77,11 @@ public class CmdMute implements CommandExecutor
 						fw.saveConfig();
 						target.sendMessage(MainCore.prefix + "§aVous §eêtes maintenant unmute.");
 						timer = 0;
-						isToCancel = true;
+						cancel();
 					}
 					timer ++;
 				}
-			}, 0, 20).getTaskId();
-			
-			if(isToCancel == true) {
-				Bukkit.getScheduler().cancelTask(taskID);
-				isToCancel = false;
-			}
+			};
 			
 			MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a mute " + target.getDisplayName() + ".");
 			

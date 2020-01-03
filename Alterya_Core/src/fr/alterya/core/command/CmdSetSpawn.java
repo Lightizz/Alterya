@@ -26,10 +26,10 @@ public class CmdSetSpawn implements CommandExecutor
 			}
 			Player player = (Player) sender;
 			if(rank.config.getInt(player.getUniqueId().toString()) >= 9) {
-				CmdSpawn.fw.config.createSection("Spawn 1");
-				CmdSpawn.fw.setValue("Spawn 1.X", player.getLocation().getX());
-				CmdSpawn.fw.setValue("Spawn 1.Y", player.getLocation().getY());
-				CmdSpawn.fw.setValue("Spawn 1.Z", player.getLocation().getZ());
+				CmdSpawn.fw.config.createSection(player.getWorld().getName() + "_spawn");
+				CmdSpawn.fw.setValue(player.getWorld().getName() + "_spawn.X", player.getLocation().getX());
+				CmdSpawn.fw.setValue(player.getWorld().getName() + "_spawn.Y", player.getLocation().getY());
+				CmdSpawn.fw.setValue(player.getWorld().getName() + "_spawn.Z", player.getLocation().getZ());
 				CmdSpawn.fw.saveConfig();
 				player.sendMessage(MainCore.prefix + "§aLe spawn §lofficiel §r§aa été positionné à votre postion.");
 				return true;
