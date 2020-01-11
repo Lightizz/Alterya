@@ -29,7 +29,7 @@ public enum FPerm
 	DOOR("door", "use doors",                      Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.CHILD),
 	BUTTON("button", "use stone buttons",          Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.CHILD),
 	LEVER("lever", "use levers",                   Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY, Rel.CHILD),
-	CONTAINER("container", "use containers",       Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.CHILD),
+	CONTAINER("container", "use containers",       Rel.LEADER, Rel.OFFICER, Rel.MEMBER, 					   Rel.CHILD),
 	INVITE("invite", "invite players",             Rel.LEADER, Rel.OFFICER),
 	KICK("kick", "kick members",                   Rel.LEADER, Rel.OFFICER),
 	SETHOME("sethome", "set the home",             Rel.LEADER, Rel.OFFICER),
