@@ -46,7 +46,7 @@ public class CmdMute implements CommandExecutor
 			Player player = (Player) sender;
 			player_ = player;
 			
-			if(m.rank.config.getInt(player.getUniqueId().toString()) <= 5) {
+			if(Rank.config.getInt(player.getUniqueId().toString()) <= 5) {
 				player.sendMessage(MainCore.prefix + "§eVous n'avez pas le grade requis pour faire cela.");
 				return true;
 			}
@@ -93,7 +93,7 @@ public class CmdMute implements CommandExecutor
 			
 			Player player = (Player) sender;
 			
-			if(m.rank.config.getInt(player.getUniqueId().toString()) <= 5) {
+			if(Rank.config.getInt(player.getUniqueId().toString()) <= 5) {
 				player.sendMessage(MainCore.prefix + "§eVous n'avez pas le grade requis pour faire cela.");
 				return true;
 			}

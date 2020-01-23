@@ -24,30 +24,33 @@ public enum RankList {
 	§8 = "dark_gray"
 	§0 = "black"
 	*/
-	JOUEUR(0, 1, "Joueur", "", "", " > "),
-	SOUVENIR(1, 3, "Souvenir", "§a[Souvenir] ", "§a", " > "),
-	MEMOIRE(2, 5, "Mémoire","§1[Mémoire] ", "§1", " > "),
-	SAGE(3, 10, "Sage", "§d[Sage] ", "§d", " > "),
-	DEVELOPPEUR(4, 15, "Développeur", "§5[Développeur] ", "§5", " > "),
-	ARCHITECTE(5, 15, "Achitecte","§5[Architecte] ", "§5", " > "),
-	GUIDE(6, 20, "Guide", "§a[Guide] ", "§a", " > "),
-	MODERATEUR(7, 40, "Modérateur","§e[Modérateur] ", "§e", " > "),
-	MODERATEUR_PLUS(8, 60, "Modérateur+", "§6[Modérateur+] ", "§6", " > §6"),
-	RESPONSABLE(9, 80, "Responsable", "§4§l[Responsable] ", "§4", " > §4"),
-	ADMINISTRATEUR(10, 100, "Administateur", "§4§l[Administrateur] ", "§4", " >> §4");
+	JOUEUR(0, 1, "Joueur", "", "", " > ", 5),
+	SOUVENIR(1, 3, "Souvenir", "§a[Souvenir] ", "§a", " > ", 3),
+	MEMOIRE(2, 5, "Mémoire","§1[Mémoire] ", "§1", " > ", 2),
+	SAGE(3, 10, "Sage", "§d[Sage] ", "§d", " > ", 0),
+	DEVELOPPEUR(4, 15, "Développeur", "§5[Développeur] ", "§5", " > ", 3),
+	REDACTOR(11, 15, "Rédacteur", "§5[Rédacteur]", "§5", " > ", 3),
+	GFX(12, 15, "Graphiste", "§5[Graphiste]", "§5", " > ", 3),
+	ARCHITECTE(5, 15, "Achitecte","§5[Architecte] ", "§5", " > ", 3),
+	GUIDE(6, 20, "Guide", "§a[Guide] ", "§a", " > ", 3),
+	MODERATEUR(7, 40, "Modérateur","§e[Modérateur] ", "§e", " > ", 2),
+	MODERATEUR_PLUS(8, 60, "Modérateur+", "§6[Modérateur+] ", "§6", " > §6", 0),
+	RESPONSABLE(9, 80, "Responsable", "§4§l[Responsable] ", "§4", " > §4", 0),
+	ADMINISTRATEUR(10, 100, "Administateur", "§4§l[Administrateur] ", "§4", " >> §4", 0);
 	
 	//Fields
-	private final int power, id;
+	private final int power, id, tpcountdown;
 	private final String rankName, prefix, chatSeparator, prefixColor;
 	
 	//Constructor
-	private RankList(int id, int power, String rankName, String prefix, String prefixColor, String chatSeparator) {
+	private RankList(int id, int power, String rankName, String prefix, String prefixColor, String chatSeparator, int tpcountdown) {
 		this.id = id;
 		this.power = power;
 		this.rankName = rankName;
 		this.prefix = prefix;
 		this.chatSeparator = chatSeparator;
 		this.prefixColor = prefixColor;
+		this.tpcountdown = tpcountdown;
 	}
 	
 	//Method Getter
@@ -71,6 +74,9 @@ public enum RankList {
 	}
 	public final String getPrefixColor() {
 		return prefixColor;
+	}
+	public final int getTpCountdown() {
+		return tpcountdown;
 	}
 }
 

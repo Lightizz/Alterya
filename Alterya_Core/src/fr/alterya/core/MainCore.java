@@ -22,6 +22,7 @@ import fr.alterya.core.command.CmdGiveMoney;
 import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdIgnore;
 import fr.alterya.core.command.CmdKit;
+import fr.alterya.core.command.CmdMarket;
 import fr.alterya.core.command.CmdMenu;
 import fr.alterya.core.command.CmdMoney;
 import fr.alterya.core.command.CmdMsg;
@@ -40,16 +41,20 @@ import fr.alterya.core.command.CmdTpMute;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
 import fr.alterya.core.command.CmdTrade;
+import fr.alterya.core.command.CmdUUID;
+import fr.alterya.core.command.CmdWarp;
 import fr.alterya.core.event.KOTHEvent;
 import fr.alterya.core.event.KOTHEventManager;
 import fr.alterya.core.event.TotemEvent;
 import fr.alterya.core.event.TotemEventManager;
+import fr.alterya.core.listeners.MarketListener;
 import fr.alterya.core.listeners.PlayerListener;
 import fr.alterya.core.listeners.PlayerMenuListener;
+import fr.alterya.core.listeners.ServerListener;
 import fr.alterya.core.listeners.ShopListener;
 import fr.alterya.core.listeners.TradeListener;
+import fr.alterya.core.market.MarketManager;
 import fr.alterya.core.rank.Rank;
-import fr.alterya.core.rank.permissions.PermissionsManager;
 import fr.alterya.core.shop.Shop;
 import fr.alterya.core.util.DCommand;
 import fr.alterya.core.util.DisconnectCombat;
@@ -74,6 +79,7 @@ public class MainCore extends JavaPlugin
 	public Recipes recipes;
 	public TotemEventManager etManager;
 	public KOTHEventManager ekManager;
+	public MarketManager mmanager;
 	public Player player;
 	
 	@Override
@@ -83,6 +89,9 @@ public class MainCore extends JavaPlugin
 		recipes = new Recipes(this);
 		tradeUtil = new TradeUtil(this);
 		tradeL = new TradeListener(this);
+		mmanager = new MarketManager(this);
+		
+		CmdWarp.reloadWarpsConfigs();
 	}	
 	
 	@Override
@@ -95,6 +104,8 @@ public class MainCore extends JavaPlugin
 		etManager = new TotemEventManager(this);
 		etManager.runTaskTimer(this, 0, 20);
 		
+		Rank.initConfig();
+		
 		// Créer les commandes
 		new DCommand("Message", "/msg <joueur> <message>", "Envoie un message privé au joueur cilbé", null, Collections.singletonList("m"), new CmdMsg(this), this);
 		new DCommand("Ignore", "/ignore", "Empêche le joueur de reçevoir les messages privés", null, Collections.singletonList(""), new CmdIgnore(), this);
@@ -106,6 +117,8 @@ public class MainCore extends JavaPlugin
 		new DCommand("Feed", "/feed", "Met la barre de faim au maximum", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
 		new DCommand("Ping", "/ping", "Envoie le ping du joueur sur le serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
 		new DCommand("Tipeee", "/tipeee", "Envoie le lien du tipeee officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
+		
+		new DCommand("UUID", "/uuid", "Commande pour voir l'UUID d'un joueur", "getUUID", Collections.singletonList(""), new CmdUUID(this, rank), this);
 		
 		new DCommand("Staff", "/staff", "Affiche tous les membres du staff connectés sur le serveur", null, Collections.singletonList(""), new CmdStaffList(rank), this);
 		
@@ -129,11 +142,11 @@ public class MainCore extends JavaPlugin
 		new DCommand("Home", "/home <nom>", "Teleporte l'executeur de la commande au home choisi à partir du nom indiqué", null, Collections.singletonList(""), new CmdHome(rank, this), this);
 		new DCommand("Delhome", "/delhome <nom>", "Supprime le home indiqué dans la commande de la liste des homes du joueur", null, Collections.singletonList(""), new CmdHome(rank, this), this);
 		new DCommand("Sethome", "/sethome <nom>", "Ajouter le home indiqué dans la commande de la liste des homes du joueur", null, Collections.singletonList(""), new CmdHome(rank, this), this);
-		new DCommand("Homeinfo", "/homeinfo", "Affiche la liste des homes positionés", null, Collections.singletonList(""), new CmdHome(rank, this), this);
+		new DCommand("Homeinfo", "/homeinfo", "Affiche la liste des homes positionés", null, Collections.singletonList("homes"), new CmdHome(rank, this), this);
 		
 		new DCommand("Promote", "/promote <id> <joueur>", "Promouvoir un joueur au rang indiqué avec l'id", null, Collections.singletonList(""), new CmdRank(rank, this), this);
 		new DCommand("Demote", "/demote <joueur>", "Remettre le rang d'un joueur à 0", null, Collections.singletonList(""), new CmdRank(rank, this), this);
-		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList(""), new CmdRank(rank, this), this);
+		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList("ranks"), new CmdRank(rank, this), this);
 		
 		new DCommand("Kit", "/kit", "Donne le kit au joueur coorespondant à son grade", null, Collections.singletonList(""), new CmdKit(this), this);
 		
@@ -143,14 +156,15 @@ public class MainCore extends JavaPlugin
 		new DCommand("TpMute", "/tpmute <joueur> <temps> <raison>", "Empêche le joueur d'utiliser les comandes de téléportation", null, Collections.singletonList(""), new CmdTpMute(rank, this), this);
 		new DCommand("UnTpMute", "/untpmute <joueur> <temps> <raison>", "Dé-empêche le joueur d'utiliser les comandes de téléportation", null, Collections.singletonList(""), new CmdTpMute(rank, this), this);
 		
-		new DCommand("Trade", "/trade", "Propose un échange d'item au joueur ciblé", null, Collections.singletonList(""), new CmdTrade(tradeUtil, this), this);
+		new DCommand("Trade", "/trade <joueur>", "Propose un échange d'item au joueur ciblé", null, Collections.singletonList(""), new CmdTrade(tradeUtil, this), this);
+		
+		new DCommand("Market", "/market", "Commande pour ouvrir le Marché noir", null, Collections.singletonList(""), new CmdMarket(), this);
+		
+		new DCommand("Warp", "/warp <nom>", "Commande pour se téléporter à un \"warp\"", null, Collections.singletonList(""), new CmdWarp(this, rank), this);
 		
 		removeCraft(p.getType());
 		removeCraft(b.getType());
 		removeCraft(i.getType());
-		
-		//Initialiser le scoreboard des rangs
-		rank.initScoreboard();
 		
 		//Enregistrer tous les évenements 
 		getServer().getPluginManager().registerEvents(new PlayerListener(rank, this), this);
@@ -158,8 +172,9 @@ public class MainCore extends JavaPlugin
 		getServer().getPluginManager().registerEvents(new TotemEvent(this, etManager), this);
 		getServer().getPluginManager().registerEvents(new KOTHEvent(this, ekManager), this);
 		getServer().getPluginManager().registerEvents(new PlayerMenuListener(this), this);
-		getServer().getPluginManager().registerEvents(new PermissionsManager(this), this);
 		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
+		getServer().getPluginManager().registerEvents(new MarketListener(), this);
+		getServer().getPluginManager().registerEvents(new ServerListener(this), this);
 		getServer().getPluginManager().registerEvents(tradeL, this);
 	}
 	
@@ -175,15 +190,15 @@ public class MainCore extends JavaPlugin
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public void onDisable() {	
-		System.out.println("AlteryaFaction [OFF]");
+	public void onDisable() {
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			ignoreMPPlayer.remove(p.getUniqueId().toString());
 			p.setScoreboard(scEmpty);
 		}
-		for (Trade trade : tradeUtil.getAllTrades()) {
+		for(Trade trade : tradeUtil.getAllTrades()) {
 		      trade.cancelTrade(true);
 		}
+		System.out.println("AlteryaFaction [OFF]");
 	}
 	
 	public static void log(LogType logType, String message) {

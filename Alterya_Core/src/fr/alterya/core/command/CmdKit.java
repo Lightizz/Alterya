@@ -34,7 +34,7 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 		Player player = (Player) sender;
 		player0 = player;
 		if(message.equalsIgnoreCase("kit")) {
-			if(rank.config.getInt(player.getUniqueId().toString()) == 2) {
+			if(Rank.config.getInt(player.getUniqueId().toString()) == 2) {
 				if(timer != 0) {
 					int timeRemaiting = 172800 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
@@ -44,7 +44,7 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 					runTaskTimer(main, 0, 20);
 					return true;
 				}
-			}else if(rank.config.getInt(player.getUniqueId().toString()) == 3) {
+			}else if(Rank.config.getInt(player.getUniqueId().toString()) == 3) {
 				if(timer != 0) {
 					int timeRemaiting = 259200 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
@@ -54,7 +54,7 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 					runTaskTimer(main, 0, 20);
 					return true;
 				}
-			}else if(rank.config.getInt(player.getUniqueId().toString()) == 1) {
+			}else if(Rank.config.getInt(player.getUniqueId().toString()) == 1) {
 				if(timer != 0) {
 					int timeRemaiting = 172800 - timer;
 					player.sendMessage(MainCore.prefix + "Il vous reste " + timeRemaiting + "sec avant de pouvoir re-utiliser le /kit !");
@@ -169,11 +169,11 @@ public class CmdKit extends BukkitRunnable implements CommandExecutor
 	public void run()
 	{
 		//1h = 3 600 sec ; 24h = 86 400 sec ; 48h = 172 800 sec ; 72h = 259 200 sec
-		if(rank.config.getInt(player0.getUniqueId().toString()) == 2 && timer >= 172800) {
+		if(Rank.config.getInt(player0.getUniqueId().toString()) == 2 && timer >= 172800) {
 			cancel();
-		}else if(rank.config.getInt(player0.getUniqueId().toString()) == 3 && timer >= 259200) {
+		}else if(Rank.config.getInt(player0.getUniqueId().toString()) == 3 && timer >= 259200) {
 			cancel();
-		}else if(rank.config.getInt(player0.getUniqueId().toString()) == 1 && timer >= 172800) {
+		}else if(Rank.config.getInt(player0.getUniqueId().toString()) == 1 && timer >= 172800) {
 			cancel();
 		}
 		timer ++;

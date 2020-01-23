@@ -33,7 +33,6 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{
 		Player player0 = (Player) sender;
-		
 		if(player0 == Bukkit.getPlayer(args[0])) {
 			player0.sendMessage(MainCore.prefix + "§2Vous§e ne pouvez pas vous téléporter à vous même.");
 			return true;
@@ -54,9 +53,8 @@ public class CmdTpa extends BukkitRunnable implements CommandExecutor
 			target1 = target;
 			
 			//Envoyer les messages
-			player.sendMessage(MainCore.prefix + "§eVous avez demander à §2" + target.getName() + " §esi vous pouvez vous téléporter à sa position.");
-			
-			target.sendMessage(MainCore.prefix + "§eLe joueur §2" + target.getName() + "§e vous demande si il peut se téléporter à votre location.");
+			player.sendMessage(MainCore.prefix + "§eVous avez demander à §2" + target.getName() + " §esi vous pouvez vous téléporter à sa position. §4(§lAttention le tpkill est autorisé sur le serveur !§r§4)");
+			target.sendMessage(MainCore.prefix + "§eLe joueur §2" + target.getName() + "§e vous demande si il peut se téléporter à votre location. §4(§lAttention le tpkill est autorisé sur le serveur !§r§4)");
 			target.sendMessage("§eFaites §2/tpyes §epour accepter.");
 			target.sendMessage("§eOu faites §2/tpno §epour refuser.");
 			

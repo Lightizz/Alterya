@@ -29,11 +29,11 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 		
 		if(message.equalsIgnoreCase("feed") && sender instanceof Player) {
 			Player player = (Player) sender;
-			if(m.rank.config.getInt(player.getUniqueId().toString()) < 3) {
+			if(Rank.config.getInt(player.getUniqueId().toString()) < 3) {
 				player.sendMessage(MainCore.prefix + "§eVous n'avez pas le grade requis pour faire cela.");
 				return true;
 			}
-			if(m.rank.config.getInt(player.getUniqueId().toString()) >= 3) {
+			if(Rank.config.getInt(player.getUniqueId().toString()) >= 3) {
 				player.setFoodLevel(20);
 				player.sendMessage("§eVotre barre de faim est maintenant au maximum");
 				return true;
@@ -47,6 +47,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 				player.sendMessage(MainCore.prefix + "§4Une erreur est survenue : 3C. Veuillez contacter un staff en donner l'identifiant (Exemple d'ID : 0C)");
 				return true;
 			}
+			//faire un countdown 
 			player.sendMessage(ChatColor.YELLOW + "Votre ping : " + ChatColor.GOLD + getPing(player) + " ms");
 			return true;
 	    }
@@ -121,7 +122,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					|| event.getSlot() == 15
 					|| event.getSlot() == 16
 					|| event.getSlot() == 17
-					&& rank.config.getInt(player.getUniqueId().toString()) == 0) {
+					&& Rank.config.getInt(player.getUniqueId().toString()) == 0) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 				return;
@@ -135,7 +136,7 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 					|| event.getSlot() == 6
 					|| event.getSlot() == 7
 					|| event.getSlot() == 8 
-					&& rank.config.getInt(player.getUniqueId().toString()) == 1) {
+					&& Rank.config.getInt(player.getUniqueId().toString()) == 1) {
 				event.setCancelled(true);
 				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
 				return;

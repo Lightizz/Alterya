@@ -12,6 +12,7 @@ import fr.alterya.core.rank.Rank;
 
 public class CmdMoney implements CommandExecutor
 {
+	@SuppressWarnings("unused")
 	private Rank rank;
 	
 	public CmdMoney(Rank rank) {
@@ -24,7 +25,7 @@ public class CmdMoney implements CommandExecutor
 		if(message.equalsIgnoreCase("money") && sender instanceof Player) {
 			Player player = (Player) sender;
 			MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
-			if(args.length == 1 && rank.config.getInt(player.getUniqueId().toString()) >= 8) {
+			if(args.length == 1 && Rank.config.getInt(player.getUniqueId().toString()) >= 8) {
 				Player target = Bukkit.getPlayer(args[0]);
 				if(manager.moneyBankExist(target.getUniqueId().toString()) == true) {
 					player.sendMessage(MainCore.prefix + "§2Money de " + target.getName() + ": §e" + manager.getMoney(target.getUniqueId().toString()) + " $");

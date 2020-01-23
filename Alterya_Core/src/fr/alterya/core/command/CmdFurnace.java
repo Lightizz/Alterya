@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
+import fr.alterya.core.rank.Rank;
 import fr.alterya.core.util.ItemBuilder;
 
 public class CmdFurnace implements CommandExecutor
@@ -25,7 +26,7 @@ public class CmdFurnace implements CommandExecutor
 		Player player = (Player) sender;
 		//	/furnace
 		if(message.equalsIgnoreCase("furnace")) {
-			if(mainCore.rank.config.getInt(player.getUniqueId().toString()) != 3 && !(mainCore.rank.config.getInt(player.getUniqueId().toString()) >= 9)) { player.sendMessage(MainCore.prefix + "Vous n'avez pas le grade suffisant pour effectuer cette commande"); return true; }
+			if(Rank.config.getInt(player.getUniqueId().toString()) != 3 && !(Rank.config.getInt(player.getUniqueId().toString()) >= 9)) { player.sendMessage(MainCore.prefix + "Vous n'avez pas le grade suffisant pour effectuer cette commande"); return true; }
 			if(player.getItemInHand().getType() == Material.COAL_ORE) {
 				int amount = player.getItemInHand().getAmount();
 				ItemStack itemToReplace = ItemBuilder.createItem(Material.COAL);

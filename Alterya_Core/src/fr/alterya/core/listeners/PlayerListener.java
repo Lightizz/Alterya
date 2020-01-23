@@ -1,18 +1,15 @@
 package fr.alterya.core.listeners;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
@@ -49,23 +46,21 @@ public final class PlayerListener implements Listener {
 	}
 	
 	@EventHandler
-	void playerLogin(PlayerJoinEvent e) {
+	void playerJoin(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
-		player.sendMessage(ChatColor.AQUA + "§lBienvenue sur Alterya ! Vous êtes sur le monde : " + player.getWorld().getName() + " !");
-	}
-	
-	@EventHandler
-	void playerJoin(PlayerJoinEvent pje) {
-		rank.loadPlayer(pje.getPlayer());
-		pje.getPlayer().setScoreboard(rank.getScoreboard());
+		e.setJoinMessage("");
+		player.sendMessage(ChatColor.AQUA + "§lBienvenue sur Alterya! Vous êtes sur le monde: " + player.getWorld().getName() + "!");
+		rank.loadPlayer(player);
+		Rank.saveConfig();
 	}
 	
 	@EventHandler
 	void playerQuit(PlayerQuitEvent pqe) {
+		pqe.setQuitMessage("");
 		if(MainCore.ignoreMPPlayer.contains(pqe.getPlayer().getUniqueId().toString())) {
 			MainCore.ignoreMPPlayer.remove(pqe.getPlayer().getUniqueId().toString());
 		}
-		rank.deletPlayer(pqe.getPlayer().getUniqueId().toString());
+		Rank.saveConfig();
 	}
 	
 	@EventHandler
@@ -73,14 +68,6 @@ public final class PlayerListener implements Listener {
 		Player player = e.getPlayer();
 		if(CmdTempBan.timePlayersBanned.containsKey(player.getUniqueId().toString())) {
 			e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "§4Vous avez été banni pendant §e" + CmdTempBan.timePlayersBanned.get(player.getUniqueId().toString()) + "j§4, raison : §e" + CmdTempBan.reason_ + "§4.");
-		}
-	}
-	
-	@EventHandler
-	void lockInvisibilityPotion(PlayerInteractEvent e) {
-		Player p = e.getPlayer();
-		if(p.getInventory().contains(new ItemStack(Material.POTION, (byte) 373).getType())) {
-			p.getInventory().remove(new ItemStack(Material.POTION, (byte) 373).getType());
 		}
 	}
 	
@@ -93,6 +80,7 @@ public final class PlayerListener implements Listener {
 		}
 	}
 	
+	@SuppressWarnings("static-access")
 	@EventHandler
 	void playerChat(AsyncPlayerChatEvent pce) {
 		Player player = pce.getPlayer();
@@ -100,98 +88,97 @@ public final class PlayerListener implements Listener {
 		this.myFaction = this.fme.getFaction();
 		Faction faction = myFaction;
 		RankList rankList = rank.getPlayerRank(pce.getPlayer().getUniqueId().toString(), pce.getPlayer());
-		//Positionne la faction du joueur + son rang + son pseudo avant sont message
 		pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + pce.getMessage());
 		
 		if(rank.config.getInt(player.getUniqueId().toString()) != 3 
 				|| !(rank.config.getInt(player.getUniqueId().toString()) >= 4)) {
-			if(pce.getFormat().contains("!a")) {
-				pce.setMessage(pce.getMessage().replaceAll("!a", ""));
+			if(pce.getFormat().startsWith("&a")) {
+				pce.setMessage(pce.getMessage().replaceAll("&a", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.GREEN + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!b")) {
-				pce.setMessage(pce.getMessage().replaceAll("!b", ""));
+			if(pce.getFormat().startsWith("&b")) {
+				pce.setMessage(pce.getMessage().replaceAll("&b", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.AQUA + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!c")) {
-				pce.setMessage(pce.getMessage().replaceAll("!c", ""));
+			if(pce.getFormat().startsWith("&c")) {
+				pce.setMessage(pce.getMessage().replaceAll("&c", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.RED + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!d")) {
-				pce.setMessage(pce.getMessage().replaceAll("!d", ""));
+			if(pce.getFormat().startsWith("&d")) {
+				pce.setMessage(pce.getMessage().replaceAll("&d", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.LIGHT_PURPLE + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!e")) {
-				pce.setMessage(pce.getMessage().replaceAll("!e", ""));
+			if(pce.getFormat().startsWith("&e")) {
+				pce.setMessage(pce.getMessage().replaceAll("&e", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.YELLOW + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!f")) {
-				pce.setMessage(pce.getMessage().replaceAll("!f", ""));
+			if(pce.getFormat().startsWith("&f")) {
+				pce.setMessage(pce.getMessage().replaceAll("&f", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.WHITE + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!r")) {
-				pce.setMessage(pce.getMessage().replaceAll("!r", ""));
+			if(pce.getFormat().startsWith("&r")) {
+				pce.setMessage(pce.getMessage().replaceAll("&r", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.RESET + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!1")) {
-				pce.setMessage(pce.getMessage().replaceAll("!1", ""));
+			if(pce.getFormat().startsWith("&1")) {
+				pce.setMessage(pce.getMessage().replaceAll("&1", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_BLUE + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!2")) {
-				pce.setMessage(pce.getMessage().replaceAll("!2", ""));
+			if(pce.getFormat().startsWith("&2")) {
+				pce.setMessage(pce.getMessage().replaceAll("&2", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_GREEN + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!3")) {
-				pce.setMessage(pce.getMessage().replaceAll("!3", ""));
+			if(pce.getFormat().startsWith("&3")) {
+				pce.setMessage(pce.getMessage().replaceAll("&3", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_AQUA + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!4")) {
-			pce.setMessage(pce.getMessage().replaceAll("!4", ""));
+			if(pce.getFormat().startsWith("&4")) {
+			pce.setMessage(pce.getMessage().replaceAll("&4", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_RED + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!5")) {
-				pce.setMessage(pce.getMessage().replaceAll("!5", ""));
+			if(pce.getFormat().startsWith("&5")) {
+				pce.setMessage(pce.getMessage().replaceAll("&5", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_PURPLE + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!6")) {
-				pce.setMessage(pce.getMessage().replaceAll("!6", ""));
+			if(pce.getFormat().startsWith("&6")) {
+				pce.setMessage(pce.getMessage().replaceAll("&6", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.GOLD + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!7")) {
-				pce.setMessage(pce.getMessage().replaceAll("!7", ""));
+			if(pce.getFormat().startsWith("&7")) {
+				pce.setMessage(pce.getMessage().replaceAll("&7", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.GRAY + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!8")) {
-				pce.setMessage(pce.getMessage().replaceAll("!8", ""));
+			if(pce.getFormat().startsWith("&8")) {
+				pce.setMessage(pce.getMessage().replaceAll("&8", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_GRAY + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!9")) {
-			pce.setMessage(pce.getMessage().replaceAll("!9", ""));
+			if(pce.getFormat().startsWith("&9")) {
+			pce.setMessage(pce.getMessage().replaceAll("&9", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.BLUE + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!0")) {
-				pce.setMessage(pce.getMessage().replaceAll("!0", ""));
+			if(pce.getFormat().startsWith("&0")) {
+				pce.setMessage(pce.getMessage().replaceAll("&0", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.BLACK + pce.getMessage());
 				return;
 			}
-			if(pce.getFormat().contains("!l")) {
-				pce.setMessage(pce.getMessage().replaceAll("!l", ""));
+			if(pce.getFormat().startsWith("&l")) {
+				pce.setMessage(pce.getMessage().replaceAll("&l", ""));
 				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.BOLD + pce.getMessage());
 				return;
 			}

@@ -13,6 +13,7 @@ import fr.alterya.core.rank.Rank;
 
 public class CmdGiveMoney implements CommandExecutor
 {	
+	@SuppressWarnings("unused")
 	private final Rank rank;
 	public MainCore main;
 	
@@ -27,7 +28,7 @@ public class CmdGiveMoney implements CommandExecutor
 		if(message.equalsIgnoreCase("givemoney")) {
 			Player player = (Player) sender;
 			if(sender instanceof Player) {
-				if(rank.config.getInt(player.getUniqueId().toString()) < 9) {
+				if(Rank.config.getInt(player.getUniqueId().toString()) < 9) {
 					player.sendMessage(MainCore.prefix + "§4Vous n'êtes pas OP, Administrateur ou Responsable, vous ne pouvez pas effectuer cette commande !");
 					return true;
 				}

@@ -1,9 +1,10 @@
 package fr.alterya.core.command;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -34,12 +35,17 @@ public class CmdBaltop implements CommandExecutor
 						return true;
 					}
 					
-					List<String> accountList2 = accountList1.stream().sorted().limit(5).collect(Collectors.toList());
+					List<String> accountList2 = new ArrayList<>();
+					
+					for(String s : accountList1) {
+						accountList2.add(s);
+					}
+					Collections.sort(accountList2, Collections.reverseOrder());
 					
 					String message1 = "§4§l->Top 5 money accounts<-\n";
 					player.sendMessage(message1);
 					
-					for (String s : accountList1) {
+					for (String s : accountList2) {
 						accountList2.add(s);
 						Player player1 = Bukkit.getPlayer(UUID.fromString(s));
 						String message2 = "§2" + player1.getPlayer().getDisplayName() + " §r: §e" + manager.getMoney(player1.getUniqueId().toString()) + "§2$\n";

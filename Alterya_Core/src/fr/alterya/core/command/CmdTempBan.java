@@ -43,7 +43,7 @@ public class CmdTempBan implements CommandExecutor
 			Player player = (Player) sender;
 			Player target = Bukkit.getPlayer(args[0]);
 			
-			if(m.rank.config.getInt(player.getUniqueId().toString()) < 8) {
+			if(Rank.config.getInt(player.getUniqueId().toString()) < 8) {
 				player.sendMessage(MainCore.prefix + "§aVous§e n'avez pas le grade requis pour faire cela.");
 				return true;
 			}

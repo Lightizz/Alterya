@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import fr.alterya.core.LogType;
 import fr.alterya.core.MainCore;
+import fr.alterya.core.rank.Rank;
 
 public class CmdMsg implements CommandExecutor
 {
@@ -41,11 +42,11 @@ public class CmdMsg implements CommandExecutor
 				return true;
 			}
 			
-			if(MainCore.ignoreMPPlayer.contains(target.getUniqueId().toString()) && mainCore.rank.config.getInt(player.getUniqueId().toString()) < 9) {
+			if(MainCore.ignoreMPPlayer.contains(target.getUniqueId().toString()) && Rank.config.getInt(player.getUniqueId().toString()) < 9) {
 				player.sendMessage(MainCore.prefix + ChatColor.AQUA + "Le joueur que vous avez demandé a bloqué ses MP.");
 				MainCore.log(LogType.INFO, "§e(Privé) (Bloqued by " + target.getDisplayName() + ")" + player.getDisplayName() + " §r: " + messageToSend);
 				return true;
-			}else if(MainCore.ignoreMPPlayer.contains(target.getUniqueId().toString()) && mainCore.rank.config.getInt(player.getUniqueId().toString()) >= 9) {
+			}else if(MainCore.ignoreMPPlayer.contains(target.getUniqueId().toString()) && Rank.config.getInt(player.getUniqueId().toString()) >= 9) {
 				target.sendMessage("§e(Privé) " + player.getDisplayName() + " §r: " + messageToSend);
 				player.sendMessage("§e(Privé) " + player.getDisplayName() + " §a(Vous)" + " §r: " + messageToSend);
 				MainCore.log(LogType.INFO, "§e(Privé) " + player.getDisplayName() + " §r: " + messageToSend);

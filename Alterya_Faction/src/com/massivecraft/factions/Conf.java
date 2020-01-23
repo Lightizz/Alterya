@@ -48,7 +48,7 @@ public class Conf
 	public static String prefixRecruit = "-";
 	
 	public static int factionTagLengthMin = 3;
-	public static int factionTagLengthMax = 10;
+	public static int factionTagLengthMax = 16;
 	public static boolean factionTagForceUpperCase = false;
 	
 	public static boolean newFactionsDefaultOpen = false;

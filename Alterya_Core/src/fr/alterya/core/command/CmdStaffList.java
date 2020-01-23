@@ -37,8 +37,8 @@ public class CmdStaffList implements CommandExecutor
 			player.sendMessage(ChatColor.BOLD + "----------------=" + ChatColor.AQUA + "Staff Connecté" + ChatColor.RESET + "=----------------");
 			player.sendMessage(" ");
 			for(Player p : Bukkit.getOnlinePlayers()) {
-				if(r.config.getInt(p.getUniqueId().toString()) >= 4) {
-					player.sendMessage(r.getRankById(r.config.getInt(p.getUniqueId().toString())).getPrefix() + p.getDisplayName());
+				if(Rank.config.getInt(p.getUniqueId().toString()) >= 4) {
+					player.sendMessage(r.getRankById(Rank.config.getInt(p.getUniqueId().toString())).getPrefix() + p.getDisplayName());
 					onlineStaff.add(player.getUniqueId().toString());
 				}
 				if(onlineStaff.isEmpty() == true) {

@@ -52,6 +52,10 @@ public class FileWriter
 		return config.getInt(valuePath);
 	}
 	
+	public float getFloat(String valuePath) {
+		return (float) config.getLong(valuePath);
+	}
+	
 	public String getString(String valuePath) {
 		return config.getString(valuePath);
 	}

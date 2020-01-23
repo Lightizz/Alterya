@@ -25,7 +25,7 @@ public class CmdSetSpawn implements CommandExecutor
 				return true;
 			}
 			Player player = (Player) sender;
-			if(rank.config.getInt(player.getUniqueId().toString()) >= 9) {
+			if(Rank.config.getInt(player.getUniqueId().toString()) >= 9) {
 				CmdSpawn.fw.config.createSection(player.getWorld().getName() + "_spawn");
 				CmdSpawn.fw.setValue(player.getWorld().getName() + "_spawn.X", player.getLocation().getX());
 				CmdSpawn.fw.setValue(player.getWorld().getName() + "_spawn.Y", player.getLocation().getY());

@@ -21,8 +21,8 @@ public class Rank {
 	
 	static Player player;
 	
-	public FileConfiguration config;
-	public File file;
+	public static FileConfiguration config;
+	public static File file;
 	
 	public static int rankCount = 0;
 	
@@ -54,7 +54,7 @@ public class Rank {
 	}
 	
 	//Initialiser la configuration
-	private void initConfig() {
+	public static void initConfig() {
 		File f = new File("ServerData");
 		if(!f.exists()) f.mkdirs();
 		file = new File(f, "PlayersRank.yml");
@@ -91,8 +91,8 @@ public class Rank {
 			config.set(uuid, 0);
 			saveConfig();
 		}
-		
 		config.set(uuid, 0);
+		saveConfig();
 	}
 	
 	//Supprimer un rang (= réinitialiser)
@@ -111,7 +111,8 @@ public class Rank {
 		if(!config.contains(uuid)) {
 			loadPlayer(player);
 		}
-			return getRankById(config.getInt(uuid));
+		saveConfig();
+		return getRankById(config.getInt(uuid));
 	}
 	
 	//Récuperer le rang à partir d'un uuid
@@ -185,6 +186,7 @@ public class Rank {
 			rankCount = 1;
 			saveConfig();
 		}
+		saveConfig();
 	}
 	
 	//Retirer / réinitialiser le rang
@@ -230,12 +232,11 @@ public class Rank {
 			rankCount = 0;
 			saveConfig();
 		}
+		saveConfig();
 	}
 	
-	public void saveConfig() {
-		try {
-			config.save(file);
-		} catch (IOException ioe) {ioe.printStackTrace();}
-			
-		}
+	public static void saveConfig() {
+		try { config.save(file); } 
+		catch (IOException ioe) {ioe.printStackTrace();}
+	}
 }

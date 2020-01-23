@@ -232,7 +232,8 @@ public class TotemEvent implements Listener
 		Block bb = e.getBlock();
 		
 		Faction warzone = Factions.i.getByTag("WarZone");
-		if(Conf.apMustBeInClaimedTerritory && Board.getFactionAt(new FLocation(eventLoc1)) == warzone) {
+		FLocation eL = new FLocation(eventLoc1);
+		if(Conf.apMustBeInClaimedTerritory && Board.getFactionAt(eL) == warzone) {
 			if(bb.getType() == obsiB1.getType()
 					|| bb.getType() == obsiB2.getType() 
 					|| bb.getType() == obsiB3.getType() 
