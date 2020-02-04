@@ -138,10 +138,10 @@ public class CmdHome implements CommandExecutor
 			
 			if(args.length != 1) { player.sendMessage(MainCore.prefix + "La commande est /home <nom>"); return true; }
 			if(args.length == 1) {
-				if(! homeManager.homeExist(args[0])) {
+				if(! homeManager.homeExist(args[0], player.getLocation().getWorld().getName(), player.getUniqueId().toString())) {
 					player.sendMessage(MainCore.prefix + ChatColor.RED + "Ce home n'éxiste pas.");
 					return true;
-				}else if(homeManager.homeExist(args[0])) {
+				}else if(homeManager.homeExist(args[0], player.getLocation().getWorld().getName(), player.getUniqueId().toString())) {
 					RankList rl = rank.getRankById(Rank.config.getInt(player.getUniqueId().toString()));
 					player.sendMessage(MainCore.prefix + ChatColor.AQUA + "Vous serez téléporter à votre home \"" + args[0] + "\" dans " + rl.getTpCountdown() + " sec.");
 					
@@ -150,7 +150,7 @@ public class CmdHome implements CommandExecutor
 						public void run()
 						{
 							if(timer >= rl.getTpCountdown()) {
-								player.teleport(homeManager.getHomeLocation(args[0]));
+								player.teleport(homeManager.getHomeLocation(args[0], player.getLocation().getWorld().getName(), player.getUniqueId().toString()));
 								player.sendMessage(MainCore.prefix + ChatColor.GREEN + "Vous avez été téléporté à votre home \"" + args[0] + "\" avec succès.");
 								timer = 0;
 								cancel();
@@ -171,11 +171,11 @@ public class CmdHome implements CommandExecutor
 			
 			if(args.length == 1) {
 				HomeManager homeManager = new HomeManager(player.getUniqueId().toString());
-				if(! homeManager.homeExist(args[0])) {
+				if(! homeManager.homeExist(args[0], player.getLocation().getWorld().getName(), player.getUniqueId().toString())) {
 					player.sendMessage(MainCore.prefix + ChatColor.RED + "Ce home n'éxiste pas.");
 					return true;
-				}else if(homeManager.homeExist(args[0])) {
-					homeManager.deleteHome(args[0]);
+				}else if(homeManager.homeExist(args[0], player.getLocation().getWorld().getName(), player.getUniqueId().toString())) {
+					homeManager.deleteHome(args[0], player.getLocation().getWorld().getName(), player.getUniqueId().toString());
 					player.sendMessage(MainCore.prefix + ChatColor.GREEN + "Vous avez supprimer votre home \"" + args[0] + "\" avec succès !");
 					return true;
 				}

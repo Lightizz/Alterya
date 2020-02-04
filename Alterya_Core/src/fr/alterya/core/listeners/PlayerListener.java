@@ -1,11 +1,13 @@
 package fr.alterya.core.listeners;
 
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -18,6 +20,7 @@ import com.massivecraft.factions.Faction;
 import fr.alterya.core.MainCore;
 import fr.alterya.core.command.CmdMute;
 import fr.alterya.core.command.CmdTempBan;
+import fr.alterya.core.command.CmdTpMute;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
@@ -80,6 +83,17 @@ public final class PlayerListener implements Listener {
 		}
 	}
 	
+	@EventHandler
+	void onPlayerTpMute(PlayerCommandPreprocessEvent e) {
+		Player player = e.getPlayer();
+		if(CmdTpMute.fw.getBoolean(player.getUniqueId().toString()) == true) {
+			if(e.getMessage().startsWith("/tp") || e.getMessage().startsWith("/home") || e.getMessage().startsWith("/warp") || e.getMessage().startsWith("/spawn")) {
+				player.sendMessage(MainCore.prefix + ChatColor.RED + "§4Vous êtes TPmute, vous ne pouvez pas vous téléporter.");
+				e.setCancelled(true);
+			}
+		}
+	}
+	
 	@SuppressWarnings("static-access")
 	@EventHandler
 	void playerChat(AsyncPlayerChatEvent pce) {
@@ -90,97 +104,9 @@ public final class PlayerListener implements Listener {
 		RankList rankList = rank.getPlayerRank(pce.getPlayer().getUniqueId().toString(), pce.getPlayer());
 		pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + pce.getMessage());
 		
-		if(rank.config.getInt(player.getUniqueId().toString()) != 3 
-				|| !(rank.config.getInt(player.getUniqueId().toString()) >= 4)) {
-			if(pce.getFormat().startsWith("&a")) {
-				pce.setMessage(pce.getMessage().replaceAll("&a", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.GREEN + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&b")) {
-				pce.setMessage(pce.getMessage().replaceAll("&b", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.AQUA + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&c")) {
-				pce.setMessage(pce.getMessage().replaceAll("&c", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.RED + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&d")) {
-				pce.setMessage(pce.getMessage().replaceAll("&d", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.LIGHT_PURPLE + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&e")) {
-				pce.setMessage(pce.getMessage().replaceAll("&e", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.YELLOW + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&f")) {
-				pce.setMessage(pce.getMessage().replaceAll("&f", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.WHITE + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&r")) {
-				pce.setMessage(pce.getMessage().replaceAll("&r", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.RESET + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&1")) {
-				pce.setMessage(pce.getMessage().replaceAll("&1", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_BLUE + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&2")) {
-				pce.setMessage(pce.getMessage().replaceAll("&2", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_GREEN + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&3")) {
-				pce.setMessage(pce.getMessage().replaceAll("&3", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_AQUA + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&4")) {
-			pce.setMessage(pce.getMessage().replaceAll("&4", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_RED + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&5")) {
-				pce.setMessage(pce.getMessage().replaceAll("&5", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_PURPLE + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&6")) {
-				pce.setMessage(pce.getMessage().replaceAll("&6", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.GOLD + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&7")) {
-				pce.setMessage(pce.getMessage().replaceAll("&7", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.GRAY + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&8")) {
-				pce.setMessage(pce.getMessage().replaceAll("&8", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.DARK_GRAY + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&9")) {
-			pce.setMessage(pce.getMessage().replaceAll("&9", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.BLUE + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&0")) {
-				pce.setMessage(pce.getMessage().replaceAll("&0", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.BLACK + pce.getMessage());
-				return;
-			}
-			if(pce.getFormat().startsWith("&l")) {
-				pce.setMessage(pce.getMessage().replaceAll("&l", ""));
-				pce.setFormat("§r[" + faction.getTag(fme) + "§r] " + rankList.getPrefix() + pce.getPlayer().getName() + rankList.getChatSeparator() + ChatColor.BOLD + pce.getMessage());
-				return;
+		if(rank.config.getInt(player.getUniqueId().toString()) != 3 || !(rank.config.getInt(player.getUniqueId().toString()) >= 4)) {
+			if(pce.getMessage().contains("&")) {
+				pce.setMessage(pce.getMessage().replace('&', '§'));
 			}
 		}
 	}
@@ -189,7 +115,7 @@ public final class PlayerListener implements Listener {
 	void onMove(PlayerMoveEvent e) {
 		Player player = e.getPlayer();
 		if(CmdTpa.requestedPlayers.contains(player.getUniqueId().toString()) || CmdTpa.requestSenderPlayers.contains(player.getUniqueId().toString())) {
-			player.sendMessage("t");
+			player.sendMessage(MainCore.prefix + ChatColor.RED + "Votre requête de téléportation a été annulée car vous avec bougé(e).");
 			CmdTpa c = new CmdTpa(m);
 			c.cancelTeleport();
 		}

@@ -72,8 +72,8 @@ public int timer = 0;
 			fw.setValue(target.getUniqueId().toString(), true);
 			fw.saveConfig();
 			
-			target.sendMessage(MainCore.prefix + "§eVous §aavez été tpmute par §e" + player.getDisplayName() + "§a pendant §e" + args[1] + "m§a.");
-			player.sendMessage(MainCore.prefix + "§eVous §aavez tpmute §e" + target.getDisplayName() + "§a pendant §e" + args[1] + "m§a.");
+			target.sendMessage(MainCore.prefix + "§eVous §aavez été tpmute par §e" + player.getDisplayName() + "§a pendant §e" + args[1] + "h§a.");
+			player.sendMessage(MainCore.prefix + "§eVous §aavez tpmute §e" + target.getDisplayName() + "§a pendant §e" + args[1] + "h§a.");
 			
 			run = new BukkitRunnable(){
 				@Override
@@ -89,6 +89,7 @@ public int timer = 0;
 					timer ++;
 				}
 			};
+			run.runTaskTimer(m, 0L, 20L);
 			
 			MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a tpmute " + target.getDisplayName() + ".");
 			

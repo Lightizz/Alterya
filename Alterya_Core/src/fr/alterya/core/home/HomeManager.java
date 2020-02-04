@@ -1,9 +1,11 @@
 package fr.alterya.core.home;
 
 import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import fr.alterya.core.util.FileWriter;
@@ -14,7 +16,8 @@ public class HomeManager
 	private FileWriter fw;
 	
 	public HomeManager(String uuid) {
-		fw = new FileWriter("ServerData/Homes", uuid.toString());
+		Player player = Bukkit.getPlayer(UUID.fromString(uuid));
+		fw = new FileWriter("ServerData/Homes/" + uuid.toString(), player.getLocation().getWorld().getName());
 	}
 	
 	public void createHome(Location homeLoc, String homeName) {
@@ -29,7 +32,9 @@ public class HomeManager
 	}
 	
 	//Regarder si le home indiqué existe
-	public boolean homeExist(String homeName) {
+	public boolean homeExist(String homeName, String worldName, String uuid) {
+		Player player = Bukkit.getPlayer(UUID.fromString(uuid));
+		fw = new FileWriter("ServerData/Homes/" + uuid.toString(), player.getLocation().getWorld().getName());
 		return fw.getString(homeName) != null;
 	}
 	
@@ -39,7 +44,9 @@ public class HomeManager
 	}
 	
 	//Récuperer la location d'un home
-	public Location getHomeLocation(String homeName) {
+	public Location getHomeLocation(String homeName, String worldName, String uuid) {
+		Player player = Bukkit.getPlayer(UUID.fromString(uuid));
+		fw = new FileWriter("ServerData/Homes/" + uuid.toString(), player.getLocation().getWorld().getName());
 		return new Location(Bukkit.getWorld(fw.getString(homeName + ".world"))
 				, fw.getDouble(homeName + ".x")
 				, fw.getDouble(homeName + ".y")
@@ -49,7 +56,9 @@ public class HomeManager
 	}
 	
 	//Supprimer un home de la liste du joueur
-	public void deleteHome(String homeName) {
+	public void deleteHome(String homeName, String worldName, String uuid) {
+		Player player = Bukkit.getPlayer(UUID.fromString(uuid));
+		fw = new FileWriter("ServerData/Homes/" + uuid.toString(), player.getLocation().getWorld().getName());
 		fw.setValue(homeName, null);
 		fw.saveConfig();
 	}

@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import fr.alterya.core.rank.Rank;
 import fr.alterya.moderation.Main;
 
 public class CommandStaff implements CommandExecutor {
@@ -36,7 +37,7 @@ public class CommandStaff implements CommandExecutor {
 		
 		Player p = (Player) sender;
 		
-		if (cmd.getName().equalsIgnoreCase("vanish") && main.rank.config.getInt(p.getUniqueId().toString()) >= 9) {
+		if (cmd.getName().equalsIgnoreCase("vanish") && Rank.config.getInt(p.getUniqueId().toString()) >= 9) {
 			Player player = (Player) sender;
 			
 			if (!vanished.contains(p)) {

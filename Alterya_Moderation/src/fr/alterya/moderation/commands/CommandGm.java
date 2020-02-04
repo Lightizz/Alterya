@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import fr.alterya.core.rank.Rank;
 import fr.alterya.moderation.Main;
 
 public class CommandGm implements CommandExecutor, Listener{
@@ -23,7 +24,7 @@ public class CommandGm implements CommandExecutor, Listener{
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		 Player player = (Player)sender;
 		 
-		 if(label.equalsIgnoreCase("gm") && main.rank.config.getInt(player.getUniqueId().toString()) >= 9){
+		 if(label.equalsIgnoreCase("gm") && Rank.config.getInt(player.getUniqueId().toString()) >= 9){
 			 if(args.length == 0) {
 				 player.sendMessage(ChatColor.GOLD + "[" + ChatColor.GREEN + "GM" + ChatColor.GOLD + "]" + ChatColor.GRAY + " /gm" + " §7[§a 0 §7/§a 1 §7/ §a2 §7]");
 			 }

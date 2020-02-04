@@ -65,8 +65,8 @@ public class CmdMute implements CommandExecutor
 			fw.setValue(target.getUniqueId().toString(), true);
 			fw.saveConfig();
 			
-			target.sendMessage(MainCore.prefix + "§eVous §aavez été mute par §e" + player.getDisplayName() + "§a pendant §e" + args[1] + "m§a.");
-			player.sendMessage(MainCore.prefix + "§eVous §aavez mute §e" + target.getDisplayName() + "§a pendant §e" + args[1] + "m§a.");
+			target.sendMessage(MainCore.prefix + "§eVous §aavez été mute par §e" + player.getDisplayName() + "§a pendant §e" + args[1] + "h§a.");
+			player.sendMessage(MainCore.prefix + "§eVous §aavez mute §e" + target.getDisplayName() + "§a pendant §e" + args[1] + "h§a.");
 			
 			run = new BukkitRunnable(){
 				@Override
@@ -78,10 +78,12 @@ public class CmdMute implements CommandExecutor
 						target.sendMessage(MainCore.prefix + "§aVous §eêtes maintenant unmute.");
 						timer = 0;
 						cancel();
+						return;
 					}
 					timer ++;
 				}
 			};
+			run.runTaskTimer(m, 0L, 20L);
 			
 			MainCore.log(LogType.INFO, "Le joueur " + player.getDisplayName() + " a mute " + target.getDisplayName() + ".");
 			
