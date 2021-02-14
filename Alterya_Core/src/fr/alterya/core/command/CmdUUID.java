@@ -19,6 +19,7 @@ public class CmdUUID implements CommandExecutor
 		main = m;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args)
 	{

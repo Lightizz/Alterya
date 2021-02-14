@@ -38,6 +38,7 @@ public class GuiPlayers extends AbstractGui {
 		player.openInventory(this.inventory);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onClick(Player player, ItemStack stack, String action, ClickType clickType) {
 		plugin.getGuiManager().openGui(player, new GuiCustom(this.plugin, Bukkit.getPlayer(action)));

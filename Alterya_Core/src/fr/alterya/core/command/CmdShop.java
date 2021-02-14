@@ -17,7 +17,7 @@ public class CmdShop implements CommandExecutor
 		this.mainCore = mainCore;
 	}
 	
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access", "deprecation" })
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{	

@@ -19,6 +19,7 @@ public class CmdMoney implements CommandExecutor
 		this.rank = rank;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{

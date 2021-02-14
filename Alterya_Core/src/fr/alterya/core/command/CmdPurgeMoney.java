@@ -36,6 +36,7 @@ public class CmdPurgeMoney implements CommandExecutor
 					player.sendMessage(MainCore.prefix + "La commande est /purgemoney <joueur>.");
 					return true;
 				}else if(args.length == 1) {
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayer(args[0]);
 					MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
 					

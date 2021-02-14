@@ -19,6 +19,7 @@ public class CmdMsg implements CommandExecutor
 		this.mainCore = mainCore;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{

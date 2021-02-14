@@ -12,8 +12,6 @@ import fr.alterya.moderation.Main;
 import fr.alterya.moderation.gui.AbstractGui;
 import fr.alterya.moderation.gui.GuiManager;
 
-//File of SamaGames
-
 public class GuiListener implements Listener {
     private final GuiManager manager;
 

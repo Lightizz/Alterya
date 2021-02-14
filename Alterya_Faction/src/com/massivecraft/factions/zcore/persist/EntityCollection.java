@@ -113,6 +113,7 @@ public abstract class EntityCollection<E extends Entity>
 		return this.create(this.getNextId());
 	}
 	
+	@SuppressWarnings("deprecation")
 	public synchronized E create(String id)
 	{
 		if ( ! this.isIdFree(id)) return null;

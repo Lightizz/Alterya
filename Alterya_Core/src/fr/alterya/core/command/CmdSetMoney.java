@@ -22,6 +22,7 @@ public class CmdSetMoney implements CommandExecutor
 		this.main = main;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{

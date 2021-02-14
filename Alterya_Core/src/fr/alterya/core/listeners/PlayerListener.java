@@ -1,7 +1,9 @@
 package fr.alterya.core.listeners;
 
-
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,6 +26,7 @@ import fr.alterya.core.command.CmdTpMute;
 import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.rank.RankList;
+import fr.alterya.core.util.ItemBuilder;
 
 public final class PlayerListener implements Listener {
 
@@ -52,7 +55,15 @@ public final class PlayerListener implements Listener {
 	void playerJoin(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
 		e.setJoinMessage("");
-		player.sendMessage(ChatColor.AQUA + "§lBienvenue sur Alterya! Vous êtes sur le monde: " + player.getWorld().getName() + "!");
+		if(player.getWorld().getName().contains("Lobby")) {
+			player.getInventory().clear();
+			player.getInventory().addItem(ItemBuilder.createItem("Navigation", Material.WATCH));
+		}else {
+			player.teleport(new Location(Bukkit.getWorld("Lobby1"), 0.5, 4.0, 0.5));
+			player.getInventory().clear();
+			player.getInventory().addItem(ItemBuilder.createItem("Navigation", Material.WATCH));
+		}
+		player.sendMessage(ChatColor.AQUA + "§lBienvenue sur Alterya! Vous êtes sur le monde: §r" + ChatColor.GREEN + player.getWorld().getName() + ChatColor.AQUA + "§l !");
 		rank.loadPlayer(player);
 		Rank.saveConfig();
 	}

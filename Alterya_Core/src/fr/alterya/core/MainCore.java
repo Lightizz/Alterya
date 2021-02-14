@@ -16,14 +16,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 
 import fr.alterya.core.command.BasicsPlayerCommands;
-import fr.alterya.core.command.CmdBaltop;
 import fr.alterya.core.command.CmdFurnace;
 import fr.alterya.core.command.CmdGiveMoney;
 import fr.alterya.core.command.CmdHome;
 import fr.alterya.core.command.CmdIgnore;
-import fr.alterya.core.command.CmdKit;
-import fr.alterya.core.command.CmdMarket;
-import fr.alterya.core.command.CmdMenu;
 import fr.alterya.core.command.CmdMoney;
 import fr.alterya.core.command.CmdMsg;
 import fr.alterya.core.command.CmdMute;
@@ -42,30 +38,21 @@ import fr.alterya.core.command.CmdTpa;
 import fr.alterya.core.command.CmdTpno;
 import fr.alterya.core.command.CmdTrade;
 import fr.alterya.core.command.CmdUUID;
-import fr.alterya.core.command.CmdWarp;
-import fr.alterya.core.event.KOTHEvent;
-import fr.alterya.core.event.KOTHEventManager;
-import fr.alterya.core.event.TotemEvent;
-import fr.alterya.core.event.TotemEventManager;
-import fr.alterya.core.listeners.MarketListener;
 import fr.alterya.core.listeners.PlayerListener;
-import fr.alterya.core.listeners.PlayerMenuListener;
-import fr.alterya.core.listeners.ServerListener;
 import fr.alterya.core.listeners.ShopListener;
 import fr.alterya.core.listeners.TradeListener;
-import fr.alterya.core.market.MarketManager;
 import fr.alterya.core.rank.Rank;
 import fr.alterya.core.shop.Shop;
 import fr.alterya.core.util.DCommand;
-import fr.alterya.core.util.DisconnectCombat;
 import fr.alterya.core.util.TradeUtil;
 
 public class MainCore extends JavaPlugin
 {
+	public static String prefix = ChatColor.AQUA + "[Alterya] ";
+	public static void log(LogType logType, String message) { System.out.println("[Log] (" + logType.string() + ") " + message); }
+	
 	private Scoreboard scEmpty = Bukkit.getScoreboardManager().getNewScoreboard();
 	
-	public static String prefix = ChatColor.AQUA + "[Alterya] ";
-		
 	public static List<String> ignoreMPPlayer = new ArrayList<>();
 	
 	public ItemStack p = new ItemStack(Material.POTION, (byte) 373);
@@ -77,9 +64,6 @@ public class MainCore extends JavaPlugin
 	public Shop shop;
 	public Rank rank;
 	public Recipes recipes;
-	public TotemEventManager etManager;
-	public KOTHEventManager ekManager;
-	public MarketManager mmanager;
 	public Player player;
 	
 	@Override
@@ -89,34 +73,22 @@ public class MainCore extends JavaPlugin
 		recipes = new Recipes(this);
 		tradeUtil = new TradeUtil(this);
 		tradeL = new TradeListener(this);
-		mmanager = new MarketManager(this);
-		
-		CmdWarp.reloadWarpsConfigs();
 	}	
 	
 	@Override
 	public void onEnable() {	
 		System.out.println("AlteryaCore [ON]");
 		
-		ekManager = new KOTHEventManager(this);
-		ekManager.runTaskTimer(this, 0, 20);
-		
-		etManager = new TotemEventManager(this);
-		etManager.runTaskTimer(this, 0, 20);
-		
 		Rank.initConfig();
 		
 		// Créer les commandes
 		new DCommand("Message", "/msg <joueur> <message>", "Envoie un message privé au joueur cilbé", null, Collections.singletonList("m"), new CmdMsg(this), this);
 		new DCommand("Ignore", "/ignore", "Empêche le joueur de reçevoir les messages privés", null, Collections.singletonList(""), new CmdIgnore(), this);
-		new DCommand("Menu", "/menu", "Ouvre le menu du joueur", null, Collections.singletonList(""), new CmdMenu(this), this);
 		new DCommand("Ec", "/ec", "Permet d'ouvrir ton enderchest", null, Collections.singletonList("enderchest"), new BasicsPlayerCommands(this, rank), this);
 		new DCommand("Craft", "/craft", "Permet d'ouvrir une table de craft", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
 		new DCommand("Furnace", "/furnace", "Permet de faire cuire l'item dans la main de l'envoyeur de la commande", null, Collections.singletonList(""), new CmdFurnace(this), this);
-		new DCommand("Discord", "/discord", "Envoie le lien du serveur discord officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
 		new DCommand("Feed", "/feed", "Met la barre de faim au maximum", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
 		new DCommand("Ping", "/ping", "Envoie le ping du joueur sur le serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
-		new DCommand("Tipeee", "/tipeee", "Envoie le lien du tipeee officiel du serveur", null, Collections.singletonList(""), new BasicsPlayerCommands(this, rank), this);
 		
 		new DCommand("UUID", "/uuid", "Commande pour voir l'UUID d'un joueur", "getUUID", Collections.singletonList(""), new CmdUUID(this, rank), this);
 		
@@ -137,7 +109,6 @@ public class MainCore extends JavaPlugin
 		new DCommand("Givemoney", "/givemoney <cible> <montant>", "Donne de la money à un joueur (OP) (Pas pris sur la money de l'executeur de la commande)", null, Collections.singletonList(""), new CmdGiveMoney(this.rank, this), this);
 		new DCommand("Purgemoney", "/purgemoney <cible>", "Remet la money du joueur au montant de départ (50 $) (OP)", null, Collections.singletonList(""), new CmdPurgeMoney(rank, this), this);
 		new DCommand("Setmoney", "/setmoney <cible> <montant>", "Met le montant de la bank de la cible au montant indiqué", null, Collections.singletonList(""), new CmdSetMoney(rank, this), this);
-		new DCommand("Baltop", "/baltop", "Affiche le top 10 des joueurs les plus richent sur le serveur", null, Collections.singletonList("moneytop"), new CmdBaltop(), this);
 		
 		new DCommand("Home", "/home <nom>", "Teleporte l'executeur de la commande au home choisi à partir du nom indiqué", null, Collections.singletonList(""), new CmdHome(rank, this), this);
 		new DCommand("Delhome", "/delhome <nom>", "Supprime le home indiqué dans la commande de la liste des homes du joueur", null, Collections.singletonList(""), new CmdHome(rank, this), this);
@@ -148,8 +119,6 @@ public class MainCore extends JavaPlugin
 		new DCommand("Demote", "/demote <joueur>", "Remettre le rang d'un joueur à 0", null, Collections.singletonList(""), new CmdRank(rank, this), this);
 		new DCommand("Rankinfo", "/rankinfo", "Affiche les infos sur les rangs", null, Collections.singletonList("ranks"), new CmdRank(rank, this), this);
 		
-		new DCommand("Kit", "/kit", "Donne le kit au joueur coorespondant à son grade", null, Collections.singletonList(""), new CmdKit(this), this);
-		
 		new DCommand("Mute", "/mute <joueur> <temps>", "Mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		new DCommand("UnMute", "/unmute <joueur>", "Dé-mute un joueur", null, Collections.singletonList(""), new CmdMute(rank, this), this);
 		new DCommand("TempBan", "/tempban <joueur> <temps> <raison>", "Banni temporairement un joueur de serveur", null, Collections.singletonList(""), new CmdTempBan(rank, this), this);
@@ -158,10 +127,6 @@ public class MainCore extends JavaPlugin
 		
 		new DCommand("Trade", "/trade <joueur>", "Propose un échange d'item au joueur ciblé", null, Collections.singletonList(""), new CmdTrade(tradeUtil, this), this);
 		
-		new DCommand("Market", "/market", "Commande pour ouvrir le Marché noir", null, Collections.singletonList(""), new CmdMarket(), this);
-		
-		new DCommand("Warp", "/warp <nom>", "Commande pour se téléporter à un \"warp\"", null, Collections.singletonList(""), new CmdWarp(this, rank), this);
-		
 		removeCraft(p.getType());
 		removeCraft(b.getType());
 		removeCraft(i.getType());
@@ -169,12 +134,6 @@ public class MainCore extends JavaPlugin
 		//Enregistrer tous les évenements 
 		getServer().getPluginManager().registerEvents(new PlayerListener(rank, this), this);
 		getServer().getPluginManager().registerEvents(new ShopListener(), this);
-		getServer().getPluginManager().registerEvents(new TotemEvent(this, etManager), this);
-		getServer().getPluginManager().registerEvents(new KOTHEvent(this, ekManager), this);
-		getServer().getPluginManager().registerEvents(new PlayerMenuListener(this), this);
-		getServer().getPluginManager().registerEvents(new DisconnectCombat(), this);
-		getServer().getPluginManager().registerEvents(new MarketListener(), this);
-		getServer().getPluginManager().registerEvents(new ServerListener(this), this);
 		getServer().getPluginManager().registerEvents(tradeL, this);
 	}
 	
@@ -199,10 +158,6 @@ public class MainCore extends JavaPlugin
 		      trade.cancelTrade(true);
 		}
 		System.out.println("AlteryaFaction [OFF]");
-	}
-	
-	public static void log(LogType logType, String message) {
-		System.out.println("[Log] (" + logType.string() + ") " + message);
 	}
 	
 	public static ItemStack getItem(Material material, int itemAmount, int itemData, String name, String... lores) {

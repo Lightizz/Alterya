@@ -63,13 +63,13 @@ public class CmdTrade implements CommandExecutor
 	                  p.sendMessage(ChatColor.AQUA + "AlteryaCore> " + ChatColor.GRAY + "You are currently involved in a different trade");
 	                } 
 	              } else {
-	                p.sendMessage(ChatColor.AQUA + "AlteryaCore> " + ChatColor.GRAY + "You must be within 10 blocks of a player to trade");
+	                p.sendMessage(ChatColor.AQUA + "AlteryaCore> " + ChatColor.GRAY + "Vous devez être à au moins 10 bloc d'un joueur pour échanger avec lui.");
 	              } 
 	            } else {
-	              p.sendMessage(ChatColor.AQUA + "AlteryaCore> " + ChatColor.GRAY + "You must be in the same world as a player to trade");
+	              p.sendMessage(ChatColor.AQUA + "AlteryaCore> " + ChatColor.GRAY + "Vous devez être dans le même monde que le joueur pour échanger.");
 	            } 
 	          } else {
-	            p.sendMessage(ChatColor.AQUA + "AlteryaCore> " + ChatColor.GRAY + "The player " + ChatColor.AQUA + args[0] + ChatColor.GRAY + " is not online");
+	            p.sendMessage(ChatColor.AQUA + "AlteryaCore> " + ChatColor.GRAY + "Le joueur " + ChatColor.AQUA + args[0] + ChatColor.GRAY + " n'est pas en ligne.");
 	          } 
 	        } else {
 	          

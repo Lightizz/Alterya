@@ -10,6 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -61,6 +62,13 @@ public class DCommand extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
+    	if(sender instanceof Player) {
+    		Player player = (Player) sender;
+    		if(player.getWorld().getName().contains("Lobby") && player.isOp() == false) {
+    			player.sendMessage("Les commandes sont désactivés dans le lobby");
+    			return true;
+    		}
+    	}
         if (Objects.isNull(executor)) {
             throw new IllegalStateException("The executor for command " + getName() + " is null !");
         }

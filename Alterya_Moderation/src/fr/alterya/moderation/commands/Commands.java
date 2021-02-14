@@ -21,7 +21,8 @@ public class Commands implements CommandExecutor {
 		this.main = main;
 	}
 	
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    @SuppressWarnings("deprecation")
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	Player player = (Player) sender;
 		String prefix = ChatColor.GRAY + "[" + ChatColor.AQUA + "Modo" + ChatColor.GRAY + "]";
         

@@ -68,7 +68,8 @@ public class Trade
     }
   }
   
-  public void closeTrade() {
+  @SuppressWarnings("deprecation")
+public void closeTrade() {
     @SuppressWarnings("unused")
 	ItemStack[] empty = new ItemStack[0];
     if (this.tradeRequester.isOnline() && this.tradeRequester.getOpenInventory() != null && 

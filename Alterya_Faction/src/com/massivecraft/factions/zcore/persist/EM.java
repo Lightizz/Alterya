@@ -2,9 +2,6 @@ package com.massivecraft.factions.zcore.persist;
 
 import java.util.*;
 
-import com.massivecraft.factions.zcore.persist.Entity;
-import com.massivecraft.factions.zcore.persist.EntityCollection;
-
 public class EM
 {
 	public static Map<Class<? extends Entity>, EntityCollection<? extends Entity>> class2Entities = new LinkedHashMap<Class<? extends Entity>, EntityCollection<? extends Entity>>();

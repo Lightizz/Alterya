@@ -36,6 +36,7 @@ public class CmdMute implements CommandExecutor
 		fw = new FileWriter("ServerData", "MutedPlayers");
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{

@@ -11,6 +11,7 @@ import fr.alterya.core.MainCore;
 
 public class CmdTpno implements CommandExecutor
 {
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args)
 	{

@@ -45,6 +45,7 @@ public class ShopListener implements Listener
 	}
 	
 	//Partie contrôlant l'interface principale du shop
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onShopInterractMain(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
@@ -200,6 +201,7 @@ public class ShopListener implements Listener
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onConfirmSellBuyInterract(InventoryClickEvent e) {
 		Inventory mainInv = e.getInventory();

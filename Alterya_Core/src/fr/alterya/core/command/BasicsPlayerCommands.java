@@ -6,9 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
 
 import fr.alterya.core.MainCore;
 import fr.alterya.core.rank.Rank;
@@ -52,20 +50,6 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 			return true;
 	    }
 	        
-		//	/discord
-		if(message.equalsIgnoreCase("discord")) {
-			Player player = (Player) sender;
-	        player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://discord.gg/rTR4FNF" + ChatColor.GOLD + "<<|");
-	        return true;
-	    }
-	      
-		//	/tipeee
-	    if(message.equalsIgnoreCase("tipeee")) {
-	    	Player player = (Player) sender;
-	    	player.sendMessage(ChatColor.GOLD + "|>> " + ChatColor.AQUA + "https://fr.tipeee.com/alterya-pvp" + ChatColor.GOLD + "<<|");
-	        return true;
-	    }
-	        
 	    //	/craft
 	    if(message.equalsIgnoreCase("craft") && sender instanceof Player) {
 	    	Player player = (Player) sender;
@@ -98,50 +82,6 @@ public class BasicsPlayerCommands implements CommandExecutor, Listener {
 	    	return true;
 	    }
 	    return false;
-	}
-	
-	@EventHandler
-	void onInterract(InventoryClickEvent event) {
-		Player player = (Player) event.getWhoClicked();
-		if(event.getInventory() == player.getEnderChest()) {
-			if(event.getSlot() == 0
-					|| event.getSlot() == 1
-					|| event.getSlot() == 2
-					|| event.getSlot() == 3
-					|| event.getSlot() == 4
-					|| event.getSlot() == 5
-					|| event.getSlot() == 6
-					|| event.getSlot() == 7
-					|| event.getSlot() == 8
-					|| event.getSlot() == 9
-					|| event.getSlot() == 10
-					|| event.getSlot() == 11
-					|| event.getSlot() == 12
-					|| event.getSlot() == 13
-					|| event.getSlot() == 14
-					|| event.getSlot() == 15
-					|| event.getSlot() == 16
-					|| event.getSlot() == 17
-					&& Rank.config.getInt(player.getUniqueId().toString()) == 0) {
-				event.setCancelled(true);
-				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
-				return;
-			}
-			if(event.getSlot() == 0
-					|| event.getSlot() == 1
-					|| event.getSlot() == 2
-					|| event.getSlot() == 3
-					|| event.getSlot() == 4
-					|| event.getSlot() == 5
-					|| event.getSlot() == 6
-					|| event.getSlot() == 7
-					|| event.getSlot() == 8 
-					&& Rank.config.getInt(player.getUniqueId().toString()) == 1) {
-				event.setCancelled(true);
-				player.sendMessage(MainCore.prefix + "Vu n'avez pas la permission d'utiliser ces slots.");
-				return;
-			}
-		}
 	}
 	
 	//Récupérer le ping du joueur (en ms)

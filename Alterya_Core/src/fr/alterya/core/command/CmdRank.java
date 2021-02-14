@@ -28,7 +28,7 @@ public class CmdRank implements CommandExecutor, TabCompleter {
 		this.main = main;
 	}
 
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access", "deprecation" })
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String message, String[] args) {
 		Player player = null;

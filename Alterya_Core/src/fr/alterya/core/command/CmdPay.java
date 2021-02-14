@@ -32,6 +32,7 @@ public class CmdPay implements CommandExecutor
 				}else if(args.length == 2) {
 					//Récupérer les joueurs avec lesquels la commande va s'effectuer
 					MoneyManager manager = new MoneyManager(player.getUniqueId().toString());
+					@SuppressWarnings("deprecation")
 					Player target = Bukkit.getPlayer(args[0]);
 					double amount = Double.valueOf(args[1]);
 					
